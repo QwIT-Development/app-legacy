@@ -47,7 +47,7 @@ dependencies:
   package_info_plus: ^8.0.0
   dotted_border: ^2.0.0+3
   screenshot: ^3.0.0
-  image_gallery_saver: ^2.0.2
+  image_gallery_saver_plus: ^3.0.5
   rounded_expansion_tile:
     git:
       url: https://github.com/kimaah/rounded_expansion_tile.git
@@ -63,7 +63,7 @@ dependencies:
   path_provider: ^2.1.2
   image_crop_plus: ^1.0.0
   uuid: ^4.3.3
-  maps_launcher: ^2.2.0
+  maps_launcher: ^3.0.0+1
   google_fonts: ^6.1.0
   # flutter_any_logo: ^1.1.1
   custom_sliding_segmented_control: ^1.8.1

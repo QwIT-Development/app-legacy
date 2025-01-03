@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 
 class PersonalityBody extends StatefulWidget {
   const PersonalityBody({super.key});
@@ -47,7 +47,8 @@ class PersonalityBodyState extends State<PersonalityBody> {
   savePersonality() async {
     await screenshotController.capture().then((image) async {
       if (image != null) {
-        await ImageGallerySaver.saveImage(image, name: 'refilc_personality');
+        await ImageGallerySaverPlus.saveImage(image,
+            name: 'refilc_personality');
       }
     }).catchError((err) {
       throw err;
