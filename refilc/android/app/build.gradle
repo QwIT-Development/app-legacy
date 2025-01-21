@@ -42,7 +42,7 @@ debugKeystoreProperties.load(new FileInputStream(debugKeystorePropertiesFile))
 android {
     namespace = "hu.refilc.naplo"
 
-    ndkVersion "25.1.8937393"
+    ndkVersion "27.0.12077973"
 
     // compileSdkVersion rootProject.ext.compileSdkVersion
     compileSdkVersion 34
