@@ -78,9 +78,9 @@ android {
         // targetCompatibility JavaVersion.VERSION_21
     }
 
-    // kotlinOptions {
-    //     jvmTarget = JavaVersion.VERSION_1_8
-    // }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
 
     signingConfigs {
         debug {

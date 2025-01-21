@@ -15,11 +15,7 @@ class DatabaseProvider {
   Future<void> init() async {
     Database db;
 
-    if (Platform.isLinux || Platform.isWindows) {
-      db = await databaseFactoryFfi.openDatabase("app.db");
-    } else {
-      db = await openDatabase("app.db");
-    }
+    db = await openDatabase("app.db");
 
     query = DatabaseQuery(db: db);
     store = DatabaseStore(db: db);
