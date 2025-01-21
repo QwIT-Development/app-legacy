@@ -148,7 +148,7 @@ class GradeProvider with ChangeNotifier {
     // streak magic
     int gradeStreak = 0;
     List<Grade> grs = _grades;
-    grs.sort((a, b) => -a.date.compareTo(b.writeDate));
+    grs.sort((a, b) => -a.writeDate.compareTo(b.writeDate));
 
     for (Grade grade in grs) {
       if (grade.value.value == 5) {
