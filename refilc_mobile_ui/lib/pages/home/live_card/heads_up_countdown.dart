@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class HeadsUpCountdown extends StatefulWidget {
   const HeadsUpCountdown(
@@ -30,6 +31,7 @@ class _HeadsUpCountdownState extends State<HeadsUpCountdown> {
   void initState() {
     super.initState();
     elapsed = widget.elapsedTime;
+    WakelockPlus.enable();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (elapsed <= widget.maxTime) elapsed += 1;
       setState(() {});
@@ -46,6 +48,7 @@ class _HeadsUpCountdownState extends State<HeadsUpCountdown> {
   void dispose() {
     _timer.cancel();
     super.dispose();
+    WakelockPlus.disable();
   }
 
   @override
