@@ -5,7 +5,7 @@
 
 /// Blocky Color Picker
 
-library block_colorpicker;
+library;
 
 import 'package:flutter/material.dart';
 import 'package:refilc/theme/colors/accent.dart';

@@ -9,7 +9,7 @@
 
 // ignore_for_file: use_build_context_synchronously
 
-library hsv_picker;
+library;
 
 import 'package:refilc/models/shared_theme.dart';
 import 'package:refilc_mobile_ui/common/custom_snack_bar.dart';

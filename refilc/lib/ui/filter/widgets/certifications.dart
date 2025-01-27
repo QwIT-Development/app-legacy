@@ -8,7 +8,9 @@ List<DateWidget> getWidgets(List<Grade> providerGrades) {
   List<DateWidget> items = [];
   for (var gradeType in GradeType.values) {
     if ([GradeType.midYear, GradeType.unknown, GradeType.levelExam]
-        .contains(gradeType)) continue;
+        .contains(gradeType)) {
+      continue;
+    }
 
     List<Grade> grades =
         providerGrades.where((grade) => grade.type == gradeType).toList();
