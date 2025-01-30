@@ -37,6 +37,7 @@ refilc_mobile_ui/.dart_tool/
 .idea
 .gitmodules
 .gradle
+.kotlin
 
 refilc/.DS_Store
 .DS_Store

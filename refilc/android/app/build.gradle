@@ -42,7 +42,7 @@ debugKeystoreProperties.load(new FileInputStream(debugKeystorePropertiesFile))
 android {
     namespace = "hu.refilc.naplo"
 
-    ndkVersion "27.0.12077973"
+    ndkVersion "27.2.12479018"
 
     // compileSdkVersion rootProject.ext.compileSdkVersion
     compileSdkVersion 34
@@ -72,14 +72,16 @@ android {
         // Flag to enable support for the new language APIs
         coreLibraryDesugaringEnabled true
         // Sets Java compatibility to Java 8
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        // sourceCompatibility JavaVersion.VERSION_1_8
+        // targetCompatibility JavaVersion.VERSION_1_8
         // sourceCompatibility JavaVersion.VERSION_21
         // targetCompatibility JavaVersion.VERSION_21
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_17
     }
 
     signingConfigs {
