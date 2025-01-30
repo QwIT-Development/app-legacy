@@ -153,7 +153,7 @@ class SettingsScreenState extends State<SettingsScreen>
 
             // check if refresh token is still valid
             String? err = await refresh();
-            if (err != null) {
+            if (err != null && err != "success") {
               showDialog(
                 context: context,
                 builder: (_) => AlertDialog(
