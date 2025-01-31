@@ -214,7 +214,7 @@ Widget errorBuilder(FlutterErrorDetails details) {
       }
     });
 
-    return Container();
+    return  Container();
   });
 }
 

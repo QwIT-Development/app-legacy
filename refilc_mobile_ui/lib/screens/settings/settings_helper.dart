@@ -922,6 +922,7 @@ class _LiveActivityColorSettingState extends State<LiveActivityColorSetting> {
           child: Column(children: [
             MaterialColorPicker(
               allowShades: false,
+              colors: [...fullMaterialColors],
               selectedColor: settings.liveActivityColor,
               onMainColorChange: (k) {
                 if (!Provider.of<PlusProvider>(context, listen: false)
