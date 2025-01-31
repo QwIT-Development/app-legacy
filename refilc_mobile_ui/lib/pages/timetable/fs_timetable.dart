@@ -120,7 +120,7 @@ class _FSTimetableState extends State<FSTimetable> {
             if (lessons.isEmpty) continue;
 
             if (index == 0 && dayIndex >= 0) {
-            // if (index == 0 || dayIndex >=0) {
+              // if (index == 0 || dayIndex >=0) {
               columns.add(
                 SizedBox(
                   width: colw,
@@ -157,13 +157,14 @@ class _FSTimetableState extends State<FSTimetable> {
                       Icon(
                         FeatherIcons.slash,
                         size: 18.0,
-                        color: AppColors.of(context).text.withOpacity(.3),
+                        color: AppColors.of(context).text.withValues(alpha: .3),
                       ),
                       const SizedBox(width: 8.0),
                       Text(
                         "Lyukas óra",
                         style: TextStyle(
-                          color: AppColors.of(context).text.withOpacity(.3),
+                          color:
+                              AppColors.of(context).text.withValues(alpha: .3),
                         ),
                       ),
                     ],
@@ -205,7 +206,9 @@ class _FSTimetableState extends State<FSTimetable> {
                               subject: lsn.subject,
                             ),
                             size: 18.0,
-                            color: AppColors.of(context).text.withOpacity(.7),
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: .7),
                           ),
                           const SizedBox(width: 8.0),
                           Expanded(
@@ -231,7 +234,9 @@ class _FSTimetableState extends State<FSTimetable> {
                         child: Text(
                           lsn.room,
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(.5),
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: .5),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),

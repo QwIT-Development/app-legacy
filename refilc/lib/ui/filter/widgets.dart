@@ -178,8 +178,7 @@ Future<List<DateWidget>> getFilterWidgets(FilterType activeData,
     // Ads
     case FilterType.ads:
       if (adProvider.available) {
-        items = ad_filter.getWidgets(
-            adProvider.ads, context);
+        items = ad_filter.getWidgets(adProvider.ads, context);
       }
       break;
   }
@@ -233,8 +232,8 @@ Widget filterItemBuilder(
                       BoxShadow(
                         offset: const Offset(0, 21),
                         blurRadius: 23.0,
-                        color: Theme.of(context).shadowColor.withOpacity(
-                              Theme.of(context).shadowColor.opacity *
+                        color: Theme.of(context).shadowColor.withValues(
+                              alpha: Theme.of(context).shadowColor.opacity *
                                   CurvedAnimation(
                                     parent: CurvedAnimation(
                                         parent: animation,

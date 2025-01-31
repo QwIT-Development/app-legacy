@@ -56,7 +56,7 @@ class SplittedPanel extends StatelessWidget {
                     color: Theme.of(context)
                         .colorScheme
                         .secondary
-                        .withOpacity(.25),
+                        .withValues(alpha: .25),
                     width: 1.0)
                 : null,
           ),
@@ -121,7 +121,7 @@ class SplittedPanelTitle extends StatelessWidget {
       child: DefaultTextStyle(
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
             fontWeight: FontWeight.w600,
-            color: AppColors.of(context).text.withOpacity(0.65)),
+            color: AppColors.of(context).text.withValues(alpha: 0.65)),
         child: title,
       ),
     );

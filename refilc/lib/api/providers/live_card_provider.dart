@@ -85,8 +85,8 @@ class LiveCardProvider extends ChangeNotifier {
   }
 
   Map<String, String> toMap() {
-    print("LIVE ACTIVITY COLOR BELOW:");
-    print(_settings.liveActivityColor.toHexString().substring(2));
+    // print("LIVE ACTIVITY COLOR BELOW:");
+    // print(_settings.liveActivityColor.toHexString().substring(2));
     String color = '#${_settings.liveActivityColor.toHexString().substring(2)}';
 
     switch (currentState) {

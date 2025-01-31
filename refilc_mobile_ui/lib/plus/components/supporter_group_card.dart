@@ -27,7 +27,7 @@ class SupporterGroupCard extends StatelessWidget {
         boxShadow: [
           if (glow != null)
             BoxShadow(
-              color: glow!.withOpacity(.2),
+              color: glow!.withValues(alpha: .2),
               blurRadius: 60.0,
             ),
         ],

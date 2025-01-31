@@ -59,7 +59,9 @@ class SupportersScreen extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 20.0,
-                            color: AppColors.of(context).text.withOpacity(.7)),
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: .7)),
                       ),
                     ),
                   ),

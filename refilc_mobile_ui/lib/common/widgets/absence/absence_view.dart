@@ -51,7 +51,7 @@ class AbsenceView extends StatelessWidget {
               height: 44.0,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: color.withOpacity(.25),
+                color: color.withValues(alpha: .25),
               ),
               child: Center(
                 child: Icon(

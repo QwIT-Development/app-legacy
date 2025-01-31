@@ -81,13 +81,13 @@ class StatisticsTile extends StatelessWidget {
             decoration: BoxDecoration(
               color: fill
                   ? (color ?? gradeColor(context: context, value: value))
-                      .withOpacity(.2)
+                      .withValues(alpha: .2)
                   : null,
               border: outline || fill
                   ? Border.all(
                       color:
                           (color ?? gradeColor(context: context, value: value))
-                              .withOpacity(outline ? 1.0 : 0.0),
+                              .withValues(alpha: outline ? 1.0 : 0.0),
                       width: fill ? 5.0 : 5.0,
                     )
                   : null,

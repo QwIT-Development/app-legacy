@@ -44,7 +44,7 @@ class StartBodyState extends State<StartBody> {
               context,
               useRootNavigator: true,
               builder: (context) => SlidingSheetDialog(
-                color: Colors.black.withOpacity(0.99),
+                color: Colors.black.withValues(alpha: 0.99),
                 duration: const Duration(milliseconds: 400),
                 scrollSpec: const ScrollSpec.bouncingScroll(),
                 snapSpec: const SnapSpec(
@@ -84,7 +84,7 @@ class StartBodyState extends State<StartBody> {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16.0,
-                    color: Colors.white.withOpacity(0.7),
+                    color: Colors.white.withValues(alpha: 0.7),
                   ),
                 ),
               ],

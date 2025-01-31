@@ -191,7 +191,7 @@ List<Widget> sortDateWidgets(
             width: 150.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.0),
-              color: AppColors.of(context).text.withOpacity(.25),
+              color: AppColors.of(context).text.withValues(alpha: .25),
             ),
           ),
         ),

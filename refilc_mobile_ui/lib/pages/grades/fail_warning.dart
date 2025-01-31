@@ -27,7 +27,7 @@ class FailWarning extends StatelessWidget {
           children: [
             Icon(
               FeatherIcons.alertTriangle,
-              color: Colors.orange.withOpacity(.5),
+              color: Colors.orange.withValues(alpha: .5),
               size: 20.0,
             ),
             const SizedBox(width: 12.0),

@@ -31,7 +31,7 @@ class ErrorReportScreen extends StatelessWidget {
                 child: Text(
                   "ekretaYou".i18n,
                   style: TextStyle(
-                    color: AppColors.of(context).text.withOpacity(0.7),
+                    color: AppColors.of(context).text.withValues(alpha: 0.7),
                     fontSize: 24.0,
                     fontWeight: FontWeight.w700,
                   ),
@@ -88,7 +88,8 @@ class ErrorReportScreen extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: 'GeistMono',
                           fontWeight: FontWeight.w500,
-                          color: AppColors.of(context).text.withOpacity(0.9),
+                          color:
+                              AppColors.of(context).text.withValues(alpha: 0.9),
                         ),
                       ),
                     ),

@@ -98,7 +98,7 @@ class PersonalityBodyState extends State<PersonalityBody> {
                     ),
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all(
-                          Colors.white.withOpacity(0.2)),
+                          Colors.white.withValues(alpha: 0.2)),
                     ),
                   ),
                   const SizedBox(
@@ -115,7 +115,7 @@ class PersonalityBodyState extends State<PersonalityBody> {
                     ),
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all(
-                          Colors.white.withOpacity(0.2)),
+                          Colors.white.withValues(alpha: 0.2)),
                     ),
                   ),
                 ],

@@ -42,18 +42,18 @@ class MenuPaintList extends StatelessWidget {
       title: Text(
         "own_paints".i18n,
         style: TextStyle(
-          color: AppColors.of(context).text.withOpacity(.95),
+          color: AppColors.of(context).text.withValues(alpha: .95),
         ),
       ),
       leading: Icon(
         FeatherIcons.list,
         size: 22.0,
-        color: AppColors.of(context).text.withOpacity(.95),
+        color: AppColors.of(context).text.withValues(alpha: .95),
       ),
       trailing: Icon(
         FeatherIcons.chevronRight,
         size: 22.0,
-        color: AppColors.of(context).text.withOpacity(0.95),
+        color: AppColors.of(context).text.withValues(alpha: 0.95),
       ),
       borderRadius: borderRadius,
     );
@@ -117,13 +117,13 @@ class PaintListScreenState extends State<PaintListScreen>
             Text(
               t.displayName,
               style: TextStyle(
-                color: AppColors.of(context).text.withOpacity(.95),
+                color: AppColors.of(context).text.withValues(alpha: .95),
               ),
             ),
             Text(
               t.nickname,
               style: TextStyle(
-                color: AppColors.of(context).text.withOpacity(.75),
+                color: AppColors.of(context).text.withValues(alpha: .75),
               ),
             ),
           ],
@@ -219,13 +219,16 @@ class PaintListScreenState extends State<PaintListScreen>
                         title: Text(
                           "enter_id".i18n,
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(.95),
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: .95),
                           ),
                         ),
                         leading: Icon(
                           FeatherIcons.plus,
                           size: 22.0,
-                          color: AppColors.of(context).text.withOpacity(.95),
+                          color:
+                              AppColors.of(context).text.withValues(alpha: .95),
                         ),
                         borderRadius: const BorderRadius.vertical(
                           top: Radius.circular(12.0),
@@ -264,8 +267,9 @@ class PaintListScreenState extends State<PaintListScreen>
                                   ? settingsProvider.currentThemeDisplayName
                                   : 'no_name'.i18n,
                               style: TextStyle(
-                                color:
-                                    AppColors.of(context).text.withOpacity(.95),
+                                color: AppColors.of(context)
+                                    .text
+                                    .withValues(alpha: .95),
                               ),
                             ),
                             Text(
@@ -273,8 +277,9 @@ class PaintListScreenState extends State<PaintListScreen>
                                   ? settingsProvider.currentThemeCreator
                                   : 'Anonymous',
                               style: TextStyle(
-                                color:
-                                    AppColors.of(context).text.withOpacity(.65),
+                                color: AppColors.of(context)
+                                    .text
+                                    .withValues(alpha: .65),
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -300,7 +305,7 @@ class PaintListScreenState extends State<PaintListScreen>
                                     BoxShadow(
                                       color: AppColors.of(context)
                                           .text
-                                          .withOpacity(0.15),
+                                          .withValues(alpha: 0.15),
                                       offset: const Offset(1, 2),
                                       blurRadius: 3,
                                     ),
@@ -323,7 +328,7 @@ class PaintListScreenState extends State<PaintListScreen>
                                       BoxShadow(
                                         color: AppColors.of(context)
                                             .text
-                                            .withOpacity(0.15),
+                                            .withValues(alpha: 0.15),
                                         offset: const Offset(1, 2),
                                         blurRadius: 3,
                                       ),
@@ -346,7 +351,7 @@ class PaintListScreenState extends State<PaintListScreen>
                                       BoxShadow(
                                         color: AppColors.of(context)
                                             .text
-                                            .withOpacity(0.15),
+                                            .withValues(alpha: 0.15),
                                         offset: const Offset(1, 2),
                                         blurRadius: 3,
                                       ),

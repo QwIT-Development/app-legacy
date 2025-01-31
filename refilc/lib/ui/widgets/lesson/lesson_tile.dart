@@ -75,7 +75,7 @@ class LessonTile extends StatelessWidget {
     }
 
     if (lesson.isEmpty) {
-      accent = AppColors.of(context).text.withOpacity(0.6);
+      accent = AppColors.of(context).text.withValues(alpha: 0.6);
     }
 
     if (!lesson.studentPresence) {
@@ -182,9 +182,8 @@ class LessonTile extends StatelessWidget {
                               fontSize: 16.5,
                               color: fill
                                   ? accent
-                                  : AppColors.of(context)
-                                      .text
-                                      .withOpacity(!lesson.isEmpty ? 1.0 : 0.5),
+                                  : AppColors.of(context).text.withValues(
+                                      alpha: !lesson.isEmpty ? 1.0 : 0.5),
                               fontStyle: lesson.subject.isRenamed &&
                                       settingsProvider.renamedSubjectsItalics
                                   ? FontStyle.italic
@@ -199,8 +198,10 @@ class LessonTile extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                               fontSize: 14.0,
                               color: fill
-                                  ? accent.withOpacity(.9)
-                                  : AppColors.of(context).text.withOpacity(.9),
+                                  ? accent.withValues(alpha: .9)
+                                  : AppColors.of(context)
+                                      .text
+                                      .withValues(alpha: .9),
                             ),
                           ),
                         ),
@@ -217,7 +218,7 @@ class LessonTile extends StatelessWidget {
                             //         color: Theme.of(context)
                             //             .colorScheme
                             //             .secondary
-                            //             .withOpacity(.15),
+                            //             .withValues(alpha: .15),
                             //         borderRadius: BorderRadius.circular(10.0),
                             //       ),
                             //       child: Text(
@@ -229,7 +230,7 @@ class LessonTile extends StatelessWidget {
                             //           color: Theme.of(context)
                             //               .colorScheme
                             //               .secondary
-                            //               .withOpacity(.9),
+                            //               .withValues(alpha: .9),
                             //         ),
                             //       ),
                             //     )
@@ -246,11 +247,11 @@ class LessonTile extends StatelessWidget {
                                     horizontal: 5.5, vertical: 3.0),
                                 decoration: BoxDecoration(
                                   color: fill
-                                      ? accent.withOpacity(.15)
+                                      ? accent.withValues(alpha: .15)
                                       : Theme.of(context)
                                           .colorScheme
                                           .tertiary
-                                          .withOpacity(.15),
+                                          .withValues(alpha: .15),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Text(
@@ -261,11 +262,11 @@ class LessonTile extends StatelessWidget {
                                     fontSize: 12.0,
                                     fontWeight: FontWeight.w600,
                                     color: fill
-                                        ? accent.withOpacity(0.9)
+                                        ? accent.withValues(alpha: 0.9)
                                         : Theme.of(context)
                                             .colorScheme
                                             .secondary
-                                            .withOpacity(.9),
+                                            .withValues(alpha: .9),
                                   ),
                                 ),
                               ),
@@ -277,7 +278,9 @@ class LessonTile extends StatelessWidget {
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   fontSize: 14.0,
-                                  color: fill ? accent.withOpacity(0.5) : null,
+                                  color: fill
+                                      ? accent.withValues(alpha: 0.5)
+                                      : null,
                                 ),
                               ),
                           ],
@@ -344,7 +347,7 @@ class LessonTile extends StatelessWidget {
                                       ? Theme.of(context)
                                           .colorScheme
                                           .secondary
-                                          .withOpacity(.3)
+                                          .withValues(alpha: .3)
                                       : const Color(0x00000000),
                                   borderRadius: BorderRadius.circular(12.0),
                                   boxShadow: [
@@ -353,7 +356,7 @@ class LessonTile extends StatelessWidget {
                                         color: Theme.of(context)
                                             .colorScheme
                                             .secondary
-                                            .withOpacity(.25),
+                                            .withValues(alpha: .25),
                                         blurRadius: 6.0,
                                       )
                                   ],
@@ -386,7 +389,7 @@ class LessonTile extends StatelessWidget {
                             //           fontWeight: FontWeight.w500,
                             //           color: AppColors.of(context)
                             //               .text
-                            //               .withOpacity(.75),
+                            //               .withValues(alpha: .75),
                             //         ),
                             //       ),
                             //     ),
@@ -398,11 +401,11 @@ class LessonTile extends StatelessWidget {
                                     horizontal: 6.0, vertical: 3.5),
                                 decoration: BoxDecoration(
                                   color: fill
-                                      ? accent.withOpacity(.15)
+                                      ? accent.withValues(alpha: .15)
                                       : Theme.of(context)
                                           .colorScheme
                                           .tertiary
-                                          .withOpacity(.15),
+                                          .withValues(alpha: .15),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Text(
@@ -413,11 +416,11 @@ class LessonTile extends StatelessWidget {
                                     fontSize: 12.5,
                                     fontWeight: FontWeight.w600,
                                     color: fill
-                                        ? accent.withOpacity(0.9)
+                                        ? accent.withValues(alpha: 0.9)
                                         : Theme.of(context)
                                             .colorScheme
                                             .secondary
-                                            .withOpacity(.9),
+                                            .withValues(alpha: .9),
                                   ),
                                 ),
                               ),
@@ -438,10 +441,10 @@ class LessonTile extends StatelessWidget {
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: fill
-                                          ? accent.withOpacity(.9)
+                                          ? accent.withValues(alpha: .9)
                                           : AppColors.of(context)
                                               .text
-                                              .withOpacity(.9),
+                                              .withValues(alpha: .9),
                                     ),
                                   ),
                                 ],
@@ -502,8 +505,8 @@ class LessonSubtile extends StatelessWidget {
               Center(
                 child: SizedBox(
                   width: 30.0,
-                  child:
-                      Icon(icon, color: iconColor.withOpacity(.75), size: 20.0),
+                  child: Icon(icon,
+                      color: iconColor.withValues(alpha: .75), size: 20.0),
                 ),
               ),
               Expanded(
@@ -515,7 +518,8 @@ class LessonSubtile extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: AppColors.of(context).text.withOpacity(.65)),
+                        color:
+                            AppColors.of(context).text.withValues(alpha: .65)),
                   ),
                 ),
               ),

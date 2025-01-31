@@ -39,7 +39,7 @@ class CertificationCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
           gradient: LinearGradient(
-            colors: [color, color.withOpacity(.75)],
+            colors: [color, color.withValues(alpha: .75)],
           ),
         ),
         child: Material(
@@ -65,7 +65,7 @@ class CertificationCard extends StatelessWidget {
                   TextSpan(
                     text: " • ${grades.length}",
                     style: TextStyle(
-                      color: textColor.withOpacity(.75),
+                      color: textColor.withValues(alpha: .75),
                       fontWeight: FontWeight.w600,
                       fontSize: 16.0,
                     ),

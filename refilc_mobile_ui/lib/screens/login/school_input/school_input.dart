@@ -88,7 +88,7 @@ class SchoolInputState extends State<SchoolInput> {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.15),
+                color: Colors.black.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(12.0),
               ),
               child: const Center(

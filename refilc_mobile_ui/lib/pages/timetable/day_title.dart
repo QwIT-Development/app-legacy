@@ -63,14 +63,14 @@ class _DayTitleState extends State<DayTitle> {
                               textStyle: TextStyle(
                                   color: AppColors.of(context)
                                       .text
-                                      .withOpacity(opacity),
+                                      .withValues(alpha: opacity),
                                   fontSize: 32.0,
                                   fontWeight: FontWeight.bold),
                             )
                           : TextStyle(
                               color: AppColors.of(context)
                                   .text
-                                  .withOpacity(opacity),
+                                  .withValues(alpha: opacity),
                               fontSize: 32.0,
                               fontWeight: FontWeight.bold),
                     ),

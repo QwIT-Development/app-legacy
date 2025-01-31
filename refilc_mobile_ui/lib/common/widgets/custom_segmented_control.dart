@@ -34,7 +34,7 @@ class CustomSegmentedControl extends StatelessWidget {
       initialValue: value,
       children: finalChildren,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary.withOpacity(.069),
+        color: Theme.of(context).colorScheme.secondary.withValues(alpha: .069),
         borderRadius: BorderRadius.circular(12.0),
       ),
       thumbDecoration: BoxDecoration(
@@ -42,7 +42,7 @@ class CustomSegmentedControl extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
         // boxShadow: [
         //   BoxShadow(
-        //     color: Colors.black.withOpacity(.3),
+        //     color: Colors.black.withValues(alpha: .3),
         //     blurRadius: 4.0,
         //     spreadRadius: 1.0,
         //     offset: const Offset(
@@ -66,7 +66,7 @@ class CustomSegmentedControl extends StatelessWidget {
         // endIndent: 2,
         // thickness: 2,
         decoration: BoxDecoration(
-          color: AppColors.of(context).text.withOpacity(0.2),
+          color: AppColors.of(context).text.withValues(alpha: 0.2),
         ),
       ),
       height: height,

@@ -380,7 +380,7 @@ class FilcColorPickerState extends State<FilcColorPicker> {
                           fontSize: 16.0,
                           color: AppColors.of(context)
                               .text
-                              .withOpacity(isAdvancedView ? 1.0 : .5),
+                              .withValues(alpha: isAdvancedView ? 1.0 : .5),
                         ),
                       ),
                     ],

@@ -23,7 +23,7 @@ class MissedExamTile extends StatelessWidget {
             height: 36,
             child: Icon(
               FeatherIcons.slash,
-              color: AppColors.of(context).red.withOpacity(.75),
+              color: AppColors.of(context).red.withValues(alpha: .75),
               size: 28.0,
             )),
         title: Text("missed_exams"

@@ -44,7 +44,7 @@ class _EmptyCardState extends State<EmptyCard> {
               if (Provider.of<SettingsProvider>(context, listen: false)
                   .shadowEffect)
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
+                  color: Colors.black.withValues(alpha: 0.08),
                   offset: const Offset(0, 5),
                   blurRadius: 20,
                   spreadRadius: 10,
@@ -52,7 +52,7 @@ class _EmptyCardState extends State<EmptyCard> {
             ],
           ),
           child: DottedBorder(
-            color: Colors.black.withOpacity(0.9),
+            color: Colors.black.withValues(alpha: 0.9),
             dashPattern: const [12, 12],
             padding:
                 const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
@@ -60,7 +60,7 @@ class _EmptyCardState extends State<EmptyCard> {
               child: Text(
                 widget.text,
                 style: TextStyle(
-                  color: Colors.white.withOpacity(0.9),
+                  color: Colors.white.withValues(alpha: 0.9),
                 ),
               ),
             ),

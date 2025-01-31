@@ -42,8 +42,10 @@ class NewGradesSurprise extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
-                    color:
-                        Theme.of(context).colorScheme.secondary.withOpacity(.5),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: .5),
                     blurRadius: 18.0,
                   )
                 ]),
@@ -59,7 +61,8 @@ class NewGradesSurprise extends StatelessWidget {
                       width: 85,
                       height: 15,
                       decoration: BoxDecoration(
-                        color: AppColors.of(context).text.withOpacity(.85),
+                        color:
+                            AppColors.of(context).text.withValues(alpha: .85),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
@@ -78,7 +81,8 @@ class NewGradesSurprise extends StatelessWidget {
                       width: 125,
                       height: 10,
                       decoration: BoxDecoration(
-                        color: AppColors.of(context).text.withOpacity(.45),
+                        color:
+                            AppColors.of(context).text.withValues(alpha: .45),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
@@ -97,7 +101,8 @@ class NewGradesSurprise extends StatelessWidget {
                       width: 25,
                       height: 25,
                       decoration: BoxDecoration(
-                        color: AppColors.of(context).text.withOpacity(.45),
+                        color:
+                            AppColors.of(context).text.withValues(alpha: .45),
                         borderRadius: BorderRadius.circular(25.0),
                       ),
                     ),
@@ -110,7 +115,9 @@ class NewGradesSurprise extends StatelessWidget {
                         style: TextStyle(
                           shadows: [
                             Shadow(
-                              color: AppColors.of(context).text.withOpacity(.2),
+                              color: AppColors.of(context)
+                                  .text
+                                  .withValues(alpha: .2),
                               offset: const Offset(2, 2),
                             )
                           ],
@@ -119,7 +126,7 @@ class NewGradesSurprise extends StatelessWidget {
                       text: "x",
                       style: TextStyle(
                         fontSize: 20.0,
-                        color: AppColors.of(context).text.withOpacity(.5),
+                        color: AppColors.of(context).text.withValues(alpha: .5),
                         fontWeight: FontWeight.w800,
                       ),
                     )
@@ -127,7 +134,7 @@ class NewGradesSurprise extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 28.0,
-                    color: AppColors.of(context).text.withOpacity(.75),
+                    color: AppColors.of(context).text.withValues(alpha: .75),
                   ),
                 ),
         ),

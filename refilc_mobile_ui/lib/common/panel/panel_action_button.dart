@@ -23,18 +23,28 @@ class PanelActionButton extends StatelessWidget {
       padding: padding,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
-        side: BorderSide(color: Theme.of(context).colorScheme.secondary.withOpacity(.6), width: 2),
+        side: BorderSide(
+            color:
+                Theme.of(context).colorScheme.secondary.withValues(alpha: .6),
+            width: 2),
       ),
       child: ListTile(
         leading: leading != null
             ? Theme(
-                data: Theme.of(context).copyWith(iconTheme: IconThemeData(color: Theme.of(context).colorScheme.secondary)),
+                data: Theme.of(context).copyWith(
+                    iconTheme: IconThemeData(
+                        color: Theme.of(context).colorScheme.secondary)),
                 child: leading!,
               )
             : null,
         trailing: trailing,
         title: title != null
-            ? DefaultTextStyle(style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w500, fontSize: 15.0), child: title!)
+            ? DefaultTextStyle(
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(fontWeight: FontWeight.w500, fontSize: 15.0),
+                child: title!)
             : null,
         contentPadding: EdgeInsets.zero,
         visualDensity: VisualDensity.compact,

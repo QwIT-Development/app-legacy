@@ -36,7 +36,8 @@ class FourRandomSlotParticle extends Particle {
 
   final double relativeDistanceToMiddle;
 
-  FourRandomSlotParticle({required this.children, this.relativeDistanceToMiddle = 2.0});
+  FourRandomSlotParticle(
+      {required this.children, this.relativeDistanceToMiddle = 2.0});
 
   @override
   void paint(Canvas canvas, Size size, double progress, int seed) {
@@ -53,13 +54,17 @@ class FourRandomSlotParticle extends Particle {
 
   Offset sideToOffset(int side, Size size, Random random) {
     if (side == 0) {
-      return Offset(-random.nextDouble() * (size.width / 2), -random.nextDouble() * (size.height / 2));
+      return Offset(-random.nextDouble() * (size.width / 2),
+          -random.nextDouble() * (size.height / 2));
     } else if (side == 1) {
-      return Offset(random.nextDouble() * (size.width / 2), -random.nextDouble() * (size.height / 2));
+      return Offset(random.nextDouble() * (size.width / 2),
+          -random.nextDouble() * (size.height / 2));
     } else if (side == 2) {
-      return Offset(random.nextDouble() * (size.width / 2), random.nextDouble() * (size.height / 2));
+      return Offset(random.nextDouble() * (size.width / 2),
+          random.nextDouble() * (size.height / 2));
     } else if (side == 3) {
-      return Offset(-random.nextDouble() * (size.width / 2), random.nextDouble() * (size.height / 2));
+      return Offset(-random.nextDouble() * (size.width / 2),
+          random.nextDouble() * (size.height / 2));
     } else {
       throw Exception();
     }
@@ -148,9 +153,16 @@ class CircleMirror extends Particle {
 
   final int numberOfParticles;
 
-  CircleMirror.builder({required this.particleBuilder, required this.initialRotation, required this.numberOfParticles});
+  CircleMirror.builder(
+      {required this.particleBuilder,
+      required this.initialRotation,
+      required this.numberOfParticles});
 
-  CircleMirror({required Particle child, required this.initialRotation, required this.numberOfParticles}) : particleBuilder = ((index) => child);
+  CircleMirror(
+      {required Particle child,
+      required this.initialRotation,
+      required this.numberOfParticles})
+      : particleBuilder = ((index) => child);
 
   @override
   void paint(Canvas canvas, Size size, double progress, seed) {
@@ -177,9 +189,15 @@ class RectangleMirror extends Particle {
 
   final int numberOfParticles;
 
-  RectangleMirror.builder({required this.particleBuilder, required this.initialDistance, required this.numberOfParticles});
+  RectangleMirror.builder(
+      {required this.particleBuilder,
+      required this.initialDistance,
+      required this.numberOfParticles});
 
-  RectangleMirror({required Particle child, required this.initialDistance, required this.numberOfParticles})
+  RectangleMirror(
+      {required Particle child,
+      required this.initialDistance,
+      required this.numberOfParticles})
       : particleBuilder = ((index) => child);
 
   @override
@@ -191,14 +209,17 @@ class RectangleMirror extends Particle {
     bool onHorizontalAxis = true;
     int side = 0;
 
-    assert((distanceBetweenParticles * numberOfParticles).round() == totalLength.round());
+    assert((distanceBetweenParticles * numberOfParticles).round() ==
+        totalLength.round());
 
     canvas.translate(-size.width / 2, -size.height / 2);
 
     double currentDistance = initialDistance;
     for (int i = 0; i < numberOfParticles; i++) {
       while (true) {
-        if (onHorizontalAxis ? currentDistance > size.width : currentDistance > size.height) {
+        if (onHorizontalAxis
+            ? currentDistance > size.width
+            : currentDistance > size.height) {
           currentDistance -= onHorizontalAxis ? size.width : size.height;
           onHorizontalAxis = !onHorizontalAxis;
           side = (++side) % 4;
@@ -215,7 +236,8 @@ class RectangleMirror extends Particle {
             });
           } else if (side == 2) {
             assert(onHorizontalAxis);
-            moveTo(canvas, size, 2, size.width - currentDistance, size.height, () {
+            moveTo(canvas, size, 2, size.width - currentDistance, size.height,
+                () {
               particleBuilder(i).paint(canvas, size, progress, seed);
             });
           } else if (side == 3) {
@@ -233,7 +255,8 @@ class RectangleMirror extends Particle {
     canvas.restore();
   }
 
-  void moveTo(Canvas canvas, Size size, int side, double x, double y, VoidCallback painter) {
+  void moveTo(Canvas canvas, Size size, int side, double x, double y,
+      VoidCallback painter) {
     canvas.save();
     canvas.translate(x, y);
     canvas.rotate(-atan2(size.width / 2 - x, size.height / 2 - y));
@@ -261,7 +284,9 @@ class PositionedParticle extends Particle {
 
 /// Animates a childs position based on a Tween<Offset>
 class AnimatedPositionedParticle extends Particle {
-  AnimatedPositionedParticle({required Offset begin, required Offset end, required this.child}) : offsetTween = Tween<Offset>(begin: begin, end: end);
+  AnimatedPositionedParticle(
+      {required Offset begin, required Offset end, required this.child})
+      : offsetTween = Tween<Offset>(begin: begin, end: end);
 
   final Particle child;
 
@@ -270,7 +295,8 @@ class AnimatedPositionedParticle extends Particle {
   @override
   void paint(Canvas canvas, Size size, double progress, seed) {
     canvas.save();
-    canvas.translate(offsetTween.lerp(progress).dx, offsetTween.lerp(progress).dy);
+    canvas.translate(
+        offsetTween.lerp(progress).dx, offsetTween.lerp(progress).dy);
     child.paint(canvas, size, progress, seed);
     canvas.restore();
   }
@@ -335,7 +361,9 @@ class AnimatedRotationParticle extends Particle {
 
   final Tween<double> rotation;
 
-  AnimatedRotationParticle({required this.child, required double begin, required double end}) : rotation = Tween<double>(begin: begin, end: end);
+  AnimatedRotationParticle(
+      {required this.child, required double begin, required double end})
+      : rotation = Tween<double>(begin: begin, end: end);
 
   @override
   void paint(Canvas canvas, Size size, double progress, int seed) {
@@ -362,7 +390,8 @@ class FadingRect extends Particle {
 
   @override
   void paint(Canvas canvas, Size size, double progress, seed) {
-    canvas.drawRect(Rect.fromLTWH(0.0, 0.0, width, height), Paint()..color = color.withOpacity(1 - progress));
+    canvas.drawRect(Rect.fromLTWH(0.0, 0.0, width, height),
+        Paint()..color = color.withValues(alpha: 1 - progress));
   }
 }
 
@@ -375,7 +404,8 @@ class FadingCircle extends Particle {
 
   @override
   void paint(Canvas canvas, Size size, double progress, seed) {
-    canvas.drawCircle(Offset.zero, radius, Paint()..color = color.withOpacity(1 - progress));
+    canvas.drawCircle(Offset.zero, radius,
+        Paint()..color = color.withValues(alpha: 1 - progress));
   }
 }
 
@@ -394,7 +424,11 @@ class FadingTriangle extends Particle {
   /// This is the factor of how much bigger then length than the width is
   final double heightToBaseFactor;
 
-  FadingTriangle({required this.variation, required this.color, required this.baseSize, required this.heightToBaseFactor});
+  FadingTriangle(
+      {required this.variation,
+      required this.color,
+      required this.baseSize,
+      required this.heightToBaseFactor});
 
   @override
   void paint(Canvas canvas, Size size, double progress, int seed) {
@@ -403,7 +437,8 @@ class FadingTriangle extends Particle {
     path.lineTo(baseSize * variation, baseSize * heightToBaseFactor);
     path.lineTo(baseSize, 0.0);
     path.close();
-    canvas.drawPath(path, Paint()..color = color.withOpacity(1 - progress));
+    canvas.drawPath(
+        path, Paint()..color = color.withValues(alpha: 1 - progress));
   }
 }
 
@@ -418,7 +453,12 @@ class FadingSnake extends Particle {
 
   final Color color;
 
-  FadingSnake({required this.width, required this.segmentLength, required this.segments, required this.curvyness, required this.color});
+  FadingSnake(
+      {required this.width,
+      required this.segmentLength,
+      required this.segments,
+      required this.curvyness,
+      required this.color});
 
   @override
   void paint(Canvas canvas, Size size, double progress, int seed) {
@@ -426,10 +466,12 @@ class FadingSnake extends Particle {
     canvas.rotate(pi / 6);
     Path path = Path();
     for (int i = 0; i < segments; i++) {
-      path.quadraticBezierTo(curvyness * i, segmentLength * (i + 1), curvyness * (i + 1), segmentLength * (i + 1));
+      path.quadraticBezierTo(curvyness * i, segmentLength * (i + 1),
+          curvyness * (i + 1), segmentLength * (i + 1));
     }
     for (int i = segments - 1; i >= 0; i--) {
-      path.quadraticBezierTo(curvyness * (i + 1), segmentLength * i - curvyness, curvyness * i, segmentLength * i - curvyness);
+      path.quadraticBezierTo(curvyness * (i + 1), segmentLength * i - curvyness,
+          curvyness * i, segmentLength * i - curvyness);
     }
     path.close();
     canvas.drawPath(path, Paint()..color = color);

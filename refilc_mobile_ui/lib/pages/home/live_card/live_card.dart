@@ -114,7 +114,7 @@ class LiveCardStateA extends State<LiveCard> {
             //   context,
             //   useRootNavigator: true,
             //   builder: (context) => SlidingSheetDialog(
-            //     color: Colors.black.withOpacity(0.99),
+            //     color: Colors.black.withValues(alpha: 0.99),
             //     duration: const Duration(milliseconds: 400),
             //     scrollSpec: const ScrollSpec.bouncingScroll(),
             //     snapSpec: const SnapSpec(
@@ -162,7 +162,7 @@ class LiveCardStateA extends State<LiveCard> {
           //                   color: Theme.of(context)
           //                       .colorScheme
           //                       .secondary
-          //                       .withOpacity(.85),
+          //                       .withValues(alpha: .85),
           //                   fontStyle: liveCard.nextLesson!.subject.isRenamed &&
           //                           settingsProvider.renamedSubjectsItalics
           //                       ? FontStyle.italic
@@ -176,7 +176,7 @@ class LiveCardStateA extends State<LiveCard> {
           //                 color: Theme.of(context)
           //                     .colorScheme
           //                     .secondary
-          //                     .withOpacity(.85),
+          //                     .withValues(alpha: .85),
           //               ),
           //             ),
           //             TextSpan(text: "first_lesson_3".i18n),
@@ -188,7 +188,7 @@ class LiveCardStateA extends State<LiveCard> {
           //                 color: Theme.of(context)
           //                     .colorScheme
           //                     .secondary
-          //                     .withOpacity(.85),
+          //                     .withValues(alpha: .85),
           //               ),
           //             ),
           //             TextSpan(text: "first_lesson_4".i18n),
@@ -281,7 +281,7 @@ class LiveCardStateA extends State<LiveCard> {
                                       color: Theme.of(context)
                                           .colorScheme
                                           .secondary
-                                          .withOpacity(.15),
+                                          .withValues(alpha: .15),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Text(
@@ -294,7 +294,7 @@ class LiveCardStateA extends State<LiveCard> {
                                         color: Theme.of(context)
                                             .colorScheme
                                             .secondary
-                                            .withOpacity(.9),
+                                            .withValues(alpha: .9),
                                       ),
                                     ),
                                   ),
@@ -469,7 +469,7 @@ class LiveCardStateA extends State<LiveCard> {
                                           fontWeight: FontWeight.w500,
                                           color: AppColors.of(context)
                                               .text
-                                              .withOpacity(.75),
+                                              .withValues(alpha: .75),
                                           height: 1.1,
                                         ),
                                       ),
@@ -547,7 +547,7 @@ class LiveCardStateA extends State<LiveCard> {
                                             color: Theme.of(context)
                                                 .colorScheme
                                                 .tertiary
-                                                .withOpacity(.15),
+                                                .withValues(alpha: .15),
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
                                           ),
@@ -561,7 +561,7 @@ class LiveCardStateA extends State<LiveCard> {
                                               color: Theme.of(context)
                                                   .colorScheme
                                                   .secondary
-                                                  .withOpacity(.9),
+                                                  .withValues(alpha: .9),
                                             ),
                                           ),
                                         ),
@@ -730,10 +730,11 @@ class LiveCardStateA extends State<LiveCard> {
                                             fontSize: 16.5,
                                             color: AppColors.of(context)
                                                 .text
-                                                .withOpacity(!liveCard
-                                                        .nextLesson!.isEmpty
-                                                    ? 1.0
-                                                    : 0.5),
+                                                .withValues(
+                                                    alpha: !liveCard
+                                                            .nextLesson!.isEmpty
+                                                        ? 1.0
+                                                        : 0.5),
                                             fontStyle: liveCard.nextLesson!
                                                         .subject.isRenamed &&
                                                     settingsProvider
@@ -752,7 +753,7 @@ class LiveCardStateA extends State<LiveCard> {
                                               height: 1.0,
                                               color: AppColors.of(context)
                                                   .text
-                                                  .withOpacity(.75),
+                                                  .withValues(alpha: .75),
                                             ),
                                         maxLines: !(nextSubject == null &&
                                                 progressCurrent == null &&
@@ -830,7 +831,7 @@ class LiveCardStateA extends State<LiveCard> {
                                                   fontWeight: FontWeight.w500,
                                                   color: AppColors.of(context)
                                                       .text
-                                                      .withOpacity(.9),
+                                                      .withValues(alpha: .9),
                                                 ),
                                               ),
                                             ],
@@ -899,7 +900,7 @@ class LiveCardStateA extends State<LiveCard> {
                                           fontWeight: FontWeight.w500,
                                           color: AppColors.of(context)
                                               .text
-                                              .withOpacity(.75),
+                                              .withValues(alpha: .75),
                                           height: 1.1,
                                         ),
                                       ),
@@ -977,7 +978,7 @@ class LiveCardStateA extends State<LiveCard> {
                                             color: Theme.of(context)
                                                 .colorScheme
                                                 .tertiary
-                                                .withOpacity(.15),
+                                                .withValues(alpha: .15),
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
                                           ),
@@ -991,7 +992,7 @@ class LiveCardStateA extends State<LiveCard> {
                                               color: Theme.of(context)
                                                   .colorScheme
                                                   .secondary
-                                                  .withOpacity(.9),
+                                                  .withValues(alpha: .9),
                                             ),
                                           ),
                                         ),

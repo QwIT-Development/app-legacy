@@ -115,42 +115,42 @@ class AppTheme {
         primary: accent,
         onPrimary:
             (accent.computeLuminance() > 0.5 ? Colors.black : Colors.white)
-                .withOpacity(.9),
+                .withValues(alpha: .9),
         secondary: newSecondary,
         onSecondary: (newSecondary.computeLuminance() > 0.5
                 ? Colors.black
                 : Colors.white)
-            .withOpacity(.9),
+            .withValues(alpha: .9),
         tertiary: newTertiary,
         onTertiary:
             (newTertiary.computeLuminance() > 0.5 ? Colors.black : Colors.white)
-                .withOpacity(.9),
+                .withValues(alpha: .9),
         brightness: Brightness.light,
         error: lightColors.red,
-        onError: Colors.white.withOpacity(.9),
+        onError: Colors.white.withValues(alpha: .9),
         surface: highlightColor,
-        onSurface: Colors.black.withOpacity(.9),
+        onSurface: Colors.black.withValues(alpha: .9),
       ),
-      shadowColor: lightColors.shadow.withOpacity(.5),
+      shadowColor: lightColors.shadow.withValues(alpha: .5),
       appBarTheme: AppBarTheme(backgroundColor: backgroundColor),
       indicatorColor: accent,
-      iconTheme: IconThemeData(color: lightColors.text.withOpacity(.75)),
+      iconTheme: IconThemeData(color: lightColors.text.withValues(alpha: .75)),
       navigationBarTheme: NavigationBarThemeData(
-        indicatorColor:
-            accent.withOpacity(accentColor == AccentColor.adaptive ? 0.4 : 0.8),
+        indicatorColor: accent.withValues(
+            alpha: accentColor == AccentColor.adaptive ? 0.4 : 0.8),
         iconTheme:
             WidgetStateProperty.all(IconThemeData(color: lightColors.text)),
         backgroundColor: highlightColor,
         labelTextStyle: WidgetStateProperty.all(TextStyle(
           fontSize: 13.0,
           fontWeight: FontWeight.w500,
-          color: lightColors.text.withOpacity(0.8),
+          color: lightColors.text.withValues(alpha: 0.8),
         )),
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         height: 76.0,
       ),
       sliderTheme: SliderThemeData(
-        inactiveTrackColor: accent.withOpacity(.3),
+        inactiveTrackColor: accent.withValues(alpha: .3),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(color: accent),
       expansionTileTheme: ExpansionTileThemeData(iconColor: accent),
@@ -238,48 +238,48 @@ class AppTheme {
         primary: accent,
         onPrimary:
             (accent.computeLuminance() > 0.5 ? Colors.black : Colors.white)
-                .withOpacity(.9),
+                .withValues(alpha: .9),
         secondary: newSecondary,
         onSecondary: (newSecondary.computeLuminance() > 0.5
                 ? Colors.black
                 : Colors.white)
-            .withOpacity(.9),
+            .withValues(alpha: .9),
         tertiary: newTertiary,
         onTertiary:
             (newTertiary.computeLuminance() > 0.5 ? Colors.black : Colors.white)
-                .withOpacity(.9),
+                .withValues(alpha: .9),
         brightness: Brightness.dark,
         error: darkColors.red,
-        onError: Colors.black.withOpacity(.9),
+        onError: Colors.black.withValues(alpha: .9),
         surface: highlightColor,
-        onSurface: Colors.white.withOpacity(.9),
+        onSurface: Colors.white.withValues(alpha: .9),
       ),
-      shadowColor: highlightColor.withOpacity(.5), //darkColors.shadow,
+      shadowColor: highlightColor.withValues(alpha: .5), //darkColors.shadow,
       appBarTheme: AppBarTheme(backgroundColor: backgroundColor),
       indicatorColor: accent,
-      iconTheme: IconThemeData(color: darkColors.text.withOpacity(.75)),
+      iconTheme: IconThemeData(color: darkColors.text.withValues(alpha: .75)),
       navigationBarTheme: NavigationBarThemeData(
-        indicatorColor:
-            accent.withOpacity(accentColor == AccentColor.adaptive ? 0.4 : 0.8),
+        indicatorColor: accent.withValues(
+            alpha: accentColor == AccentColor.adaptive ? 0.4 : 0.8),
         iconTheme:
             WidgetStateProperty.all(IconThemeData(color: darkColors.text)),
         backgroundColor: highlightColor,
         labelTextStyle: WidgetStateProperty.all(TextStyle(
           fontSize: 13.0,
           fontWeight: FontWeight.w500,
-          color: darkColors.text.withOpacity(0.8),
+          color: darkColors.text.withValues(alpha: 0.8),
         )),
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         height: 76.0,
       ),
       sliderTheme: SliderThemeData(
-        inactiveTrackColor: accent.withOpacity(.3),
+        inactiveTrackColor: accent.withValues(alpha: .3),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(color: accent),
       expansionTileTheme: ExpansionTileThemeData(iconColor: accent),
       cardColor: highlightColor,
       chipTheme: ChipThemeData(
-        backgroundColor: accent.withOpacity(.2),
+        backgroundColor: accent.withValues(alpha: .2),
         elevation: 1,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(

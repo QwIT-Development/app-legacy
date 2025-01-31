@@ -66,7 +66,7 @@ class CertificationTile extends StatelessWidget {
         child: ListTile(
           tileColor: gradeColor(
                   context: context, value: grade.value.value, nocolor: false)
-              .withOpacity(.1),
+              .withValues(alpha: .1),
           visualDensity: VisualDensity.compact,
           contentPadding: isSubjectView
               ? const EdgeInsets.only(left: 20.0, right: 12.0, bottom: 6.0)
@@ -85,7 +85,7 @@ class CertificationTile extends StatelessWidget {
                       SubjectIcon.resolveVariant(
                           subject: grade.subject, context: context),
                       size: 28.0,
-                      color: AppColors.of(context).text.withOpacity(.75)),
+                      color: AppColors.of(context).text.withValues(alpha: .75)),
                 ),
           minLeadingWidth: isSubjectView ? 32.0 : 42.0,
           trailing: isSubjectView

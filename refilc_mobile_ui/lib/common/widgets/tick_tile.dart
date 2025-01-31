@@ -81,7 +81,7 @@ class TickTileState extends State<TickTile> {
                     fontSize: 15.5,
                     decoration: isTicked ? TextDecoration.lineThrough : null,
                     color: isTicked
-                        ? AppColors.of(context).text.withOpacity(0.5)
+                        ? AppColors.of(context).text.withValues(alpha: 0.5)
                         : null,
                   ),
                 ),
@@ -97,7 +97,7 @@ class TickTileState extends State<TickTile> {
                     fontWeight: FontWeight.w500,
                     fontSize: 12.0,
                     color: isTicked
-                        ? AppColors.of(context).text.withOpacity(0.5)
+                        ? AppColors.of(context).text.withValues(alpha: 0.5)
                         : null,
                   ),
                 )

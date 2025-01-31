@@ -50,7 +50,7 @@ class MissedExamViewTile extends StatelessWidget {
           leading: Icon(
             SubjectIcon.resolveVariant(
                 subject: lesson.subject, context: context),
-            color: AppColors.of(context).text.withOpacity(.8),
+            color: AppColors.of(context).text.withValues(alpha: .8),
             size: 32.0,
           ),
           title: Text(

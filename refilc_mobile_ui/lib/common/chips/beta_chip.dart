@@ -16,7 +16,7 @@ class BetaChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: !disabled
               ? Theme.of(context).colorScheme.secondary
-              : AppColors.of(context).text.withOpacity(.25),
+              : AppColors.of(context).text.withValues(alpha: .25),
           borderRadius: BorderRadius.circular(40),
         ),
         child: Padding(
@@ -28,7 +28,7 @@ class BetaChip extends StatelessWidget {
               style: TextStyle(
                 fontSize: 10,
                 color: disabled
-                    ? AppColors.of(context).text.withOpacity(.5)
+                    ? AppColors.of(context).text.withValues(alpha: .5)
                     : Colors.white,
                 fontWeight: FontWeight.w600,
                 overflow: TextOverflow.ellipsis,

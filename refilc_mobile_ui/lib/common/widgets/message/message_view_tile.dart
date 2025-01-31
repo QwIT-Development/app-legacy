@@ -91,7 +91,10 @@ class MessageViewTile extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.0),
               border: Border.all(
-                color: Theme.of(context).colorScheme.secondary.withOpacity(.25),
+                color: Theme.of(context)
+                    .colorScheme
+                    .secondary
+                    .withValues(alpha: .25),
                 width: 1.0,
               ),
             ),
@@ -122,7 +125,7 @@ class MessageViewTile extends StatelessWidget {
                       .textTheme
                       .bodySmall
                       ?.color
-                      ?.withOpacity(0.6),
+                      ?.withValues(alpha: 0.6),
                 ),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,

@@ -38,7 +38,7 @@ class MenuExtrasSettings extends StatelessWidget {
       leading: Icon(
         FeatherIcons.edit,
         size: 22.0,
-        color: AppColors.of(context).text.withOpacity(0.95),
+        color: AppColors.of(context).text.withValues(alpha: 0.95),
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
@@ -51,7 +51,7 @@ class MenuExtrasSettings extends StatelessWidget {
           Icon(
             FeatherIcons.chevronRight,
             size: 22.0,
-            color: AppColors.of(context).text.withOpacity(0.95),
+            color: AppColors.of(context).text.withValues(alpha: 0.95),
           )
         ],
       ),
@@ -126,15 +126,16 @@ class ExtrasSettingsScreenState extends State<ExtrasSettingsScreen> {
                     title: Text(
                       "surprise_grades".i18n,
                       style: TextStyle(
-                        color: AppColors.of(context).text.withOpacity(
-                            settingsProvider.gradeOpeningFun ? .95 : .25),
+                        color: AppColors.of(context).text.withValues(
+                            alpha:
+                                settingsProvider.gradeOpeningFun ? .95 : .25),
                       ),
                     ),
                     leading: Icon(
                       FeatherIcons.gift,
                       size: 22.0,
-                      color: AppColors.of(context).text.withOpacity(
-                          settingsProvider.gradeOpeningFun ? .95 : .25),
+                      color: AppColors.of(context).text.withValues(
+                          alpha: settingsProvider.gradeOpeningFun ? .95 : .25),
                     ),
                     trailing: Switch(
                       onChanged: (v) async {

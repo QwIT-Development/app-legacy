@@ -54,7 +54,8 @@ class UpdateViewState extends State<UpdateView> {
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 16.0,
-                        color: AppColors.of(context).text.withOpacity(0.6),
+                        color:
+                            AppColors.of(context).text.withValues(alpha: 0.6),
                       ),
                     ),
                   ],

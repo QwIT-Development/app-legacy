@@ -19,7 +19,9 @@ class GithubCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(14.0),
           onTap: onPressed,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0).add(const EdgeInsets.only(top: 4.0)),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0)
+                    .add(const EdgeInsets.only(top: 4.0)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -36,7 +38,7 @@ class GithubCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4.0),
                 Chip(
-                  backgroundColor: Colors.black.withOpacity(.5),
+                  backgroundColor: Colors.black.withValues(alpha: .5),
                   label: const Text(
                     "Már támogatsz? Jelentkezz be!",
                     style: TextStyle(color: Colors.white),

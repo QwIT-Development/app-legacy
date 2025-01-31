@@ -52,12 +52,12 @@ class MenuPersonalizeSettings extends StatelessWidget {
       leading: Icon(
         Icons.palette_outlined,
         size: 22.0,
-        color: AppColors.of(context).text.withOpacity(0.95),
+        color: AppColors.of(context).text.withValues(alpha: 0.95),
       ),
       trailing: Icon(
         FeatherIcons.chevronRight,
         size: 22.0,
-        color: AppColors.of(context).text.withOpacity(0.95),
+        color: AppColors.of(context).text.withValues(alpha: 0.95),
       ),
       borderRadius: borderRadius,
     );
@@ -175,7 +175,7 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                       : s.subject.name.capital()) ??
                   '',
               style: TextStyle(
-                color: AppColors.of(context).text.withOpacity(.95),
+                color: AppColors.of(context).text.withValues(alpha: .95),
                 fontStyle: settingsProvider.renamedSubjectsItalics
                     ? FontStyle.italic
                     : FontStyle.normal,
@@ -187,7 +187,7 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                       : s.teacher.name.capital()) ??
                   '',
               style: TextStyle(
-                color: AppColors.of(context).text.withOpacity(.85),
+                color: AppColors.of(context).text.withValues(alpha: .85),
                 fontWeight: FontWeight.w400,
                 fontSize: 15.0,
                 height: 1.2,
@@ -198,12 +198,12 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
         leading: Icon(
           SubjectIcon.resolveVariant(context: context, subject: s.subject),
           size: 22.0,
-          color: AppColors.of(context).text.withOpacity(.95),
+          color: AppColors.of(context).text.withValues(alpha: .95),
         ),
         trailing: Icon(
           FeatherIcons.chevronRight,
           size: 22.0,
-          color: AppColors.of(context).text.withOpacity(0.95),
+          color: AppColors.of(context).text.withValues(alpha: 0.95),
         ),
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(i == 0 ? 12.0 : 4.0),
@@ -242,7 +242,7 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
   //         f,
   //         style: GoogleFonts.getFont(
   //           f,
-  //           color: AppColors.of(context).text.withOpacity(.95),
+  //           color: AppColors.of(context).text.withValues(alpha: .95),
   //           fontStyle: settingsProvider.renamedSubjectsItalics
   //               ? FontStyle.italic
   //               : FontStyle.normal,
@@ -252,7 +252,7 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
   //           ? Icon(
   //               FeatherIcons.chevronRight,
   //               size: 22.0,
-  //               color: AppColors.of(context).text.withOpacity(0.95),
+  //               color: AppColors.of(context).text.withValues(alpha: 0.95),
   //             )
   //           : null,
   //       borderRadius: BorderRadius.circular(12.0),
@@ -324,7 +324,9 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         leading: Icon(
                           FeatherIcons.sun,
                           size: 22.0,
-                          color: AppColors.of(context).text.withOpacity(0.95),
+                          color: AppColors.of(context)
+                              .text
+                              .withValues(alpha: 0.95),
                         ),
                         trailing: Text(
                           themeModeText,
@@ -354,13 +356,16 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         title: Text(
                           "color".i18n,
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(.95),
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: .95),
                           ),
                         ),
                         leading: Icon(
                           FeatherIcons.droplet,
                           size: 22.0,
-                          color: AppColors.of(context).text.withOpacity(.95),
+                          color:
+                              AppColors.of(context).text.withValues(alpha: .95),
                         ),
                         trailing: Container(
                           width: 12.0,
@@ -388,15 +393,15 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         title: Text(
                           "new_colors".i18n,
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(
-                                settingsProvider.newColors ? .95 : .25),
+                            color: AppColors.of(context).text.withValues(
+                                alpha: settingsProvider.newColors ? .95 : .25),
                           ),
                         ),
                         leading: Icon(
                           Icons.flare_outlined,
                           size: 22.0,
-                          color: AppColors.of(context).text.withOpacity(
-                              settingsProvider.newColors ? .95 : .25),
+                          color: AppColors.of(context).text.withValues(
+                              alpha: settingsProvider.newColors ? .95 : .25),
                         ),
                         trailing: Switch(
                           onChanged: (v) async {
@@ -437,15 +442,16 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         title: Text(
                           "shadow_effect".i18n,
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(
-                                settingsProvider.shadowEffect ? .95 : .25),
+                            color: AppColors.of(context).text.withValues(
+                                alpha:
+                                    settingsProvider.shadowEffect ? .95 : .25),
                           ),
                         ),
                         leading: Icon(
                           FeatherIcons.moon,
                           size: 22.0,
-                          color: AppColors.of(context).text.withOpacity(
-                              settingsProvider.shadowEffect ? .95 : .25),
+                          color: AppColors.of(context).text.withValues(
+                              alpha: settingsProvider.shadowEffect ? .95 : .25),
                         ),
                         trailing: Switch(
                           onChanged: (v) async {
@@ -480,15 +486,15 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         title: Text(
                           "new_popups".i18n,
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(
-                                settingsProvider.newPopups ? .95 : .25),
+                            color: AppColors.of(context).text.withValues(
+                                alpha: settingsProvider.newPopups ? .95 : .25),
                           ),
                         ),
                         leading: Icon(
                           FeatherIcons.alertOctagon,
                           size: 22.0,
-                          color: AppColors.of(context).text.withOpacity(
-                              settingsProvider.newPopups ? .95 : .25),
+                          color: AppColors.of(context).text.withValues(
+                              alpha: settingsProvider.newPopups ? .95 : .25),
                         ),
                         trailing: Switch(
                           onChanged: (v) async {
@@ -519,13 +525,13 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                   //       title: Text(
                   //         "icon_pack".i18n,
                   //         style: TextStyle(
-                  //           color: AppColors.of(context).text.withOpacity(.95),
+                  //           color: AppColors.of(context).text.withValues(alpha: .95),
                   //         ),
                   //       ),
                   //       leading: Icon(
                   //         FeatherIcons.grid,
                   //         size: 22.0,
-                  //         color: AppColors.of(context).text.withOpacity(.95),
+                  //         color: AppColors.of(context).text.withValues(alpha: .95),
                   //       ),
                   //       trailing: Text(
                   //         settingsProvider.iconPack.name.capital(),
@@ -558,13 +564,16 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         title: Text(
                           "grade_colors".i18n,
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(.95),
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: .95),
                           ),
                         ),
                         leading: Icon(
                           FeatherIcons.star,
                           size: 22.0,
-                          color: AppColors.of(context).text.withOpacity(.95),
+                          color:
+                              AppColors.of(context).text.withValues(alpha: .95),
                         ),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -616,8 +625,8 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         title: Text(
                           "rename_subjects".i18n,
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(
-                                settingsProvider.renamedSubjectsEnabled
+                            color: AppColors.of(context).text.withValues(
+                                alpha: settingsProvider.renamedSubjectsEnabled
                                     ? .95
                                     : .25),
                           ),
@@ -625,8 +634,8 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         leading: Icon(
                           Icons.school_outlined,
                           size: 22.0,
-                          color: AppColors.of(context).text.withOpacity(
-                              settingsProvider.renamedSubjectsEnabled
+                          color: AppColors.of(context).text.withValues(
+                              alpha: settingsProvider.renamedSubjectsEnabled
                                   ? .95
                                   : .25),
                         ),
@@ -675,8 +684,8 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         title: Text(
                           "rename_teachers".i18n,
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(
-                                settingsProvider.renamedTeachersEnabled
+                            color: AppColors.of(context).text.withValues(
+                                alpha: settingsProvider.renamedTeachersEnabled
                                     ? .95
                                     : .25),
                           ),
@@ -684,8 +693,8 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         leading: Icon(
                           FeatherIcons.user,
                           size: 22.0,
-                          color: AppColors.of(context).text.withOpacity(
-                              settingsProvider.renamedTeachersEnabled
+                          color: AppColors.of(context).text.withValues(
+                              alpha: settingsProvider.renamedTeachersEnabled
                                   ? .95
                                   : .25),
                         ),
@@ -729,14 +738,17 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                           title: Text(
                             "live_activity_color".i18n,
                             style: TextStyle(
-                              color:
-                                  AppColors.of(context).text.withOpacity(.95),
+                              color: AppColors.of(context)
+                                  .text
+                                  .withValues(alpha: .95),
                             ),
                           ),
                           leading: Icon(
                             FeatherIcons.activity,
                             size: 22.0,
-                            color: AppColors.of(context).text.withOpacity(.95),
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: .95),
                           ),
                           trailing: Container(
                             margin: const EdgeInsets.only(left: 2.0),
@@ -855,7 +867,7 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                                   style: TextStyle(
                                     color: AppColors.of(context)
                                         .text
-                                        .withOpacity(.95),
+                                        .withValues(alpha: .95),
                                   ),
                                 ),
                                 leading: Icon(
@@ -863,7 +875,7 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                                   size: 22.0,
                                   color: AppColors.of(context)
                                       .text
-                                      .withOpacity(.95),
+                                      .withValues(alpha: .95),
                                 ),
                                 borderRadius: const BorderRadius.vertical(
                                   top: Radius.circular(12.0),
@@ -1022,13 +1034,16 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         title: Text(
                           "font_family".i18n,
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(.95),
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: .95),
                           ),
                         ),
                         leading: Icon(
                           FeatherIcons.type,
                           size: 22.0,
-                          color: AppColors.of(context).text.withOpacity(.95),
+                          color:
+                              AppColors.of(context).text.withValues(alpha: .95),
                         ),
                         trailing: Text(
                           settingsProvider.fontFamily != ''
@@ -1066,15 +1081,17 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         title: Text(
                           "only_ch_title_font".i18n,
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(
-                                settingsProvider.titleOnlyFont ? .95 : .25),
+                            color: AppColors.of(context).text.withValues(
+                                alpha:
+                                    settingsProvider.titleOnlyFont ? .95 : .25),
                           ),
                         ),
                         leading: Icon(
                           Icons.text_increase_rounded,
                           size: 22.0,
-                          color: AppColors.of(context).text.withOpacity(
-                              settingsProvider.titleOnlyFont ? .95 : .25),
+                          color: AppColors.of(context).text.withValues(
+                              alpha:
+                                  settingsProvider.titleOnlyFont ? .95 : .25),
                         ),
                         trailing: Switch(
                           onChanged: (v) async {

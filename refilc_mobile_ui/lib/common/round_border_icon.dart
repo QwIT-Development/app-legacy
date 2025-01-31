@@ -19,7 +19,7 @@ class RoundBorderIcon extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
             color: color ??
-                Theme.of(context).colorScheme.secondary.withOpacity(0.25),
+                Theme.of(context).colorScheme.secondary.withValues(alpha: 0.25),
             width: width),
         borderRadius: BorderRadius.circular(50.0),
       ),

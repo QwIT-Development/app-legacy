@@ -159,7 +159,7 @@ class PlusPlanCard extends StatelessWidget {
           ),
           shadowColor: Colors.transparent,
           surfaceTintColor: Colors.white,
-          color: Colors.white.withOpacity(0.9),
+          color: Colors.white.withValues(alpha: 0.9),
           child: Padding(
             padding: const EdgeInsets.only(
                 top: 18.0, bottom: 16.0, left: 22.0, right: 18.0),
@@ -237,7 +237,7 @@ class PlusPlanCard extends StatelessWidget {
                 Text(
                   description,
                   style: TextStyle(
-                    color: const Color(0xFF011234).withOpacity(0.6),
+                    color: const Color(0xFF011234).withValues(alpha: 0.6),
                     fontSize: 13.69,
                     fontWeight: FontWeight.w500,
                   ),

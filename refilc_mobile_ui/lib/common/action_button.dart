@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ActionButton extends StatelessWidget {
-  const ActionButton({super.key, required this.label, this.activeColor, this.onTap});
+  const ActionButton(
+      {super.key, required this.label, this.activeColor, this.onTap});
 
   final Color? activeColor;
   final void Function()? onTap;
@@ -19,7 +20,8 @@ class ActionButton extends StatelessWidget {
           curve: Curves.easeInOut,
           height: 32.0,
           decoration: BoxDecoration(
-            color: (activeColor ?? Theme.of(context).colorScheme.secondary).withOpacity(0.25),
+            color: (activeColor ?? Theme.of(context).colorScheme.secondary)
+                .withValues(alpha: 0.25),
             borderRadius: BorderRadius.circular(6.0),
           ),
           padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
@@ -28,7 +30,11 @@ class ActionButton extends StatelessWidget {
                   maxLines: 1,
                   softWrap: false,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w600, color: activeColor ?? Theme.of(context).colorScheme.secondary))),
+                  style: TextStyle(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.w600,
+                      color: activeColor ??
+                          Theme.of(context).colorScheme.secondary))),
         ),
       ),
     );

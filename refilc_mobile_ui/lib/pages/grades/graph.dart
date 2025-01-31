@@ -171,7 +171,7 @@ class GradeGraphState extends State<GradeGraph> {
           VerticalLine(
             x: x,
             strokeWidth: 3.0,
-            color: AppColors.of(context).red.withOpacity(.75),
+            color: AppColors.of(context).red.withValues(alpha: .75),
             label: VerticalLineLabel(
               labelResolver: (_) => " ${"mid".i18n} ​", // <- zwsp for padding
               show: true,
@@ -196,7 +196,7 @@ class GradeGraphState extends State<GradeGraph> {
         settings.graphClassAvg) {
       extraLinesH.add(HorizontalLine(
         y: widget.classAvg!,
-        color: AppColors.of(context).text.withOpacity(.75),
+        color: AppColors.of(context).text.withValues(alpha: .75),
       ));
     }
 
@@ -244,10 +244,10 @@ class GradeGraphState extends State<GradeGraph> {
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                   colors: [
-                                    averageColor.withOpacity(0.7),
-                                    averageColor.withOpacity(0.3),
-                                    averageColor.withOpacity(0.2),
-                                    averageColor.withOpacity(0.1),
+                                    averageColor.withValues(alpha: 0.7),
+                                    averageColor.withValues(alpha: 0.3),
+                                    averageColor.withValues(alpha: 0.2),
+                                    averageColor.withValues(alpha: 0.1),
                                   ],
                                   stops: const [0.1, 0.6, 0.8, 1],
                                 ),
@@ -274,16 +274,16 @@ class GradeGraphState extends State<GradeGraph> {
                                     colors: [
                                       AppColors.of(context)
                                           .text
-                                          .withOpacity(0.7),
+                                          .withValues(alpha: 0.7),
                                       AppColors.of(context)
                                           .text
-                                          .withOpacity(0.3),
+                                          .withValues(alpha: 0.3),
                                       AppColors.of(context)
                                           .text
-                                          .withOpacity(0.2),
+                                          .withValues(alpha: 0.2),
                                       AppColors.of(context)
                                           .text
-                                          .withOpacity(0.1),
+                                          .withValues(alpha: 0.1),
                                     ],
                                     stops: const [0.1, 0.6, 0.8, 1],
                                   ),
@@ -300,11 +300,11 @@ class GradeGraphState extends State<GradeGraph> {
                             horizontalInterval: 1,
                             // checkToShowVerticalLine: (_) => false,
                             // getDrawingHorizontalLine: (_) => FlLine(
-                            //   color: AppColors.of(context).text.withOpacity(.15),
+                            //   color: AppColors.of(context).text.withValues(alpha: .15),
                             //   strokeWidth: 2,
                             // ),
                             // getDrawingVerticalLine: (_) => FlLine(
-                            //   color: AppColors.of(context).text.withOpacity(.25),
+                            //   color: AppColors.of(context).text.withValues(alpha: .25),
                             //   strokeWidth: 2,
                             // ),
                           ),
@@ -367,7 +367,7 @@ class GradeGraphState extends State<GradeGraph> {
                                     style: TextStyle(
                                       color: AppColors.of(context)
                                           .text
-                                          .withOpacity(.75),
+                                          .withValues(alpha: .75),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14.0,
                                     ),
@@ -376,7 +376,7 @@ class GradeGraphState extends State<GradeGraph> {
                                 // getTextStyles: (context, value) => TextStyle(
                                 //   color: AppColors.of(context)
                                 //       .text
-                                //       .withOpacity(.75),
+                                //       .withValues(alpha: .75),
                                 //   fontWeight: FontWeight.bold,
                                 //   fontSize: 14.0,
                                 // ),

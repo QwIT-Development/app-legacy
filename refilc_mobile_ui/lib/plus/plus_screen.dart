@@ -77,11 +77,11 @@ class PlusScreenState extends State<PlusScreen> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                const Color(0xffF4F9FF).withOpacity(0.30),
-                const Color(0xffF4F9FF).withOpacity(0.40),
-                const Color(0xffF4F9FF).withOpacity(0.50),
-                const Color(0xffF4F9FF).withOpacity(0.60),
-                const Color(0xffF4F9FF).withOpacity(0.70),
+                const Color(0xffF4F9FF).withValues(alpha: 0.30),
+                const Color(0xffF4F9FF).withValues(alpha: 0.40),
+                const Color(0xffF4F9FF).withValues(alpha: 0.50),
+                const Color(0xffF4F9FF).withValues(alpha: 0.60),
+                const Color(0xffF4F9FF).withValues(alpha: 0.70),
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -94,10 +94,10 @@ class PlusScreenState extends State<PlusScreen> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      const Color(0xffF4F9FF).withOpacity(0.0),
-                      const Color(0xffF4F9FF).withOpacity(0.7),
-                      const Color(0xffF4F9FF).withOpacity(0.8),
-                      const Color(0xffF4F9FF).withOpacity(0.9),
+                      const Color(0xffF4F9FF).withValues(alpha: 0.0),
+                      const Color(0xffF4F9FF).withValues(alpha: 0.7),
+                      const Color(0xffF4F9FF).withValues(alpha: 0.8),
+                      const Color(0xffF4F9FF).withValues(alpha: 0.9),
                       const Color(0xffF4F9FF),
                     ],
                     begin: Alignment.topCenter,
@@ -155,7 +155,7 @@ class PlusScreenState extends State<PlusScreen> {
                                     style: TextStyle(
                                       fontSize: 14.4,
                                       color: const Color(0xFF0A1C41)
-                                          .withOpacity(0.5),
+                                          .withValues(alpha: 0.5),
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -182,7 +182,7 @@ class PlusScreenState extends State<PlusScreen> {
                                     '2',
                                     style: TextStyle(
                                       color: const Color(0xFF011234)
-                                          .withOpacity(0.5),
+                                          .withValues(alpha: 0.5),
                                       fontSize: 10.0,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -194,7 +194,8 @@ class PlusScreenState extends State<PlusScreen> {
                               ),
                             ],
                             style: TextStyle(
-                              color: const Color(0xFF011234).withOpacity(0.6),
+                              color: const Color(0xFF011234)
+                                  .withValues(alpha: 0.6),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -300,7 +301,7 @@ class PlusScreenState extends State<PlusScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16.0),
                           border: Border.all(
-                            color: Colors.black.withOpacity(0.2),
+                            color: Colors.black.withValues(alpha: 0.2),
                           ),
                         ),
                         child: SwitchListTile(
@@ -329,7 +330,7 @@ class PlusScreenState extends State<PlusScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16.0),
                           border: Border.all(
-                            color: Colors.black.withOpacity(0.2),
+                            color: Colors.black.withValues(alpha: 0.2),
                           ),
                         ),
                         child: ListTile(
@@ -427,7 +428,7 @@ class PlusScreenState extends State<PlusScreen> {
                       //   decoration: BoxDecoration(
                       //     borderRadius: BorderRadius.circular(16.0),
                       //     border: Border.all(
-                      //       color: Colors.black.withOpacity(0.2),
+                      //       color: Colors.black.withValues(alpha: 0.2),
                       //     ),
                       //   ),
                       //   child: CheckboxListTile(
@@ -462,7 +463,7 @@ class PlusScreenState extends State<PlusScreen> {
                       //     'A szolgáltatási csomag kiválasztásával (megérintés) elfogadod a reFilc előfizetésekkel kapcsolatos Általános Szerződési Feltételeit (elérhető az alábbi link-en: filc.one/pay-terms), valamint Adatkezelési Tájékoztatónkat (elérhető az alábbi link-en: filc.one/pay-privacy).',
                       //     textAlign: TextAlign.justify,
                       //     style:
-                      //         TextStyle(color: Colors.black.withOpacity(0.9)),
+                      //         TextStyle(color: Colors.black.withValues(alpha: 0.9)),
                       //   ),
                       // ),
                       // faq section
@@ -474,7 +475,8 @@ class PlusScreenState extends State<PlusScreen> {
                         child: Text(
                           'faq'.i18n,
                           style: TextStyle(
-                            color: const Color(0xFF011234).withOpacity(0.6),
+                            color:
+                                const Color(0xFF011234).withValues(alpha: 0.6),
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -518,7 +520,7 @@ class PlusScreenState extends State<PlusScreen> {
                                 TextSpan(
                                   style: TextStyle(
                                     color: const Color(0xFF011234)
-                                        .withOpacity(0.6),
+                                        .withValues(alpha: 0.6),
                                     fontWeight: FontWeight.w500,
                                   ),
                                   children: [
@@ -532,7 +534,7 @@ class PlusScreenState extends State<PlusScreen> {
                                           '3',
                                           style: TextStyle(
                                             color: const Color(0xFF011234)
-                                                .withOpacity(0.5),
+                                                .withValues(alpha: 0.5),
                                             fontSize: 10.0,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -587,8 +589,8 @@ class PlusScreenState extends State<PlusScreen> {
                               Text(
                                 'o_1'.i18n,
                                 style: TextStyle(
-                                  color:
-                                      const Color(0xFF011234).withOpacity(0.6),
+                                  color: const Color(0xFF011234)
+                                      .withValues(alpha: 0.6),
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -604,7 +606,8 @@ class PlusScreenState extends State<PlusScreen> {
                         child: Text(
                           'desc'.i18n,
                           style: TextStyle(
-                            color: const Color(0xFF011234).withOpacity(0.6),
+                            color:
+                                const Color(0xFF011234).withValues(alpha: 0.6),
                             fontWeight: FontWeight.w500,
                           ),
                         ),

@@ -30,7 +30,7 @@ class PremiumGoalCard extends StatelessWidget {
                 Container(
                   height: 12,
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(.2),
+                    color: Colors.black.withValues(alpha: .2),
                     borderRadius: BorderRadius.circular(45.0),
                   ),
                 ),
@@ -59,7 +59,8 @@ class PremiumGoalCard extends StatelessWidget {
                                   imageFilter:
                                       ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                                   child: Image.asset("assets/images/heart.png",
-                                      color: Colors.black.withOpacity(.3)),
+                                      color:
+                                          Colors.black.withValues(alpha: .3)),
                                 ),
                                 Image.asset("assets/images/heart.png"),
                               ],

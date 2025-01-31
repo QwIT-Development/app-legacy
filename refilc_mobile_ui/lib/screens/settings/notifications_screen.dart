@@ -43,12 +43,12 @@
 //       leading: Icon(
 //         FeatherIcons.messageCircle,
 //         size: 22.0,
-//         color: AppColors.of(context).text.withOpacity(0.95),
+//         color: AppColors.of(context).text.withValues(alpha: 0.95),
 //       ),
 //       trailing: Icon(
 //         FeatherIcons.chevronRight,
 //         size: 22.0,
-//         color: AppColors.of(context).text.withOpacity(0.95),
+//         color: AppColors.of(context).text.withValues(alpha: 0.95),
 //       ),
 //       borderRadius: borderRadius,
 //     );
@@ -105,14 +105,14 @@
 //                     title: Text(
 //                       "grades".i18n,
 //                       style: TextStyle(
-//                         color: AppColors.of(context).text.withOpacity(
+//                         color: AppColors.of(context).text.withValues(alpha: 
 //                             settings.notificationsGradesEnabled ? .95 : .25),
 //                       ),
 //                     ),
 //                     leading: Icon(
 //                       FeatherIcons.bookmark,
 //                       size: 22.0,
-//                       color: AppColors.of(context).text.withOpacity(
+//                       color: AppColors.of(context).text.withValues(alpha: 
 //                           settings.notificationsGradesEnabled ? .95 : .25),
 //                     ),
 //                     trailing: Switch(
@@ -144,14 +144,14 @@
 //                     title: Text(
 //                       "absences".i18n,
 //                       style: TextStyle(
-//                         color: AppColors.of(context).text.withOpacity(
+//                         color: AppColors.of(context).text.withValues(alpha: 
 //                             settings.notificationsAbsencesEnabled ? .95 : .25),
 //                       ),
 //                     ),
 //                     leading: Icon(
 //                       FeatherIcons.clock,
 //                       size: 22.0,
-//                       color: AppColors.of(context).text.withOpacity(
+//                       color: AppColors.of(context).text.withValues(alpha: 
 //                           settings.notificationsAbsencesEnabled ? .95 : .25),
 //                     ),
 //                     trailing: Switch(
@@ -183,14 +183,14 @@
 //                     title: Text(
 //                       "messages".i18n,
 //                       style: TextStyle(
-//                         color: AppColors.of(context).text.withOpacity(
+//                         color: AppColors.of(context).text.withValues(alpha: 
 //                             settings.notificationsMessagesEnabled ? .95 : .25),
 //                       ),
 //                     ),
 //                     leading: Icon(
 //                       FeatherIcons.messageSquare,
 //                       size: 22.0,
-//                       color: AppColors.of(context).text.withOpacity(
+//                       color: AppColors.of(context).text.withValues(alpha: 
 //                           settings.notificationsMessagesEnabled ? .95 : .25),
 //                     ),
 //                     trailing: Switch(
@@ -222,14 +222,14 @@
 //                     title: Text(
 //                       "lessons".i18n,
 //                       style: TextStyle(
-//                         color: AppColors.of(context).text.withOpacity(
+//                         color: AppColors.of(context).text.withValues(alpha: 
 //                             settings.notificationsLessonsEnabled ? .95 : .25),
 //                       ),
 //                     ),
 //                     leading: Icon(
 //                       FeatherIcons.bookmark,
 //                       size: 22.0,
-//                       color: AppColors.of(context).text.withOpacity(
+//                       color: AppColors.of(context).text.withValues(alpha: 
 //                           settings.notificationsLessonsEnabled ? .95 : .25),
 //                     ),
 //                     trailing: Switch(
@@ -259,7 +259,7 @@
 //                           leading: Icon(
 //                             FeatherIcons.mail,
 //                             size: 22.0,
-//                             color: AppColors.of(context).text.withOpacity(0.95),
+//                             color: AppColors.of(context).text.withValues(alpha: 0.95),
 //                           ),
 //                           borderRadius: const BorderRadius.vertical(
 //                               top: Radius.circular(12.0),

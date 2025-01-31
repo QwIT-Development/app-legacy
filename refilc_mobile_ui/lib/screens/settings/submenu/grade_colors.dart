@@ -86,7 +86,7 @@ class GradeColorsSettingsScreenState extends State<GradeColorsSettingsScreen> {
                             color: Theme.of(context)
                                 .colorScheme
                                 .shadow
-                                .withOpacity(.1),
+                                .withValues(alpha: .1),
                             blurRadius: 10.0,
                             offset: const Offset(0, 5),
                           ),
@@ -198,7 +198,7 @@ class GradeColorsSettingsScreenState extends State<GradeColorsSettingsScreen> {
                                   : Theme.of(context)
                                       .colorScheme
                                       .secondary
-                                      .withOpacity(.2),
+                                      .withValues(alpha: .2),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
@@ -235,7 +235,7 @@ class GradeColorsSettingsScreenState extends State<GradeColorsSettingsScreen> {
                                   : Theme.of(context)
                                       .colorScheme
                                       .secondary
-                                      .withOpacity(.2),
+                                      .withValues(alpha: .2),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
@@ -272,7 +272,7 @@ class GradeColorsSettingsScreenState extends State<GradeColorsSettingsScreen> {
                                   : Theme.of(context)
                                       .colorScheme
                                       .secondary
-                                      .withOpacity(.2),
+                                      .withValues(alpha: .2),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
@@ -309,7 +309,7 @@ class GradeColorsSettingsScreenState extends State<GradeColorsSettingsScreen> {
                                   : Theme.of(context)
                                       .colorScheme
                                       .secondary
-                                      .withOpacity(.2),
+                                      .withValues(alpha: .2),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
@@ -346,7 +346,7 @@ class GradeColorsSettingsScreenState extends State<GradeColorsSettingsScreen> {
                                   : Theme.of(context)
                                       .colorScheme
                                       .secondary
-                                      .withOpacity(.2),
+                                      .withValues(alpha: .2),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
