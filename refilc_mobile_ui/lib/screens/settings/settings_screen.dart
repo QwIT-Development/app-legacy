@@ -39,7 +39,6 @@ import 'package:refilc_mobile_ui/screens/settings/accounts/account_tile.dart';
 import 'package:refilc_mobile_ui/screens/settings/accounts/account_view.dart';
 // import 'package:refilc_mobile_ui/screens/settings/debug/subject_icon_gallery.dart';
 // import 'package:refilc_mobile_ui/screens/settings/modify_subject_names.dart';
-import 'package:refilc_mobile_ui/screens/settings/notifications_screen.dart';
 import 'package:refilc_mobile_ui/screens/settings/privacy_view.dart';
 import 'package:refilc_mobile_ui/screens/settings/settings_helper.dart';
 import 'package:refilc_mobile_ui/screens/settings/submenu/code_scanner.dart';
