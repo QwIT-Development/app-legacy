@@ -59,20 +59,20 @@ class LoginScreenState extends State<LoginScreen> {
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
 
-    FilcAPI.getSchools().then((schools) {
-      if (schools != null) {
-        schoolController.update(() {
-          schoolController.schools = schools;
-        });
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(
-          content: Text("schools_error".i18n,
-              style: const TextStyle(color: Colors.white)),
-          backgroundColor: AppColors.of(context).red,
-          context: context,
-        ));
-      }
-    });
+    // FilcAPI.getSchools().then((schools) {
+    //   if (schools != null) {
+    //     schoolController.update(() {
+    //       schoolController.schools = schools;
+    //     });
+    //   } else {
+    //     ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(
+    //       content: Text("schools_error".i18n,
+    //           style: const TextStyle(color: Colors.white)),
+    //       backgroundColor: AppColors.of(context).red,
+    //       context: context,
+    //     ));
+    //   }
+    // });
   }
 
   double paddingTop = 0;
