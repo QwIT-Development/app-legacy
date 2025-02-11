@@ -520,8 +520,8 @@
 				CURRENT_PROJECT_VERSION = 283;
 				DEVELOPMENT_TEAM = 4J97JVC2FG;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 5.1.0;
-				FLUTTER_BUILD_NUMBER = 282;
+				FLUTTER_BUILD_NAME = 5.1.1;
+				FLUTTER_BUILD_NUMBER = 283;
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = reFilc;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -780,8 +780,8 @@
 				CURRENT_PROJECT_VERSION = 283;
 				DEVELOPMENT_TEAM = 4J97JVC2FG;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 5.1.0;
-				FLUTTER_BUILD_NUMBER = 282;
+				FLUTTER_BUILD_NAME = 5.1.1;
+				FLUTTER_BUILD_NUMBER = 283;
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = reFilc;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -810,8 +810,8 @@
 				CURRENT_PROJECT_VERSION = 283;
 				DEVELOPMENT_TEAM = 4J97JVC2FG;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 5.1.0;
-				FLUTTER_BUILD_NUMBER = 282;
+				FLUTTER_BUILD_NAME = 5.1.1;
+				FLUTTER_BUILD_NUMBER = 283;
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = reFilc;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
