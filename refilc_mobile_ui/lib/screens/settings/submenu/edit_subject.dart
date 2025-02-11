@@ -273,6 +273,9 @@ class EditSubjectScreenState extends State<EditSubjectScreen> {
                 await databaseProvider.userStore
                     .storeRenamedSubjects(renamedSubjs, userId: user.id!);
 
+                print("USER ID BELOW FOR DEBUG:");
+                print(user.id);
+
                 updateProviders();
 
                 Navigator.of(context).pop();

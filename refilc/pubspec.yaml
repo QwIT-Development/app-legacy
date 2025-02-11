@@ -93,6 +93,9 @@ dev_dependencies:
   flutter_native_splash: "^2.3.10"
   sqflite_common_ffi: ^2.0.0+3
 
+dependency_overrides:
+  webview_flutter_wkwebview: 3.17.0
+
 flutter:
   uses-material-design: true
 
