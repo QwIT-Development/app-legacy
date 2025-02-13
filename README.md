@@ -11,7 +11,7 @@
 
 ### Source code letöltése
 
-<em>Az építhéshez szükséged lesz a refilc_plus repora is, amit itt találsz: [student-plus](https://git.qwit.cloud/refilc/student-plus)</em>
+*Az építhéshez szükséged lesz a refilc_plus repora is, amit itt találsz: [student-plus](https://git.qwit.cloud/refilc/student-plus)*
 
 ```sh
 git clone --branch dev https://git.qwit.cloud/refilc/student-legacy.git
@@ -45,14 +45,22 @@ Az összes (ugyan azon verzióhoz tartozó) contribution meg fog jelenni a relea
 
 -------
 
-# Team
+# Csapatunk
 
-**Reiner, pdf, Pearoo, Zizi:** community- and project manager / developer
+**Management**
+- Zypherift
+- hayn
+- Pearoo
+- Zizi
+- mnus
+- xou
+
+**Designerek**
+- dwe
+- xou
 
 **vrolandd, TMarccci:** head developer
 
-**dwe., xou:** designer
-
 **Péter:** video editor
 
-<em>**annon:** a régi Filc Napló fejlesztője (ez az app, ha bár sokban változott, alapjaiban a Filc-re épül)</em>
+***annon:** a régi Filc Napló fejlesztője (ez az app, ha bár sokban változott, alapjaiban a Filc-re épül)*
