@@ -196,7 +196,7 @@ class SummaryScreenState extends State<SummaryScreen>
       context,
       useRootNavigator: true,
       builder: (context) => SlidingSheetDialog(
-        color: Colors.black.withOpacity(0.99),
+        color: Colors.black.withValues(alpha: 0.99),
         duration: const Duration(milliseconds: 400),
         scrollSpec: const ScrollSpec.bouncingScroll(),
         snapSpec: const SnapSpec(

@@ -59,7 +59,7 @@ class ExamTile extends StatelessWidget {
               ? Icon(
                   SubjectIcon.resolveVariant(
                       context: context, subject: exam.subject),
-                  color: AppColors.of(context).text.withOpacity(.5),
+                  color: AppColors.of(context).text.withValues(alpha: .5),
                 )
               : null,
           minLeadingWidth: 0,

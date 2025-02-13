@@ -401,10 +401,8 @@ class SettingsHelper {
                 width: 12.0,
                 height: 12.0,
                 decoration: BoxDecoration(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .secondary
-                      .withOpacity((index + 1) / (vibrationTitle.length + 1)),
+                  color: Theme.of(context).colorScheme.secondary.withValues(
+                      alpha: (index + 1) / (vibrationTitle.length + 1)),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -448,7 +446,7 @@ class SettingsHelper {
           //     width: 175.0,
           //     decoration: BoxDecoration(
           //       borderRadius: BorderRadius.circular(12.0),
-          //       color: AppColors.of(context).text.withOpacity(.25),
+          //       color: AppColors.of(context).text.withValues(alpha: .25),
           //     ),
           //   ),
           // );
@@ -745,7 +743,7 @@ class _BellDelaySettingState extends State<BellDelaySetting>
             style: TextStyle(
                 fontSize: 12.0,
                 fontWeight: FontWeight.w500,
-                color: AppColors.of(context).text.withOpacity(.75))),
+                color: AppColors.of(context).text.withValues(alpha: .75))),
         Padding(
           padding: const EdgeInsets.only(bottom: 12.0, top: 6.0),
           child: Column(
@@ -922,6 +920,7 @@ class _LiveActivityColorSettingState extends State<LiveActivityColorSetting> {
           child: Column(children: [
             MaterialColorPicker(
               allowShades: false,
+              colors: [...fullMaterialColors],
               selectedColor: settings.liveActivityColor,
               onMainColorChange: (k) {
                 if (!Provider.of<PlusProvider>(context, listen: false)

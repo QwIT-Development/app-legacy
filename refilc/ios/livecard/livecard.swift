@@ -11,6 +11,17 @@ struct Widgets: WidgetBundle {
   }
 }
 
+// text contrast background
+extension Text {
+    func getContrastText(backgroundColor: Color) -> some View {
+        var r, g, b, a: CGFloat
+        (r, g, b, a) = (0, 0, 0, 0)
+        UIColor(backgroundColor).getRed(&r, green: &g, blue: &b, alpha: &a)
+        let luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b
+        return  luminance < 0.6 ? self.foregroundColor(.white) : self.foregroundColor(.black)
+    }
+}
+
 // Color Converter
 extension Color {
     init(hex: String, alpha: Double = 1.0) {
@@ -62,7 +73,6 @@ struct LockScreenLiveActivityView: View {
                       .font(.body)
                       .bold()
                       .padding(.trailing, 90)
-                    
                   } else {
                     MultilineTextView(text: "\(context.state.index) \(context.state.title) -  \(context.state.subtitle)", limit: 25)
                       .font(.body)
@@ -84,6 +94,7 @@ struct LockScreenLiveActivityView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: CGFloat(8), height: CGFloat(8))
+                        .foregroundStyle(.secondary)
                   Text("\(context.state.nextSubject) -  \(context.state.nextRoom)")
                         .font(.caption)
                 }
@@ -107,11 +118,15 @@ struct LockScreenLiveActivityView: View {
                 .monospacedDigit()
                 .padding(.trailing)
         }
+//        .activityBackgroundTint(
+//            context.state.color != "#676767"
+//            ? Color(hex: context.state.color)
+//            : Color.clear
+//        )
         .activityBackgroundTint(
-            context.state.color != "#676767"
-            ? Color(hex: context.state.color)
-            : Color.clear
+          Color.clear
         )
+        .foregroundStyle(Color(hex: context.state.color))
     }
 }
 

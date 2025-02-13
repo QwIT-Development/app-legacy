@@ -56,12 +56,12 @@ class _FilterBarState extends State<FilterBar> {
           ),
       labelPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
       labelColor: Theme.of(context).colorScheme.secondary,
-      unselectedLabelColor: AppColors.of(context).text.withOpacity(0.65),
+      unselectedLabelColor: AppColors.of(context).text.withValues(alpha: 0.65),
       // indicator
       indicatorSize: TabBarIndicatorSize.tab,
       indicatorPadding: const EdgeInsets.symmetric(vertical: 8.0),
       indicator: BoxDecoration(
-        color: Theme.of(context).colorScheme.tertiary.withOpacity(.2),
+        color: Theme.of(context).colorScheme.tertiary.withValues(alpha: .2),
         borderRadius: BorderRadius.circular(45.0),
       ),
       overlayColor: WidgetStateProperty.all(const Color(0x00000000)),
@@ -77,7 +77,7 @@ class _FilterBarState extends State<FilterBar> {
                     width: e,
                     height: 15,
                     decoration: BoxDecoration(
-                      color: AppColors.of(context).text.withOpacity(.45),
+                      color: AppColors.of(context).text.withValues(alpha: .45),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),

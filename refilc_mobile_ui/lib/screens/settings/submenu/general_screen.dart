@@ -30,12 +30,12 @@ class MenuGeneralSettings extends StatelessWidget {
       leading: Icon(
         FeatherIcons.settings,
         size: 22.0,
-        color: AppColors.of(context).text.withOpacity(0.95),
+        color: AppColors.of(context).text.withValues(alpha: 0.95),
       ),
       trailing: Icon(
         FeatherIcons.chevronRight,
         size: 22.0,
-        color: AppColors.of(context).text.withOpacity(0.95),
+        color: AppColors.of(context).text.withValues(alpha: 0.95),
       ),
       borderRadius: borderRadius,
     );
@@ -94,8 +94,9 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                     title: Text(
                       "bell_delay".i18n,
                       style: TextStyle(
-                        color: AppColors.of(context).text.withOpacity(
-                            settingsProvider.bellDelayEnabled ? .95 : .25),
+                        color: AppColors.of(context).text.withValues(
+                            alpha:
+                                settingsProvider.bellDelayEnabled ? .95 : .25),
                       ),
                     ),
                     leading: Icon(
@@ -103,8 +104,8 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                           ? FeatherIcons.bell
                           : FeatherIcons.bellOff,
                       size: 22.0,
-                      color: AppColors.of(context).text.withOpacity(
-                          settingsProvider.bellDelayEnabled ? .95 : .25),
+                      color: AppColors.of(context).text.withValues(
+                          alpha: settingsProvider.bellDelayEnabled ? .95 : .25),
                     ),
                     trailingDivider: true,
                     trailing: Switch(
@@ -133,13 +134,14 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                     title: Text(
                       "rounding".i18n,
                       style: TextStyle(
-                        color: AppColors.of(context).text.withOpacity(.95),
+                        color:
+                            AppColors.of(context).text.withValues(alpha: .95),
                       ),
                     ),
                     leading: Icon(
                       FeatherIcons.gitCommit,
                       size: 22.0,
-                      color: AppColors.of(context).text.withOpacity(.95),
+                      color: AppColors.of(context).text.withValues(alpha: .95),
                     ),
                     trailing: Text(
                       (settingsProvider.rounding / 10).toStringAsFixed(1),
@@ -167,15 +169,15 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                     title: Text(
                       "graph_class_avg".i18n,
                       style: TextStyle(
-                        color: AppColors.of(context).text.withOpacity(
-                            settingsProvider.graphClassAvg ? .95 : .25),
+                        color: AppColors.of(context).text.withValues(
+                            alpha: settingsProvider.graphClassAvg ? .95 : .25),
                       ),
                     ),
                     leading: Icon(
                       FeatherIcons.barChart,
                       size: 22.0,
-                      color: AppColors.of(context).text.withOpacity(
-                          settingsProvider.graphClassAvg ? .95 : .25),
+                      color: AppColors.of(context).text.withValues(
+                          alpha: settingsProvider.graphClassAvg ? .95 : .25),
                     ),
                     trailing: Switch(
                       onChanged: (v) =>
@@ -203,13 +205,14 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                     title: Text(
                       "startpage".i18n,
                       style: TextStyle(
-                        color: AppColors.of(context).text.withOpacity(.95),
+                        color:
+                            AppColors.of(context).text.withValues(alpha: .95),
                       ),
                     ),
                     leading: Icon(
                       FeatherIcons.play,
                       size: 22.0,
-                      color: AppColors.of(context).text.withOpacity(.95),
+                      color: AppColors.of(context).text.withValues(alpha: .95),
                     ),
                     trailing: Text(
                       startPageTitle.capital(),
@@ -235,13 +238,14 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                     title: Text(
                       "language".i18n,
                       style: TextStyle(
-                        color: AppColors.of(context).text.withOpacity(.95),
+                        color:
+                            AppColors.of(context).text.withValues(alpha: .95),
                       ),
                     ),
                     leading: Icon(
                       FeatherIcons.globe,
                       size: 22.0,
-                      color: AppColors.of(context).text.withOpacity(.95),
+                      color: AppColors.of(context).text.withValues(alpha: .95),
                     ),
                     trailing: Text(
                       languageText,
@@ -267,13 +271,13 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
               //       title: Text(
               //         "vibrate".i18n,
               //         style: TextStyle(
-              //           color: AppColors.of(context).text.withOpacity(.95),
+              //           color: AppColors.of(context).text.withValues(alpha: .95),
               //         ),
               //       ),
               //       leading: Icon(
               //         FeatherIcons.radio,
               //         size: 22.0,
-              //         color: AppColors.of(context).text.withOpacity(.95),
+              //         color: AppColors.of(context).text.withValues(alpha: .95),
               //       ),
               //       trailing: Text(
               //         vibrateTitle,
@@ -301,8 +305,8 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                     title: Text(
                       "show_breaks".i18n,
                       style: TextStyle(
-                        color: AppColors.of(context).text.withOpacity(
-                            settingsProvider.showBreaks ? .95 : .25),
+                        color: AppColors.of(context).text.withValues(
+                            alpha: settingsProvider.showBreaks ? .95 : .25),
                       ),
                     ),
                     leading: Icon(
@@ -310,9 +314,8 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                           ? FeatherIcons.eye
                           : FeatherIcons.eyeOff,
                       size: 22.0,
-                      color: AppColors.of(context)
-                          .text
-                          .withOpacity(settingsProvider.showBreaks ? .95 : .25),
+                      color: AppColors.of(context).text.withValues(
+                          alpha: settingsProvider.showBreaks ? .95 : .25),
                     ),
                     trailing: Switch(
                       onChanged: (v) => settingsProvider.update(showBreaks: v),
@@ -341,15 +344,15 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                     title: Text(
                       "news".i18n,
                       style: TextStyle(
-                        color: AppColors.of(context).text.withOpacity(
-                            settingsProvider.newsEnabled ? .95 : .25),
+                        color: AppColors.of(context).text.withValues(
+                            alpha: settingsProvider.newsEnabled ? .95 : .25),
                       ),
                     ),
                     leading: Icon(
                       Icons.newspaper_outlined,
                       size: 22.0,
-                      color: AppColors.of(context).text.withOpacity(
-                          settingsProvider.newsEnabled ? .95 : .25),
+                      color: AppColors.of(context).text.withValues(
+                          alpha: settingsProvider.newsEnabled ? .95 : .25),
                     ),
                     trailing: Switch(
                       onChanged: (v) => settingsProvider.update(newsEnabled: v),

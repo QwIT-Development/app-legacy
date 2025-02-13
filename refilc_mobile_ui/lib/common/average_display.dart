@@ -21,7 +21,7 @@ class AverageDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color color = average == 0.0
-        ? AppColors.of(context).text.withOpacity(.8)
+        ? AppColors.of(context).text.withValues(alpha: .8)
         : gradeColor(context: context, value: average);
 
     String averageText = average.toStringAsFixed(2);
@@ -49,16 +49,18 @@ class AverageDisplay extends StatelessWidget {
         borderRadius:
             (border && dashed) ? null : BorderRadius.circular(45.0 * scale),
         border: border && !dashed
-            ? Border.fromBorderSide(
-                BorderSide(color: color.withOpacity(.5), width: 1.0 * scale))
+            ? Border.fromBorderSide(BorderSide(
+                color: color.withValues(alpha: .5), width: 1.0 * scale))
             : null,
-        color: !border ? color.withOpacity(average == 0.0 ? .15 : .25) : null,
+        color: !border
+            ? color.withValues(alpha: average == 0.0 ? .15 : .25)
+            : null,
       ),
       child: (border && dashed)
           ? DottedBorder(
               strokeWidth: 1.0 * scale,
               padding: EdgeInsets.all(4.0 * scale),
-              color: color.withOpacity(.5),
+              color: color.withValues(alpha: .5),
               dashPattern: const [6, 6],
               radius: Radius.circular(45.0 * scale),
               borderType: BorderType.RRect,

@@ -58,7 +58,8 @@ class MessageTile extends StatelessWidget {
                       width: 105,
                       height: 15,
                       decoration: BoxDecoration(
-                        color: AppColors.of(context).text.withOpacity(.85),
+                        color:
+                            AppColors.of(context).text.withValues(alpha: .85),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
@@ -89,7 +90,8 @@ class MessageTile extends StatelessWidget {
                       width: 150,
                       height: 10,
                       decoration: BoxDecoration(
-                        color: AppColors.of(context).text.withOpacity(.45),
+                        color:
+                            AppColors.of(context).text.withValues(alpha: .45),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
@@ -109,7 +111,8 @@ class MessageTile extends StatelessWidget {
                       width: 35,
                       height: 15,
                       decoration: BoxDecoration(
-                        color: AppColors.of(context).text.withOpacity(.45),
+                        color:
+                            AppColors.of(context).text.withValues(alpha: .45),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
@@ -120,7 +123,7 @@ class MessageTile extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 14.0,
-                    color: AppColors.of(context).text.withOpacity(.75),
+                    color: AppColors.of(context).text.withValues(alpha: .75),
                   ),
                 ),
         ),

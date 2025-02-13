@@ -9,7 +9,7 @@
 
 // ignore_for_file: use_build_context_synchronously
 
-library hsv_picker;
+library;
 
 import 'package:refilc/models/shared_theme.dart';
 import 'package:refilc_mobile_ui/common/custom_snack_bar.dart';
@@ -380,7 +380,7 @@ class FilcColorPickerState extends State<FilcColorPicker> {
                           fontSize: 16.0,
                           color: AppColors.of(context)
                               .text
-                              .withOpacity(isAdvancedView ? 1.0 : .5),
+                              .withValues(alpha: isAdvancedView ? 1.0 : .5),
                         ),
                       ),
                     ],

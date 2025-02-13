@@ -31,7 +31,7 @@ class ExamView extends StatelessWidget {
                 SubjectIcon.resolveVariant(
                     subject: exam.subject, context: context),
                 size: 36.0,
-                color: AppColors.of(context).text.withOpacity(.75),
+                color: AppColors.of(context).text.withValues(alpha: .75),
               ),
             ),
             title: Text(

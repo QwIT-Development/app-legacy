@@ -310,7 +310,7 @@ class LessonsBodyState extends State<LessonsBody> {
               style: TextStyle(
                   fontSize: 18.0,
                   height: 2.0,
-                  color: Colors.white.withOpacity(0.5)),
+                  color: Colors.white.withValues(alpha: 0.5)),
             ),
           ],
         ),

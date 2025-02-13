@@ -2,14 +2,12 @@
 import 'dart:convert';
 
 import 'package:refilc/api/client.dart';
-import 'package:refilc/api/providers/database_provider.dart';
 import 'package:refilc/api/providers/user_provider.dart';
 import 'package:refilc/models/settings.dart';
 import 'package:refilc/theme/colors/colors.dart';
 import 'package:refilc_mobile_ui/common/panel/panel_button.dart';
 import 'package:refilc_mobile_ui/common/splitted_panel/splitted_panel.dart';
 import 'package:refilc_mobile_ui/screens/login/qwid_login.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:provider/provider.dart';
@@ -29,15 +27,19 @@ class MenuCloudSyncSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PanelButton(
-      onPressed: () => Navigator.of(context, rootNavigator: true).push(
-        CupertinoPageRoute(
-            builder: (context) => const CloudSyncSettingsScreen()),
+      // onPressed: () => Navigator.of(context, rootNavigator: true).push(
+      //   CupertinoPageRoute(
+      //       builder: (context) => const CloudSyncSettingsScreen()),
+      // ),
+      title: Text(
+        "cloud_sync".i18n,
+        style:
+            TextStyle(color: AppColors.of(context).text.withValues(alpha: 0.3)),
       ),
-      title: Text("cloud_sync".i18n),
       leading: Icon(
         FeatherIcons.uploadCloud,
         size: 22.0,
-        color: AppColors.of(context).text.withOpacity(0.95),
+        color: AppColors.of(context).text.withValues(alpha: 0.25),
       ),
       borderRadius: borderRadius,
     );
@@ -163,8 +165,9 @@ class CloudSyncSettingsScreenState extends State<CloudSyncSettingsScreen> {
                     title: Text(
                       "qwit_sign_in".i18n,
                       style: TextStyle(
-                        color: AppColors.of(context).text.withOpacity(
-                            settingsProvider.gradeOpeningFun ? .95 : .25),
+                        color: AppColors.of(context).text.withValues(
+                            alpha:
+                                settingsProvider.gradeOpeningFun ? .95 : .25),
                       ),
                     ),
                     borderRadius: const BorderRadius.vertical(
@@ -232,8 +235,9 @@ class CloudSyncSettingsScreenState extends State<CloudSyncSettingsScreen> {
                     title: Text(
                       "sync_now".i18n,
                       style: TextStyle(
-                        color: AppColors.of(context).text.withOpacity(
-                            settingsProvider.gradeOpeningFun ? .95 : .25),
+                        color: AppColors.of(context).text.withValues(
+                            alpha:
+                                settingsProvider.gradeOpeningFun ? .95 : .25),
                       ),
                     ),
                     borderRadius: const BorderRadius.vertical(

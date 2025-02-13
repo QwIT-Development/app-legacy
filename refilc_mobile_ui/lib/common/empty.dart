@@ -34,7 +34,7 @@ class Empty extends StatelessWidget {
             style: TextStyle(
                 fontSize: 32.0,
                 fontWeight: FontWeight.w500,
-                color: AppColors.of(context).text.withOpacity(.75)),
+                color: AppColors.of(context).text.withValues(alpha: .75)),
             children: subtitle != null
                 ? [
                     TextSpan(
@@ -42,7 +42,9 @@ class Empty extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 18.0,
                             height: 2.0,
-                            color: AppColors.of(context).text.withOpacity(.5)))
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: .5)))
                   ]
                 : [],
           ),

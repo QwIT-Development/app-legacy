@@ -134,9 +134,12 @@ class _SurpriseGradeState extends State<SurpriseGrade>
         return FadeTransition(
           opacity: _revealAnimFade,
           child: Material(
-            color: Colors.black.withOpacity(.75),
+            color: Colors.black.withValues(alpha: .75),
             child: Container(
-              color: Theme.of(context).colorScheme.secondary.withOpacity(.05),
+              color: Theme.of(context)
+                  .colorScheme
+                  .secondary
+                  .withValues(alpha: .05),
               child: Container(
                 decoration: const BoxDecoration(
                   gradient: RadialGradient(
@@ -223,12 +226,13 @@ class _SurpriseGradeState extends State<SurpriseGrade>
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 32.0, vertical: 20.0),
                                           decoration: BoxDecoration(
-                                            color: Colors.white.withOpacity(.3),
+                                            color: Colors.white
+                                                .withValues(alpha: .3),
                                             borderRadius:
                                                 BorderRadius.circular(24.0),
                                             border: Border.all(
                                                 color: Colors.black
-                                                    .withOpacity(.3),
+                                                    .withValues(alpha: .3),
                                                 width: 1.0),
                                           ),
                                           child: Row(
@@ -264,7 +268,8 @@ class _SurpriseGradeState extends State<SurpriseGrade>
                                                               .capital(),
                                                       style: TextStyle(
                                                           color: Colors.white
-                                                              .withOpacity(.8),
+                                                              .withValues(
+                                                                  alpha: .8),
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           fontSize: 24.0,
@@ -285,7 +290,8 @@ class _SurpriseGradeState extends State<SurpriseGrade>
                                                       "${widget.grade.value.weight}%",
                                                       style: TextStyle(
                                                         color: Colors.white
-                                                            .withOpacity(.7),
+                                                            .withValues(
+                                                                alpha: .7),
                                                         fontWeight:
                                                             FontWeight.w600,
                                                         fontSize: 20.0,
@@ -326,7 +332,7 @@ class _SurpriseGradeState extends State<SurpriseGrade>
                       child: Text(
                         "open_subtitle".i18n,
                         style: TextStyle(
-                          color: Colors.white.withOpacity(.8),
+                          color: Colors.white.withValues(alpha: .8),
                           fontWeight: FontWeight.w600,
                           fontSize: 24.0,
                         ),
@@ -383,7 +389,7 @@ class _SurpriseGradeState extends State<SurpriseGrade>
                                                   context: context,
                                                   value:
                                                       widget.grade.value.value)
-                                              .withOpacity(.5),
+                                              .withValues(alpha: .5),
                                           blurRadius: 24.0,
                                         ),
                                         Shadow(
@@ -391,7 +397,7 @@ class _SurpriseGradeState extends State<SurpriseGrade>
                                                   context: context,
                                                   value:
                                                       widget.grade.value.value)
-                                              .withOpacity(.3),
+                                              .withValues(alpha: .3),
                                           offset: const Offset(-3, -3),
                                         ),
                                       ],

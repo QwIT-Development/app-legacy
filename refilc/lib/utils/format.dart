@@ -58,7 +58,9 @@ extension DateFormatUtils on DateTime {
     }
     if (now.year == year &&
         now.month == month &&
-        now.add(const Duration(days: 1)).day == day) return "Tomorrow".i18n;
+        now.add(const Duration(days: 1)).day == day) {
+      return "Tomorrow".i18n;
+    }
 
     String formatString;
 

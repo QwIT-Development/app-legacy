@@ -301,7 +301,7 @@ class _PersonalityCardState extends State<PersonalityCard> {
             style: TextStyle(
               fontSize: 16,
               height: 1.2,
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withValues(alpha: 0.8),
             ),
           ),
           const SizedBox(height: 25),
@@ -354,7 +354,7 @@ class _PersonalityCardState extends State<PersonalityCard> {
             borderRadius: const BorderRadius.all(Radius.circular(5)),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.08),
+                color: Colors.black.withValues(alpha: 0.08),
                 offset: const Offset(0, 5),
                 blurRadius: 20,
                 spreadRadius: 10,
@@ -362,7 +362,7 @@ class _PersonalityCardState extends State<PersonalityCard> {
             ],
           ),
           child: DottedBorder(
-            color: Colors.black.withOpacity(0.9),
+            color: Colors.black.withValues(alpha: 0.9),
             dashPattern: const [12, 12],
             padding:
                 const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),

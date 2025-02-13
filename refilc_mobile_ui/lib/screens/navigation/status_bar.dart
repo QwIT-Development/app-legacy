@@ -59,8 +59,10 @@ class StatusBarState extends State<StatusBar> {
                         statusProvider.progress -
                     36.0,
                 decoration: BoxDecoration(
-                  color:
-                      Theme.of(context).colorScheme.secondary.withOpacity(0.8),
+                  color: Theme.of(context)
+                      .colorScheme
+                      .secondary
+                      .withValues(alpha: 0.8),
                   borderRadius: BorderRadius.circular(45.0),
                 ),
               ),

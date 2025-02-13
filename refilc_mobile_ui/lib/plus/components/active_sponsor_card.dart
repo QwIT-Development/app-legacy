@@ -78,7 +78,7 @@ class ActiveSponsorCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0),
         boxShadow: [
           BoxShadow(
-            color: glow.withOpacity(.4),
+            color: glow.withValues(alpha: .4),
             blurRadius: 42.0,
           ),
         ],
@@ -91,7 +91,7 @@ class ActiveSponsorCard extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
         child: InkWell(
           borderRadius: BorderRadius.circular(14.0),
-          splashColor: glow.withOpacity(.2),
+          splashColor: glow.withValues(alpha: .2),
           onTap: () {
             Navigator.of(context, rootNavigator: true)
                 .push(MaterialPageRoute(builder: (context) {

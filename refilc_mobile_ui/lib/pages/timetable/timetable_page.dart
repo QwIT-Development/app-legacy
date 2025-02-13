@@ -585,7 +585,8 @@ class TimetablePageState extends State<TimetablePage>
                                                         color: Theme.of(context)
                                                             .colorScheme
                                                             .secondary
-                                                            .withOpacity(0.25),
+                                                            .withValues(
+                                                                alpha: 0.25),
                                                       ),
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -615,8 +616,9 @@ class TimetablePageState extends State<TimetablePage>
                                                                 color: AppColors.of(
                                                                         context)
                                                                     .text
-                                                                    .withOpacity(
-                                                                        0.90),
+                                                                    .withValues(
+                                                                        alpha:
+                                                                            0.90),
                                                               ),
                                                               child: Text(
                                                                 'break'.i18n,
@@ -661,8 +663,8 @@ class TimetablePageState extends State<TimetablePage>
                                                                     context)
                                                                 .colorScheme
                                                                 .secondary
-                                                                .withOpacity(
-                                                                    .5),
+                                                                .withValues(
+                                                                    alpha: .5),
                                                             size: 10.0,
                                                           )
                                                       ],
@@ -775,11 +777,11 @@ class TimetablePageState extends State<TimetablePage>
                           // Label
                           labelPadding: EdgeInsets.zero,
                           labelColor:
-                              AppColors.of(context).text.withOpacity(0.9),
+                              AppColors.of(context).text.withValues(alpha: 0.9),
                           unselectedLabelColor: Theme.of(context)
                               .colorScheme
                               .secondary
-                              .withOpacity(0.25)
+                              .withValues(alpha: 0.25)
                               .withAlpha(100),
                           // Indicator
                           indicatorSize: TabBarIndicatorSize.tab,
@@ -791,15 +793,15 @@ class TimetablePageState extends State<TimetablePage>
                             // border: Border.all(
                             //     color: AppColors.of(context)
                             //         .text
-                            //         .withOpacity(0.90)),
+                            //         .withValues(alpha: 0.90)),
                             // color: Theme.of(context)
                             //     .colorScheme
                             //     .secondary
-                            //     .withOpacity(0.25),
+                            //     .withValues(alpha: 0.25),
                             borderRadius: BorderRadius.circular(16.0),
                           ),
-                          overlayColor: WidgetStateProperty.all(
-                              const Color(0x00000000)),
+                          overlayColor:
+                              WidgetStateProperty.all(const Color(0x00000000)),
                           // Tabs
                           padding: const EdgeInsets.symmetric(
                               vertical: 6.0, horizontal: 24.0),
@@ -823,7 +825,7 @@ class TimetablePageState extends State<TimetablePage>
                                           color: Theme.of(context)
                                               .colorScheme
                                               .secondary
-                                              .withOpacity(0.25)
+                                              .withValues(alpha: 0.25)
                                               .withAlpha(100)),
                                     ),
                                   Text(
@@ -851,7 +853,7 @@ class TimetablePageState extends State<TimetablePage>
                                       color: Theme.of(context)
                                           .colorScheme
                                           .secondary
-                                          .withOpacity(0.25)
+                                          .withValues(alpha: 0.25)
                                           .withAlpha(100),
                                     ),
                                   ),

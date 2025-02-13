@@ -122,7 +122,7 @@ class ExamPopup extends StatelessWidget {
                 color: ColorsUtils()
                     .fade(context, Theme.of(context).colorScheme.secondary,
                         darkenAmount: 0.1, lightenAmount: 0.1)
-                    .withOpacity(0.33),
+                    .withValues(alpha: 0.33),
                 width: MediaQuery.of(context).size.width,
               ),
               Container(
@@ -135,10 +135,10 @@ class ExamPopup extends StatelessWidget {
                       Theme.of(context).scaffoldBackgroundColor,
                       Theme.of(context)
                           .scaffoldBackgroundColor
-                          .withOpacity(0.1),
+                          .withValues(alpha: 0.1),
                       Theme.of(context)
                           .scaffoldBackgroundColor
-                          .withOpacity(0.1),
+                          .withValues(alpha: 0.1),
                       Theme.of(context).scaffoldBackgroundColor,
                     ],
                     stops: const [0.1, 0.5, 0.7, 1.0],
@@ -166,7 +166,7 @@ class ExamPopup extends StatelessWidget {
                           .fade(
                               context, Theme.of(context).colorScheme.secondary,
                               darkenAmount: 0.1, lightenAmount: 0.1)
-                          .withOpacity(0.33),
+                          .withValues(alpha: 0.33),
                       borderRadius: BorderRadius.circular(
                         2.0,
                       ),
@@ -186,7 +186,7 @@ class ExamPopup extends StatelessWidget {
                             Theme.of(context).colorScheme.secondary,
                             amount: 0.1,
                           )
-                          .withOpacity(0.9),
+                          .withValues(alpha: 0.9),
                       width: 1.5,
                       padding: 10.0,
                       icon: Icon(
@@ -198,7 +198,7 @@ class ExamPopup extends StatelessWidget {
                               Theme.of(context).colorScheme.secondary,
                               amount: 0.1,
                             )
-                            .withOpacity(0.8),
+                            .withValues(alpha: 0.8),
                       ),
                     ),
                   ),
@@ -236,7 +236,7 @@ class ExamPopup extends StatelessWidget {
                                 style: TextStyle(
                                   color: AppColors.of(context)
                                       .text
-                                      .withOpacity(0.9),
+                                      .withValues(alpha: 0.9),
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -298,7 +298,7 @@ class ExamPopup extends StatelessWidget {
                                 style: TextStyle(
                                   color: AppColors.of(context)
                                       .text
-                                      .withOpacity(0.9),
+                                      .withValues(alpha: 0.9),
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w600,
                                   fontStyle: ((lesson?.subject.isRenamed ??
@@ -315,8 +315,9 @@ class ExamPopup extends StatelessWidget {
                           Text(
                             '${DateFormat('MMM d, H:mm', I18n.locale.countryCode).format(lesson!.start).capital()} - ${DateFormat('H:mm').format(lesson!.end)}',
                             style: TextStyle(
-                              color:
-                                  AppColors.of(context).text.withOpacity(0.85),
+                              color: AppColors.of(context)
+                                  .text
+                                  .withValues(alpha: 0.85),
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                             ),
@@ -359,7 +360,7 @@ class ExamPopup extends StatelessWidget {
                   //           'view_subject'.i18n,
                   //           style: TextStyle(
                   //             color:
-                  //                 AppColors.of(context).text.withOpacity(0.9),
+                  //                 AppColors.of(context).text.withValues(alpha: 0.9),
                   //             fontSize: 18.0,
                   //             fontWeight: FontWeight.w500,
                   //           ),

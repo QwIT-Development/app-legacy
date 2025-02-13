@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:refilc/database/query.dart';
 import 'package:refilc/database/store.dart';
 // ignore: depend_on_referenced_packages
@@ -15,11 +13,7 @@ class DatabaseProvider {
   Future<void> init() async {
     Database db;
 
-    if (Platform.isLinux || Platform.isWindows) {
-      db = await databaseFactoryFfi.openDatabase("app.db");
-    } else {
-      db = await openDatabase("app.db");
-    }
+    db = await openDatabase("app.db");
 
     query = DatabaseQuery(db: db);
     store = DatabaseStore(db: db);

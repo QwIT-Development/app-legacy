@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 class ProgressBar extends StatelessWidget {
   const ProgressBar(
-      {super.key, required this.value, this.backgroundColor, this.height = 8.0});
+      {super.key,
+      required this.value,
+      this.backgroundColor,
+      this.height = 8.0});
 
   final double value;
   final Color? backgroundColor;
@@ -16,8 +19,8 @@ class ProgressBar extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: Theme.of(context).brightness == Brightness.light
-                ? Colors.black.withOpacity(0.1)
-                : Colors.white.withOpacity(0.1),
+                ? Colors.black.withValues(alpha: 0.1)
+                : Colors.white.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(45.0),
           ),
           width: double.infinity,

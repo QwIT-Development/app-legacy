@@ -55,8 +55,10 @@ class NoteViewScreenState extends State<NoteViewScreen> {
                               AddNoteScreen(initialNote: widget.note)));
                 },
                 child: Container(
-                  color:
-                      Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+                  color: Theme.of(context)
+                      .colorScheme
+                      .secondary
+                      .withValues(alpha: 0.2),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Stack(
@@ -74,8 +76,8 @@ class NoteViewScreenState extends State<NoteViewScreen> {
                           data: IconThemeData(
                             color:
                                 Theme.of(context).brightness == Brightness.light
-                                    ? Colors.black.withOpacity(.5)
-                                    : Colors.white.withOpacity(.3),
+                                    ? Colors.black.withValues(alpha: .5)
+                                    : Colors.white.withValues(alpha: .3),
                           ),
                           child: const Icon(
                             FeatherIcons.edit,
@@ -105,7 +107,10 @@ class NoteViewScreenState extends State<NoteViewScreen> {
                 Navigator.of(context).pop();
               },
               child: Container(
-                color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+                color: Theme.of(context)
+                    .colorScheme
+                    .secondary
+                    .withValues(alpha: 0.2),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Stack(
@@ -123,8 +128,8 @@ class NoteViewScreenState extends State<NoteViewScreen> {
                         data: IconThemeData(
                           color:
                               Theme.of(context).brightness == Brightness.light
-                                  ? Colors.black.withOpacity(.5)
-                                  : Colors.white.withOpacity(.3),
+                                  ? Colors.black.withValues(alpha: .5)
+                                  : Colors.white.withValues(alpha: .3),
                         ),
                         child: const Icon(
                           FeatherIcons.trash2,

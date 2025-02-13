@@ -320,7 +320,7 @@ class TimetableLessonPopup extends StatelessWidget {
                 color: ColorsUtils()
                     .fade(context, Theme.of(context).colorScheme.secondary,
                         darkenAmount: 0.1, lightenAmount: 0.1)
-                    .withOpacity(0.33),
+                    .withValues(alpha: 0.33),
                 width: MediaQuery.of(context).size.width,
               ),
               Container(
@@ -333,10 +333,10 @@ class TimetableLessonPopup extends StatelessWidget {
                       Theme.of(context).scaffoldBackgroundColor,
                       Theme.of(context)
                           .scaffoldBackgroundColor
-                          .withOpacity(0.1),
+                          .withValues(alpha: 0.1),
                       Theme.of(context)
                           .scaffoldBackgroundColor
-                          .withOpacity(0.1),
+                          .withValues(alpha: 0.1),
                       Theme.of(context).scaffoldBackgroundColor,
                     ],
                     stops: const [0.0, 0.3, 0.6, 0.95],
@@ -373,7 +373,7 @@ class TimetableLessonPopup extends StatelessWidget {
                             .fade(context,
                                 Theme.of(context).colorScheme.secondary,
                                 darkenAmount: 0.1, lightenAmount: 0.1)
-                            .withOpacity(0.33),
+                            .withValues(alpha: 0.33),
                         borderRadius: BorderRadius.circular(
                           2.0,
                         ),
@@ -395,7 +395,7 @@ class TimetableLessonPopup extends StatelessWidget {
                             Theme.of(context).colorScheme.secondary,
                             amount: 0.1,
                           )
-                          .withOpacity(0.9),
+                          .withValues(alpha: 0.9),
                       width: 1.5,
                       padding: 10.0,
                       icon: Icon(
@@ -407,7 +407,7 @@ class TimetableLessonPopup extends StatelessWidget {
                               Theme.of(context).colorScheme.secondary,
                               amount: 0.1,
                             )
-                            .withOpacity(0.8),
+                            .withValues(alpha: 0.8),
                       ),
                     ),
                   ),
@@ -434,7 +434,7 @@ class TimetableLessonPopup extends StatelessWidget {
                               style: TextStyle(
                                 color: AppColors.of(context)
                                     .text
-                                    .withOpacity(0.85),
+                                    .withValues(alpha: 0.85),
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -450,7 +450,7 @@ class TimetableLessonPopup extends StatelessWidget {
                                 color: Theme.of(context)
                                     .colorScheme
                                     .tertiary
-                                    .withOpacity(.15),
+                                    .withValues(alpha: .15),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: Text(
@@ -463,7 +463,7 @@ class TimetableLessonPopup extends StatelessWidget {
                                   color: Theme.of(context)
                                       .colorScheme
                                       .secondary
-                                      .withOpacity(.9),
+                                      .withValues(alpha: .9),
                                 ),
                               ),
                             ),
@@ -505,7 +505,9 @@ class TimetableLessonPopup extends StatelessWidget {
                                       : lesson.substituteTeacher!.name)) ??
                               '',
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(0.9),
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: 0.9),
                             fontSize: 14.0,
                             fontWeight: FontWeight.w500,
                           ),
@@ -534,8 +536,9 @@ class TimetableLessonPopup extends StatelessWidget {
                           Text(
                             lesson.description,
                             style: TextStyle(
-                              color:
-                                  AppColors.of(context).text.withOpacity(0.9),
+                              color: AppColors.of(context)
+                                  .text
+                                  .withValues(alpha: 0.9),
                               fontSize: 14.0,
                               fontWeight: FontWeight.w600,
                             ),
@@ -564,7 +567,9 @@ class TimetableLessonPopup extends StatelessWidget {
                         Text(
                           '${'year_index'.i18n}: ${lesson.lessonYearIndex ?? '?'}',
                           style: TextStyle(
-                            color: AppColors.of(context).text.withOpacity(0.9),
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: 0.9),
                             fontSize: 14.0,
                             fontWeight: FontWeight.w600,
                           ),
@@ -607,7 +612,7 @@ class TimetableLessonPopup extends StatelessWidget {
                                   style: TextStyle(
                                     color: AppColors.of(context)
                                         .text
-                                        .withOpacity(0.9),
+                                        .withValues(alpha: 0.9),
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -622,7 +627,7 @@ class TimetableLessonPopup extends StatelessWidget {
                               style: TextStyle(
                                 color: AppColors.of(context)
                                     .text
-                                    .withOpacity(0.85),
+                                    .withValues(alpha: 0.85),
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -665,7 +670,7 @@ class TimetableLessonPopup extends StatelessWidget {
                   //           'view_subject'.i18n,
                   //           style: TextStyle(
                   //             color:
-                  //                 AppColors.of(context).text.withOpacity(0.9),
+                  //                 AppColors.of(context).text.withValues(alpha: 0.9),
                   //             fontSize: 18.0,
                   //             fontWeight: FontWeight.w500,
                   //           ),

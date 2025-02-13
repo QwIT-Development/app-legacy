@@ -643,7 +643,7 @@ class AbsencesPageState extends State<AbsencesPage>
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.of(context)
                                       .text
-                                      .withOpacity(0.8),
+                                      .withValues(alpha: 0.8),
                                 ),
                               ),
                             ],

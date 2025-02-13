@@ -55,7 +55,7 @@ class _LoginInputState extends State<LoginInput> {
       obscureText: obscure,
       scrollPhysics: const BouncingScrollPhysics(),
       decoration: InputDecoration(
-        // fillColor: Colors.black.withOpacity(0.15),
+        // fillColor: Colors.black.withValues(alpha: 0.15),
         filled: false,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
@@ -104,13 +104,17 @@ class _LoginInputState extends State<LoginInput> {
                     icon: widget.style == LoginInputStyle.password
                         ? Icon(
                             obscure ? FeatherIcons.eye : FeatherIcons.eyeOff,
-                            color: AppColors.of(context).text.withOpacity(0.8),
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: 0.8),
                             weight: 0.1,
                             size: 18.0,
                           )
                         : Icon(
                             FeatherIcons.x,
-                            color: AppColors.of(context).text.withOpacity(0.8),
+                            color: AppColors.of(context)
+                                .text
+                                .withValues(alpha: 0.8),
                             weight: 0.1,
                             size: 20.0,
                           ),
@@ -122,7 +126,7 @@ class _LoginInputState extends State<LoginInput> {
       style: TextStyle(
         fontSize: 14.0,
         fontWeight: FontWeight.w500,
-        color: AppColors.of(context).text.withOpacity(0.8),
+        color: AppColors.of(context).text.withValues(alpha: 0.8),
       ),
     );
   }

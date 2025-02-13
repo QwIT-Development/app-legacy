@@ -37,7 +37,7 @@ class AccountTile extends StatelessWidget {
                   splashRadius: 24.0,
                   onPressed: onTapMenu,
                   icon: Icon(FeatherIcons.moreVertical,
-                      color: AppColors.of(context).text.withOpacity(0.8)),
+                      color: AppColors.of(context).text.withValues(alpha: 0.8)),
                 ),
               )
             : null,

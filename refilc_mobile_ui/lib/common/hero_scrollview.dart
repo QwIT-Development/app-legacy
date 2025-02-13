@@ -79,7 +79,7 @@ class HeroScrollViewState extends State<HeroScrollView> {
               child: Row(
                 children: [
                   Icon(widget.icon,
-                      color: AppColors.of(context).text.withOpacity(.8)),
+                      color: AppColors.of(context).text.withValues(alpha: .8)),
                   const SizedBox(width: 8.0),
                   Expanded(
                     child: Text(
@@ -123,7 +123,7 @@ class HeroScrollViewState extends State<HeroScrollView> {
                               Theme.of(context).colorScheme.secondary,
                               amount: 0.1,
                             )
-                            .withOpacity(0.4),
+                            .withValues(alpha: 0.4),
                         width: MediaQuery.of(context).size.width,
                         fit: BoxFit.cover,
                       ),
@@ -135,10 +135,10 @@ class HeroScrollViewState extends State<HeroScrollView> {
                             Theme.of(context).scaffoldBackgroundColor,
                             Theme.of(context)
                                 .scaffoldBackgroundColor
-                                .withOpacity(0.1),
+                                .withValues(alpha: 0.1),
                             Theme.of(context)
                                 .scaffoldBackgroundColor
-                                .withOpacity(0.1),
+                                .withValues(alpha: 0.1),
                             Theme.of(context).scaffoldBackgroundColor,
                           ],
                           stops: const [0.1, 0.5, 0.7, 0.98],
@@ -164,7 +164,7 @@ class HeroScrollViewState extends State<HeroScrollView> {
                             Theme.of(context).colorScheme.secondary,
                             amount: 0.1,
                           )
-                          .withOpacity(0.9),
+                          .withValues(alpha: 0.9),
                       width: 1.5,
                       padding: 12.0,
                       icon: Icon(
@@ -175,7 +175,7 @@ class HeroScrollViewState extends State<HeroScrollView> {
                               Theme.of(context).colorScheme.secondary,
                               amount: 0.1,
                             )
-                            .withOpacity(0.8),
+                            .withValues(alpha: 0.8),
                       ),
                     ),
                   ),
@@ -192,7 +192,7 @@ class HeroScrollViewState extends State<HeroScrollView> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 26.0,
-                        color: AppColors.of(context).text.withOpacity(.8),
+                        color: AppColors.of(context).text.withValues(alpha: .8),
                         fontStyle: widget.italic ? FontStyle.italic : null,
                         fontWeight: FontWeight.bold,
                       ),

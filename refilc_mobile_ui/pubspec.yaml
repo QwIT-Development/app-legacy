@@ -2,7 +2,7 @@ name: refilc_mobile_ui
 publish_to: "none"
 
 environment:
-  sdk: ">=3.3.2 <=3.6.0"
+  sdk: ^3.6.0
 
 dependencies:
   flutter:
@@ -30,16 +30,13 @@ dependencies:
   flutter_markdown: ^0.7.2+1
   animations: ^2.0.11
   animated_list_plus: ^0.5.0
-  confetti: ^0.7.0
+  confetti: ^0.8.0
   # live_activities: ^1.9.1+1
   animated_flip_counter: ^0.3.4
   lottie: ^3.1.0
   rive: ^0.12.4
   animated_background: ^2.0.0
-  home_widget:
-    git:
-      url: https://github.com/refilc/home_widget.git
-      ref: flutter-beta
+  home_widget: ^0.7.0+1
   dropdown_button2: ^2.3.9
   flutter_svg: ^2.0.10+1
   background_fetch: ^1.2.2
@@ -47,11 +44,8 @@ dependencies:
   package_info_plus: ^8.0.0
   dotted_border: ^2.0.0+3
   screenshot: ^3.0.0
-  image_gallery_saver: ^2.0.2
-  rounded_expansion_tile:
-    git:
-      url: https://github.com/kimaah/rounded_expansion_tile.git
-  # go_router: ^14.2.0
+  image_gallery_saver_plus: ^3.0.5
+  rounded_expansion_tile: ^0.0.13
   flutter_expandable_fab: ^2.0.0
   intl: ^0.19.0
   i18n_extension: ^12.0.1
@@ -61,13 +55,10 @@ dependencies:
   share_plus: ^10.0.3
   image_picker: ^1.0.7
   path_provider: ^2.1.2
-  image_crop:
-    git:
-      url: https://github.com/kimaah/image_crop.git
+  image_crop_plus: ^1.0.0
   uuid: ^4.3.3
-  maps_launcher: ^2.2.0
+  maps_launcher: ^3.0.0+1
   google_fonts: ^6.1.0
-  # flutter_any_logo: ^1.1.1
   custom_sliding_segmented_control: ^1.8.1
   get_it: ^7.6.7
   xml: ^6.5.0
@@ -78,9 +69,13 @@ dependencies:
   file_picker: ^8.0.5
   shake_flutter: ^17.0.0
   qr_code_scanner_plus: ^2.0.6
+  wakelock_plus: ^1.2.10
   
 dev_dependencies:
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
+
+dependency_overrides:
+  webview_flutter_wkwebview: 3.17.0
 
 flutter:
   uses-material-design: true

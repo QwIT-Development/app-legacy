@@ -38,7 +38,7 @@ class HomeworkTile extends StatelessWidget {
           child: censored
               ? Container(
                   decoration: BoxDecoration(
-                    color: AppColors.of(context).text.withOpacity(.55),
+                    color: AppColors.of(context).text.withValues(alpha: .55),
                     borderRadius: BorderRadius.circular(60.0),
                   ),
                 )
@@ -48,7 +48,7 @@ class HomeworkTile extends StatelessWidget {
                     SubjectIcon.resolveVariant(
                         subject: homework.subject, context: context),
                     size: 28.0,
-                    color: AppColors.of(context).text.withOpacity(.75),
+                    color: AppColors.of(context).text.withValues(alpha: .75),
                   ),
                 ),
         ),
@@ -59,7 +59,7 @@ class HomeworkTile extends StatelessWidget {
                     width: 160,
                     height: 15,
                     decoration: BoxDecoration(
-                      color: AppColors.of(context).text.withOpacity(.85),
+                      color: AppColors.of(context).text.withValues(alpha: .85),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
@@ -83,7 +83,7 @@ class HomeworkTile extends StatelessWidget {
                     width: 100,
                     height: 10,
                     decoration: BoxDecoration(
-                      color: AppColors.of(context).text.withOpacity(.45),
+                      color: AppColors.of(context).text.withValues(alpha: .45),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
@@ -100,13 +100,13 @@ class HomeworkTile extends StatelessWidget {
                 width: 15,
                 height: 15,
                 decoration: BoxDecoration(
-                  color: AppColors.of(context).text.withOpacity(.45),
+                  color: AppColors.of(context).text.withValues(alpha: .45),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               )
             : Icon(
                 FeatherIcons.home,
-                color: AppColors.of(context).text.withOpacity(.75),
+                color: AppColors.of(context).text.withValues(alpha: .75),
               ),
         minLeadingWidth: 0,
       ),

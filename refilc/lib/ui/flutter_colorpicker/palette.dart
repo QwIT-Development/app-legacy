@@ -210,32 +210,32 @@ class TrackPainter extends CustomPainter {
         break;
       case TrackType.red:
         final List<Color> colors = [
-          hsvColor.toColor().withRed(0).withOpacity(1.0),
-          hsvColor.toColor().withRed(255).withOpacity(1.0),
+          hsvColor.toColor().withRed(0).withValues(alpha: 1.0),
+          hsvColor.toColor().withRed(255).withValues(alpha: 1.0),
         ];
         Gradient gradient = LinearGradient(colors: colors);
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
         break;
       case TrackType.green:
         final List<Color> colors = [
-          hsvColor.toColor().withGreen(0).withOpacity(1.0),
-          hsvColor.toColor().withGreen(255).withOpacity(1.0),
+          hsvColor.toColor().withGreen(0).withValues(alpha: 1.0),
+          hsvColor.toColor().withGreen(255).withValues(alpha: 1.0),
         ];
         Gradient gradient = LinearGradient(colors: colors);
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
         break;
       case TrackType.blue:
         final List<Color> colors = [
-          hsvColor.toColor().withBlue(0).withOpacity(1.0),
-          hsvColor.toColor().withBlue(255).withOpacity(1.0),
+          hsvColor.toColor().withBlue(0).withValues(alpha: 1.0),
+          hsvColor.toColor().withBlue(255).withValues(alpha: 1.0),
         ];
         Gradient gradient = LinearGradient(colors: colors);
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
         break;
       case TrackType.alpha:
         final List<Color> colors = [
-          hsvColor.toColor().withOpacity(0.0),
-          hsvColor.toColor().withOpacity(1.0),
+          hsvColor.toColor().withValues(alpha: 0.0),
+          hsvColor.toColor().withValues(alpha: 1.0),
         ];
         Gradient gradient = LinearGradient(colors: colors);
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
@@ -390,7 +390,7 @@ class ColorPickerInputState extends State<ColorPickerInput> {
             ),
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-            fillColor: AppColors.of(context).text.withOpacity(.1),
+            fillColor: AppColors.of(context).text.withValues(alpha: .1),
           ),
           onChanged: (String value) {
             String input = value;
@@ -603,20 +603,20 @@ class ColorPickerSlider extends StatelessWidget {
           break;
         case TrackType.red:
           thumbOffset += (box.maxWidth - 30.0) * hsvColor.toColor().red / 0xff;
-          thumbColor = hsvColor.toColor().withOpacity(1.0);
+          thumbColor = hsvColor.toColor().withValues(alpha: 1.0);
           break;
         case TrackType.green:
           thumbOffset +=
               (box.maxWidth - 30.0) * hsvColor.toColor().green / 0xff;
-          thumbColor = hsvColor.toColor().withOpacity(1.0);
+          thumbColor = hsvColor.toColor().withValues(alpha: 1.0);
           break;
         case TrackType.blue:
           thumbOffset += (box.maxWidth - 30.0) * hsvColor.toColor().blue / 0xff;
-          thumbColor = hsvColor.toColor().withOpacity(1.0);
+          thumbColor = hsvColor.toColor().withValues(alpha: 1.0);
           break;
         case TrackType.alpha:
           thumbOffset += (box.maxWidth - 30.0) * hsvColor.toColor().opacity;
-          thumbColor = hsvColor.toColor().withOpacity(hsvColor.alpha);
+          thumbColor = hsvColor.toColor().withValues(alpha: hsvColor.alpha);
           break;
       }
 
@@ -709,8 +709,8 @@ class ColorIndicator extends StatelessWidget {
         boxShadow: [
           BoxShadow(
               color: useWhiteForeground(color)
-                  ? Colors.white.withOpacity(.5)
-                  : Colors.black.withOpacity(.5),
+                  ? Colors.white.withValues(alpha: .5)
+                  : Colors.black.withValues(alpha: .5),
               offset: const Offset(0, 0),
               blurRadius: 5)
         ],

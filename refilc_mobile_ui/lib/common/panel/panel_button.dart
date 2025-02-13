@@ -36,8 +36,9 @@ class PanelButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: borderRadius ?? BorderRadius.circular(12.0)),
       fillColor: background
-          ? Colors.white.withOpacity(
-              Theme.of(context).brightness == Brightness.light ? .35 : .2)
+          ? Colors.white.withValues(
+              alpha:
+                  Theme.of(context).brightness == Brightness.light ? .35 : .2)
           : null,
       child: ListTile(
         leading: leading != null
@@ -57,7 +58,7 @@ class PanelButton extends StatelessWidget {
                     width: 2.0,
                     height: 32.0,
                     decoration: BoxDecoration(
-                      color: AppColors.of(context).text.withOpacity(.15),
+                      color: AppColors.of(context).text.withValues(alpha: .15),
                       borderRadius: BorderRadius.circular(45.0),
                     ),
                   ),

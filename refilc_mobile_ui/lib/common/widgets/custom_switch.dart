@@ -28,7 +28,9 @@ class CustomSwitch extends StatelessWidget {
                 borderRadius: const BorderRadius.all(
                   Radius.circular(25.0),
                 ),
-                color: value ? Theme.of(context).colorScheme.secondary : Theme.of(context).highlightColor,
+                color: value
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).highlightColor,
               ),
             ),
             AnimatedAlign(
@@ -44,7 +46,7 @@ class CustomSwitch extends StatelessWidget {
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black12.withOpacity(0.1),
+                      color: Colors.black12.withValues(alpha: 0.1),
                       spreadRadius: 0.5,
                       blurRadius: 1,
                     )

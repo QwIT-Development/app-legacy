@@ -500,7 +500,7 @@ class SettingsProvider extends ChangeNotifier {
       renameSubjectsItalics: false,
       renameTeachersEnabled: false,
       renameTeachersItalics: false,
-      liveActivityColor: const Color(0xFF676767),
+      liveActivityColor: const Color(0x00000000),
       welcomeMessage: '',
       appIcon: 'refilc_default',
       currentThemeId: '',

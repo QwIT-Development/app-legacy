@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:refilc/api/providers/liveactivity/platform_channel.dart';
 import 'package:refilc/helpers/subject.dart';
 import 'package:refilc/models/settings.dart';
+import 'package:refilc/ui/flutter_colorpicker/utils.dart';
 import 'package:refilc_kreta_api/models/lesson.dart';
 import 'package:refilc_kreta_api/models/week.dart';
 import 'package:refilc/utils/format.dart';
@@ -84,11 +85,14 @@ class LiveCardProvider extends ChangeNotifier {
   }
 
   Map<String, String> toMap() {
+    // print("LIVE ACTIVITY COLOR BELOW:");
+    // print(_settings.liveActivityColor.toHexString().substring(2));
+    String color = '#${_settings.liveActivityColor.toHexString().substring(2)}';
+
     switch (currentState) {
       case LiveCardState.morning:
         return {
-          "color":
-          '#${_settings.liveActivityColor.toString().substring(10, 16)}',
+          "color": color,
           "icon": nextLesson != null
               ? SubjectIcon.resolveName(subject: nextLesson?.subject)
               : "book",
@@ -97,23 +101,22 @@ class LiveCardProvider extends ChangeNotifier {
           "description": "",
           "startDate": storeFirstRunDate != null
               ? ((storeFirstRunDate?.millisecondsSinceEpoch ?? 0) -
-              (_delay.inMilliseconds))
-              .toString()
+                      (_delay.inMilliseconds))
+                  .toString()
               : "",
           "endDate": ((nextLesson?.start.millisecondsSinceEpoch ?? 0) -
-              _delay.inMilliseconds)
+                  _delay.inMilliseconds)
               .toString(),
           "nextSubject": nextLesson != null
               ? nextLesson?.subject.renamedTo ??
-              ShortSubject.resolve(subject: nextLesson?.subject).capital()
+                  ShortSubject.resolve(subject: nextLesson?.subject).capital()
               : "",
           "nextRoom": nextLesson?.room.replaceAll("_", " ") ?? "",
         };
 
       case LiveCardState.afternoon:
         return {
-          "color":
-          '#${_settings.liveActivityColor.toString().substring(10, 16)}',
+          "color": color,
           "icon": nextLesson != null
               ? SubjectIcon.resolveName(subject: nextLesson?.subject)
               : "book",
@@ -122,23 +125,22 @@ class LiveCardProvider extends ChangeNotifier {
           "description": "",
           "startDate": storeFirstRunDate != null
               ? ((storeFirstRunDate?.millisecondsSinceEpoch ?? 0) -
-              (_delay.inMilliseconds))
-              .toString()
+                      (_delay.inMilliseconds))
+                  .toString()
               : "",
           "endDate": ((nextLesson?.start.millisecondsSinceEpoch ?? 0) -
-              _delay.inMilliseconds)
+                  _delay.inMilliseconds)
               .toString(),
           "nextSubject": nextLesson != null
               ? nextLesson?.subject.renamedTo ??
-              ShortSubject.resolve(subject: nextLesson?.subject).capital()
+                  ShortSubject.resolve(subject: nextLesson?.subject).capital()
               : "",
           "nextRoom": nextLesson?.room.replaceAll("_", " ") ?? "",
         };
 
       case LiveCardState.night:
         return {
-          "color":
-          '#${_settings.liveActivityColor.toString().substring(10, 16)}',
+          "color": color,
           "icon": nextLesson != null
               ? SubjectIcon.resolveName(subject: nextLesson?.subject)
               : "book",
@@ -147,44 +149,44 @@ class LiveCardProvider extends ChangeNotifier {
           "description": "",
           "startDate": storeFirstRunDate != null
               ? ((storeFirstRunDate?.millisecondsSinceEpoch ?? 0) -
-              (_delay.inMilliseconds))
-              .toString()
+                      (_delay.inMilliseconds))
+                  .toString()
               : "",
           "endDate": ((nextLesson?.start.millisecondsSinceEpoch ?? 0) -
-              _delay.inMilliseconds)
+                  _delay.inMilliseconds)
               .toString(),
           "nextSubject": nextLesson != null
               ? nextLesson?.subject.renamedTo ??
-              ShortSubject.resolve(subject: nextLesson?.subject).capital()
+                  ShortSubject.resolve(subject: nextLesson?.subject).capital()
               : "",
           "nextRoom": nextLesson?.room.replaceAll("_", " ") ?? "",
         };
 
       case LiveCardState.duringLesson:
         return {
-          "color":
-          '#${_settings.liveActivityColor.toString().substring(10, 16)}',
+          "color": color,
           "icon": currentLesson != null
               ? SubjectIcon.resolveName(subject: currentLesson?.subject)
               : "book",
           "index":
-          currentLesson != null ? '${currentLesson!.lessonIndex}. ' : "",
+              currentLesson != null ? '${currentLesson!.lessonIndex}. ' : "",
           "title": currentLesson != null
               ? currentLesson?.subject.renamedTo ??
-              ShortSubject.resolve(subject: currentLesson?.subject)
-                  .capital()
+                  ShortSubject.resolve(subject: currentLesson?.subject)
+                      .capital()
               : "",
-          "subtitle": "Terem: ${currentLesson?.room.replaceAll("_", " ") ?? ""}",
+          "subtitle":
+              "Terem: ${currentLesson?.room.replaceAll("_", " ") ?? ""}",
           "description": currentLesson?.description ?? "",
           "startDate": ((currentLesson?.start.millisecondsSinceEpoch ?? 0) -
-              _delay.inMilliseconds)
+                  _delay.inMilliseconds)
               .toString(),
           "endDate": ((currentLesson?.end.millisecondsSinceEpoch ?? 0) -
-              _delay.inMilliseconds)
+                  _delay.inMilliseconds)
               .toString(),
           "nextSubject": nextLesson != null
               ? nextLesson?.subject.renamedTo ??
-              ShortSubject.resolve(subject: nextLesson?.subject).capital()
+                  ShortSubject.resolve(subject: nextLesson?.subject).capital()
               : "",
           "nextRoom": nextLesson?.room.replaceAll("_", " ") ?? "",
         };
@@ -199,24 +201,23 @@ class LiveCardProvider extends ChangeNotifier {
         final diff = getFloorDifference();
 
         return {
-          "color":
-          '#${_settings.liveActivityColor.toString().substring(10, 16)}',
+          "color": color,
           "icon": iconFloorMap[diff] ?? "cup.and.saucer",
           "title": "Szünet",
           "description": "go $diff".i18n.fill([
             diff != "to room" ? (nextLesson!.getFloor() ?? 0) : nextLesson!.room
           ]),
           "startDate": ((prevLesson?.end.millisecondsSinceEpoch ?? 0) -
-              _delay.inMilliseconds)
+                  _delay.inMilliseconds)
               .toString(),
           "endDate": ((nextLesson?.start.millisecondsSinceEpoch ?? 0) -
-              _delay.inMilliseconds)
+                  _delay.inMilliseconds)
               .toString(),
           "nextSubject": (nextLesson != null
-              ? nextLesson?.subject.renamedTo ??
-              ShortSubject.resolve(subject: nextLesson?.subject)
-                  .capital()
-              : "")
+                  ? nextLesson?.subject.renamedTo ??
+                      ShortSubject.resolve(subject: nextLesson?.subject)
+                          .capital()
+                  : "")
               .capital(),
           "nextRoom": nextLesson?.room.replaceAll("_", " ") ?? "",
           "index": "",
@@ -243,8 +244,8 @@ class LiveCardProvider extends ChangeNotifier {
     DateTime now = _now().add(_delay);
 
     if ((currentState == LiveCardState.morning ||
-        currentState == LiveCardState.afternoon ||
-        currentState == LiveCardState.night) &&
+            currentState == LiveCardState.afternoon ||
+            currentState == LiveCardState.night) &&
         storeFirstRunDate == null) {
       storeFirstRunDate = now;
     }
@@ -253,9 +254,9 @@ class LiveCardProvider extends ChangeNotifier {
     // Filter label lessons #128
     today = today
         .where((lesson) =>
-    lesson.status?.name != "Elmaradt" &&
-        lesson.subject.id != '' &&
-        !lesson.isEmpty)
+            lesson.status?.name != "Elmaradt" &&
+            lesson.subject.id != '' &&
+            !lesson.isEmpty)
         .toList();
 
     if (today.isNotEmpty) {
@@ -263,7 +264,7 @@ class LiveCardProvider extends ChangeNotifier {
       today.sort((a, b) => a.start.compareTo(b.start));
 
       final _lesson = today.firstWhere(
-              (l) => l.start.isBefore(now) && l.end.isAfter(now),
+          (l) => l.start.isBefore(now) && l.end.isAfter(now),
           orElse: () => Lesson.fromJson({}));
 
       if (_lesson.start.year != 0) {
@@ -328,7 +329,7 @@ class LiveCardProvider extends ChangeNotifier {
       hasActivityStarted = true;
     } else if (!hasActivityStarted &&
         ((currentState == LiveCardState.duringLesson &&
-            currentLesson != null) ||
+                currentLesson != null) ||
             currentState == LiveCardState.duringBreak)) {
       debugPrint("Óra van, vagy szünet, de nincs LiveActivity. létrehozás...");
       PlatformChannel.createLiveActivity(toMap());
@@ -362,7 +363,11 @@ class LiveCardProvider extends ChangeNotifier {
     }
 
     //END
-    if ((currentState == LiveCardState.afternoon || currentState == LiveCardState.morning || currentState == LiveCardState.night) && hasActivityStarted && nextLesson != null &&
+    if ((currentState == LiveCardState.afternoon ||
+            currentState == LiveCardState.morning ||
+            currentState == LiveCardState.night) &&
+        hasActivityStarted &&
+        nextLesson != null &&
         nextLesson!.start.difference(now).inMinutes > 60) {
       debugPrint("Több, mint 1 óra van az első óráig. Befejezés...");
       PlatformChannel.endLiveActivity();

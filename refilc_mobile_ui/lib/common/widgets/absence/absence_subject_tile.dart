@@ -81,7 +81,7 @@ class AbsenceSubjectTile extends StatelessWidget {
                         // fontFamily: "monospace",
                         color:
                             getColorByPercentage(percentage, context: context)
-                                .withOpacity(0.8),
+                                .withValues(alpha: 0.8),
                         fontSize: 16.0,
                         fontWeight: FontWeight.w500,
                       ),
@@ -109,5 +109,5 @@ Color getColorByPercentage(double percentage, {required BuildContext context}) {
     color = AppColors.of(context).yellow;
   }
 
-  return color.withOpacity(.8);
+  return color.withValues(alpha: .8);
 }

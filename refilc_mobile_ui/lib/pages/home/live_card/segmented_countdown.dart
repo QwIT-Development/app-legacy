@@ -24,7 +24,8 @@ class SegmentedCountdownState extends State<SegmentedCountdown> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary.withOpacity(0.05),
+            color:
+                Theme.of(context).colorScheme.secondary.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(8.0),
           ),
           padding: const EdgeInsets.symmetric(vertical: 2.0),
@@ -46,7 +47,7 @@ class SegmentedCountdownState extends State<SegmentedCountdown> {
           style: TextStyle(
             fontSize: 16.0,
             fontWeight: FontWeight.w500,
-            color: AppColors.of(context).text.withOpacity(0.6),
+            color: AppColors.of(context).text.withValues(alpha: 0.6),
           ),
         ),
         const SizedBox(
@@ -54,7 +55,8 @@ class SegmentedCountdownState extends State<SegmentedCountdown> {
         ),
         Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary.withOpacity(0.05),
+            color:
+                Theme.of(context).colorScheme.secondary.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(8.0),
           ),
           padding: const EdgeInsets.symmetric(vertical: 2.0),
@@ -71,7 +73,10 @@ class SegmentedCountdownState extends State<SegmentedCountdown> {
         if (diffMins.length == 2)
           Container(
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary.withOpacity(0.05),
+              color: Theme.of(context)
+                  .colorScheme
+                  .secondary
+                  .withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(8.0),
             ),
             padding: const EdgeInsets.symmetric(vertical: 2.0),
@@ -94,7 +99,7 @@ class SegmentedCountdownState extends State<SegmentedCountdown> {
           style: TextStyle(
             fontSize: 16.0,
             fontWeight: FontWeight.w500,
-            color: AppColors.of(context).text.withOpacity(0.6),
+            color: AppColors.of(context).text.withValues(alpha: 0.6),
           ),
         ),
         const SizedBox(
@@ -102,7 +107,8 @@ class SegmentedCountdownState extends State<SegmentedCountdown> {
         ),
         Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary.withOpacity(0.05),
+            color:
+                Theme.of(context).colorScheme.secondary.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(8.0),
           ),
           padding: const EdgeInsets.symmetric(vertical: 2.0),
@@ -119,7 +125,10 @@ class SegmentedCountdownState extends State<SegmentedCountdown> {
         if (diffSecs.length == 2)
           Container(
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary.withOpacity(0.05),
+              color: Theme.of(context)
+                  .colorScheme
+                  .secondary
+                  .withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(8.0),
             ),
             padding: const EdgeInsets.symmetric(vertical: 2.0),
@@ -142,7 +151,7 @@ class SegmentedCountdownState extends State<SegmentedCountdown> {
           style: TextStyle(
             fontSize: 16.0,
             fontWeight: FontWeight.w500,
-            color: AppColors.of(context).text.withOpacity(0.6),
+            color: AppColors.of(context).text.withValues(alpha: 0.6),
           ),
         ),
       ],

@@ -41,14 +41,13 @@ class AbsenceGroupTile extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 12.0, vertical: 0),
               tileColor: Colors.transparent,
               duration: const Duration(milliseconds: 250),
-              trailingDuration: 0.5,
               trailing: const Icon(FeatherIcons.chevronDown),
               leading: Container(
                 width: 39.0,
                 height: 39.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: color.withOpacity(.25),
+                  color: color.withValues(alpha: .25),
                 ),
                 child: Center(
                     child: Icon(AbsenceTile.justificationIcon(state),
@@ -76,7 +75,9 @@ class AbsenceGroupTile extends StatelessWidget {
                           .format(context, weekday: true),
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          color: AppColors.of(context).text.withOpacity(0.8)),
+                          color: AppColors.of(context)
+                              .text
+                              .withValues(alpha: 0.8)),
                     )
                   : null,
               children: absences,

@@ -271,9 +271,12 @@ class _PremiumCustomAccentColorSettingState
                 stops: const [0.0, 0.75],
                 colors: isBackgroundDifferent
                     ? [
-                        Theme.of(context).colorScheme.surface.withOpacity(1 -
-                            ((currentTheme == ThemeMode.dark ? 0.65 : 0.25) *
-                                backgroundAnimation.value)),
+                        Theme.of(context).colorScheme.surface.withValues(
+                            alpha: 1 -
+                                ((currentTheme == ThemeMode.dark
+                                        ? 0.65
+                                        : 0.25) *
+                                    backgroundAnimation.value)),
                         backgroundGradientBottomColor,
                       ]
                     : [

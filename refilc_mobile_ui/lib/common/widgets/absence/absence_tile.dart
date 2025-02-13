@@ -57,7 +57,7 @@ class AbsenceTile extends StatelessWidget {
               width: 39,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: !group ? color.withOpacity(.25) : null,
+                color: !group ? color.withValues(alpha: .25) : null,
               ),
               child: Center(
                   child: Icon(justificationIcon(absence.state), color: color)),

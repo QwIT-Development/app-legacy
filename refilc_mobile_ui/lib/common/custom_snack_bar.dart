@@ -24,7 +24,7 @@ SnackBar CustomSnackBar({
         color: _backgroundColor,
         borderRadius: BorderRadius.circular(6.0),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(.15), blurRadius: 4.0)
+          BoxShadow(color: Colors.black.withValues(alpha: .15), blurRadius: 4.0)
         ],
       ),
       padding: const EdgeInsets.all(12.0),

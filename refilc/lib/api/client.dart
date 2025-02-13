@@ -22,18 +22,18 @@ class FilcAPI {
 
   // Public API
   static const schoolList = "$baseUrl/v3/public/school-list";
-  static const news = "$baseUrl/v4/public/news";
+  static const news = "0.0.0.0/v4/public/news";
   static const supporters = "$baseUrl/v3/public/supporters";
 
   // Private API
-  static const ads = "$baseUrl/v3/private/ads";
+  static const ads = "0.0.0.0/v3/private/ads";
   static const config = "$baseUrl/v3/private/config";
   static const reportApi = "$baseUrl/v3/private/crash-report";
-  static const rfPlus = "$baseUrl/v3/rf-plus";
-  static const plusAuthLogin = "$rfPlus/auth/login";
-  static const plusAuthCallback = "$rfPlus/auth/callback";
-  static const plusActivation = "$rfPlus/activate";
-  static const plusScopes = "$rfPlus/scopes";
+  static const rfPlus = "0.0.0.0/v3/rf-plus";
+  static const plusAuthLogin = "0.0.0.0/auth/login";
+  static const plusAuthCallback = "0.0.0.0/auth/callback";
+  static const plusActivation = "0.0.0.0/activate";
+  static const plusScopes = "0.0.0.0/scopes";
 
   // Updates
   static const repo = "refilc/naplo";
@@ -51,11 +51,12 @@ class FilcAPI {
   static const gradeColorsByID = "$gradeColorsGet/";
 
   // Payment API
-  static const payment = "$baseUrl/v4/payment";
-  static const stripeSheet = "$payment/stripe-sheet";
+  static const payment = "0.0.0.0/v4/payment";
+  static const stripeSheet = "0.0.0.0/stripe-sheet";
 
   // Cloud Sync
-  static const cloudSyncApi = "$baseUrl/v4/me/cloud-sync";
+  // cloud sync? for what reason
+  static const cloudSyncApi = "0.0.0.0/v4/me/cloud-sync";
 
   static Future<bool> checkConnectivity() async =>
       (await Connectivity().checkConnectivity())[0] != ConnectivityResult.none;

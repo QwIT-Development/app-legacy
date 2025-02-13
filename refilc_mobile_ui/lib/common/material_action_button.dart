@@ -19,7 +19,8 @@ class MaterialActionButton extends StatelessWidget {
     return RawMaterialButton(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       shape: const StadiumBorder(),
-      fillColor: backgroundColor ?? AppColors.of(context).text.withOpacity(.15),
+      fillColor:
+          backgroundColor ?? AppColors.of(context).text.withValues(alpha: .15),
       elevation: 0,
       highlightElevation: 0,
       onPressed: onPressed,

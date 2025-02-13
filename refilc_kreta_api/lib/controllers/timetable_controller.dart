@@ -108,7 +108,9 @@ class TimetableController extends ChangeNotifier {
     // Jump to next week on weekends
     if (skip &&
         (days?.length ?? 0) > 0 &&
-        days!.last.last.end.isBefore(DateTime.now())) return next(context);
+        days!.last.last.end.isBefore(DateTime.now())) {
+      return next(context);
+    }
 
     notifyListeners();
   }
@@ -149,7 +151,9 @@ class TimetableController extends ChangeNotifier {
         lessons.sort((a, b) => a.date.compareTo(b.date));
         for (var lesson in lessons) {
           if (days.last.isNotEmpty &&
-              _differentDate(lesson.date, days.last.last.date)) days.add([]);
+              _differentDate(lesson.date, days.last.last.date)) {
+            days.add([]);
+          }
           days.last.add(lesson);
         }
 

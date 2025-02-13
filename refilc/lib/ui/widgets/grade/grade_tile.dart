@@ -199,7 +199,7 @@ class GradeTile extends StatelessWidget {
                   : Icon(
                       SubjectIcon.resolveVariant(
                           context: context, subject: grade.subject),
-                      color: AppColors.of(context).text.withOpacity(.5),
+                      color: AppColors.of(context).text.withValues(alpha: .5),
                     ),
           minLeadingWidth: isSubjectView ? 32.0 : 0,
         ),
@@ -288,7 +288,8 @@ class GradeValueWidget extends StatelessWidget {
               shadows: [
                 if (value.weight >= 200)
                   Shadow(
-                    color: (contrast ? Colors.white : color).withOpacity(.4),
+                    color:
+                        (contrast ? Colors.white : color).withValues(alpha: .4),
                     offset: const Offset(-4, -3),
                   )
               ],
@@ -312,7 +313,7 @@ class GradeValueWidget extends StatelessWidget {
             width: size * 1.4,
             height: size * 1.4,
             decoration: BoxDecoration(
-              color: color.withOpacity(contrast ? 1.0 : .25),
+              color: color.withValues(alpha: contrast ? 1.0 : .25),
               shape: BoxShape.circle,
               boxShadow: [
                 if (shadow &&

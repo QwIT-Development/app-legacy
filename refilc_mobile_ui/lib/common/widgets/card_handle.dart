@@ -17,7 +17,7 @@ class CardHandle extends StatelessWidget {
           margin: const EdgeInsets.only(top: 12.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(45.0),
-            color: AppColors.of(context).text.withOpacity(0.10),
+            color: AppColors.of(context).text.withValues(alpha: 0.10),
           ),
         ),
         if (child != null) child!,

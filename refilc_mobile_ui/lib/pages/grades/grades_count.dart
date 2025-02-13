@@ -26,7 +26,6 @@ class GradesCount extends StatelessWidget {
         contentPadding: EdgeInsets.zero,
         visualDensity: const VisualDensity(vertical: -4),
         duration: const Duration(milliseconds: 250),
-        trailingDuration: 0.5,
         trailing: const Icon(FeatherIcons.chevronDown),
         title: Text(
           'grades_cnt'.i18n.fill([

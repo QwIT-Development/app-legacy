@@ -132,7 +132,7 @@ class _LiveCardWidgetState extends State<LiveCardWidget> {
                                   color: Theme.of(context)
                                       .colorScheme
                                       .secondary
-                                      .withOpacity(0.5),
+                                      .withValues(alpha: 0.5),
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(10),
                                   ),
@@ -220,8 +220,9 @@ class _LiveCardWidgetState extends State<LiveCardWidget> {
                                                                       context)
                                                                   .colorScheme
                                                                   .secondary
-                                                                  .withOpacity(
-                                                                      .3),
+                                                                  .withValues(
+                                                                      alpha:
+                                                                          .3),
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
@@ -267,7 +268,7 @@ class _LiveCardWidgetState extends State<LiveCardWidget> {
                                                   size: 26.0,
                                                   color: AppColors.of(context)
                                                       .text
-                                                      .withOpacity(.75),
+                                                      .withValues(alpha: .75),
                                                 ),
                                               ),
                                           ],
@@ -283,7 +284,7 @@ class _LiveCardWidgetState extends State<LiveCardWidget> {
                                                   height: 1.0,
                                                   color: AppColors.of(context)
                                                       .text
-                                                      .withOpacity(.75),
+                                                      .withValues(alpha: .75),
                                                 ),
                                             maxLines:
                                                 !(widget.nextSubject == null &&
@@ -341,7 +342,8 @@ class _LiveCardWidgetState extends State<LiveCardWidget> {
                                                       color: Theme.of(context)
                                                           .colorScheme
                                                           .secondary
-                                                          .withOpacity(.25),
+                                                          .withValues(
+                                                              alpha: .25),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               4.0),
@@ -356,7 +358,8 @@ class _LiveCardWidgetState extends State<LiveCardWidget> {
                                                         color: Theme.of(context)
                                                             .colorScheme
                                                             .secondary
-                                                            .withOpacity(.9),
+                                                            .withValues(
+                                                                alpha: .9),
                                                       ),
                                                     ),
                                                   ),
@@ -366,7 +369,7 @@ class _LiveCardWidgetState extends State<LiveCardWidget> {
                                           style: TextStyle(
                                             color: AppColors.of(context)
                                                 .text
-                                                .withOpacity(.8),
+                                                .withValues(alpha: .8),
                                             fontWeight: FontWeight.w600,
                                           ),
                                           maxLines: 1,
@@ -393,7 +396,7 @@ class _LiveCardWidgetState extends State<LiveCardWidget> {
                                               fontWeight: FontWeight.w500,
                                               color: AppColors.of(context)
                                                   .text
-                                                  .withOpacity(.75),
+                                                  .withValues(alpha: .75),
                                             ),
                                           ),
                                         ),

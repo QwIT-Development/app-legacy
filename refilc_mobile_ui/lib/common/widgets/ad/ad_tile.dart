@@ -32,7 +32,7 @@ class AdTile extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14.5,
                 fontWeight: FontWeight.w500,
-                color: AppColors.of(context).text.withOpacity(0.7),
+                color: AppColors.of(context).text.withValues(alpha: 0.7),
               ),
             ),
           ],

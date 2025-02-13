@@ -128,7 +128,8 @@ class SendMessageSheetState extends State<SendMessageSheet> {
                           .join(),
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       fontWeight: FontWeight.w700,
-                      color: AppColors.of(context).text.withOpacity(0.75)),
+                      color:
+                          AppColors.of(context).text.withValues(alpha: 0.75)),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   textAlign: TextAlign.center,

@@ -3,10 +3,10 @@ description: "Egy nem hivatalos e-KRÉTA kliens, diákoktól diákoknak."
 homepage: https://refilc.hu
 publish_to: "none"
 
-version: 5.0.6+277
+version: 5.1.1+283
 
 environment:
-  sdk: ">=3.3.2 <=3.6.0"
+  sdk: ^3.6.0
 
 dependencies:
   flutter:
@@ -16,8 +16,8 @@ dependencies:
   # reFilc packages
   refilc_mobile_ui:
     path: "../refilc_mobile_ui/"
-  refilc_desktop_ui:
-    path: "../refilc_desktop_ui/"
+  # refilc_desktop_ui:
+  #   path: "../refilc_desktop_ui/"
   refilc_kreta_api:
     path: "../refilc_kreta_api/"
   refilc_plus:
@@ -33,10 +33,6 @@ dependencies:
   uuid: ^4.2.1
   html: ^0.15.0
   open_filex: ^4.3.4
-  # open_file:
-  #   git:
-  #     url: https://github.com/crazecoder/open_file
-  #     ref: master
   path_provider: ^2.0.2
   permission_handler: ^11.0.1
   share_plus: ^10.0.3
@@ -55,17 +51,9 @@ dependencies:
   rive: ^0.12.4
   animated_background: ^2.0.0
   dropdown_button2: ^2.3.9
-  home_widget:
-    git:
-      url: https://github.com/refilc/home_widget.git
-      ref: flutter-beta
+  home_widget: ^0.7.0+1
   flutter_expandable_fab: ^2.0.0
-  uni_links: ^0.5.1
   url_launcher: ^6.1.6
-  # workmanager:
-  #   git:
-  #     url: https://github.com/refilc/flutter_workmanager.git
-  #     ref: v0.5.1
   flutter_svg: ^2.0.10+1
   image_picker: ^1.0.7
   animations: ^2.0.1
@@ -74,16 +62,12 @@ dependencies:
   package_info_plus: ^8.0.0
   screenshot: ^3.0.0
   flutter_staggered_grid_view: ^0.7.0
-  sqflite_common_ffi_web: ^0.4.0
-  image_crop:
-    git:
-      url: https://github.com/kimaah/image_crop.git
+  image_crop_plus: ^1.0.0
   googleapis: ^13.2.0
   google_sign_in: ^6.2.1
   extension_google_sign_in_as_googleapis_auth: ^2.0.12
-  maps_launcher: ^2.2.0
+  maps_launcher: ^3.0.0+1
   google_fonts: ^6.1.0
-  # flutter_stripe: ^11.3.0
   get_it: ^7.6.7
   xml: ^6.5.0
   carousel_slider: ^5.0.0
@@ -95,6 +79,9 @@ dev_dependencies:
   flutter_launcher_icons: ^0.14.2
   flutter_native_splash: "^2.3.10"
   sqflite_common_ffi: ^2.0.0+3
+
+dependency_overrides:
+  webview_flutter_wkwebview: 3.17.0
 
 flutter:
   uses-material-design: true

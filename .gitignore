@@ -12,10 +12,10 @@ refilc/build/
 refilc/android/key.properties
 refilc/android/debug.keystore
 
-refilc_desktop_ui/.flutter-plugins
-refilc_desktop_ui/.flutter-plugins-dependencies
-refilc_desktop_ui/pubspec.lock
-refilc_desktop_ui/.dart_tool/
+# refilc_desktop_ui/.flutter-plugins
+# refilc_desktop_ui/.flutter-plugins-dependencies
+# refilc_desktop_ui/pubspec.lock
+# refilc_desktop_ui/.dart_tool/
 
 refilc_kreta_api/.flutter-plugins
 refilc_kreta_api/.flutter-plugins-dependencies
@@ -37,6 +37,7 @@ refilc_mobile_ui/.dart_tool/
 .idea
 .gitmodules
 .gradle
+.kotlin
 
 refilc/.DS_Store
 .DS_Store

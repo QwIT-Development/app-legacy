@@ -8,7 +8,7 @@ import 'package:refilc/models/settings.dart';
 import 'package:flutter/foundation.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
+// import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 const settingsDB = DatabaseStruct("settings", {
   "language": String, "start_page": int, "rounding": int, "theme": int,
@@ -110,7 +110,8 @@ Future<Database> initDB(DatabaseProvider database) async {
   Database db;
 
   if (kIsWeb) {
-    db = await databaseFactoryFfiWeb.openDatabase("app.db");
+    // db = await databaseFactoryFfiWeb.openDatabase("app.db");
+    throw "web is not supported";
   } else if (Platform.isLinux || Platform.isWindows) {
     sqfliteFfiInit();
     db = await databaseFactoryFfi.openDatabase("app.db");

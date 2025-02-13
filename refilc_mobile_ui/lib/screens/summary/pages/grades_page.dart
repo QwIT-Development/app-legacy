@@ -112,7 +112,7 @@ class GradesBodyState extends State<GradesBody> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20.0,
-                color: Colors.white.withOpacity(0.98),
+                color: Colors.white.withValues(alpha: 0.98),
                 fontStyle: settings.renamedSubjectsItalics && subject.isRenamed
                     ? FontStyle.italic
                     : null,
@@ -145,7 +145,7 @@ class GradesBodyState extends State<GradesBody> {
                 style: TextStyle(
                     fontSize: 18.0,
                     height: 2.0,
-                    color: Colors.white.withOpacity(0.5)),
+                    color: Colors.white.withValues(alpha: 0.5)),
               ),
             ],
           ),
@@ -331,10 +331,10 @@ class GradesBodyState extends State<GradesBody> {
                       horizontal: 16.0, vertical: 4.0),
                   decoration: BoxDecoration(
                     color: gradeColor(context: context, value: endYearAvg)
-                        .withOpacity(.2),
+                        .withValues(alpha: .2),
                     border: Border.all(
                       color: (gradeColor(context: context, value: endYearAvg))
-                          .withOpacity(0.0),
+                          .withValues(alpha: 0.0),
                       width: 2.0,
                     ),
                     borderRadius: BorderRadius.circular(45.0),

@@ -11,8 +11,9 @@ class NewChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color:
-            disabled ? AppColors.of(context).text.withOpacity(.25) : Colors.red,
+        color: disabled
+            ? AppColors.of(context).text.withValues(alpha: .25)
+            : Colors.red,
         borderRadius: BorderRadius.circular(12.0),
       ),
       padding:
@@ -23,7 +24,7 @@ class NewChip extends StatelessWidget {
           Icon(
             Icons.hotel_class_rounded,
             color: disabled
-                ? AppColors.of(context).text.withOpacity(.5)
+                ? AppColors.of(context).text.withValues(alpha: .5)
                 : Colors.white,
             size: 14.0,
           ),
@@ -32,7 +33,7 @@ class NewChip extends StatelessWidget {
             'new'.i18n,
             style: TextStyle(
               color: disabled
-                  ? AppColors.of(context).text.withOpacity(.5)
+                  ? AppColors.of(context).text.withValues(alpha: .5)
                   : Colors.white,
               fontSize: 12.0,
               fontWeight: FontWeight.bold,

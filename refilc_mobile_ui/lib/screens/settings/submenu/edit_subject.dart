@@ -111,7 +111,7 @@ class EditSubjectScreenState extends State<EditSubjectScreen> {
                     leading: Icon(
                       FeatherIcons.penTool,
                       size: 22.0,
-                      color: AppColors.of(context).text.withOpacity(0.95),
+                      color: AppColors.of(context).text.withValues(alpha: 0.95),
                     ),
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(12.0),
@@ -134,7 +134,7 @@ class EditSubjectScreenState extends State<EditSubjectScreen> {
                     leading: Icon(
                       FeatherIcons.user,
                       size: 22.0,
-                      color: AppColors.of(context).text.withOpacity(0.95),
+                      color: AppColors.of(context).text.withValues(alpha: 0.95),
                     ),
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(12.0),
@@ -157,13 +157,13 @@ class EditSubjectScreenState extends State<EditSubjectScreen> {
               //       title: Text(
               //         "rounding".i18n,
               //         style: TextStyle(
-              //           color: AppColors.of(context).text.withOpacity(.95),
+              //           color: AppColors.of(context).text.withValues(alpha: .95),
               //         ),
               //       ),
               //       leading: Icon(
               //         FeatherIcons.gitCommit,
               //         size: 22.0,
-              //         color: AppColors.of(context).text.withOpacity(.95),
+              //         color: AppColors.of(context).text.withValues(alpha: .95),
               //       ),
               //       trailing: Text(
               //         ((widget.subject.customRounding ??
@@ -272,6 +272,9 @@ class EditSubjectScreenState extends State<EditSubjectScreen> {
 
                 await databaseProvider.userStore
                     .storeRenamedSubjects(renamedSubjs, userId: user.id!);
+
+                print("USER ID BELOW FOR DEBUG:");
+                print(user.id);
 
                 updateProviders();
 

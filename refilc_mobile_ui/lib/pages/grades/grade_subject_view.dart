@@ -493,7 +493,7 @@ class _GradeSubjectViewState extends State<GradeSubjectView>
                           color: Theme.of(context)
                               .colorScheme
                               .primary
-                              .withOpacity(.15),
+                              .withValues(alpha: .15),
                         ),
                         child: Icon(
                           FeatherIcons.flag,

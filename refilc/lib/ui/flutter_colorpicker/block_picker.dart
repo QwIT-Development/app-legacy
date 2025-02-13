@@ -5,7 +5,7 @@
 
 /// Blocky Color Picker
 
-library block_colorpicker;
+library;
 
 import 'package:flutter/material.dart';
 import 'package:refilc/theme/colors/accent.dart';
@@ -73,7 +73,7 @@ Widget _defaultItemBuilder(
       color: color,
       boxShadow: [
         BoxShadow(
-            color: color.withOpacity(0.8),
+            color: color.withValues(alpha: 0.8),
             offset: const Offset(1, 2),
             blurRadius: 5)
       ],

@@ -98,7 +98,7 @@ class AverageSelectorState extends State<AverageSelector> {
               avgDropItems[widget.value]!.i18n,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: AppColors.of(context).text.withOpacity(0.65)),
+                  color: AppColors.of(context).text.withValues(alpha: 0.65)),
             ),
             const SizedBox(
               width: 4,

@@ -67,7 +67,7 @@ class PanelTitle extends StatelessWidget {
       child: DefaultTextStyle(
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
             fontWeight: FontWeight.w600,
-            color: AppColors.of(context).text.withOpacity(0.65)),
+            color: AppColors.of(context).text.withValues(alpha: 0.65)),
         child: title,
       ),
     );

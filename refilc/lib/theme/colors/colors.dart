@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:refilc/theme/colors/dark_desktop.dart';
+// import 'package:refilc/theme/colors/dark_desktop.dart';
 import 'package:refilc/theme/colors/dark_mobile.dart';
-import 'package:refilc/theme/colors/light_desktop.dart';
+// import 'package:refilc/theme/colors/light_desktop.dart';
 import 'package:refilc/theme/colors/light_mobile.dart';
 import 'package:flutter/material.dart';
 
@@ -21,10 +21,16 @@ class AppColors {
     } else {
       switch (brightness) {
         case Brightness.light:
-          return LightDesktopAppColors();
+          return LightMobileAppColors();
         case Brightness.dark:
-          return DarkDesktopAppColors();
+          return DarkMobileAppColors();
       }
+      // switch (brightness) {
+      //   case Brightness.light:
+      //     return LightDesktopAppColors();
+      //   case Brightness.dark:
+      //     return DarkDesktopAppColors();
+      // }
     }
   }
 }

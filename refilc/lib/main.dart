@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:refilc/api/providers/user_provider.dart';
 import 'package:refilc/api/providers/database_provider.dart';
 import 'package:refilc/database/init.dart';
-import 'package:refilc/helpers/notification_helper.dart';
+// import 'package:refilc/helpers/notification_helper.dart';
 import 'package:refilc/models/settings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +104,7 @@ class Startup {
     user = await database.query.getUsers(settings);
 
     // Set all notification categories to seen to avoid having notifications that the user has already seen in the app
-    NotificationsHelper().setAllCategoriesSeen(user);
+    // NotificationsHelper().setAllCategoriesSeen(user);
 
     late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
     // Notifications setup
@@ -146,30 +146,30 @@ class Startup {
 
     // Platform specific settings
     if (!kIsWeb) {
-      const DarwinInitializationSettings initializationSettingsDarwin =
-          DarwinInitializationSettings(
-        requestSoundPermission: true,
-        requestBadgePermission: true,
-        requestAlertPermission: false,
-      );
-      const AndroidInitializationSettings initializationSettingsAndroid =
-          AndroidInitializationSettings('ic_notification');
-      const LinuxInitializationSettings initializationSettingsLinux =
-          LinuxInitializationSettings(defaultActionName: 'Open notification');
-      const InitializationSettings initializationSettings =
-          InitializationSettings(
-        android: initializationSettingsAndroid,
-        iOS: initializationSettingsDarwin,
-        macOS: initializationSettingsDarwin,
-        linux: initializationSettingsLinux,
-      );
+      // const DarwinInitializationSettings initializationSettingsDarwin =
+      //     DarwinInitializationSettings(
+      //   requestSoundPermission: true,
+      //   requestBadgePermission: true,
+      //   requestAlertPermission: false,
+      // );
+      // const AndroidInitializationSettings initializationSettingsAndroid =
+      //     AndroidInitializationSettings('ic_notification');
+      // const LinuxInitializationSettings initializationSettingsLinux =
+      //     LinuxInitializationSettings(defaultActionName: 'Open notification');
+      // const InitializationSettings initializationSettings =
+      //     InitializationSettings(
+      //   android: initializationSettingsAndroid,
+      //   iOS: initializationSettingsDarwin,
+      //   macOS: initializationSettingsDarwin,
+      //   linux: initializationSettingsLinux,
+      // );
 
       // Initialize notifications
-      await flutterLocalNotificationsPlugin.initialize(
-        initializationSettings,
-        onDidReceiveNotificationResponse:
-            NotificationsHelper().onDidReceiveNotificationResponse,
-      );
+      // await flutterLocalNotificationsPlugin.initialize(
+      //   initializationSettings,
+      //   onDidReceiveNotificationResponse:
+      //       NotificationsHelper().onDidReceiveNotificationResponse,
+      // );
     }
 
     // if (Platform.isAndroid || Platform.isIOS) {
@@ -214,7 +214,7 @@ Widget errorBuilder(FlutterErrorDetails details) {
       }
     });
 
-    return Container();
+    return  Container();
   });
 }
 
@@ -239,7 +239,7 @@ Future<void> initPlatformState() async {
       if (!Platform.isIOS) return;
       LiveActivityHelper().backgroundJob();
     } else {
-      NotificationsHelper().backgroundJob();
+      // NotificationsHelper().backgroundJob();
     }
     BackgroundFetch.finish(taskId);
   }, (String taskId) async {
@@ -279,7 +279,7 @@ void backgroundHeadlessTask(HeadlessTask task) {
     if (!Platform.isIOS) return;
     LiveActivityHelper().backgroundJob();
   } else {
-    NotificationsHelper().backgroundJob();
+    // NotificationsHelper().backgroundJob();
   }
   BackgroundFetch.finish(task.taskId);
 }

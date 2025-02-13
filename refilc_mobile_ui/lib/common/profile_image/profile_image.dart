@@ -91,10 +91,10 @@ class _ProfileImageState extends State<ProfileImage> {
           clipBehavior: Clip.hardEdge,
           shape: const CircleBorder(),
           color: widget.name != null && widget.name! == 'Rendszerüzenet'
-              ? widget.backgroundColor?.withOpacity(0.8) ??
-                  AppColors.of(context).text.withOpacity(0.5)
+              ? widget.backgroundColor?.withValues(alpha: 0.8) ??
+                  AppColors.of(context).text.withValues(alpha: 0.5)
               : widget.backgroundColor ??
-                  AppColors.of(context).text.withOpacity(.15),
+                  AppColors.of(context).text.withValues(alpha: .15),
           child: InkWell(
             onTap: widget.onTap,
             onDoubleTap: widget.onDoubleTap,
@@ -114,7 +114,7 @@ class _ProfileImageState extends State<ProfileImage> {
                                   width: 15,
                                   height: 15,
                                   decoration: BoxDecoration(
-                                    color: color.withOpacity(.5),
+                                    color: color.withValues(alpha: .5),
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                 )
@@ -206,7 +206,7 @@ class _ProfileImageState extends State<ProfileImage> {
                 color: profilePicture != null
                     ? Colors.transparent
                     : widget.backgroundColor ??
-                        AppColors.of(context).text.withOpacity(.15),
+                        AppColors.of(context).text.withValues(alpha: .15),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   height: widget.radius * 2,
