@@ -11,7 +11,7 @@
 
 ### Clone the project
 
-<em>A teljes source eléréséhez szükséged lesz a naplo-plus repo-ra is, mely biztonsági okokból privát. Írj Discord szerverünkön, hogy kaphass hozzáférést.</em>
+<em>A teljes source eléréséhez szükséged lesz a refilc_plus repora is, amit itt találsz: [student-plus](https://git.qwit.cloud/refilc/student-plus)</em>
 
 ```sh
 git clone --branch dev https://github.com/refilc/naplo --recursive
