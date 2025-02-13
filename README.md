@@ -11,11 +11,13 @@
 
 ### Clone the project
 
-<em>A teljes source eléréséhez szükséged lesz a refilc_plus repora is, amit itt találsz: [student-plus](https://git.qwit.cloud/refilc/student-plus)</em>
+<em>Az építhéshez szükséged lesz a refilc_plus repora is, amit itt találsz: [student-plus](https://git.qwit.cloud/refilc/student-plus)</em>
 
 ```sh
 git clone --branch dev https://github.com/refilc/naplo --recursive
 cd naplo
+rm -rf refilc_plus
+git clone https://git.qwit.cloud/refilc/student-plus refilc_plus
 ```
 
 ### Install packages
