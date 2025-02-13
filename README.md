@@ -7,9 +7,9 @@
 
 [![Downloads](https://img.shields.io/github/downloads-pre/refilc/naplo/total?&logo=github&label=Downloads)](https://github.com/refilc/naplo/releases) &nbsp; [![Discord](https://img.shields.io/discord/1111649116020285532?logo=discord&label=Discord)](https://discord.gg/refilc-1111649116020285532)
 
-## Setup
+## Környezet felállítása
 
-### Clone the project
+### Source code letöltése
 
 <em>Az építhéshez szükséged lesz a refilc_plus repora is, amit itt találsz: [student-plus](https://git.qwit.cloud/refilc/student-plus)</em>
 
@@ -20,16 +20,22 @@ rm -rf refilc_plus
 git clone https://git.qwit.cloud/refilc/student-plus.git refilc_plus
 ```
 
-### Install packages
+### Csomagok telepítése
 
-Run `fix-pub.sh`
+Menj be minden mappába és futtasd a következő parancsokat:
+```sh
+flutter clean
+flutter pub get
+```
 
-### Run the app
+### Alkalmazás építése
 
 ```sh
 cd refilc
-flutter run (--release)
+flutter run apk --release
 ```
+
+*Ez egy apk fájlt fog építeni*
 
 ### Contribution
 
