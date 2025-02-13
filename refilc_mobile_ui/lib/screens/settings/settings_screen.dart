@@ -1388,7 +1388,7 @@ class SettingsScreenState extends State<SettingsScreen>
                                   color: AppColors.of(context)
                                       .text
                                       .withOpacity(0.65)),
-                          child: Text("v${release.data!['version']}"),
+                          child: Text("v${release.data!['version']}, módosítva mnus, és a Filc csapat által"),
                         );
                       } else {
                         String envAppVer = const String.fromEnvironment(
