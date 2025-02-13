@@ -39,6 +39,19 @@ def debugKeystoreProperties = new Properties()
 def debugKeystorePropertiesFile = rootProject.file("debugkey.properties")
 debugKeystoreProperties.load(new FileInputStream(debugKeystorePropertiesFile))
 
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty('android')) {
+            project.android {
+                if (!hasProperty('namespace') || namespace == null || namespace.isEmpty()) {
+                    // Assign a default namespace based on the project name or group
+                    namespace = project.group.toString() ?: "com.example.${project.name}"
+                }
+            }
+        }
+    }
+}
+
 android {
     namespace = "hu.refilc.naplo"
 

@@ -41,7 +41,6 @@ class AbsenceGroupTile extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 12.0, vertical: 0),
               tileColor: Colors.transparent,
               duration: const Duration(milliseconds: 250),
-              trailingDuration: 0.5,
               trailing: const Icon(FeatherIcons.chevronDown),
               leading: Container(
                 width: 39.0,
