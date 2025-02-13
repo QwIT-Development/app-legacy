@@ -82,7 +82,7 @@ class SettingsScreen extends StatefulWidget {
 class SettingsScreenState extends State<SettingsScreen>
     with SingleTickerProviderStateMixin {
   int devmodeCountdown = 5;
-  bool __ss = false; // secret settings
+  bool __ss = true; // secret settings
 
   Future<Map>? futureRelease;
 
@@ -949,12 +949,12 @@ class SettingsScreenState extends State<SettingsScreen>
                     padding: EdgeInsets.only(top: 8.0),
                     cardPadding: EdgeInsets.all(4.0),
                     children: [
-                      MenuNotifications(
+                      /*MenuNotifications(
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(12.0),
                           bottom: Radius.circular(12.0),
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
 
@@ -1291,7 +1291,7 @@ class SettingsScreenState extends State<SettingsScreen>
                 ],
               ),
             // developer options
-            if (settings.developerMode)
+            if (true)
               SplittedPanel(
                 title: Text("devsettings".i18n),
                 cardPadding: const EdgeInsets.all(4.0),
@@ -1403,7 +1403,7 @@ class SettingsScreenState extends State<SettingsScreen>
                                   color: AppColors.of(context)
                                       .text
                                       .withOpacity(0.65)),
-                          child: Text("v$envAppVer"),
+                          child: Text("reFilc, módosítva a Filc csapat által"),
                         );
                       }
                     },
