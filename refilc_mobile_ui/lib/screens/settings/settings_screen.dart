@@ -39,6 +39,7 @@ import 'package:refilc_mobile_ui/screens/settings/accounts/account_tile.dart';
 import 'package:refilc_mobile_ui/screens/settings/accounts/account_view.dart';
 // import 'package:refilc_mobile_ui/screens/settings/debug/subject_icon_gallery.dart';
 // import 'package:refilc_mobile_ui/screens/settings/modify_subject_names.dart';
+import 'package:refilc_mobile_ui/screens/settings/notifications_screen.dart';
 import 'package:refilc_mobile_ui/screens/settings/privacy_view.dart';
 import 'package:refilc_mobile_ui/screens/settings/settings_helper.dart';
 import 'package:refilc_mobile_ui/screens/settings/submenu/code_scanner.dart';
@@ -152,7 +153,7 @@ class SettingsScreenState extends State<SettingsScreen>
 
             // check if refresh token is still valid
             String? err = await refresh();
-            if (err != null && err != "success") {
+            if (err != null) {
               showDialog(
                 context: context,
                 builder: (_) => AlertDialog(
@@ -325,7 +326,7 @@ class SettingsScreenState extends State<SettingsScreen>
                     //   onPressed: () =>
                     //       _showBottomSheet(user.getUser(user.id ?? "")),
                     //   icon: Icon(FeatherIcons.moreVertical,
-                    //       color: AppColors.of(context).text.withValues(alpha: 0.8)),
+                    //       color: AppColors.of(context).text.withOpacity(0.8)),
                     // ),
                     // const SizedBox(
                     //   width: 5,
@@ -344,7 +345,7 @@ class SettingsScreenState extends State<SettingsScreen>
                     //   ),
                     //   // _showBottomSheet(user.getUser(user.id ?? "")),
                     //   icon: Icon(FeatherIcons.fileText,
-                    //       color: AppColors.of(context).text.withValues(alpha: 0.8)),
+                    //       color: AppColors.of(context).text.withOpacity(0.8)),
                     // ),
                   ],
                 ),
@@ -357,9 +358,7 @@ class SettingsScreenState extends State<SettingsScreen>
                         Navigator.of(context).pop();
                       },
                       icon: Icon(FeatherIcons.x,
-                          color: AppColors.of(context)
-                              .text
-                              .withValues(alpha: 0.8)),
+                          color: AppColors.of(context).text.withOpacity(0.8)),
                     ),
                     const SizedBox(
                       width: 5.0,
@@ -425,7 +424,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     FeatherIcons.info,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(12.0), bottom: Radius.circular(4.0)),
@@ -444,7 +443,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     FeatherIcons.grid,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(4.0), bottom: Radius.circular(4.0)),
@@ -457,7 +456,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     FeatherIcons.edit3,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(4.0), bottom: Radius.circular(4.0)),
@@ -477,7 +476,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     FeatherIcons.users,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(4.0), bottom: Radius.circular(4.0)),
@@ -544,7 +543,7 @@ class SettingsScreenState extends State<SettingsScreen>
             //               width: 75.0,
             //               decoration: BoxDecoration(
             //                 borderRadius: BorderRadius.circular(12.0),
-            //                 color: AppColors.of(context).text.withValues(alpha: .25),
+            //                 color: AppColors.of(context).text.withOpacity(.25),
             //               ),
             //             ),
             //           ),
@@ -782,18 +781,14 @@ class SettingsScreenState extends State<SettingsScreen>
                       title: Text(
                         "grade_streak".i18n,
                         style: TextStyle(
-                          color: AppColors.of(context)
-                              .text
-                              .withValues(alpha: 0.95),
+                          color: AppColors.of(context).text.withOpacity(0.95),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       subtitle: Text(
                         "grade_streak_subtitle".i18n,
                         style: TextStyle(
-                          color: AppColors.of(context)
-                              .text
-                              .withValues(alpha: 0.75),
+                          color: AppColors.of(context).text.withOpacity(0.75),
                         ),
                       ),
                       leading: Image.asset(
@@ -807,9 +802,7 @@ class SettingsScreenState extends State<SettingsScreen>
                       trailing: Text(
                         "${user.gradeStreak}",
                         style: TextStyle(
-                          color: AppColors.of(context)
-                              .text
-                              .withValues(alpha: 0.95),
+                          color: AppColors.of(context).text.withOpacity(0.95),
                           fontWeight: FontWeight.w500,
                           fontSize: 18.0,
                         ),
@@ -849,7 +842,7 @@ class SettingsScreenState extends State<SettingsScreen>
             //         leading: Icon(
             //           FeatherIcons.link,
             //           size: 22.0,
-            //           color: AppColors.of(context).text.withValues(alpha: 0.95),
+            //           color: AppColors.of(context).text.withOpacity(0.95),
             //         ),
             //         trailing: GestureDetector(
             //           onTap: () {
@@ -876,7 +869,7 @@ class SettingsScreenState extends State<SettingsScreen>
             //           child: Icon(
             //             FeatherIcons.helpCircle,
             //             size: 20.0,
-            //             color: AppColors.of(context).text.withValues(alpha: 0.95),
+            //             color: AppColors.of(context).text.withOpacity(0.95),
             //           ),
             //         ),
             //         borderRadius: const BorderRadius.vertical(
@@ -937,9 +930,7 @@ class SettingsScreenState extends State<SettingsScreen>
                         leading: Icon(
                           FeatherIcons.sun,
                           size: 22.0,
-                          color: AppColors.of(context)
-                              .text
-                              .withValues(alpha: 0.95),
+                          color: AppColors.of(context).text.withOpacity(0.95),
                         ),
                         trailing: Text(
                           themeModeText,
@@ -954,18 +945,18 @@ class SettingsScreenState extends State<SettingsScreen>
                   ),
 
                   // notifications
-                  // const SplittedPanel(
-                  //   padding: EdgeInsets.only(top: 8.0),
-                  //   cardPadding: EdgeInsets.all(4.0),
-                  //   children: [
-                  //     MenuNotifications(
-                  //       borderRadius: BorderRadius.vertical(
-                  //         top: Radius.circular(12.0),
-                  //         bottom: Radius.circular(12.0),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
+                  const SplittedPanel(
+                    padding: EdgeInsets.only(top: 8.0),
+                    cardPadding: EdgeInsets.all(4.0),
+                    children: [
+                      MenuNotifications(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(12.0),
+                          bottom: Radius.circular(12.0),
+                        ),
+                      ),
+                    ],
+                  ),
 
                   // extras
                   const SplittedPanel(
@@ -1032,7 +1023,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     Icons.qr_code,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   title: Text("qr_scanner".i18n),
                   onPressed: () => Navigator.of(context).push(
@@ -1049,7 +1040,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     FeatherIcons.mail,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   title: Text("news".i18n),
                   onPressed: () => _openNews(context),
@@ -1062,7 +1053,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     FeatherIcons.map,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   title: Text("stickermap".i18n),
                   onPressed: () => launchUrl(
@@ -1113,7 +1104,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     FeatherIcons.lock,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   title: Text("privacy".i18n),
                   // onPressed: () => launchUrl(
@@ -1129,7 +1120,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     FeatherIcons.atSign,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   title: const Text("Discord"),
                   onPressed: () => launchUrl(Uri.parse("https://dc.refilc.hu"),
@@ -1143,7 +1134,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     FeatherIcons.globe,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   title: const Text("www.refilc.hu"),
                   onPressed: () => launchUrl(Uri.parse("https://www.refilc.hu"),
@@ -1157,7 +1148,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     FeatherIcons.github,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   title: const Text("Github"),
                   onPressed: () => launchUrl(
@@ -1172,7 +1163,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     FeatherIcons.award,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   title: Text("licenses".i18n),
                   onPressed: () => showLicensePage(context: context),
@@ -1193,7 +1184,7 @@ class SettingsScreenState extends State<SettingsScreen>
                     borderRadius: BorderRadius.circular(12.0),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.2),
+                        color: Colors.black.withOpacity(0.2),
                         blurRadius: 40.0,
                       )
                     ],
@@ -1213,23 +1204,24 @@ class SettingsScreenState extends State<SettingsScreen>
                         FeatherIcons.barChart2,
                         size: 22.0,
                         color: settings.analyticsEnabled
-                            ? AppColors.of(context).text.withValues(alpha: 0.95)
-                            : AppColors.of(context).text.withValues(alpha: .25),
+                            ? AppColors.of(context).text.withOpacity(0.95)
+                            : AppColors.of(context).text.withOpacity(.25),
                       ),
                       title: Text(
                         "Analytics".i18n,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16.0,
-                          color: AppColors.of(context).text.withValues(
-                              alpha: settings.analyticsEnabled ? 1.0 : .5),
+                          color: AppColors.of(context).text.withOpacity(
+                              settings.analyticsEnabled ? 1.0 : .5),
                         ),
                       ),
                       subtitle: Text(
                         "Anonymous Usage Analytics".i18n,
                         style: TextStyle(
-                          color: AppColors.of(context).text.withValues(
-                              alpha: settings.analyticsEnabled ? .5 : .2),
+                          color: AppColors.of(context)
+                              .text
+                              .withOpacity(settings.analyticsEnabled ? .5 : .2),
                         ),
                       ),
                       onChanged: (v) {
@@ -1252,7 +1244,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   leading: Icon(
                     Icons.feedback_outlined,
                     size: 22.0,
-                    color: AppColors.of(context).text.withValues(alpha: 0.95),
+                    color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   title: Text("feedback".i18n),
                   onPressed: () => {
@@ -1328,7 +1320,7 @@ class SettingsScreenState extends State<SettingsScreen>
                     leading: Icon(
                       Icons.tune_outlined,
                       size: 22.0,
-                      color: AppColors.of(context).text.withValues(alpha: .95),
+                      color: AppColors.of(context).text.withOpacity(.95),
                     ),
                     title: Text("exp_settings".i18n),
                     onPressed: () => Clipboard.setData(ClipboardData(
@@ -1346,7 +1338,7 @@ class SettingsScreenState extends State<SettingsScreen>
                     leading: Icon(
                       FeatherIcons.copy,
                       size: 22.0,
-                      color: AppColors.of(context).text.withValues(alpha: .95),
+                      color: AppColors.of(context).text.withOpacity(.95),
                     ),
                     title: Text("copy_jwt".i18n),
                     onPressed: () => Clipboard.setData(ClipboardData(
@@ -1363,8 +1355,7 @@ class SettingsScreenState extends State<SettingsScreen>
                       leading: Icon(
                         FeatherIcons.key,
                         size: 22.0,
-                        color:
-                            AppColors.of(context).text.withValues(alpha: .95),
+                        color: AppColors.of(context).text.withOpacity(.95),
                       ),
                       title: const Text("Remove Premium"),
                       onPressed: () {
@@ -1396,8 +1387,8 @@ class SettingsScreenState extends State<SettingsScreen>
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.of(context)
                                       .text
-                                      .withValues(alpha: 0.65)),
-                          child: Text("v${release.data!['version']}"),
+                                      .withOpacity(0.65)),
+                          child: Text("v${release.data!['version']}, módosítva a Filc csapat által"),
                         );
                       } else {
                         String envAppVer = const String.fromEnvironment(
@@ -1411,7 +1402,7 @@ class SettingsScreenState extends State<SettingsScreen>
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.of(context)
                                       .text
-                                      .withValues(alpha: 0.65)),
+                                      .withOpacity(0.65)),
                           child: Text("v$envAppVer"),
                         );
                       }
