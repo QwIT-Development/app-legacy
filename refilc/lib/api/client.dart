@@ -61,6 +61,8 @@ class FilcAPI {
   static Future<bool> checkConnectivity() async =>
       (await Connectivity().checkConnectivity())[0] != ConnectivityResult.none;
 
+
+  // nem tudom nem vazar-e senkit se, de mar ertelmetlen ez
   static Future<List<School>?> getSchools() async {
     try {
       http.Response res = await http.get(Uri.parse(schoolList));
@@ -70,16 +72,6 @@ class FilcAPI {
             .cast<Map>()
             .map((json) => School.fromJson(json))
             .toList();
-        schools.add(School(
-          city: "Stockholm",
-          instituteCode: "refilc-test-sweden",
-          name: "reFilc Test SE - Leo Ekström High School",
-        ));
-        schools.add(School(
-          city: "Madrid",
-          instituteCode: "refilc-test-spain",
-          name: "reFilc Test ES - Emilio Obrero University",
-        ));
         return schools;
       } else {
         throw "HTTP ${res.statusCode}: ${res.body}";
@@ -397,27 +389,6 @@ class FilcAPI {
 
   // cloud sync
   static Future<Map?> cloudSync(Map<String, String> data, String token) async {
-    try {
-      var client = http.Client();
-
-      http.Response res = await client.post(
-        Uri.parse(cloudSyncApi),
-        body: data,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer $token',
-        },
-      );
-
-      if (res.statusCode != 200) {
-        throw "HTTP ${res.statusCode}: ${res.body}";
-      }
-
-      return jsonDecode(res.body);
-    } on Exception catch (error, stacktrace) {
-      log("ERROR: FilcAPI.cloudSync: $error $stacktrace");
-    }
-
     return null;
   }
 }
