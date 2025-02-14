@@ -23,17 +23,17 @@ class FilcAPI {
   // Public API
   static const schoolList = "https://api.refilcapp.hu/v3/public/school-list";
   static const news = "https://staticrf-api.pages.dev/news/index.json";
-  static const supporters = "0.0.0.0/v3/public/supporters";
+  static const supporters = "0.0.0.0";
 
   // Private API
-  static const ads = "0.0.0.0/v3/private/ads";
+  static const ads = "0.0.0.0";
   static const config = "$baseUrl/v3/private/config";
   static const reportApi = "$baseUrl/v3/private/crash-report";
-  static const rfPlus = "0.0.0.0/v3/rf-plus";
-  static const plusAuthLogin = "0.0.0.0/auth/login";
-  static const plusAuthCallback = "0.0.0.0/auth/callback";
-  static const plusActivation = "0.0.0.0/activate";
-  static const plusScopes = "0.0.0.0/scopes";
+  static const rfPlus = "0.0.0.0";
+  static const plusAuthLogin = "0.0.0.0";
+  static const plusAuthCallback = "0.0.0.0";
+  static const plusActivation = "0.0.0.0";
+  static const plusScopes = "0.0.0.0/";
 
   // Updates
   static const repo = "refilc/naplo";
@@ -42,21 +42,21 @@ class FilcAPI {
   // Share API
   static const themeShare = "https://api.refilcapp.hu/v3/shared/theme/add";
   static const themeGet = "https://api.refilcapp.hu/v3/shared/theme/get";
-  static const allThemes = "https://api.refilcapp.hu/all";
-  static const themeByID = "https://api.refilcapp.hu/";
+  static const allThemes = "$themeGet/all";
+  static const themeByID = "$themeGet/";
 
   static const gradeColorsShare = "https://api.refilcapp.hu/v3/shared/grade-colors/add";
   static const gradeColorsGet = "https://api.refilcapp.hu/v3/shared/grade-colors/get";
-  static const allGradeColors = "https://api.refilcapp.hu/all";
-  static const gradeColorsByID = "https://api.refilcapp.hu/";
+  static const allGradeColors = "gradeColorsGet/all";
+  static const gradeColorsByID = "gradeColorsGet/";
 
   // Payment API
-  static const payment = "0.0.0.0/v4/payment";
-  static const stripeSheet = "0.0.0.0/stripe-sheet";
+  static const payment = "0.0.0.0";
+  static const stripeSheet = "0.0.0.0";
 
   // Cloud Sync
   // cloud sync? for what reason
-  static const cloudSyncApi = "0.0.0.0/v4/me/cloud-sync";
+  static const cloudSyncApi = "0.0.0.0";
 
   static Future<bool> checkConnectivity() async =>
       (await Connectivity().checkConnectivity())[0] != ConnectivityResult.none;
@@ -94,9 +94,7 @@ class FilcAPI {
       "rf-platform-version": settings.analyticsEnabled
           ? Platform.operatingSystemVersion
           : "unknown",
-      "rf-app-version": settings.analyticsEnabled
-          ? const String.fromEnvironment("APPVER", defaultValue: "?")
-          : "unknown",
+      "rf-app-version": const String.fromEnvironment("APPVER", defaultValue: "?"),
       "rf-uinid": settings.xFilcId,
     };
 
