@@ -47,8 +47,8 @@ class FilcAPI {
 
   static const gradeColorsShare = "https://api.refilcapp.hu/v3/shared/grade-colors/add";
   static const gradeColorsGet = "https://api.refilcapp.hu/v3/shared/grade-colors/get";
-  static const allGradeColors = "gradeColorsGet/all";
-  static const gradeColorsByID = "gradeColorsGet/";
+  static const allGradeColors = "$gradeColorsGet/all";
+  static const gradeColorsByID = "$gradeColorsGet/";
 
   // Payment API
   static const payment = "0.0.0.0";
