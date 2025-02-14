@@ -1103,27 +1103,6 @@ class SettingsScreenState extends State<SettingsScreen>
                   children: [
                     PanelButton(
                       leading: Icon(
-                        Icons.qr_code,
-                        size: 22.0,
-                        color: AppColors
-                            .of(context)
-                            .text
-                            .withOpacity(0.95),
-                      ),
-                      title: Text("qr_scanner".i18n),
-                      onPressed: () =>
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const CodeScannerScreen(),
-                            ),
-                          ),
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(12.0),
-                        bottom: Radius.circular(4.0),
-                      ),
-                    ),
-                    PanelButton(
-                      leading: Icon(
                         FeatherIcons.mail,
                         size: 22.0,
                         color: AppColors
