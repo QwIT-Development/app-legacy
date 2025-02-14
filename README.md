@@ -14,8 +14,9 @@
 *Az építhéshez szükséged lesz a refilc_plus repora is, amit itt találsz: [student-plus](https://git.qwit.cloud/refilc/student-plus)*
 
 ```sh
-git clone --branch dev https://git.qwit.cloud/refilc/student-legacy.git
+git clone --branch dev https://git.qwit.cloud/refilc/student-legacy.git --recursive
 cd naplo
+# ha ez nem töltött le refilc plus repoba értelmes dolgokat futtasd a többi parancsot is
 rm -rf refilc_plus
 git clone https://git.qwit.cloud/refilc/student-plus.git refilc_plus
 ```
@@ -32,7 +33,7 @@ flutter pub get
 
 ```sh
 cd refilc
-flutter run apk --release
+flutter build apk --release
 ```
 
 *Ez egy apk fájlt fog építeni*
