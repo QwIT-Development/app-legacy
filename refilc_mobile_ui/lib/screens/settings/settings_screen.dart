@@ -1399,7 +1399,7 @@ class SettingsScreenState extends State<SettingsScreen>
                     ],
                   ),
                 // developer options
-                if (settings.developerMode)
+                if (true)
                   SplittedPanel(
                     title: Text("devsettings".i18n),
                     cardPadding: const EdgeInsets.all(4.0),
