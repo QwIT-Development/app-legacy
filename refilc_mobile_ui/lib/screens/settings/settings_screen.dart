@@ -92,7 +92,7 @@ class SettingsScreen extends StatefulWidget {
 class SettingsScreenState extends State<SettingsScreen>
     with SingleTickerProviderStateMixin {
   int devmodeCountdown = 5;
-  bool __ss = true; // secret settings
+  bool __ss = false; // secret settings
 
   Future<Map>? futureRelease;
 
@@ -335,13 +335,13 @@ class SettingsScreenState extends State<SettingsScreen>
     if (settings.developerMode) devmodeCountdown = -1;
 
     return AnimatedBuilder(
-        animation: _hideContainersController,
-        builder: (context, child) =>
-            Opacity(
-                opacity: 1 - _hideContainersController.value,
-                child: Column(
-                    children: [
-                    const SizedBox(height: 45.0),
+      animation: _hideContainersController,
+      builder: (context, child) =>
+          Opacity(
+            opacity: 1 - _hideContainersController.value,
+            child: Column(
+              children: [
+                const SizedBox(height: 45.0),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -466,13 +466,6 @@ class SettingsScreenState extends State<SettingsScreen>
                       borderRadius: const BorderRadius.vertical(
                           top: Radius.circular(12.0),
                           bottom: Radius.circular(4.0)),
-                    ),
-                    // cloud-sync
-                    const MenuCloudSyncSettings(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(4.0),
-                        bottom: Radius.circular(4.0),
-                      ),
                     ),
                     // open dcs (digital collaboration space)
                     PanelButton(
@@ -665,149 +658,162 @@ class SettingsScreenState extends State<SettingsScreen>
 
                 // updates
                 if (updateProvider.available)
-        Padding(
-    padding: const EdgeInsets.symmetric(
-    vertical: 12.0, horizontal: 24.0),
-    child: Panel(
-    child: PanelButton(
-    onPressed: () => _openUpdates(context),
-    title: Text("update_available".i18n),
-    leading: const Icon(FeatherIcons.download),
-    trailing: Text(
-    updateProvider.releases.first.tag,
-    style: TextStyle(
-    fontWeight: FontWeight.w500,
-    color: Theme.of(context).colorScheme.secondary,
-    ),
-    ),
-    ),
-    ),
-    ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12.0, horizontal: 24.0),
+                    child: Panel(
+                      child: PanelButton(
+                        onPressed: () => _openUpdates(context),
+                        title: Text("update_available".i18n),
+                        leading: const Icon(FeatherIcons.download),
+                        trailing: Text(
+                          updateProvider.releases.first.tag,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Theme
+                                .of(context)
+                                .colorScheme
+                                .secondary,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
 
-    // const Padding(
-    //   padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-    //   child: PremiumBannerButton(),
-    // ),
-    // if (!context.watch<PlusProvider>().hasPremium)
-    //   const ClipRect(
-    //     child: Padding(
-    //       padding: EdgeInsets.symmetric(vertical: 12.0),
-    //       child: PremiumButton(),
-    //     ),
-    //   )
-    // else
-    //   const Padding(
-    //     padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-    //     child: ActiveSponsorCard(),
-    //   ),
+                // const Padding(
+                //   padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                //   child: PremiumBannerButton(),
+                // ),
+                // if (!context.watch<PlusProvider>().hasPremium)
+                //   const ClipRect(
+                //     child: Padding(
+                //       padding: EdgeInsets.symmetric(vertical: 12.0),
+                //       child: PremiumButton(),
+                //     ),
+                //   )
+                // else
+                //   const Padding(
+                //     padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                //     child: ActiveSponsorCard(),
+                //   ),
 
-    // secret settings
-    if (__ss)
-    SplittedPanel(
-    isSeparated: true,
-    isTransparent: true,
-    hasShadow: false,
-    children: [
-    SplittedPanel(
-    title: Text("secret".i18n),
-    cardPadding: const EdgeInsets.all(4.0),
-    padding: EdgeInsets.zero,
-    children: [
-    // good student mode
-    Material(
-    type: MaterialType.transparency,
-    child: SwitchListTile(
-    contentPadding:
-    const EdgeInsets.only(left: 12.0, right: 6.0),
-    shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(12.0)),
-    title: Text("goodstudent".i18n,
-    style:
-    const TextStyle(fontWeight: FontWeight.w500)),
-    onChanged: (v) {
-    if (v) {
-    showDialog(
-    context: context,
-    builder: (context) => WillPopScope(
-    onWillPop: () async => false,
-    child: AlertDialog(
-    shape: RoundedRectangleBorder(
-    borderRadius:
-    BorderRadius.circular(12.0)),
-    title: Text("attention".i18n),
-    content:
-    Text("goodstudent_disclaimer".i18n),
-    actions: [
-    ActionButton(
-    label: "understand".i18n,
-    onTap: () {
-    Navigator.of(context).pop();
-    settings.update(goodStudent: v);
-    Provider.of<GradeProvider>(context,
-    listen: false)
-        .convertBySettings();
-    })
-    ],
-    ),
-    ),
-    );
-    } else {
-    settings.update(goodStudent: v);
-    Provider.of<GradeProvider>(context, listen: false)
-        .convertBySettings();
-    }
-    },
-    value: settings.goodStudent,
-    activeColor: Theme.of(context).colorScheme.secondary,
-    ),
-    ),
-    ],
-    ),
-    SplittedPanel(
-    cardPadding: const EdgeInsets.all(4.0),
-    padding: EdgeInsets.zero,
-    children: [
-    // presentation mode
-    Material(
-    type: MaterialType.transparency,
-    child: SwitchListTile(
-    contentPadding:
-    const EdgeInsets.only(left: 12.0, right: 6.0),
-    shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(12.0)),
-    title: Text("presentation".i18n,
-    style:
-    const TextStyle(fontWeight: FontWeight.w500)),
-    onChanged: (v) =>
-    settings.update(presentationMode: v),
-    value: settings.presentationMode,
-    activeColor: Theme.of(context).colorScheme.secondary,
-    ),
-    ),
+                // secret settings
+                if (__ss)
+                  SplittedPanel(
+                    isSeparated: true,
+                    isTransparent: true,
+                    hasShadow: false,
+                    children: [
+                      SplittedPanel(
+                        title: Text("secret".i18n),
+                        cardPadding: const EdgeInsets.all(4.0),
+                        padding: EdgeInsets.zero,
+                        children: [
+                          // good student mode
+                          Material(
+                            type: MaterialType.transparency,
+                            child: SwitchListTile(
+                              contentPadding:
+                              const EdgeInsets.only(left: 12.0, right: 6.0),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0)),
+                              title: Text("goodstudent".i18n,
+                                  style:
+                                  const TextStyle(fontWeight: FontWeight.w500)),
+                              onChanged: (v) {
+                                if (v) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        WillPopScope(
+                                          onWillPop: () async => false,
+                                          child: AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(12.0)),
+                                            title: Text("attention".i18n),
+                                            content:
+                                            Text("goodstudent_disclaimer".i18n),
+                                            actions: [
+                                              ActionButton(
+                                                  label: "understand".i18n,
+                                                  onTap: () {
+                                                    Navigator.of(context).pop();
+                                                    settings.update(
+                                                        goodStudent: v);
+                                                    Provider.of<GradeProvider>(
+                                                        context,
+                                                        listen: false)
+                                                        .convertBySettings();
+                                                  })
+                                            ],
+                                          ),
+                                        ),
+                                  );
+                                } else {
+                                  settings.update(goodStudent: v);
+                                  Provider.of<GradeProvider>(
+                                      context, listen: false)
+                                      .convertBySettings();
+                                }
+                              },
+                              value: settings.goodStudent,
+                              activeColor: Theme
+                                  .of(context)
+                                  .colorScheme
+                                  .secondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SplittedPanel(
+                        cardPadding: const EdgeInsets.all(4.0),
+                        padding: EdgeInsets.zero,
+                        children: [
+                          // presentation mode
+                          Material(
+                            type: MaterialType.transparency,
+                            child: SwitchListTile(
+                              contentPadding:
+                              const EdgeInsets.only(left: 12.0, right: 6.0),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0)),
+                              title: Text("presentation".i18n,
+                                  style:
+                                  const TextStyle(fontWeight: FontWeight.w500)),
+                              onChanged: (v) =>
+                                  settings.update(presentationMode: v),
+                              value: settings.presentationMode,
+                              activeColor: Theme
+                                  .of(context)
+                                  .colorScheme
+                                  .secondary,
+                            ),
+                          ),
 
-    // UwU-fied mode (why????)
-    // Material(
-    //   type: MaterialType.transparency,
-    //   child: SwitchListTile(
-    //     contentPadding: const EdgeInsets.only(left: 12.0),
-    //     shape: RoundedRectangleBorder(
-    //         borderRadius: BorderRadius.circular(12.0)),
-    //     title: Text("uwufymode".i18n,
-    //         style:
-    //             const TextStyle(fontWeight: FontWeight.w500)),
-    //     onChanged: (v) {
-    //       SettingsHelper.uwuMode(context, v);
-    //       setState(() {});
-    //     },
-    //     value: settings.presentationMode,
-    //     activeColor: Theme.of(context).colorScheme.secondary,
-    //   ),
-    // ),
-    ],
-    ),
-    // uwu mode
-    // since it is not working i removed it
-    /*SplittedPanel(
+                          // UwU-fied mode (why????)
+                          // Material(
+                          //   type: MaterialType.transparency,
+                          //   child: SwitchListTile(
+                          //     contentPadding: const EdgeInsets.only(left: 12.0),
+                          //     shape: RoundedRectangleBorder(
+                          //         borderRadius: BorderRadius.circular(12.0)),
+                          //     title: Text("uwufymode".i18n,
+                          //         style:
+                          //             const TextStyle(fontWeight: FontWeight.w500)),
+                          //     onChanged: (v) {
+                          //       SettingsHelper.uwuMode(context, v);
+                          //       setState(() {});
+                          //     },
+                          //     value: settings.presentationMode,
+                          //     activeColor: Theme.of(context).colorScheme.secondary,
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                      // uwu mode
+                      // since it is not working i removed it
+                      /*SplittedPanel(
                     cardPadding: const EdgeInsets.all(4.0),
                     padding: EdgeInsets.zero,
                     children: [
@@ -829,369 +835,399 @@ class SettingsScreenState extends State<SettingsScreen>
                       ),
                     ],
                   ),*/
-    ],
-    ),
+                    ],
+                  ),
 
-    if ((user.gradeStreak ?? 0) > 1)
-    SplittedPanel(
-    padding: const EdgeInsets.only(
-    bottom: 12.0, left: 24.0, right: 24.0),
-    children: [
-    GestureDetector(
-    onTap: () {
-    SoonAlert.show(context: context);
-    },
-    child: ListTile(
-    title: Text(
-    "grade_streak".i18n,
-    style: TextStyle(
-    color: AppColors.of(context).text.withOpacity(0.95),
-    fontWeight: FontWeight.w500,
-    ),
-    ),
-    subtitle: Text(
-    "grade_streak_subtitle".i18n,
-    style: TextStyle(
-    color: AppColors.of(context).text.withOpacity(0.75),
-    ),
-    ),
-    leading: Image.asset(
-    'assets/images/apple_fire_emoji.png',
-    width: 24.0,
-    ),
-    // leading: const Text(
-    //   "🔥",
-    //   style: TextStyle(fontSize: 22.0),
-    // ),
-    trailing: Text(
-    "${user.gradeStreak}",
-    style: TextStyle(
-    color: AppColors.of(context).text.withOpacity(0.95),
-    fontWeight: FontWeight.w500,
-    fontSize: 18.0,
-    ),
-    ),
-    ),
-    ),
-    ],
-    ),
+                if ((user.gradeStreak ?? 0) > 1)
+                  SplittedPanel(
+                    padding: const EdgeInsets.only(
+                        bottom: 12.0, left: 24.0, right: 24.0),
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          SoonAlert.show(context: context);
+                        },
+                        child: ListTile(
+                          title: Text(
+                            "grade_streak".i18n,
+                            style: TextStyle(
+                              color: AppColors
+                                  .of(context)
+                                  .text
+                                  .withOpacity(0.95),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          subtitle: Text(
+                            "grade_streak_subtitle".i18n,
+                            style: TextStyle(
+                              color: AppColors
+                                  .of(context)
+                                  .text
+                                  .withOpacity(0.75),
+                            ),
+                          ),
+                          leading: Image.asset(
+                            'assets/images/apple_fire_emoji.png',
+                            width: 24.0,
+                          ),
+                          // leading: const Text(
+                          //   "🔥",
+                          //   style: TextStyle(fontSize: 22.0),
+                          // ),
+                          trailing: Text(
+                            "${user.gradeStreak}",
+                            style: TextStyle(
+                              color: AppColors
+                                  .of(context)
+                                  .text
+                                  .withOpacity(0.95),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
 
-    // plus subscribe inline
-    const PlusSettingsInline(),
+                // plus subscribe inline
+                const PlusSettingsInline(),
 
-    // const SizedBox(
-    //   height: 16.0,
-    // ),
+                // const SizedBox(
+                //   height: 16.0,
+                // ),
 
-    // Panel(
-    //   hasShadow: false,
-    //   padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-    //   title: Padding(
-    //     padding: const EdgeInsets.only(left: 24.0),
-    //     child: Text('account_link'.i18n),
-    //   ),
-    //   isTransparent: true,
-    //   child: Column(
-    //     children: [
-    //       // QwID account linking
-    //       PanelButton(
-    //         onPressed: () {
-    //           launchUrl(
-    //             Uri.parse(
-    //                 'https://qwid.qwit.dev/oauth2/authorize?client_id=refilc&response_type=code&scope=*'),
-    //             mode: LaunchMode.externalApplication,
-    //           );
-    //         },
-    //         title: Text("QwID fiók-összekapcsolás".i18n),
-    //         leading: Icon(
-    //           FeatherIcons.link,
-    //           size: 22.0,
-    //           color: AppColors.of(context).text.withOpacity(0.95),
-    //         ),
-    //         trailing: GestureDetector(
-    //           onTap: () {
-    //             showDialog(
-    //               context: context,
-    //               builder: (BuildContext context) {
-    //                 return AlertDialog(
-    //                   title: const Text("QwID?!"),
-    //                   content: const Text(
-    //                     "A QwID egy olyan fiók, mellyel az összes QwIT szolgáltatásba beléphetsz és minden adatod egy helyen kezelheted. \"Miért jó ez nekem?\" A QwID fiókba való bejelentkezéssel rengeteg új funkcióhoz férhetsz hozzá, ami sajnos korábban lehetetlen volt egy szimpla e-KRÉTA fiókkal. Fiókhoz kötve megoszthatsz bármilyen adatot a barátaiddal, vagy ha szeretnéd nyilvánosságra is hozhatod jegyeid, reFilc témáid, és még rengeteg dolgot. A QwID fiók abban is segít, hogy egyszerűbben kezelhesd előfizetéseid, valamint fiókodnak köszönhetően rengeteg ajándékot kaphatsz reFilc+ előfizetésed mellé egyéb QwIT és reFilc szolgáltatásokban. \"Miért QwID?\" A név a reFilc mögött álló fejlesztői csapat, a QwIT nevéből, valamint az angol Identity szó rövidítéséből ered. \"Egyéb hasznos tudnivalók?\" A QwID fiókodat bármikor törölheted, ha úgy érzed, hogy nem szeretnéd tovább használni. Bővebb információt az adatkezelésről és az általános feltételekről megtalálsz a regisztrációs oldalon. Fiókod kezeléséhez látogass el a qwid.qwit.dev weboldalra.",
-    //                   ),
-    //                   actions: [
-    //                     TextButton(
-    //                       onPressed: () {
-    //                         Navigator.of(context).pop();
-    //                       },
-    //                       child: const Text("Szuper!"),
-    //                     ),
-    //                   ],
-    //                 );
-    //               },
-    //             );
-    //           },
-    //           child: Icon(
-    //             FeatherIcons.helpCircle,
-    //             size: 20.0,
-    //             color: AppColors.of(context).text.withOpacity(0.95),
-    //           ),
-    //         ),
-    //         borderRadius: const BorderRadius.vertical(
-    //           top: Radius.circular(12.0),
-    //           bottom: Radius.circular(4.0),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // ),
+                // Panel(
+                //   hasShadow: false,
+                //   padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                //   title: Padding(
+                //     padding: const EdgeInsets.only(left: 24.0),
+                //     child: Text('account_link'.i18n),
+                //   ),
+                //   isTransparent: true,
+                //   child: Column(
+                //     children: [
+                //       // QwID account linking
+                //       PanelButton(
+                //         onPressed: () {
+                //           launchUrl(
+                //             Uri.parse(
+                //                 'https://qwid.qwit.dev/oauth2/authorize?client_id=refilc&response_type=code&scope=*'),
+                //             mode: LaunchMode.externalApplication,
+                //           );
+                //         },
+                //         title: Text("QwID fiók-összekapcsolás".i18n),
+                //         leading: Icon(
+                //           FeatherIcons.link,
+                //           size: 22.0,
+                //           color: AppColors.of(context).text.withOpacity(0.95),
+                //         ),
+                //         trailing: GestureDetector(
+                //           onTap: () {
+                //             showDialog(
+                //               context: context,
+                //               builder: (BuildContext context) {
+                //                 return AlertDialog(
+                //                   title: const Text("QwID?!"),
+                //                   content: const Text(
+                //                     "A QwID egy olyan fiók, mellyel az összes QwIT szolgáltatásba beléphetsz és minden adatod egy helyen kezelheted. \"Miért jó ez nekem?\" A QwID fiókba való bejelentkezéssel rengeteg új funkcióhoz férhetsz hozzá, ami sajnos korábban lehetetlen volt egy szimpla e-KRÉTA fiókkal. Fiókhoz kötve megoszthatsz bármilyen adatot a barátaiddal, vagy ha szeretnéd nyilvánosságra is hozhatod jegyeid, reFilc témáid, és még rengeteg dolgot. A QwID fiók abban is segít, hogy egyszerűbben kezelhesd előfizetéseid, valamint fiókodnak köszönhetően rengeteg ajándékot kaphatsz reFilc+ előfizetésed mellé egyéb QwIT és reFilc szolgáltatásokban. \"Miért QwID?\" A név a reFilc mögött álló fejlesztői csapat, a QwIT nevéből, valamint az angol Identity szó rövidítéséből ered. \"Egyéb hasznos tudnivalók?\" A QwID fiókodat bármikor törölheted, ha úgy érzed, hogy nem szeretnéd tovább használni. Bővebb információt az adatkezelésről és az általános feltételekről megtalálsz a regisztrációs oldalon. Fiókod kezeléséhez látogass el a qwid.qwit.dev weboldalra.",
+                //                   ),
+                //                   actions: [
+                //                     TextButton(
+                //                       onPressed: () {
+                //                         Navigator.of(context).pop();
+                //                       },
+                //                       child: const Text("Szuper!"),
+                //                     ),
+                //                   ],
+                //                 );
+                //               },
+                //             );
+                //           },
+                //           child: Icon(
+                //             FeatherIcons.helpCircle,
+                //             size: 20.0,
+                //             color: AppColors.of(context).text.withOpacity(0.95),
+                //           ),
+                //         ),
+                //         borderRadius: const BorderRadius.vertical(
+                //           top: Radius.circular(12.0),
+                //           bottom: Radius.circular(4.0),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
 
-    // settings submenus
-    const SizedBox(
-    height: 16.0,
-    ),
-    Panel(
-    hasShadow: false,
-    padding:
-    const EdgeInsets.only(bottom: 20.0, left: 24.0, right: 24.0),
-    title: Padding(
-    padding: const EdgeInsets.only(left: 24.0),
-    child: Text('settings'.i18n),
-    ),
-    isTransparent: true,
-    child: Column(
-    children: [
-    // general settings
-    const SplittedPanel(
-    padding: EdgeInsets.zero,
-    cardPadding: EdgeInsets.all(4.0),
-    children: [
-    MenuGeneralSettings(
-    borderRadius: BorderRadius.vertical(
-    top: Radius.circular(12.0),
-    bottom: Radius.circular(12.0),
-    ),
-    ),
-    ],
-    ),
+                // settings submenus
+                const SizedBox(
+                  height: 16.0,
+                ),
+                Panel(
+                  hasShadow: false,
+                  padding:
+                  const EdgeInsets.only(bottom: 20.0, left: 24.0, right: 24.0),
+                  title: Padding(
+                    padding: const EdgeInsets.only(left: 24.0),
+                    child: Text('settings'.i18n),
+                  ),
+                  isTransparent: true,
+                  child: Column(
+                    children: [
+                      // general settings
+                      const SplittedPanel(
+                        padding: EdgeInsets.zero,
+                        cardPadding: EdgeInsets.all(4.0),
+                        children: [
+                          MenuGeneralSettings(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(12.0),
+                              bottom: Radius.circular(12.0),
+                            ),
+                          ),
+                        ],
+                      ),
 
-    // theme settings
-    SplittedPanel(
-    padding: const EdgeInsets.only(top: 8.0),
-    cardPadding: const EdgeInsets.all(4.0),
-    children: [
-    const MenuPersonalizeSettings(
-    borderRadius: BorderRadius.vertical(
-    top: Radius.circular(12.0),
-    bottom: Radius.circular(4.0),
-    ),
-    ),
-    PanelButton(
-    onPressed: () {
-    SettingsHelper.theme(context);
-    setState(() {});
-    },
-    title: Text("theme".i18n),
-    leading: Icon(
-    FeatherIcons.sun,
-    size: 22.0,
-    color: AppColors.of(context).text.withOpacity(0.95),
-    ),
-    trailing: Text(
-    themeModeText,
-    style: const TextStyle(fontSize: 14.0),
-    ),
-    borderRadius: const BorderRadius.vertical(
-    top: Radius.circular(4.0),
-    bottom: Radius.circular(12.0),
-    ),
-    ),
-    ],
-    ),
+                      // theme settings
+                      SplittedPanel(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        cardPadding: const EdgeInsets.all(4.0),
+                        children: [
+                          const MenuPersonalizeSettings(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(12.0),
+                              bottom: Radius.circular(4.0),
+                            ),
+                          ),
+                          PanelButton(
+                            onPressed: () {
+                              SettingsHelper.theme(context);
+                              setState(() {});
+                            },
+                            title: Text("theme".i18n),
+                            leading: Icon(
+                              FeatherIcons.sun,
+                              size: 22.0,
+                              color: AppColors
+                                  .of(context)
+                                  .text
+                                  .withOpacity(0.95),
+                            ),
+                            trailing: Text(
+                              themeModeText,
+                              style: const TextStyle(fontSize: 14.0),
+                            ),
+                            borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(4.0),
+                              bottom: Radius.circular(12.0),
+                            ),
+                          ),
+                        ],
+                      ),
 
-    // notifications
-    const SplittedPanel(
-    padding: EdgeInsets.only(top: 8.0),
-    cardPadding: EdgeInsets.all(4.0),
-    children: [
-    /*MenuNotifications(
+                      // notifications
+                      const SplittedPanel(
+                        padding: EdgeInsets.only(top: 8.0),
+                        cardPadding: EdgeInsets.all(4.0),
+                        children: [
+                          /*MenuNotifications(
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(12.0),
                           bottom: Radius.circular(12.0),
                         ),
                       ),*/
-    ],
-    ),
+                        ],
+                      ),
 
-    // extras
-    const SplittedPanel(
-    padding: EdgeInsets.only(top: 8.0),
-    cardPadding: EdgeInsets.all(4.0),
-    children: [
-    MenuExtrasSettings(
-    borderRadius: BorderRadius.vertical(
-    top: Radius.circular(12.0),
-    bottom: Radius.circular(12.0),
-    ),
-    ),
-    ],
-    ),
-    // const SplittedPanel(
-    //   padding: EdgeInsets.only(top: 8.0),
-    //   cardPadding: EdgeInsets.all(4.0),
-    //   children: [
-    //     MenuOtherSettings(
-    //       borderRadius: BorderRadius.vertical(
-    //         top: Radius.circular(12.0),
-    //         bottom: Radius.circular(12.0),
-    //       ),
-    //     ),
-    //   ],
-    // ),
-    ],
-    ),
-    ),
+                      // extras
+                      const SplittedPanel(
+                        padding: EdgeInsets.only(top: 8.0),
+                        cardPadding: EdgeInsets.all(4.0),
+                        children: [
+                          MenuExtrasSettings(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(12.0),
+                              bottom: Radius.circular(12.0),
+                            ),
+                          ),
+                        ],
+                      ),
+                      // const SplittedPanel(
+                      //   padding: EdgeInsets.only(top: 8.0),
+                      //   cardPadding: EdgeInsets.all(4.0),
+                      //   children: [
+                      //     MenuOtherSettings(
+                      //       borderRadius: BorderRadius.vertical(
+                      //         top: Radius.circular(12.0),
+                      //         bottom: Radius.circular(12.0),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                    ],
+                  ),
+                ),
 
-    // // icon gallery (debug mode)
-    if (kDebugMode)
-    Padding(
-    padding: const EdgeInsets.only(
-    bottom: 16.0, left: 24.0, right: 24.0),
-    child: Panel(
-    title: const Text("Debug"),
-    child: Column(
-    children: [
-    PanelButton(
-    title: const Text("Subject Icon Gallery"),
-    leading:
-    const Icon(CupertinoIcons.rectangle_3_offgrid_fill),
-    trailing: const Icon(Icons.arrow_forward),
-    onPressed: () {
-    Navigator.of(context, rootNavigator: true).push(
-    CupertinoPageRoute(
-    builder: (context) =>
-    const SubjectIconGallery()),
-    );
-    },
-    )
-    ],
-    ),
-    ),
-    ),
+                // // icon gallery (debug mode)
+                if (kDebugMode)
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        bottom: 16.0, left: 24.0, right: 24.0),
+                    child: Panel(
+                      title: const Text("Debug"),
+                      child: Column(
+                        children: [
+                          PanelButton(
+                            title: const Text("Subject Icon Gallery"),
+                            leading:
+                            const Icon(CupertinoIcons.rectangle_3_offgrid_fill),
+                            trailing: const Icon(Icons.arrow_forward),
+                            onPressed: () {
+                              Navigator.of(context, rootNavigator: true).push(
+                                CupertinoPageRoute(
+                                    builder: (context) =>
+                                    const SubjectIconGallery()),
+                              );
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
 
-    // other secion
-    SplittedPanel(
-    title: Text("other".i18n),
-    cardPadding: const EdgeInsets.all(4.0),
-    children: [
-    PanelButton(
-    leading: Icon(
-    Icons.qr_code,
-    size: 22.0,
-    color: AppColors.of(context).text.withOpacity(0.95),
-    ),
-    title: Text("qr_scanner".i18n),
-    onPressed: () => Navigator.of(context).push(
-    MaterialPageRoute(
-    builder: (context) => const CodeScannerScreen(),
-    ),
-    ),
-    borderRadius: const BorderRadius.vertical(
-    top: Radius.circular(12.0),
-    bottom: Radius.circular(4.0),
-    ),
-    ),
-    PanelButton(
-    leading: Icon(
-    FeatherIcons.mail,
-    size: 22.0,
-    color: AppColors.of(context).text.withOpacity(0.95),
-    ),
-    title: Text("news".i18n),
-    onPressed: () => _openNews(context),
-    borderRadius: const BorderRadius.vertical(
-    top: Radius.circular(4.0),
-    bottom: Radius.circular(4.0),
-    ),
-    ),
-    PanelButton(
-    leading: Icon(
-    FeatherIcons.map,
-    size: 22.0,
-    color: AppColors.of(context).text.withOpacity(0.95),
-    ),
-    title: Text("stickermap".i18n),
-    onPressed: () => launchUrl(
-    Uri.parse("https://map.qwit.cloud"),
-    mode: LaunchMode.inAppBrowserView,
-    ),
-    borderRadius: const BorderRadius.vertical(
-    top: Radius.circular(4.0),
-    bottom: Radius.circular(12.0),
-    ),
-    ),
-    ],
-    ),
+                // other secion
+                SplittedPanel(
+                  title: Text("other".i18n),
+                  cardPadding: const EdgeInsets.all(4.0),
+                  children: [
+                    PanelButton(
+                      leading: Icon(
+                        Icons.qr_code,
+                        size: 22.0,
+                        color: AppColors
+                            .of(context)
+                            .text
+                            .withOpacity(0.95),
+                      ),
+                      title: Text("qr_scanner".i18n),
+                      onPressed: () =>
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const CodeScannerScreen(),
+                            ),
+                          ),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(12.0),
+                        bottom: Radius.circular(4.0),
+                      ),
+                    ),
+                    PanelButton(
+                      leading: Icon(
+                        FeatherIcons.mail,
+                        size: 22.0,
+                        color: AppColors
+                            .of(context)
+                            .text
+                            .withOpacity(0.95),
+                      ),
+                      title: Text("news".i18n),
+                      onPressed: () => _openNews(context),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(4.0),
+                        bottom: Radius.circular(4.0),
+                      ),
+                    ),
+                    PanelButton(
+                      leading: Icon(
+                        FeatherIcons.map,
+                        size: 22.0,
+                        color: AppColors
+                            .of(context)
+                            .text
+                            .withOpacity(0.95),
+                      ),
+                      title: Text("stickermap".i18n),
+                      onPressed: () =>
+                          launchUrl(
+                            Uri.parse("https://map.qwit.cloud"),
+                            mode: LaunchMode.inAppBrowserView,
+                          ),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(4.0),
+                        bottom: Radius.circular(12.0),
+                      ),
+                    ),
+                  ],
+                ),
 
-    // // extra settings
-    // Padding(
-    //   padding:
-    //       const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-    //   child: Panel(
-    //     title: Text("extras".i18n),
-    //     child: Column(
-    //       children: [
-    //         PremiumCustomAppIconMenu(
-    //           settings: settings,
-    //         ),
-    //         // PanelButton(
-    //         //   onPressed: () {
-    //         //     SoonAlert.show(context: context);
-    //         //   },
-    //         //   title: Text('app_icon'.i18n),
-    //         //   leading: const Icon(FeatherIcons.edit),
-    //         //   // trailing: Text(
-    //         //   //   'default'.i18n,
-    //         //   //   style: const TextStyle(fontSize: 14.0),
-    //         //   // ),
-    //         // ),
-    //       ],
-    //     ),
-    //   ),
-    // ),
+                // // extra settings
+                // Padding(
+                //   padding:
+                //       const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                //   child: Panel(
+                //     title: Text("extras".i18n),
+                //     child: Column(
+                //       children: [
+                //         PremiumCustomAppIconMenu(
+                //           settings: settings,
+                //         ),
+                //         // PanelButton(
+                //         //   onPressed: () {
+                //         //     SoonAlert.show(context: context);
+                //         //   },
+                //         //   title: Text('app_icon'.i18n),
+                //         //   leading: const Icon(FeatherIcons.edit),
+                //         //   // trailing: Text(
+                //         //   //   'default'.i18n,
+                //         //   //   style: const TextStyle(fontSize: 14.0),
+                //         //   // ),
+                //         // ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
 
-    // about sweetie
-    SplittedPanel(
-    title: Text("about".i18n),
-    cardPadding: const EdgeInsets.all(4.0),
-    children: [
-    PanelButton(
-    leading: Icon(
-    FeatherIcons.lock,
-    size: 22.0,
-    color: AppColors.of(context).text.withOpacity(0.95),
-    ),
-    title: Text("privacy".i18n),
-    onPressed: () => _openPrivacy(context),
-    borderRadius: const BorderRadius.vertical(
-    top: Radius.circular(12.0),
-    bottom: Radius.circular(4.0),
-    ),
-    ),
-    PanelButton(
-    leading: Icon(
-    FeatherIcons.atSign,
-    size: 22.0,
-    color: AppColors.of(context).text.withOpacity(0.95),
-    ),
-    title: const Text("Discord"),
-    onPressed: () => launchUrl(Uri.parse("https://discord.gg/6DvjyPAw2T"),
-    mode: LaunchMode.externalApplication),
-    borderRadius: const BorderRadius.vertical(
-    top: Radius.circular(4.0),
-    bottom: Radius.circular(4.0),
-    ),
-    ),
-    /*PanelButton(
+                // about sweetie
+                SplittedPanel(
+                  title: Text("about".i18n),
+                  cardPadding: const EdgeInsets.all(4.0),
+                  children: [
+                    PanelButton(
+                      leading: Icon(
+                        FeatherIcons.lock,
+                        size: 22.0,
+                        color: AppColors
+                            .of(context)
+                            .text
+                            .withOpacity(0.95),
+                      ),
+                      title: Text("privacy".i18n),
+                      onPressed: () => _openPrivacy(context),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(12.0),
+                        bottom: Radius.circular(4.0),
+                      ),
+                    ),
+                    PanelButton(
+                      leading: Icon(
+                        FeatherIcons.atSign,
+                        size: 22.0,
+                        color: AppColors
+                            .of(context)
+                            .text
+                            .withOpacity(0.95),
+                      ),
+                      title: const Text("Discord"),
+                      onPressed: () =>
+                          launchUrl(Uri.parse("https://discord.gg/6DvjyPAw2T"),
+                              mode: LaunchMode.externalApplication),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(4.0),
+                        bottom: Radius.circular(4.0),
+                      ),
+                    ),
+                    /*PanelButton(
                   leading: Icon(
                     FeatherIcons.globe,
                     size: 22.0,
@@ -1205,280 +1241,341 @@ class SettingsScreenState extends State<SettingsScreen>
                     bottom: Radius.circular(4.0),
                   ),
                 ),*/
-    PanelButton(
-    leading: Icon(
-    FeatherIcons.github,
-    size: 22.0,
-    color: AppColors.of(context).text.withOpacity(0.95),
-    ),
-    title: const Text("Gitea"),
-    onPressed: () => launchUrl(
-    Uri.parse("https://git.qwit.cloud/refilc/student-legacy"),
-    mode: LaunchMode.externalApplication),
-    borderRadius: const BorderRadius.vertical(
-    top: Radius.circular(4.0),
-    bottom: Radius.circular(4.0),
-    ),
-    ),
-    PanelButton(
-    leading: Icon(
-    FeatherIcons.award,
-    size: 22.0,
-    color: AppColors.of(context).text.withOpacity(0.95),
-    ),
-    title: Text("licenses".i18n),
-    onPressed: () => showLicensePage(context: context),
-    borderRadius: const BorderRadius.vertical(
-    top: Radius.circular(4.0),
-    bottom: Radius.circular(4.0),
-    ),
-    ),
-    Tooltip(
-    message: "data_collected".i18n,
-    padding: const EdgeInsets.all(4.0),
-    margin: const EdgeInsets.all(10.0),
-    textStyle: TextStyle(
-    fontWeight: FontWeight.w500,
-    color: AppColors.of(context).text),
-    decoration: BoxDecoration(
-    color: Theme.of(context).colorScheme.surface,
-    borderRadius: BorderRadius.circular(12.0),
-    boxShadow: [
-    BoxShadow(
-    color: Colors.black.withOpacity(0.2),
-    blurRadius: 40.0,
-    )
-    ],
-    ),
-    child: Material(
-    type: MaterialType.transparency,
-    child: SwitchListTile(
-    contentPadding:
-    const EdgeInsets.only(left: 14.0, right: 4.0),
-    shape: const RoundedRectangleBorder(
-    borderRadius: BorderRadius.vertical(
-    top: Radius.circular(4.0),
-    bottom: Radius.circular(4.0),
-    ),
-    ),
-    secondary: Icon(
-    FeatherIcons.barChart2,
-    size: 22.0,
-    color: settings.analyticsEnabled
-    ? AppColors.of(context).text.withOpacity(0.95)
-        : AppColors.of(context).text.withOpacity(.25),
-    ),
-    title: Text(
-    "Analytics".i18n,
-    style: TextStyle(
-    fontWeight: FontWeight.w600,
-    fontSize: 16.0,
-    color: AppColors.of(context).text.withOpacity(
-    settings.analyticsEnabled ? 1.0 : .5),
-    ),
-    ),
-    subtitle: Text(
-    "Anonymous Usage Analytics".i18n,
-    style: TextStyle(
-    color: AppColors.of(context)
-        .text
-        .withOpacity(settings.analyticsEnabled ? .5 : .2),
-    ),
-    ),
-    onChanged: (v) {
-    // String newId;
-    // if (v == false) {
-    //   newId = "none";
-    // } else if (settings.xFilcId == "none") {
-    //   newId = SettingsProvider.defaultSettings().xFilcId;
-    // } else {
-    //   newId = settings.xFilcId;
-    // }
-    settings.update(analyticsEnabled: v);
-    },
-    value: settings.analyticsEnabled,
-    activeColor: Theme.of(context).colorScheme.secondary,
-    ),
-    ),
-    ),
-    PanelButton(
-    leading: Icon(
-    Icons.feedback_outlined,
-    size: 22.0,
-    color: AppColors.of(context).text.withOpacity(0.95),
-    ),
-    title: Text("feedback".i18n),
-    onPressed: () => {
-    Shake.setScreenshotIncluded(false),
-    Shake.show(ShakeScreen.newTicket),
-    Shake.setScreenshotIncluded(true),
-    },
-    borderRadius: const BorderRadius.vertical(
-    top: Radius.circular(4.0),
-    bottom: Radius.circular(12.0),
-    ),
-    ),
-    ],
-    ),
+                    PanelButton(
+                      leading: Icon(
+                        FeatherIcons.github,
+                        size: 22.0,
+                        color: AppColors
+                            .of(context)
+                            .text
+                            .withOpacity(0.95),
+                      ),
+                      title: const Text("Gitea"),
+                      onPressed: () =>
+                          launchUrl(
+                              Uri.parse(
+                                  "https://git.qwit.cloud/refilc/student-legacy"),
+                              mode: LaunchMode.externalApplication),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(4.0),
+                        bottom: Radius.circular(4.0),
+                      ),
+                    ),
+                    PanelButton(
+                      leading: Icon(
+                        FeatherIcons.award,
+                        size: 22.0,
+                        color: AppColors
+                            .of(context)
+                            .text
+                            .withOpacity(0.95),
+                      ),
+                      title: Text("licenses".i18n),
+                      onPressed: () => showLicensePage(context: context),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(4.0),
+                        bottom: Radius.circular(4.0),
+                      ),
+                    ),
+                    Tooltip(
+                      message: "data_collected".i18n,
+                      padding: const EdgeInsets.all(4.0),
+                      margin: const EdgeInsets.all(10.0),
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: AppColors
+                              .of(context)
+                              .text),
+                      decoration: BoxDecoration(
+                        color: Theme
+                            .of(context)
+                            .colorScheme
+                            .surface,
+                        borderRadius: BorderRadius.circular(12.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            blurRadius: 40.0,
+                          )
+                        ],
+                      ),
+                      child: Material(
+                        type: MaterialType.transparency,
+                        child: SwitchListTile(
+                          contentPadding:
+                          const EdgeInsets.only(left: 14.0, right: 4.0),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(4.0),
+                              bottom: Radius.circular(4.0),
+                            ),
+                          ),
+                          secondary: Icon(
+                            FeatherIcons.barChart2,
+                            size: 22.0,
+                            color: settings.analyticsEnabled
+                                ? AppColors
+                                .of(context)
+                                .text
+                                .withOpacity(0.95)
+                                : AppColors
+                                .of(context)
+                                .text
+                                .withOpacity(.25),
+                          ),
+                          title: Text(
+                            "Analytics".i18n,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16.0,
+                              color: AppColors
+                                  .of(context)
+                                  .text
+                                  .withOpacity(
+                                  settings.analyticsEnabled ? 1.0 : .5),
+                            ),
+                          ),
+                          subtitle: Text(
+                            "Anonymous Usage Analytics".i18n,
+                            style: TextStyle(
+                              color: AppColors
+                                  .of(context)
+                                  .text
+                                  .withOpacity(
+                                  settings.analyticsEnabled ? .5 : .2),
+                            ),
+                          ),
+                          onChanged: (v) {
+                            // String newId;
+                            // if (v == false) {
+                            //   newId = "none";
+                            // } else if (settings.xFilcId == "none") {
+                            //   newId = SettingsProvider.defaultSettings().xFilcId;
+                            // } else {
+                            //   newId = settings.xFilcId;
+                            // }
+                            settings.update(analyticsEnabled: v);
+                          },
+                          value: settings.analyticsEnabled,
+                          activeColor: Theme
+                              .of(context)
+                              .colorScheme
+                              .secondary,
+                        ),
+                      ),
+                    ),
+                    PanelButton(
+                      leading: Icon(
+                        Icons.feedback_outlined,
+                        size: 22.0,
+                        color: AppColors
+                            .of(context)
+                            .text
+                            .withOpacity(0.95),
+                      ),
+                      title: Text("feedback".i18n),
+                      onPressed: () =>
+                      {
+                        Shake.setScreenshotIncluded(false),
+                        Shake.show(ShakeScreen.newTicket),
+                        Shake.setScreenshotIncluded(true),
+                      },
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(4.0),
+                        bottom: Radius.circular(12.0),
+                      ),
+                    ),
+                  ],
+                ),
 
-    if (kDebugMode)
-    SplittedPanel(
-    title: const Text("debug_settings"),
-    cardPadding: const EdgeInsets.all(4.0),
-    children: [
-    PanelButton(
-    title: const Text('loginToGoogle'),
-    onPressed: () async {
-    ThirdPartyProvider tpp = Provider.of<ThirdPartyProvider>(
-    context,
-    listen: false);
+                if (kDebugMode)
+                  SplittedPanel(
+                    title: const Text("debug_settings"),
+                    cardPadding: const EdgeInsets.all(4.0),
+                    children: [
+                      PanelButton(
+                        title: const Text('loginToGoogle'),
+                        onPressed: () async {
+                          ThirdPartyProvider tpp = Provider.of<
+                              ThirdPartyProvider>(
+                              context,
+                              listen: false);
 
-    await tpp.googleSignIn();
-    },
-    ),
-    PanelButton(
-    title: const Text('pushTimetableToCalendar'),
-    onPressed: () async {},
-    ),
-    PanelButton(
-    title: const Text('resetNewBadges'),
-    onPressed: () async {
-    Provider.of<SettingsProvider>(context, listen: false)
-        .update(
-    unseenNewFeatures: ['grade_exporting'],
-    );
-    },
-    ),
-    ],
-    ),
-    // developer options
-    if (true)
-    SplittedPanel(
-    title: Text("devsettings".i18n),
-    cardPadding: const EdgeInsets.all(4.0),
-    children: [
-    Material(
-    type: MaterialType.transparency,
-    child: SwitchListTile(
-    contentPadding:
-    const EdgeInsets.only(left: 12.0, right: 4.0),
-    shape: const RoundedRectangleBorder(
-    borderRadius: BorderRadius.vertical(
-    top: Radius.circular(12.0),
-    bottom: Radius.circular(4.0))),
-    title: Text("devmode".i18n,
-    style: const TextStyle(fontWeight: FontWeight.w500)),
-    onChanged: (v) => settings.update(developerMode: false),
-    value: settings.developerMode,
-    activeColor: Theme.of(context).colorScheme.secondary,
-    ),
-    ),
-    PanelButton(
-    borderRadius: const BorderRadius.vertical(
-    top: Radius.circular(4.0),
-    bottom: Radius.circular(4.0),
-    ),
-    leading: Icon(
-    Icons.tune_outlined,
-    size: 22.0,
-    color: AppColors.of(context).text.withOpacity(.95),
-    ),
-    title: Text("exp_settings".i18n),
-    onPressed: () => Clipboard.setData(ClipboardData(
-    text: json.encode(settings.toMap()),
-    )),
-    ),
-    PanelButton(
-    borderRadius: BorderRadius.vertical(
-    top: const Radius.circular(4.0),
-    bottom: Provider.of<PlusProvider>(context, listen: false)
-        .hasPremium
-    ? const Radius.circular(4.0)
-        : const Radius.circular(12.0),
-    ),
-    leading: Icon(
-    FeatherIcons.copy,
-    size: 22.0,
-    color: AppColors.of(context).text.withOpacity(.95),
-    ),
-    title: Text("copy_jwt".i18n),
-    onPressed: () => Clipboard.setData(ClipboardData(
-    text: Provider.of<KretaClient>(context, listen: false)
-        .accessToken!)),
-    ),
-    if (Provider.of<PlusProvider>(context, listen: false)
-        .hasPremium)
-    PanelButton(
-    borderRadius: const BorderRadius.vertical(
-    top: Radius.circular(4.0),
-    bottom: Radius.circular(12.0),
-    ),
-    leading: Icon(
-    FeatherIcons.key,
-    size: 22.0,
-    color: AppColors.of(context).text.withOpacity(.95),
-    ),
-    title: const Text("Remove Premium"),
-    onPressed: () {
-    Provider.of<PlusProvider>(context, listen: false)
-        .activate(removePremium: true);
-    settings.update(
-    accentColor: AccentColor.filc, store: true);
-    Provider.of<ThemeModeObserver>(context, listen: false)
-        .changeTheme(settings.theme);
-    },
-    ),
-    ],
-    ),
+                          await tpp.googleSignIn();
+                        },
+                      ),
+                      PanelButton(
+                        title: const Text('pushTimetableToCalendar'),
+                        onPressed: () async {},
+                      ),
+                      PanelButton(
+                        title: const Text('resetNewBadges'),
+                        onPressed: () async {
+                          Provider.of<SettingsProvider>(context, listen: false)
+                              .update(
+                            unseenNewFeatures: ['grade_exporting'],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                // developer options
+                if (settings.developerMode)
+                  SplittedPanel(
+                    title: Text("devsettings".i18n),
+                    cardPadding: const EdgeInsets.all(4.0),
+                    children: [
+                      Material(
+                        type: MaterialType.transparency,
+                        child: SwitchListTile(
+                          contentPadding:
+                          const EdgeInsets.only(left: 12.0, right: 4.0),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(12.0),
+                                  bottom: Radius.circular(4.0))),
+                          title: Text("devmode".i18n,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w500)),
+                          onChanged: (v) =>
+                              settings.update(developerMode: false),
+                          value: settings.developerMode,
+                          activeColor: Theme
+                              .of(context)
+                              .colorScheme
+                              .secondary,
+                        ),
+                      ),
+                      PanelButton(
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(4.0),
+                          bottom: Radius.circular(4.0),
+                        ),
+                        leading: Icon(
+                          Icons.tune_outlined,
+                          size: 22.0,
+                          color: AppColors
+                              .of(context)
+                              .text
+                              .withOpacity(.95),
+                        ),
+                        title: Text("exp_settings".i18n),
+                        onPressed: () =>
+                            Clipboard.setData(ClipboardData(
+                              text: json.encode(settings.toMap()),
+                            )),
+                      ),
+                      PanelButton(
+                        borderRadius: BorderRadius.vertical(
+                          top: const Radius.circular(4.0),
+                          bottom: Provider
+                              .of<PlusProvider>(context, listen: false)
+                              .hasPremium
+                              ? const Radius.circular(4.0)
+                              : const Radius.circular(12.0),
+                        ),
+                        leading: Icon(
+                          FeatherIcons.copy,
+                          size: 22.0,
+                          color: AppColors
+                              .of(context)
+                              .text
+                              .withOpacity(.95),
+                        ),
+                        title: Text("copy_jwt".i18n),
+                        onPressed: () =>
+                            Clipboard.setData(ClipboardData(
+                                text: Provider
+                                    .of<KretaClient>(context, listen: false)
+                                    .accessToken!)),
+                      ),
+                      if (Provider
+                          .of<PlusProvider>(context, listen: false)
+                          .hasPremium)
+                        PanelButton(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(4.0),
+                            bottom: Radius.circular(12.0),
+                          ),
+                          leading: Icon(
+                            FeatherIcons.key,
+                            size: 22.0,
+                            color: AppColors
+                                .of(context)
+                                .text
+                                .withOpacity(.95),
+                          ),
+                          title: const Text("Remove Premium"),
+                          onPressed: () {
+                            Provider.of<PlusProvider>(context, listen: false)
+                                .activate(removePremium: true);
+                            settings.update(
+                                accentColor: AccentColor.filc, store: true);
+                            Provider.of<ThemeModeObserver>(
+                                context, listen: false)
+                                .changeTheme(settings.theme);
+                          },
+                        ),
+                    ],
+                  ),
 
-    // version info
-    SafeArea(
-    top: false,
-    child: Center(
-    child: GestureDetector(
-    child: FutureBuilder<Map>(
-    future: futureRelease,
-    builder: (context, release) {
-    String versionText;
-    if (release.hasData && release.data != null) {
-    versionText = "v${release.data!['version']}, modosítva a Filc csapat által";
-    } else {
-    versionText = "reFilc, modosítva a Filc csapat által";
-    }
-    return DefaultTextStyle(
-    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-    fontWeight: FontWeight.w600,
-    color: AppColors.of(context).text.withOpacity(0.65)),
-    child: Text(versionText),
-    );
-    },
-    ),
-    onTap: () {
-    if (devmodeCountdown > 0) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    duration: const Duration(milliseconds: 200),
-    content:
-    Text("devmoretaps".i18n.fill([devmodeCountdown])),
-    ));
+                // version info
+                SafeArea(
+                  top: false,
+                  child: Center(
+                    child: GestureDetector(
+                      child: FutureBuilder<Map>(
+                        future: futureRelease,
+                        builder: (context, release) {
+                          String versionText;
+                          if (release.hasData && release.data != null) {
+                            versionText = "v${release
+                                .data!['version']}, modosítva a Filc csapat által";
+                          } else {
+                            versionText =
+                            "reFilc, modosítva a Filc csapat által";
+                          }
+                          return DefaultTextStyle(
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: AppColors
+                                    .of(context)
+                                    .text
+                                    .withOpacity(0.65)),
+                            child: Text(versionText),
+                          );
+                        },
+                      ),
+                      onTap: () {
+                        if (devmodeCountdown > 0) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            duration: const Duration(milliseconds: 200),
+                            content:
+                            Text("devmoretaps".i18n.fill([devmodeCountdown])),
+                          ));
 
-    setState(() => devmodeCountdown--);
-    } else if (devmodeCountdown == 0) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: Text("devactivated".i18n),
-    ));
+                          setState(() => devmodeCountdown--);
+                        } else if (devmodeCountdown == 0) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("devactivated".i18n),
+                          ));
 
-    settings.update(developerMode: true);
+                          settings.update(developerMode: true);
 
-    setState(() => devmodeCountdown--);
-    }
-    },
-    ),
-    ),
-    ),
-    ],
-    ),
-    )
-    ,
+                          setState(() => devmodeCountdown--);
+                        }
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+      ,
     );
   }
 
