@@ -743,7 +743,8 @@ class SettingsScreenState extends State<SettingsScreen>
                     ],
                   ),
                   // uwu mode
-                  SplittedPanel(
+                  // since it is not working i removed it
+                  /*SplittedPanel(
                     cardPadding: const EdgeInsets.all(4.0),
                     padding: EdgeInsets.zero,
                     children: [
@@ -764,7 +765,7 @@ class SettingsScreenState extends State<SettingsScreen>
                         ),
                       ),
                     ],
-                  ),
+                  ),*/
                 ],
               ),
 
@@ -1107,9 +1108,6 @@ class SettingsScreenState extends State<SettingsScreen>
                     color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   title: Text("privacy".i18n),
-                  // onPressed: () => launchUrl(
-                  //     Uri.parse("https://refilc.hu/privacy-policy"),
-                  //     mode: LaunchMode.inAppWebView),
                   onPressed: () => _openPrivacy(context),
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(12.0),
@@ -1123,14 +1121,14 @@ class SettingsScreenState extends State<SettingsScreen>
                     color: AppColors.of(context).text.withOpacity(0.95),
                   ),
                   title: const Text("Discord"),
-                  onPressed: () => launchUrl(Uri.parse("https://dc.refilc.hu"),
+                  onPressed: () => launchUrl(Uri.parse("https://discord.gg/6DvjyPAw2T"),
                       mode: LaunchMode.externalApplication),
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(4.0),
                     bottom: Radius.circular(4.0),
                   ),
                 ),
-                PanelButton(
+                /*PanelButton(
                   leading: Icon(
                     FeatherIcons.globe,
                     size: 22.0,
@@ -1143,16 +1141,16 @@ class SettingsScreenState extends State<SettingsScreen>
                     top: Radius.circular(4.0),
                     bottom: Radius.circular(4.0),
                   ),
-                ),
+                ),*/
                 PanelButton(
                   leading: Icon(
                     FeatherIcons.github,
                     size: 22.0,
                     color: AppColors.of(context).text.withOpacity(0.95),
                   ),
-                  title: const Text("Github"),
+                  title: const Text("Gitea"),
                   onPressed: () => launchUrl(
-                      Uri.parse("https://github.com/refilc"),
+                      Uri.parse("https://git.qwit.cloud/refilc/student-legacy"),
                       mode: LaunchMode.externalApplication),
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(4.0),
