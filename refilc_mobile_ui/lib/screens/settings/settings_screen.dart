@@ -1057,7 +1057,7 @@ class SettingsScreenState extends State<SettingsScreen>
                   ),
                   title: Text("stickermap".i18n),
                   onPressed: () => launchUrl(
-                    Uri.parse("https://stickermap.refilc.hu"),
+                    Uri.parse("https://map.qwit.cloud"),
                     mode: LaunchMode.inAppBrowserView,
                   ),
                   borderRadius: const BorderRadius.vertical(
