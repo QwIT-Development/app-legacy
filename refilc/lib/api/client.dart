@@ -127,7 +127,7 @@ class FilcAPI {
       http.Response res = await http.get(Uri.parse(news));
 
       if (res.statusCode == 200) {
-        String utf8Body = utf9.decode(res.bodyBytes);
+        String utf8Body = utf8.decode(res.bodyBytes);
         return (jsonDecode(utf8Body) as List)
             .cast<Map>()
             .map((e) => News.fromJson(e))
