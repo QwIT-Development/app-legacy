@@ -21,46 +21,48 @@ class FilcAPI {
   static const baseUrl = "https://api.refilcapp.hu";
 
   // Public API
-  static const schoolList = "$baseUrl/v3/public/school-list";
-  static const news = "0.0.0.0/v4/public/news";
-  static const supporters = "$baseUrl/v3/public/supporters";
+  static const schoolList = "https://api.refilcapp.hu/v3/public/school-list";
+  static const news = "https://staticrf-api.pages.dev/news/index.json";
+  static const supporters = "0.0.0.0";
 
   // Private API
-  static const ads = "0.0.0.0/v3/private/ads";
+  static const ads = "0.0.0.0";
   static const config = "$baseUrl/v3/private/config";
   static const reportApi = "$baseUrl/v3/private/crash-report";
-  static const rfPlus = "0.0.0.0/v3/rf-plus";
-  static const plusAuthLogin = "0.0.0.0/auth/login";
-  static const plusAuthCallback = "0.0.0.0/auth/callback";
-  static const plusActivation = "0.0.0.0/activate";
-  static const plusScopes = "0.0.0.0/scopes";
+  static const rfPlus = "0.0.0.0";
+  static const plusAuthLogin = "0.0.0.0";
+  static const plusAuthCallback = "0.0.0.0";
+  static const plusActivation = "0.0.0.0";
+  static const plusScopes = "0.0.0.0/";
 
   // Updates
   static const repo = "refilc/naplo";
   static const releases = "https://api.github.com/repos/$repo/releases";
 
   // Share API
-  static const themeShare = "$baseUrl/v3/shared/theme/add";
-  static const themeGet = "$baseUrl/v3/shared/theme/get";
+  static const themeShare = "https://api.refilcapp.hu/v3/shared/theme/add";
+  static const themeGet = "https://api.refilcapp.hu/v3/shared/theme/get";
   static const allThemes = "$themeGet/all";
   static const themeByID = "$themeGet/";
 
-  static const gradeColorsShare = "$baseUrl/v3/shared/grade-colors/add";
-  static const gradeColorsGet = "$baseUrl/v3/shared/grade-colors/get";
+  static const gradeColorsShare = "https://api.refilcapp.hu/v3/shared/grade-colors/add";
+  static const gradeColorsGet = "https://api.refilcapp.hu/v3/shared/grade-colors/get";
   static const allGradeColors = "$gradeColorsGet/all";
   static const gradeColorsByID = "$gradeColorsGet/";
 
   // Payment API
-  static const payment = "0.0.0.0/v4/payment";
-  static const stripeSheet = "0.0.0.0/stripe-sheet";
+  static const payment = "0.0.0.0";
+  static const stripeSheet = "0.0.0.0";
 
   // Cloud Sync
   // cloud sync? for what reason
-  static const cloudSyncApi = "0.0.0.0/v4/me/cloud-sync";
+  static const cloudSyncApi = "0.0.0.0";
 
   static Future<bool> checkConnectivity() async =>
       (await Connectivity().checkConnectivity())[0] != ConnectivityResult.none;
 
+
+  // nem tudom nem vazar-e senkit se, de mar ertelmetlen ez
   static Future<List<School>?> getSchools() async {
     try {
       http.Response res = await http.get(Uri.parse(schoolList));
@@ -70,16 +72,6 @@ class FilcAPI {
             .cast<Map>()
             .map((json) => School.fromJson(json))
             .toList();
-        schools.add(School(
-          city: "Stockholm",
-          instituteCode: "refilc-test-sweden",
-          name: "reFilc Test SE - Leo Ekström High School",
-        ));
-        schools.add(School(
-          city: "Madrid",
-          instituteCode: "refilc-test-spain",
-          name: "reFilc Test ES - Emilio Obrero University",
-        ));
         return schools;
       } else {
         throw "HTTP ${res.statusCode}: ${res.body}";
@@ -102,9 +94,7 @@ class FilcAPI {
       "rf-platform-version": settings.analyticsEnabled
           ? Platform.operatingSystemVersion
           : "unknown",
-      "rf-app-version": settings.analyticsEnabled
-          ? const String.fromEnvironment("APPVER", defaultValue: "?")
-          : "unknown",
+      "rf-app-version": const String.fromEnvironment("APPVER", defaultValue: "?"),
       "rf-uinid": settings.xFilcId,
     };
 
@@ -135,7 +125,8 @@ class FilcAPI {
       http.Response res = await http.get(Uri.parse(news));
 
       if (res.statusCode == 200) {
-        return (jsonDecode(res.body) as List)
+        String utf8Body = utf8.decode(res.bodyBytes);
+        return (jsonDecode(utf8Body) as List)
             .cast<Map>()
             .map((e) => News.fromJson(e))
             .toList();
@@ -397,27 +388,6 @@ class FilcAPI {
 
   // cloud sync
   static Future<Map?> cloudSync(Map<String, String> data, String token) async {
-    try {
-      var client = http.Client();
-
-      http.Response res = await client.post(
-        Uri.parse(cloudSyncApi),
-        body: data,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer $token',
-        },
-      );
-
-      if (res.statusCode != 200) {
-        throw "HTTP ${res.statusCode}: ${res.body}";
-      }
-
-      return jsonDecode(res.body);
-    } on Exception catch (error, stacktrace) {
-      log("ERROR: FilcAPI.cloudSync: $error $stacktrace");
-    }
-
     return null;
   }
 }

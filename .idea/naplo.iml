@@ -60,8 +60,21 @@
       <excludeFolder url="file://$MODULE_DIR$/filcnaplo/linux/flutter/ephemeral/.plugin_symlinks/flutter_acrylic/build" />
       <excludeFolder url="file://$MODULE_DIR$/filcnaplo/linux/flutter/ephemeral/.plugin_symlinks/flutter_acrylic/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/filcnaplo/linux/flutter/ephemeral/.plugin_symlinks/flutter_acrylic/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/refilc/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/refilc/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/refilc/build" />
+      <excludeFolder url="file://$MODULE_DIR$/refilc_kreta_api/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/refilc_kreta_api/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/refilc_kreta_api/build" />
+      <excludeFolder url="file://$MODULE_DIR$/refilc_mobile_ui/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/refilc_mobile_ui/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/refilc_mobile_ui/build" />
+      <excludeFolder url="file://$MODULE_DIR$/refilc_plus/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/refilc_plus/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/refilc_plus/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Dart SDK" level="project" />
   </component>
 </module>
