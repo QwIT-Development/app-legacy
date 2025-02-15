@@ -15,7 +15,7 @@ class MenuGeneralSettings extends StatelessWidget {
   const MenuGeneralSettings({
     super.key,
     this.borderRadius = const BorderRadius.vertical(
-        top: Radius.circular(4.0), bottom: Radius.circular(4.0)),
+        top: Radius.circular(12.0), bottom: Radius.circular(4.0)),
   });
 
   final BorderRadius borderRadius;

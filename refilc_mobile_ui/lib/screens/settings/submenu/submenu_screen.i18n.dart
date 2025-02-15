@@ -34,6 +34,11 @@ extension SettingsLocalization on String {
           "theme_share_ratelimit": "You can only share 1 theme per minute.",
           // cloud sync
           "cloud_sync": "Cloud Sync",
+          "secret": "Secret Settings",
+          "goodstudent": "Good student mode",
+          "presentation": "Presentation Mode",
+          "goodstudent_disclaimer":
+          "reFilc can not be held liable for the usage of this feature.\n\n(if your mother beats you up because you showed her fake grades, you can only blame yourself for it)",
         },
         "hu_hu": {
           "general": "Általános",
@@ -66,6 +71,11 @@ extension SettingsLocalization on String {
           "theme_share_ratelimit": "Csak 1 témát oszthatsz meg percenként.",
           // cloud sync
           "cloud_sync": "Felhő szinkronizálás",
+          "secret": "Titkos Beállítások",
+          "goodstudent": "Jó tanuló mód",
+          "presentation": "Bemutató mód",
+          "goodstudent_disclaimer":
+          "A reFilc minden felelősséget elhárít a funkció használatával kapcsolatban.\n\n(Értsd: ha az anyád megver, mert megtévesztő ábrákat mutattál neki, azért csakis magadat hibáztathatod.)",
         },
         "de_de": {
           "general": "Allgemeine",
@@ -99,6 +109,11 @@ extension SettingsLocalization on String {
           "theme_share_ratelimit": "Sie können nur 1 Thema pro Minute teilen.",
           // cloud sync
           "cloud_sync": "Cloud-Synchronisierung",
+          "secret": "Geheime Einstellungen",
+          "presentation": "Präsentationsmodus",
+          "goodstudent": "Guter Student Modus",
+          "goodstudent_disclaimer":
+          "reFilc kann nicht für die Nutzung dieser Funktion haftbar gemacht werden.\n\n(Wenn deine Mutter dich verprügelt, weil du ihr falsche Noten gezeigt hast, kannst du dir nur die Schuld dafür geben)",
         },
       };
 

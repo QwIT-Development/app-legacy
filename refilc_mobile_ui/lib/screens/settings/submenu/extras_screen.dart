@@ -16,6 +16,10 @@ import 'package:refilc_plus/models/premium_scopes.dart';
 import 'package:refilc_plus/providers/plus_provider.dart';
 import 'package:refilc_plus/ui/mobile/plus/upsell.dart';
 import 'package:refilc_plus/ui/mobile/settings/welcome_message.dart';
+
+import 'package:refilc_kreta_api/providers/grade_provider.dart';
+import 'package:refilc_mobile_ui/common/action_button.dart';
+
 // import 'package:provider/provider.dart';
 import 'submenu_screen.i18n.dart';
 
@@ -23,7 +27,7 @@ class MenuExtrasSettings extends StatelessWidget {
   const MenuExtrasSettings({
     super.key,
     this.borderRadius = const BorderRadius.vertical(
-        top: Radius.circular(4.0), bottom: Radius.circular(4.0)),
+        top: Radius.circular(4.0), bottom: Radius.circular(12.0)),
   });
 
   final BorderRadius borderRadius;
@@ -178,6 +182,146 @@ class ExtrasSettingsScreenState extends State<ExtrasSettingsScreen> {
                 children: [
                   MenuGradeExporting(
                     borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ],
+              ),
+              SplittedPanel(
+                padding: const EdgeInsets.only(top: 9.0),
+                cardPadding: const EdgeInsets.all(4.0),
+                isSeparated: true,
+                children: [
+                  PanelButton(
+                    padding: const EdgeInsets.only(left: 14.0, right: 6.0),
+                    onPressed: () async {
+                      if (!settingsProvider.goodStudent) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => WillPopScope(
+                            onWillPop: () async => false,
+                            child: AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0)),
+                              title: Text("attention".i18n),
+                              content: Text("goodstudent_disclaimer".i18n),
+                              actions: [
+                                ActionButton(
+                                    label: "understand".i18n,
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                      settingsProvider.update(
+                                          goodStudent: true);
+                                      Provider.of<GradeProvider>(context,
+                                              listen: false)
+                                          .convertBySettings();
+                                      setState(() {});
+                                    })
+                              ],
+                            ),
+                          ),
+                        );
+                      } else {
+                        settingsProvider.update(goodStudent: false);
+                        Provider.of<GradeProvider>(context, listen: false)
+                            .convertBySettings();
+                        setState(() {});
+                      }
+                    },
+                    title: Text(
+                      "goodstudent".i18n,
+                      style: TextStyle(
+                        color: AppColors.of(context).text.withValues(
+                            alpha: settingsProvider.goodStudent ? .95 : .25),
+                      ),
+                    ),
+                    leading: Icon(
+                      FeatherIcons.userCheck,
+                      size: 22.0,
+                      color: AppColors.of(context).text.withValues(
+                          alpha: settingsProvider.goodStudent ? .95 : .25),
+                    ),
+                    trailing: Switch(
+                      onChanged: (v) async {
+                        if (v) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => WillPopScope(
+                              onWillPop: () async => false,
+                              child: AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.0)),
+                                title: Text("attention".i18n),
+                                content: Text("goodstudent_disclaimer".i18n),
+                                actions: [
+                                  ActionButton(
+                                      label: "understand".i18n,
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                        settingsProvider.update(
+                                            goodStudent: true);
+                                        Provider.of<GradeProvider>(context,
+                                                listen: false)
+                                            .convertBySettings();
+                                        setState(() {});
+                                      })
+                                ],
+                              ),
+                            ),
+                          );
+                        } else {
+                          settingsProvider.update(goodStudent: false);
+                          Provider.of<GradeProvider>(context, listen: false)
+                              .convertBySettings();
+                          setState(() {});
+                        }
+                      },
+                      value: settingsProvider.goodStudent,
+                      activeColor: Theme.of(context).colorScheme.secondary,
+                    ),
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(12.0),
+                      bottom: Radius.circular(12.0),
+                    ),
+                  ),
+                ],
+              ),
+              SplittedPanel(
+                padding: const EdgeInsets.only(top: 9.0),
+                cardPadding: const EdgeInsets.all(4.0),
+                isSeparated: true,
+                children: [
+                  PanelButton(
+                    padding: const EdgeInsets.only(left: 14.0, right: 6.0),
+                    onPressed: () async {
+                      settingsProvider.update(
+                          presentationMode: !settingsProvider.presentationMode);
+                      setState(() {});
+                    },
+                    title: Text(
+                      "presentation".i18n,
+                      style: TextStyle(
+                        color: AppColors.of(context).text.withValues(
+                            alpha:
+                                settingsProvider.presentationMode ? .95 : .25),
+                      ),
+                    ),
+                    leading: Icon(
+                      FeatherIcons.tv,
+                      size: 22.0,
+                      color: AppColors.of(context).text.withValues(
+                          alpha: settingsProvider.presentationMode ? .95 : .25),
+                    ),
+                    trailing: Switch(
+                      onChanged: (v) async {
+                        settingsProvider.update(presentationMode: v);
+                        setState(() {});
+                      },
+                      value: settingsProvider.presentationMode,
+                      activeColor: Theme.of(context).colorScheme.secondary,
+                    ),
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(12.0),
+                      bottom: Radius.circular(12.0),
+                    ),
                   ),
                 ],
               ),
