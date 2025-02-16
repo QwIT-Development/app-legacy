@@ -122,6 +122,11 @@ android {
             signingConfig signingConfigs.release
             shrinkResources true
             minifyEnabled true
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            pseudoLocalesEnabled false
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

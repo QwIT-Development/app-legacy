@@ -45,7 +45,6 @@ dependencies:
   crypto: ^3.0.2
   elegant_notification: ^2.2.0
   flutter_feather_icons: ^2.0.0+1
-  # live_activities: ^1.7.4
   animated_flip_counter: ^0.3.4
   lottie: ^3.1.0
   rive: ^0.12.4
@@ -79,6 +78,7 @@ dev_dependencies:
   flutter_launcher_icons: ^0.14.2
   flutter_native_splash: "^2.3.10"
   sqflite_common_ffi: ^2.0.0+3
+  dependency_validator: ^5.0.2
 
 dependency_overrides:
   webview_flutter_wkwebview: 3.17.0

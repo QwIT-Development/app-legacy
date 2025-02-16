@@ -1,3 +1,3 @@
 #!/bin/sh
 
-flutter build apk --release --dart-define=APPVER=$(cat pubspec.yaml | grep version: | cut -d' ' -f2 | cut -d+ -f1) --no-tree-shake-icons
+flutter build apk --release --tree-shake-icons --split-debug-info=debug-info --split-per-abi --target-platform android-arm,android-arm64 --obfuscate
