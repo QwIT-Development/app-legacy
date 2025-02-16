@@ -219,8 +219,7 @@ class NotesScreenState extends State<NotesScreen> {
                 if (!Provider.of<PlusProvider>(context, listen: false)
                         .hasScope(PremiumScopes.unlimitedSelfNotes) &&
                     noteTiles.length > 10) {
-                  return PlusLockedFeaturePopup.show(
-                      context: context, feature: PremiumFeature.selfNotes);
+                  return;
                 }
 
                 Navigator.of(context, rootNavigator: true).push(

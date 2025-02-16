@@ -925,10 +925,6 @@ class _LiveActivityColorSettingState extends State<LiveActivityColorSetting> {
               onMainColorChange: (k) {
                 if (!Provider.of<PlusProvider>(context, listen: false)
                     .hasScope(PremiumScopes.liveActivityColor)) {
-                  PlusLockedFeaturePopup.show(
-                    context: context,
-                    feature: PremiumFeature.liveActivity,
-                  );
                   return;
                 }
 

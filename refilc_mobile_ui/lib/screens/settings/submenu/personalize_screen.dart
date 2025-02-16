@@ -1065,9 +1065,6 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                         onPressed: () async {
                           if (!Provider.of<PlusProvider>(context, listen: false)
                               .hasScope(PremiumScopes.customFont)) {
-                            PlusLockedFeaturePopup.show(
-                                context: context,
-                                feature: PremiumFeature.fontChange);
                             return;
                           }
 
@@ -1098,9 +1095,6 @@ class PersonalizeSettingsScreenState extends State<PersonalizeSettingsScreen>
                             if (!Provider.of<PlusProvider>(context,
                                     listen: false)
                                 .hasScope(PremiumScopes.customFont)) {
-                              PlusLockedFeaturePopup.show(
-                                  context: context,
-                                  feature: PremiumFeature.fontChange);
                               return;
                             }
 

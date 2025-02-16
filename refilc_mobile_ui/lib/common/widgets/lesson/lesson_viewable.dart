@@ -98,8 +98,6 @@ class LessonViewableState extends State<LessonViewable> {
 
             if (!Provider.of<PlusProvider>(context, listen: false)
                 .hasScope(PremiumScopes.timetableNotes)) {
-              PlusLockedFeaturePopup.show(
-                  context: context, feature: PremiumFeature.timetableNotes);
 
               return;
             }

@@ -308,9 +308,7 @@ class NotesPageState extends State<NotesPage> with TickerProviderStateMixin {
                           if (!Provider.of<PlusProvider>(context, listen: false)
                                   .hasScope(PremiumScopes.unlimitedSelfNotes) &&
                               noteTiles.length > 10) {
-                            return PlusLockedFeaturePopup.show(
-                                context: context,
-                                feature: PremiumFeature.selfNotes);
+                            return;
                           }
 
                           showCreationModal(context);

@@ -1,4 +1,6 @@
 // import 'package:refilc/models/settings.dart';
+import 'dart:ffi';
+
 import 'package:refilc/api/providers/user_provider.dart';
 import 'package:refilc/models/settings.dart';
 import 'package:refilc/theme/colors/colors.dart';
@@ -104,9 +106,7 @@ class ExtrasSettingsScreenState extends State<ExtrasSettingsScreen> {
                     onPressed: () async {
                       if (!Provider.of<PlusProvider>(context, listen: false)
                           .hasScope(PremiumScopes.customGradeRarities)) {
-                        return PlusLockedFeaturePopup.show(
-                            context: context,
-                            feature: PremiumFeature.gradeRarities);
+                        return;
                       }
 
                       // settingsProvider.update(

@@ -746,8 +746,6 @@ class GradesPageState extends State<GradesPage> {
 
               if (!Provider.of<PlusProvider>(context, listen: false)
                   .hasScope(PremiumScopes.gradeExporting)) {
-                PlusLockedFeaturePopup.show(
-                    context: context, feature: PremiumFeature.gradeExporting);
                 return;
               }
 
