@@ -90,11 +90,11 @@ Future<void> syncAll(BuildContext context) async {
             '';
         if (authRes != 'success') {
           if (kDebugMode) print('ERROR: failed to refresh login');
-      /   lock = false;
-      /   return Future.value();
-      / } else {
-      /   if (kDebugMode) print('INFO: access token refreshed');
-      / }
+         lock = false;
+         return Future.value();
+       } else {
+         if (kDebugMode) print('INFO: access token refreshed');
+       }
       } else {
         if (kDebugMode) print('INFO: access token is not expired');
       }
