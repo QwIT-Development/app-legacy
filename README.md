@@ -23,8 +23,8 @@ Az alkalmazás építéséhez a Flutter **3.27.1**-es változatára lesz szüks�
 ### Forráskód letöltése
 
 ```sh
-git clone https://github.com/QwIT-Development/student-legacy.git --recursive
-cd naplo
+git clone https://github.com/QwIT-Development/app-legacy.git
+cd app-legacy
 ```
 
 ### Csomagok telepítése
