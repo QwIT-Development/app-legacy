@@ -1,15 +1,11 @@
-# reFilc+ ✨
+# reFilc"+"
 
-A collection of features only accessible for ~~reFilc+ subscribers~~ everyone!
+A funkciók gyűjteménye, ami ~~csak reFilc+ előfizetők számára elérhető~~ mindenki számára elérhető!
 
-This version is **AGPL** compilant, unlike the upstream one...
+Ez a verzió **NEM** sérti az **[AGPL](https://github.com/QwIT-Development/app-legacy/blob/master/LICENSE)** licenszt, ami alatt van az alkalmazás, ellentétben a [korábbi verziójával](https://github.com/refilc/naplo/).
 
-AGPL License Summary:
- * What it is: A copyleft license designed for network-distributed software.
- * What you CAN do:
-   * Use, modify, and distribute the software.
-   * Use it as a component of a larger work.
- * What you CAN'T do:
-   * If you modify the software and run it on a server (making it available over a network), you MUST release your modified source code.
-   * You must also provide access to the source code of your modifications to any users who interact with the software over a network.
-   * You must keep the AGPL license and copyright notices.
+Korábbi verzió:<br>
+![image](https://github.com/user-attachments/assets/170dc789-bb7e-449f-8aca-5a767d1097e8)<br>
+([repo](https://github.com/refilc/naplo-plus/))
+
+Ha a projekt AGPL licenc alatt van terjesztve, akkor a teljes forráskódnak, beleértve a **nélkülözhetetlen** részeket is, nyíltnak kell lennie. Ha ez nem lehetséges, akkor a projekt nem terjeszthető **AGPL** licenc alatt.
