@@ -1133,7 +1133,10 @@ class SettingsScreenState extends State<SettingsScreen>
                   child: FutureBuilder<Map>(
                     future: futureRelease,
                     builder: (context, release) {
-                      String versionText;
+                      String versionText =
+                        release.hasData && release.data != null ?
+                          "versiontext".i18n.fill([release.data!["version"]]) :
+                          "packagetest".i18n;
                       if (release.hasData && release.data != null) {
                         versionText =
                             "v${release.data!['version']}, modosítva a Firka csapat által";

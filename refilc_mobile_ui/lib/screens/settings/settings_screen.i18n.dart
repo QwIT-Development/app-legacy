@@ -132,6 +132,8 @@ extension SettingsLocalization on String {
               "Camera permission is required to scan QR codes.",
           "invalid_qr_code": "Invalid QR code!",
           "success": "Success!",
+          "versiontext": "v%s, modified by the Firka team",
+          "packagetext": "reFilc, modified by the Firka team",
         },
         "hu_hu": {
           "heads_up": "Figyelem!",
@@ -262,6 +264,8 @@ extension SettingsLocalization on String {
               "A kamera engedély szükséges a QR kódok beolvasásához.",
           "invalid_qr_code": "Érvénytelen QR kód!",
           "success": "Siker!",
+          "versiontext": "v%s, módosítva a Firka csapat által",
+          "packagetext": "reFilc, módosítva a Firka csapat által",
         },
         "de_de": {
           "heads_up": "Achtung!",
@@ -392,6 +396,8 @@ extension SettingsLocalization on String {
               "Kameraberechtigung ist erforderlich, um QR-Codes zu scannen.",
           "invalid_qr_code": "Ungültiger QR-Code!",
           "success": "Erfolg!",
+          "versiontext": "v%s, geändert vom Firka",
+          "packagetext": "reFilc, geändert vom Firka",
         },
       };
 
