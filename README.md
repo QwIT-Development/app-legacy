@@ -1,11 +1,11 @@
 <p align=center>
-  <img src="https://raw.githubusercontent.com/Laky2k8/Refilc-2-Episode-1/refs/heads/master/refilc-2-real.png" width=150>
-  <h1 align=center><b>reFilc</b></h1>
+  <img src="" width=150>
+  <h1 align=center><b>Firka - reFilc legacy</b></h1>
 </p>
 
 #### Nem hivatalos e-napló alkalmazás az e-KRÉTA rendszerhez - tanulóktól, tanulóknak.
 
-[![Downloads](https://img.shields.io/github/downloads-pre/refilc/naplo/total?&logo=github&label=Downloads)](https://github.com/refilc/naplo/releases) &nbsp; [![Discord](https://img.shields.io/discord/1111649116020285532?logo=discord&label=Discord)](https://discord.gg/refilc-1111649116020285532)
+[![Downloads](https://img.shields.io/github/downloads-pre/QwIT-Development/app-legacy/total?&logo=github&label=Downloads)](https://github.com/QwIT-Development/app-legacy/releases) &nbsp; [![Discord](https://img.shields.io/discord/1111649116020285532?logo=discord&label=Discord)](https://discord.gg/6DvjyPAw2T)
 
 ## Környezet felállítása
 
