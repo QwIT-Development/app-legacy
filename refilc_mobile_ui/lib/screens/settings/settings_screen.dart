@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter/rendering.dart';
 import 'package:refilc/api/providers/update_provider.dart';
 import 'package:refilc/providers/third_party_provider.dart';
 import 'package:refilc/theme/colors/accent.dart';
@@ -1120,29 +1121,7 @@ class SettingsScreenState extends State<SettingsScreen>
                     onPressed: () => Clipboard.setData(ClipboardData(
                         text: Provider.of<KretaClient>(context, listen: false)
                             .accessToken!)),
-                  ),
-                  if (Provider.of<PlusProvider>(context, listen: false)
-                      .hasPremium)
-                    PanelButton(
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(4.0),
-                        bottom: Radius.circular(12.0),
-                      ),
-                      leading: Icon(
-                        FeatherIcons.key,
-                        size: 22.0,
-                        color: AppColors.of(context).text.withOpacity(.95),
-                      ),
-                      title: const Text("Remove Premium"),
-                      onPressed: () {
-                        Provider.of<PlusProvider>(context, listen: false)
-                            .activate(removePremium: true);
-                        settings.update(
-                            accentColor: AccentColor.filc, store: true);
-                        Provider.of<ThemeModeObserver>(context, listen: false)
-                            .changeTheme(settings.theme);
-                      },
-                    ),
+                  )
                 ],
               ),
 
@@ -1157,9 +1136,9 @@ class SettingsScreenState extends State<SettingsScreen>
                       String versionText;
                       if (release.hasData && release.data != null) {
                         versionText =
-                            "v${release.data!['version']}, modosítva a Filc csapat által";
+                            "v${release.data!['version']}, modosítva a Firka csapat által";
                       } else {
-                        versionText = "reFilc, modosítva a Filc csapat által";
+                        versionText = "reFilc, modosítva a Firka csapat által";
                       }
                       return DefaultTextStyle(
                         style: Theme.of(context)
