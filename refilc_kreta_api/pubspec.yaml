@@ -16,5 +16,8 @@ dependencies:
   i18n_extension: ^12.0.1
   uuid: ^4.5.1
 
+dependency_overrides:
+  webview_flutter_wkwebview: 3.17.0
+
 dev_dependencies:
   flutter_lints: ^5.0.0
