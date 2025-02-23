@@ -5,11 +5,22 @@
 
 #### Nem hivatalos e-napló alkalmazás az e-KRÉTA rendszerhez - tanulóktól, tanulóknak.
 
+(Ameddig nincs kész a rewrite ezt használjuk...)
+
 [![Downloads](https://img.shields.io/github/downloads-pre/QwIT-Development/app-legacy/total?&logo=github&label=Downloads)](https://github.com/QwIT-Development/app-legacy/releases) &nbsp; [![Discord](https://img.shields.io/discord/1111649116020285532?logo=discord&label=Discord)](https://discord.gg/6DvjyPAw2T)
 
 ## Környezet felállítása
 
-### Source code letöltése
+### Flutter beállítása
+
+Az alkalmazás építéséhez a Flutter **3.27.1**-es változatára lesz szükséged.
+
+- [Windows](https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.27.1-stable.zip)
+- [Linux](https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.27.1-stable.tar.xz)
+- [MacOS x64](https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_3.27.1-stable.zip)
+- [MacOS arm64](https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.27.1-stable.zip)
+
+### Forráskód letöltése
 
 ```sh
 git clone https://github.com/QwIT-Development/student-legacy.git --recursive
@@ -39,7 +50,7 @@ flutter build apk --release
 
 **Nézd meg a [Contribution guide](CONTRIBUTING.md)-ot!**
 
-Az összes (ugyan azon verzióhoz tartozó) contribution meg fog jelenni a release-nél. Kérjük, írd le a Discord nevedet a Description-be, hogy adhassunk rangot.
+Az összes (ugyan azon verzióhoz tartozó) contribution meg fog jelenni a kiadásnál. Kérjük, írd le a Discord nevedet a pull request leírásába, hogy adhassunk rangot.
 
 -------
 
