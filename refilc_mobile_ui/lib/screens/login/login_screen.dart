@@ -1,6 +1,5 @@
 // import 'dart:async';
 
-import 'package:refilc/api/client.dart';
 import 'dart:io' show Platform;
 import 'package:refilc/api/login.dart';
 import 'package:refilc/theme/colors/colors.dart';

@@ -1,5 +1,4 @@
 // import 'package:refilc/models/settings.dart';
-import 'dart:ffi';
 
 import 'package:refilc/api/providers/user_provider.dart';
 import 'package:refilc/models/settings.dart';
@@ -16,7 +15,6 @@ import 'package:refilc_plus/ui/mobile/settings/submenu/calendar_sync.dart';
 import 'package:refilc_plus/ui/mobile/settings/submenu/grade_exporting.dart';
 import 'package:refilc_plus/models/premium_scopes.dart';
 import 'package:refilc_plus/providers/plus_provider.dart';
-import 'package:refilc_plus/ui/mobile/plus/upsell.dart';
 import 'package:refilc_plus/ui/mobile/settings/welcome_message.dart';
 
 import 'package:refilc_kreta_api/providers/grade_provider.dart';

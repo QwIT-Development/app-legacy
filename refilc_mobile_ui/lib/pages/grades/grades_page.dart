@@ -46,7 +46,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:refilc/helpers/average_helper.dart';
-import 'package:refilc_plus/ui/mobile/plus/upsell.dart';
 import 'average_selector.dart';
 import 'package:refilc_plus/ui/mobile/plus/premium_inline.dart';
 import 'calculator/grade_calculator.dart';

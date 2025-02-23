@@ -29,7 +29,6 @@ import 'package:refilc_mobile_ui/common/bottom_sheet_menu/bottom_sheet_menu.dart
 import 'package:refilc_mobile_ui/common/panel/panel.dart';
 import 'package:refilc_mobile_ui/common/panel/panel_button.dart';
 import 'package:refilc_mobile_ui/common/profile_image/profile_image.dart';
-import 'package:refilc_mobile_ui/common/soon_alert/soon_alert.dart';
 
 // import 'package:refilc_mobile_ui/common/soon_alert/soon_alert.dart';
 import 'package:refilc_mobile_ui/common/splitted_panel/splitted_panel.dart';
@@ -45,10 +44,8 @@ import 'package:refilc_mobile_ui/screens/settings/accounts/account_view.dart';
 
 // import 'package:refilc_mobile_ui/screens/settings/debug/subject_icon_gallery.dart';
 // import 'package:refilc_mobile_ui/screens/settings/modify_subject_names.dart';
-import 'package:refilc_mobile_ui/screens/settings/notifications_screen.dart';
 import 'package:refilc_mobile_ui/screens/settings/privacy_view.dart';
 import 'package:refilc_mobile_ui/screens/settings/settings_helper.dart';
-import 'package:refilc_mobile_ui/screens/settings/submenu/code_scanner.dart';
 import 'package:refilc_mobile_ui/screens/settings/submenu/extras_screen.dart';
 import 'package:refilc_mobile_ui/screens/settings/submenu/personalize_screen.dart';
 import 'package:flutter/foundation.dart';
@@ -78,9 +75,7 @@ import 'package:refilc_mobile_ui/screens/settings/user/profile_pic.dart';
 // import 'package:refilc_plus/ui/mobile/settings/welcome_message.dart';
 // import 'package:refilc_mobile_ui/screens/error_screen.dart';
 import 'package:refilc_mobile_ui/screens/error_report_screen.dart';
-import 'submenu/cloud_sync_screen.dart';
 import 'submenu/general_screen.dart';
-import 'package:refilc_plus/ui/mobile/plus/settings_inline.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -698,7 +693,7 @@ class SettingsScreenState extends State<SettingsScreen>
                 children: [
                   // general settings
                   const SplittedPanel(
-                    padding: const EdgeInsets.only(top: 8.0),
+                    padding: EdgeInsets.only(top: 8.0),
                     cardPadding: EdgeInsets.all(4.0),
                     children: [
                       MenuGeneralSettings(

@@ -27,7 +27,6 @@ import 'package:provider/provider.dart';
 import 'package:refilc_mobile_ui/screens/settings/settings_screen.i18n.dart';
 import 'package:refilc_plus/models/premium_scopes.dart';
 import 'package:refilc_plus/providers/plus_provider.dart';
-import 'package:refilc_plus/ui/mobile/plus/upsell.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'grade_colors.dart';

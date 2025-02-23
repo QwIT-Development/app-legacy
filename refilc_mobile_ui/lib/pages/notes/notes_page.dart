@@ -35,7 +35,6 @@ import 'package:refilc_mobile_ui/pages/notes/submenu/self_note_tile.dart';
 import 'package:refilc_plus/models/premium_scopes.dart';
 import 'package:refilc_plus/providers/plus_provider.dart';
 import 'package:refilc_plus/ui/mobile/plus/premium_inline.dart';
-import 'package:refilc_plus/ui/mobile/plus/upsell.dart';
 import 'package:uuid/uuid.dart';
 import 'notes_page.i18n.dart';
 
