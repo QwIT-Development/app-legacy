@@ -61,4 +61,4 @@ Az összes (ugyan azon verzióhoz tartozó) contribution meg fog jelenni a relea
 
 **Péter:** video editor
 
-***annon:** a régi Filc Napló fejlesztője (ez az app, ha bár sokban változott, alapjaiban a Filc-re épül)*
+***annon:** a régi Filc Napló fejlesztője (ez az app, ha bár sokban változott, alapjaiban a Filc-re, valamint a reFilc-re épül)*
