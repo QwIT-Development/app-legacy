@@ -9,3 +9,5 @@ Korábbi verzió:<br>
 ([repo](https://github.com/refilc/naplo-plus/))
 
 Ha a projekt AGPL licenc alatt van terjesztve, akkor a teljes forráskódnak, beleértve a **nélkülözhetetlen** részeket is, nyíltnak kell lennie. Ha ez nem lehetséges, akkor a projekt nem terjeszthető **AGPL** licenc alatt.
+
+ui.: *A "fixed plus bypass" (8583609abbd6a93ac55ecff93c886d0898f71f12) nevű commit nem ér semmit, mert még mindig ugyan úgy be lehet aktiválni az appot, de lehet próbálkozni...*
