@@ -1,4 +1,4 @@
-package hu.refilc.naplo.database
+package hu.firka.naplo.database
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

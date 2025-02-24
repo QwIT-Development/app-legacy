@@ -1,4 +1,4 @@
-package hu.refilc.naplo.database
+package hu.firka.naplo.database
 
 import android.content.ContentValues
 import android.content.Context
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 
 import java.sql.SQLException
 
-import hu.refilc.naplo.database.SQLiteHelper
+import hu.firka.naplo.database.SQLiteHelper
 import kotlin.arrayOf
 
 class DBManager(private val context: Context) {

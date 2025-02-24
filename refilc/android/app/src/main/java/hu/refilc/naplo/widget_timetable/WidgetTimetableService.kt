@@ -1,4 +1,4 @@
-package hu.refilc.naplo.widget_timetable
+package hu.firka.naplo.widget_timetable
 
 import android.content.Context
 import android.content.Intent
