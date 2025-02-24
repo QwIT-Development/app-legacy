@@ -1,4 +1,4 @@
-package hu.refilc.naplo.utils
+package hu.firka.naplo.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

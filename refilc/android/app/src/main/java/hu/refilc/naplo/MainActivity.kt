@@ -1,4 +1,4 @@
-package hu.refilc.naplo
+package hu.firka.naplo
 
 import io.flutter.embedding.android.FlutterActivity
 
