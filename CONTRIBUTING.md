@@ -9,7 +9,7 @@ Kérünk, olyan dologgal járulj hozzá a **Firká**hoz, ami valószínűleg **s
 
 Fontos, hogy **mielőtt egy nagyobb méretű projektbe belekezdenél, futtasd meg ötletedet a [Discord szerverünkön](https://discord.gg/6DvjyPAw2T)**, ahol még azelőtt tudunk tanácsot adni, hogy sok-sok órát beleöltél volna egy esetleg felesleges dologba.
 
-A legjobban annak örülünk, ha az [Issues](https://github.com/QwIT-Development/app-legacy/issues) oldalról szemezgetsz. Ha még új vagy a Flutterben, ajánljuk figyelmedbe a viszonlyak könnyen javítható hibákat, ha éppen van ilyen.
+A legjobban annak örülünk, ha az [Issues](https://github.com/QwIT-Development/app-legacy/issues) oldalról szemezgetsz. Ha még új vagy a Flutterben, ajánljuk figyelmedbe a viszonylag könnyen javítható hibákat, ha éppen van ilyen.
 
 ## Hogyan segítsek?
 Nem ígérhetünk itt sem programozás-, sem Git-kurzust, de a projektspecifikus dolgokat leírjuk, és segítünk a Flutter telepítésében.
