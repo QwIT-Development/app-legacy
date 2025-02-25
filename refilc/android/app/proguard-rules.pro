@@ -13,4 +13,4 @@
 -dontwarn org.joda.convert.FromString
 -dontwarn org.joda.convert.ToString
 
-#-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*

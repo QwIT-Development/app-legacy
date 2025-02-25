@@ -77,3 +77,6 @@ UserInterfaceState.xcuserstate
 **/ios/Flutter/flutter_export_environment.sh
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+
+#don't include debugging symbols, bc they get generated on build
+debug-info/

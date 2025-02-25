@@ -53,7 +53,7 @@ subprojects {
 }
 
 android {
-    namespace = "hu.firka.naplo"
+    namespace = "app.firka.legacy"
 
     ndkVersion "27.2.12479018"
 
@@ -72,7 +72,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "hu.firka.naplo"
+        applicationId "app.firka.legacy"
         minSdkVersion 24
         targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
