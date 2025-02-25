@@ -39,7 +39,9 @@ jobs:
           cache: "true"
 
       - name: Install dependencies
-        run: ./fix-pub.sh
+        run: |
+          chmod +x fix-pub.sh
+          ./fix-pub.sh
 
       - name: Build
         run: ./refilc/build.sh
