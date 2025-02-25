@@ -44,7 +44,11 @@ jobs:
           ./fix-pub.sh
 
       - name: Build
-        run: ./refilc/build.sh
+        run: |
+            cd refilc
+            chmod +x build.sh
+            ./build.sh
+            cd ..
 
       - name: Upload Android Release
         uses: actions/upload-artifact@v4.6.1
