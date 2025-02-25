@@ -1,4 +1,4 @@
-# <img src="" alt width="100px"> Firka - *reFilc legacy*
+# <img src="https://raw.githubusercontent.com/QwIT-Development/app-legacy/2d22a8de31de8a46424a3a3dafb686f7f21942d9/dave.gif" alt width="100px"> Firka - *reFilc legacy*
 
 #### Nem hivatalos e-napló alkalmazás az e-KRÉTA rendszerhez - tanulóktól, tanulóknak.
 
