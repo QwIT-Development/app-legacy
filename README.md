@@ -11,6 +11,14 @@
 
 Az összes (ugyan azon verzióhoz tartozó) hozzájárulás meg fog jelenni a kiadásnál. Kérjük, írd le a Discord nevedet a pull request leírásába, hogy adhassunk rangot.
 
+<a href="https://star-history.com/#QwIT-Development/app-legacy&Timeline">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=QwIT-Development/app-legacy&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=QwIT-Development/app-legacy&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=QwIT-Development/app-legacy&type=Timeline" />
+ </picture>
+</a>
+
 # Csapatunk
 
 **Management**
