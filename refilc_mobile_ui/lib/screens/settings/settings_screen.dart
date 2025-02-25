@@ -1136,13 +1136,7 @@ class SettingsScreenState extends State<SettingsScreen>
                       String versionText =
                         release.hasData && release.data != null ?
                           "versiontext".i18n.fill([release.data!["version"]]) :
-                          "packagetest".i18n;
-                      if (release.hasData && release.data != null) {
-                        versionText =
-                            "v${release.data!['version']}, modosítva a Firka csapat által";
-                      } else {
-                        versionText = "reFilc, modosítva a Firka csapat által";
-                      }
+                          "packagetext".i18n;
                       return DefaultTextStyle(
                         style: Theme.of(context)
                             .textTheme
