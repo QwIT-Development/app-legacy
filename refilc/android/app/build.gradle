@@ -39,13 +39,13 @@ def debugKeystoreProperties = new Properties()
 def debugKeystorePropertiesFile = rootProject.file("debugkey.properties")
 debugKeystoreProperties.load(new FileInputStream(debugKeystorePropertiesFile))
 
+// magical code that fixes builds
 subprojects {
     afterEvaluate { project ->
         if (project.hasProperty('android')) {
             project.android {
-                if (!hasProperty('namespace') || namespace == null || namespace.isEmpty()) {
-                    // Assign a default namespace based on the project name or group
-                    namespace = project.group.toString() ?: "com.example.${project.name}"
+                if (namespace == null) {
+                    namespace project.group
                 }
             }
         }
