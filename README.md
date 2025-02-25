@@ -1,4 +1,4 @@
-# <img src="https://github.com/user-attachments/assets/cbffc8b4-cfb4-4055-894c-af9e979c8ea6" alt width="100px"> Firka - *reFilc legacy*
+# <img src="" alt width="100px"> Firka - *reFilc legacy*
 
 #### Nem hivatalos e-napló alkalmazás az e-KRÉTA rendszerhez - tanulóktól, tanulóknak.
 
