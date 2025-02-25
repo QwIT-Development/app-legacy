@@ -43,7 +43,7 @@ class AppIconHelper {
     //   // ignore: no_leading_underscores_for_local_identifiers
     //   final _androidDynamicIconPlugin = AndroidDynamicIcon();
     //   await _androidDynamicIconPlugin.changeIcon(
-    //     bundleId: 'hu.firka.naplo',
+    //     bundleId: 'app.firka.legacy',
     //     isNewIcon: iconName != 'refilc_default' ? true : false,
     //     iconName: iconName != 'refilc_default' ? iconName : '',
     //     iconNames: [

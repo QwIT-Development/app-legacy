@@ -1,4 +1,4 @@
-package hu.firka.naplo.widget_timetable
+package app.firka.legacy.widget_timetable
 
 import android.app.PendingIntent
 import android.app.UiModeManager
@@ -30,11 +30,11 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 
-import hu.firka.naplo.database.DBManager
-import hu.firka.naplo.MainActivity
-import hu.firka.naplo.R
+import app.firka.legacy.database.DBManager
+import app.firka.legacy.MainActivity
+import app.firka.legacy.R
 
-import hu.firka.naplo.utils.Week
+import app.firka.legacy.utils.Week
 
 import es.antonborri.home_widget.HomeWidgetBackgroundIntent
 import es.antonborri.home_widget.HomeWidgetLaunchIntent

@@ -2,11 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:flutter/rendering.dart';
 import 'package:refilc/api/providers/update_provider.dart';
-import 'package:refilc/providers/third_party_provider.dart';
-import 'package:refilc/theme/colors/accent.dart';
-import 'package:refilc/theme/observer.dart';
 import 'package:refilc_kreta_api/providers/absence_provider.dart';
 import 'package:refilc_kreta_api/providers/event_provider.dart';
 import 'package:refilc_kreta_api/providers/exam_provider.dart';
@@ -1042,16 +1038,6 @@ class SettingsScreenState extends State<SettingsScreen>
                 title: const Text("debug_settings"),
                 cardPadding: const EdgeInsets.all(4.0),
                 children: [
-                  PanelButton(
-                    title: const Text('loginToGoogle'),
-                    onPressed: () async {
-                      ThirdPartyProvider tpp = Provider.of<ThirdPartyProvider>(
-                          context,
-                          listen: false);
-
-                      await tpp.googleSignIn();
-                    },
-                  ),
                   PanelButton(
                     title: const Text('pushTimetableToCalendar'),
                     onPressed: () async {},

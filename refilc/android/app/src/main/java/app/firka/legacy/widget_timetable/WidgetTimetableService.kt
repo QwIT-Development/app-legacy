@@ -1,4 +1,4 @@
-package hu.firka.naplo.widget_timetable
+package app.firka.legacy.widget_timetable
 
 import android.content.Context
 import android.content.Intent

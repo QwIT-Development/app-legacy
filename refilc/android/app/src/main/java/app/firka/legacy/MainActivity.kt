@@ -1,4 +1,4 @@
-package hu.firka.naplo
+package app.firka.legacy
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -152,7 +152,7 @@ class NavigationScreenState extends State<NavigationScreen>
   void initState() {
     super.initState();
 
-    HomeWidget.setAppGroupId('hu.firka.naplo.group');
+    HomeWidget.setAppGroupId('app.firka.legacy.group');
 
     _checkForWidgetLaunch();
     HomeWidget.widgetClicked.listen(_launchedFromWidget);

@@ -1,4 +1,4 @@
-package hu.firka.naplo.database
+package app.firka.legacy.database
 
 import android.content.ContentValues
 import android.content.Context
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 
 import java.sql.SQLException
 
-import hu.firka.naplo.database.SQLiteHelper
+import app.firka.legacy.database.SQLiteHelper
 import kotlin.arrayOf
 
 class DBManager(private val context: Context) {

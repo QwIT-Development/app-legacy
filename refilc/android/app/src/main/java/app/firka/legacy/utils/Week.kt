@@ -1,4 +1,4 @@
-package hu.firka.naplo.utils
+package app.firka.legacy.utils
 
 import java.time.DayOfWeek
 import java.time.Duration

@@ -523,14 +523,14 @@
 				FLUTTER_BUILD_NAME = 5.1.1;
 				FLUTTER_BUILD_NUMBER = 283;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = reFilc;
+				INFOPLIST_KEY_CFBundleDisplayName = Firka;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 5.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = hu.qwit.refilc;
+				PRODUCT_BUNDLE_IDENTIFIER = app.firka.legacy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -568,7 +568,7 @@
 				MARKETING_VERSION = 5.1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = hu.qwit.refilc.livecard;
+				PRODUCT_BUNDLE_IDENTIFIER = app.firka.legacy.livecard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -609,7 +609,7 @@
 				);
 				MARKETING_VERSION = 5.1.1;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = hu.qwit.refilc.livecard;
+				PRODUCT_BUNDLE_IDENTIFIER = app.firka.legacy.livecard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -649,7 +649,7 @@
 				);
 				MARKETING_VERSION = 5.1.1;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = hu.qwit.refilc.livecard;
+				PRODUCT_BUNDLE_IDENTIFIER = app.firka.legacy.livecard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -783,14 +783,14 @@
 				FLUTTER_BUILD_NAME = 5.1.1;
 				FLUTTER_BUILD_NUMBER = 283;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = reFilc;
+				INFOPLIST_KEY_CFBundleDisplayName = Firka;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 5.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = hu.qwit.refilc;
+				PRODUCT_BUNDLE_IDENTIFIER = app.firka.legacy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -813,14 +813,14 @@
 				FLUTTER_BUILD_NAME = 5.1.1;
 				FLUTTER_BUILD_NUMBER = 283;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = reFilc;
+				INFOPLIST_KEY_CFBundleDisplayName = Firka;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 5.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = hu.qwit.refilc;
+				PRODUCT_BUNDLE_IDENTIFIER = app.firka.legacy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

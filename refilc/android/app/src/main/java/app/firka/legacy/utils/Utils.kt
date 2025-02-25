@@ -1,4 +1,4 @@
-package hu.firka.naplo.utils
+package app.firka.legacy.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

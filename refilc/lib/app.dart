@@ -183,7 +183,7 @@ class App extends StatelessWidget {
 
         // third party providers
         ChangeNotifierProvider<ThirdPartyProvider>(
-          create: (context) => ThirdPartyProvider(context: context),
+          create: (context) => ThirdPartyProvider(),
         ),
       ],
       child: Consumer<ThemeModeObserver>(

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" package="hu.firka.naplo">
+    xmlns:tools="http://schemas.android.com/tools" package="app.firka.legacy">
     <application android:name="${applicationName}" android:label="Firka" tools:replace="android:label" android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true" android:enableOnBackInvokedCallback="false">
 
@@ -8,7 +8,7 @@
             android:name="flutter.embedding.android.SurfaceView"
             android:value="true" />
 
-        <activity android:exported="true" android:name="hu.firka.naplo.MainActivity"
+        <activity android:exported="true" android:name="app.firka.legacy.MainActivity"
             android:launchMode="singleTop" android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize"
@@ -62,10 +62,10 @@
             android:label="reFilc"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_new"
-            android:name="hu.firka.naplo.icon_new"
+            android:name="app.firka.legacy.icon_new"
             android:exported="true"
             android:enabled="false"
-            android:targetActivity="hu.firka.naplo.MainActivity">
+            android:targetActivity="app.firka.legacy.MainActivity">
 
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
@@ -162,7 +162,7 @@
         </activity-alias> -->
         <!-- end of custom app icon thingies -->
 
-        <receiver android:name="hu.firka.naplo.widget_timetable.WidgetTimetable"
+        <receiver android:name="app.firka.legacy.widget_timetable.WidgetTimetable"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -178,7 +178,7 @@
                 android:resource="@xml/home_widget_test_info" />
         </receiver>
 
-        <service android:name="hu.firka.naplo.widget_timetable.WidgetTimetableService"
+        <service android:name="app.firka.legacy.widget_timetable.WidgetTimetableService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <receiver android:name="es.antonborri.home_widget.HomeWidgetBackgroundReceiver"

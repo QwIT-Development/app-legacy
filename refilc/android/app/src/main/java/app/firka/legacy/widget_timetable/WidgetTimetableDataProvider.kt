@@ -1,4 +1,4 @@
-package hu.firka.naplo.widget_timetable
+package app.firka.legacy.widget_timetable
 
 import android.app.UiModeManager
 import android.appwidget.AppWidgetManager
@@ -19,8 +19,8 @@ import org.json.JSONObject
 import java.util.Collections
 import java.util.Comparator
 
-import hu.firka.naplo.database.DBManager
-import hu.firka.naplo.R
+import app.firka.legacy.database.DBManager
+import app.firka.legacy.R
 
 class WidgetTimetableDataProvider(context: Context, intent: Intent) : RemoteViewsService.RemoteViewsFactory {
     private val context: Context

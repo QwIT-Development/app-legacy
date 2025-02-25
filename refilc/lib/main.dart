@@ -229,7 +229,7 @@ Future<void> initPlatformState() async {
     if (kDebugMode) {
       print("[BackgroundFetch] Event received $taskId");
     }
-    if (taskId == "com.transistorsoft.refilcliveactivity") {
+    if (taskId == "com.transistorsoft.firkaliveactivity") {
       if (!Platform.isIOS) return;
       LiveActivityHelper().backgroundJob();
     } else {
@@ -247,7 +247,7 @@ Future<void> initPlatformState() async {
     print('[BackgroundFetch] configure success: $status');
   }
   BackgroundFetch.scheduleTask(TaskConfig(
-      taskId: "com.transistorsoft.refilcnotification",
+      taskId: "com.transistorsoft.firkanotification",
       delay: 900000, // 15 minutes
       periodic: true,
       forceAlarmManager: true,
@@ -269,7 +269,7 @@ void backgroundHeadlessTask(HeadlessTask task) {
   if (kDebugMode) {
     print('[BackgroundFetch] Headless event received.');
   }
-  if (taskId == "com.transistorsoft.refilcliveactivity") {
+  if (taskId == "com.transistorsoft.firkaliveactivity") {
     if (!Platform.isIOS) return;
     LiveActivityHelper().backgroundJob();
   } else {

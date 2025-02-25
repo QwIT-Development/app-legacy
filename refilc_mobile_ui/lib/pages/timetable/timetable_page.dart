@@ -166,10 +166,7 @@ class TimetablePageState extends State<TimetablePage>
     if (mounted) {
       if (Provider.of<PlusProvider>(context, listen: false).hasPremium &&
           Provider.of<PlusProvider>(context, listen: false)
-              .hasScope(PremiumScopes.calendarSync)) {
-        Provider.of<ThirdPartyProvider>(context, listen: false)
-            .pushTimetable(context, _controller);
-      }
+              .hasScope(PremiumScopes.calendarSync)) {}
     }
 
     // Listen for user changes

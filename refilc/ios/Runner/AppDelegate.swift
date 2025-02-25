@@ -15,7 +15,7 @@ import Flutter
       guard let controller = window?.rootViewController as? FlutterViewController else {
       fatalError("rootViewController is not type FlutterViewController")
     }
-    methodChannel = FlutterMethodChannel(name: "hu.refilc/liveactivity",
+    methodChannel = FlutterMethodChannel(name: "app.firka/liveactivity",
                                          binaryMessenger: controller as! FlutterBinaryMessenger)
     methodChannel?.setMethodCallHandler({
       [weak self] (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
