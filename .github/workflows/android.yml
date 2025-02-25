@@ -9,11 +9,11 @@ jobs:
 
     steps:
       - name: Download repository
-        uses: actions/checkout@latest
+        uses: actions/checkout
 
       - name: Download Android keystore
         id: android_keystore
-        uses: timheuer/base64-to-file@latest
+        uses: timheuer/base64-to-file
         with:
           fileName: firkaapp.jks
           encodedString: ${{ secrets.KEYSTORE_BASE64 }}
@@ -26,13 +26,13 @@ jobs:
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> refilc/android/key.properties
           cp refilc/android/key.properties refilc/android/debugkey.properties
 
-      - uses: actions/setup-java@latest
+      - uses: actions/setup-java
         with:
           distribution: "temurin"
           java-version: "17"
           cache: "gradle"
 
-      - uses: subosito/flutter-action@latest
+      - uses: subosito/flutter-action
         with:
           flutter-version: "3.27.1"
           channel: "stable"
@@ -45,7 +45,7 @@ jobs:
         run: ./refilc/build.sh
 
       - name: Upload Android Release
-        uses: actions/upload-artifact@latest
+        uses: actions/upload-artifact
         with:
           name: android-release
           path: refilc/build/app/outputs/flutter-apk/app-*-release.apk
