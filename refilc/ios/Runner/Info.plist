@@ -4,45 +4,45 @@
 	<dict>
 		<key>BGTaskSchedulerPermittedIdentifiers</key>
 		<array>
-			<string>com.transistorsoft.refilcnotification</string>
-			<string>com.transistorsoft.refilcliveactivity</string>
+			<string>com.transistorsoft.firkanotification</string>
+			<string>com.transistorsoft.firkaliveactivity</string>
 		</array>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true/>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
-			<key>refilc_concept</key>
+			<key>firka_concept</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>refilc_concept</string>
+					<string>firka_concept</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>refilc_default</key>
+			<key>firka_default</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>refilc_default</string>
+					<string>firka_default</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>refilc_overcomplicated</key>
+			<key>firka_overcomplicated</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>refilc_overcomplicated</string>
+					<string>firka_overcomplicated</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>refilc_pride</key>
+			<key>firka_pride</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>refilc_pride</string>
+					<string>firka_pride</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -71,7 +71,7 @@
 		<key>CFBundleInfoDictionaryVersion</key>
 		<string>6.0</string>
 		<key>CFBundleName</key>
-		<string>reFilc</string>
+		<string>Firka</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>
@@ -85,7 +85,7 @@
 				<string>Editor</string>
 				<key>CFBundleURLSchemes</key>
 				<array>
-					<string>refilcapp</string>
+					<string>firkaapp</string>
 				</array>
 			</dict>
 		</array>
