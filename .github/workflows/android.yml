@@ -4,37 +4,48 @@ on: workflow_dispatch
 
 jobs:
   build:
+    name: Build for Android
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Download repository
+        uses: actions/checkout@latest
+
       - name: Download Android keystore
         id: android_keystore
-        uses: timheuer/base64-to-file@v1.0.3
+        uses: timheuer/base64-to-file@latest
         with:
-          fileName: upload-keystore.jks
+          fileName: firkaapp.jks
           encodedString: ${{ secrets.KEYSTORE_BASE64 }}
+
       - name: Create key.properties
         run: |
           echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > refilc/android/key.properties
-          echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> refilc/android/key.properties
+          echo "storePassword=${{ secrets.KEY_PASSWORD }}" >> refilc/android/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> refilc/android/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> refilc/android/key.properties
-      - uses: actions/setup-java@v3
+          cp refilc/android/key.properties refilc/android/debugkey.properties
+
+      - uses: actions/setup-java@latest
         with:
-          distribution: "zulu"
-          java-version: "17.x"
+          distribution: "temurin"
+          java-version: "17"
           cache: "gradle"
-      - uses: subosito/flutter-action@v2
+
+      - uses: subosito/flutter-action@latest
         with:
-          flutter-version: "3.10.2"
+          flutter-version: "3.27.1"
           channel: "stable"
           cache: "true"
+
       - name: Install dependencies
         run: ./fix-pub.sh
+
       - name: Build
-        run: cd refilc && ./build.sh
+        run: ./refilc/build.sh
+
       - name: Upload Android Release
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@latest
         with:
           name: android-release
-          path: build/outputs/flutter-apk/app-release.apk
+          path: refilc/build/app/outputs/flutter-apk/app-*-release.apk

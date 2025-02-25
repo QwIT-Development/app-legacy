@@ -5,7 +5,6 @@ import 'package:i18n_extension/i18n_extension.dart';
 import 'package:refilc/api/providers/database_provider.dart';
 import 'package:refilc/api/providers/update_provider.dart';
 import 'package:refilc/models/settings.dart';
-import 'package:refilc/providers/third_party_provider.dart';
 import 'package:refilc/utils/format.dart';
 import 'package:refilc_kreta_api/client/client.dart';
 import 'package:refilc_kreta_api/models/week.dart';
