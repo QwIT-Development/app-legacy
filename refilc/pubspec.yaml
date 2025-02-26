@@ -87,7 +87,6 @@ flutter:
     - assets/animations/
     - assets/images/
     - assets/images/subject_covers/
-    - assets/launch_icons/
     - assets/images/ext_logo/
     - assets/svg/menu_icons/
     - assets/other/dirtywords.xml
@@ -113,8 +112,6 @@ flutter:
         - asset: assets/fonts/FigTree/Figtree-SemiBold.ttf
           weight: 500
 
-
-
 flutter_launcher_icons:
   image_path: assets/icons/ic_android.png
   android: true
@@ -122,6 +119,8 @@ flutter_launcher_icons:
   adaptive_icon_foreground: assets/icons/ic_launcher_foreground.png
   ios: false
   remove_alpha_ios: false
+  web: false
+  compress: true
 
 flutter_native_splash:
   color: "#7CA021"
@@ -133,3 +132,4 @@ flutter_native_splash:
   ios: true
   ios_content_mode: center
   web: false
+  compress: true
