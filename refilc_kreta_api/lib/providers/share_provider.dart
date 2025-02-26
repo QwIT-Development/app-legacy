@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
+List? _cachedThemesJson;
+
 class ShareProvider extends ChangeNotifier {
   final UserProvider _user;
 
@@ -101,49 +103,58 @@ class ShareProvider extends ChangeNotifier {
     return null;
   }
 
-  Future<List<SharedTheme>> getAllPublicThemes(BuildContext context,
-      {int count = 0}) async {
-    List? themesJson = await FilcAPI.getAllSharedThemes(count);
+Future<List<SharedTheme>> getAllPublicThemes(BuildContext context,
+    {int offset = 0, int limit = 10}) async {
+  // Fetch all themes only once if not already fetched
+  if (_cachedThemesJson == null) {
+    _cachedThemesJson = await FilcAPI.getAllSharedThemes(0);
+  }
 
-    List<SharedTheme> themes = [];
+  List<SharedTheme> themes = [];
 
-    if (themesJson != null) {
-      for (var t in themesJson) {
-        if (t['public_id'].toString().replaceAll(' ', '') == '') continue;
-        if (t['grade_colors_id'].toString().replaceAll(' ', '') == '') continue;
+  if (_cachedThemesJson != null) {
+    // Get the current chunk based on offset and limit
+    final int endIndex = (offset + limit <= _cachedThemesJson!.length)
+        ? offset + limit
+        : _cachedThemesJson!.length;
+    final chunk = _cachedThemesJson!.sublist(offset, endIndex);
 
-        Map? gradeColorsJson =
-            await FilcAPI.getSharedGradeColors(t['grade_colors_id']);
+    for (var t in chunk) {
+      if (t['public_id'].toString().replaceAll(' ', '') == '') continue;
+      if (t['grade_colors_id'].toString().replaceAll(' ', '') == '') continue;
 
-        if (gradeColorsJson != null) {
-          SharedTheme theme = SharedTheme.fromJson(
-            t,
-            SharedGradeColors.fromJson(gradeColorsJson["public_id"] != ''
-                ? gradeColorsJson
-                : {
-                    "public_id": "0",
-                    "is_public": false,
-                    "nickname": "Anonymous",
-                    "five_color":
-                        SettingsProvider.defaultSettings().gradeColors[4].value,
-                    "four_color":
-                        SettingsProvider.defaultSettings().gradeColors[3].value,
-                    "three_color":
-                        SettingsProvider.defaultSettings().gradeColors[2].value,
-                    "two_color":
-                        SettingsProvider.defaultSettings().gradeColors[1].value,
-                    "one_color":
-                        SettingsProvider.defaultSettings().gradeColors[0].value,
-                  }),
-          );
+      Map? gradeColorsJson =
+          await FilcAPI.getSharedGradeColors(t['grade_colors_id']);
 
-          themes.add(theme);
-        }
+      if (gradeColorsJson != null) {
+        SharedTheme theme = SharedTheme.fromJson(
+          t,
+          SharedGradeColors.fromJson(gradeColorsJson["public_id"] != ''
+              ? gradeColorsJson
+              : {
+                  "public_id": "0",
+                  "is_public": false,
+                  "nickname": "Anonymous",
+                  "five_color":
+                      SettingsProvider.defaultSettings().gradeColors[4].value,
+                  "four_color":
+                      SettingsProvider.defaultSettings().gradeColors[3].value,
+                  "three_color":
+                      SettingsProvider.defaultSettings().gradeColors[2].value,
+                  "two_color":
+                      SettingsProvider.defaultSettings().gradeColors[1].value,
+                  "one_color":
+                      SettingsProvider.defaultSettings().gradeColors[0].value,
+                }),
+        );
+
+        themes.add(theme);
       }
     }
-
-    return themes;
   }
+
+  return themes;
+}
 
   // grade colors
   Future<(SharedGradeColors?, int)> shareCurrentGradeColors(

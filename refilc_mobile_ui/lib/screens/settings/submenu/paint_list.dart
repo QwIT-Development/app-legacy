@@ -31,13 +31,9 @@ class MenuPaintList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PanelButton(
-      onPressed: () async {
-        List<SharedTheme> publicThemes =
-            await Provider.of<ShareProvider>(context, listen: false)
-                .getAllPublicThemes(context);
-
-        Navigator.of(context, rootNavigator: true).push(CupertinoPageRoute(
-            builder: (context) => PaintListScreen(publicThemes: publicThemes)));
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).push(
+            CupertinoPageRoute(builder: (context) => const PaintListScreen()));
       },
       title: Text(
         "own_paints".i18n,
@@ -61,9 +57,7 @@ class MenuPaintList extends StatelessWidget {
 }
 
 class PaintListScreen extends StatefulWidget {
-  const PaintListScreen({super.key, required this.publicThemes});
-
-  final List<SharedTheme> publicThemes;
+  const PaintListScreen({super.key});
 
   @override
   PaintListScreenState createState() => PaintListScreenState();
@@ -74,42 +68,80 @@ class PaintListScreenState extends State<PaintListScreen>
   late SettingsProvider settingsProvider;
   late UserProvider user;
   late ShareProvider shareProvider;
-
   late AnimationController _hideContainersController;
-
-  late List<Widget> tiles;
-
   final _paintId = TextEditingController();
 
   SharedTheme? newThemeByID;
+  List<SharedTheme> publicThemes = [];
+  List<Widget> tiles = [];
+  bool isLoading = false;
+  bool hasMore = true;
+  int currentOffset = 0;
+  static const int pageSize = 10;
+
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-
     shareProvider = Provider.of<ShareProvider>(context, listen: false);
-
     _hideContainersController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 200));
+
+    _scrollController.addListener(_scrollListener);
+    _loadMoreThemes();
   }
 
-  void buildPublicPaintTiles() async {
-    List<Widget> subjectTiles = [];
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _hideContainersController.dispose();
+    super.dispose();
+  }
 
-    var added = [];
-    var i = 0;
+  void _scrollListener() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent * 0.8) {
+      _loadMoreThemes();
+    }
+  }
 
-    for (var t in widget.publicThemes) {
-      if (added.contains(t.id)) continue;
+  Future<void> _loadMoreThemes() async {
+    if (isLoading || !hasMore) return;
 
-      Widget w = PanelButton(
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      final newThemes = await shareProvider.getAllPublicThemes(
+        context,
+        offset: currentOffset,
+        limit: pageSize,
+      );
+
+      setState(() {
+        publicThemes.addAll(newThemes);
+        currentOffset += newThemes.length;
+        hasMore = newThemes.length == pageSize;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  void buildPublicPaintTiles() {
+    tiles = [];  // Clear existing tiles
+
+    for (var i = 0; i < publicThemes.length; i++) {
+      final t = publicThemes[i];
+      tiles.add(PanelButton(
         onPressed: () async {
           newThemeByID = t;
-
-          // slay
-
           setPaint();
-
           setState(() {});
         },
         title: Column(
@@ -162,231 +194,24 @@ class PaintListScreenState extends State<PaintListScreen>
         ),
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(i == 0 ? 12.0 : 4.0),
-          bottom:
-              Radius.circular(i + 1 == widget.publicThemes.length ? 12.0 : 4.0),
+          bottom: Radius.circular(
+              i + 1 == publicThemes.length && !hasMore ? 12.0 : 4.0),
         ),
-      );
-
-      i += 1;
-      subjectTiles.add(w);
-      added.add(t.id);
-    }
-
-    if (widget.publicThemes.isEmpty) {
-      subjectTiles.add(Empty(
-        subtitle: 'no_pub_paint'.i18n,
       ));
     }
 
-    tiles = subjectTiles;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    settingsProvider = Provider.of<SettingsProvider>(context);
-    user = Provider.of<UserProvider>(context);
-
-    buildPublicPaintTiles();
-
-    return AnimatedBuilder(
-      animation: _hideContainersController,
-      builder: (context, child) => Opacity(
-        opacity: 1 - _hideContainersController.value,
-        child: Scaffold(
-          appBar: AppBar(
-            surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
-            leading: BackButton(color: AppColors.of(context).text),
-            title: Text(
-              "own_paints".i18n,
-              style: TextStyle(color: AppColors.of(context).text),
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-              child: Column(
-                children: [
-                  // enter id
-                  SplittedPanel(
-                    padding: EdgeInsets.zero,
-                    cardPadding: const EdgeInsets.all(3.0),
-                    hasBorder: true,
-                    isTransparent: true,
-                    children: [
-                      PanelButton(
-                        onPressed: () => showEnterIDDialog(),
-                        title: Text(
-                          "enter_id".i18n,
-                          style: TextStyle(
-                            color: AppColors.of(context)
-                                .text
-                                .withValues(alpha: .95),
-                          ),
-                        ),
-                        leading: Icon(
-                          FeatherIcons.plus,
-                          size: 22.0,
-                          color:
-                              AppColors.of(context).text.withValues(alpha: .95),
-                        ),
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(12.0),
-                          bottom: Radius.circular(12.0),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(
-                    height: 18.0,
-                  ),
-                  // current paint
-                  SplittedPanel(
-                    title: Text('current_paint'.i18n),
-                    padding: EdgeInsets.zero,
-                    cardPadding: const EdgeInsets.all(4.0),
-                    children: [
-                      PanelButton(
-                        onPressed: () async {
-                          if (settingsProvider.currentThemeId != '') {
-                            Share.share(
-                              settingsProvider.currentThemeId,
-                              subject: 'share_subj_theme'.i18n,
-                            );
-                          } else {
-                            ShareThemeDialog.show(context);
-                          }
-                        },
-                        longPressInstead: true,
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              settingsProvider.currentThemeDisplayName != ''
-                                  ? settingsProvider.currentThemeDisplayName
-                                  : 'no_name'.i18n,
-                              style: TextStyle(
-                                color: AppColors.of(context)
-                                    .text
-                                    .withValues(alpha: .95),
-                              ),
-                            ),
-                            Text(
-                              settingsProvider.currentThemeCreator != ''
-                                  ? settingsProvider.currentThemeCreator
-                                  : 'Anonymous',
-                              style: TextStyle(
-                                color: AppColors.of(context)
-                                    .text
-                                    .withValues(alpha: .65),
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        trailing: Transform.translate(
-                          offset: const Offset(8.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(left: 2.0),
-                                width: 14.0,
-                                height: 14.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color:
-                                      (settingsProvider.customBackgroundColor ??
-                                          SettingsProvider.defaultSettings()
-                                              .customBackgroundColor),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColors.of(context)
-                                          .text
-                                          .withValues(alpha: 0.15),
-                                      offset: const Offset(1, 2),
-                                      blurRadius: 3,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Transform.translate(
-                                offset: const Offset(-4.0, 0.0),
-                                child: Container(
-                                  margin: const EdgeInsets.only(left: 2.0),
-                                  width: 14.0,
-                                  height: 14.0,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: (settingsProvider
-                                            .customHighlightColor ??
-                                        SettingsProvider.defaultSettings()
-                                            .customHighlightColor),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppColors.of(context)
-                                            .text
-                                            .withValues(alpha: 0.15),
-                                        offset: const Offset(1, 2),
-                                        blurRadius: 3,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Transform.translate(
-                                offset: const Offset(-8.0, 0.0),
-                                child: Container(
-                                  margin: const EdgeInsets.only(left: 2.0),
-                                  width: 14.0,
-                                  height: 14.0,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: settingsProvider.customAccentColor ??
-                                        accentColorMap[
-                                            settingsProvider.accentColor],
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppColors.of(context)
-                                            .text
-                                            .withValues(alpha: 0.15),
-                                        offset: const Offset(1, 2),
-                                        blurRadius: 3,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(12),
-                          bottom: Radius.circular(12),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(
-                    height: 18.0,
-                  ),
-                  // own paints
-                  SplittedPanel(
-                    title: Text('public_paint'.i18n),
-                    padding: EdgeInsets.zero,
-                    cardPadding: const EdgeInsets.all(4.0),
-                    children: tiles,
-                  ),
-                ],
-              ),
-            ),
-          ),
+    if (isLoading) {
+      tiles.add(const Center(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: CircularProgressIndicator(),
         ),
-      ),
-    );
+      ));
+    }
+
+    if (publicThemes.isEmpty && !isLoading) {
+      tiles.add(Empty(subtitle: 'no_pub_paint'.i18n, alwaysRandom: true));
+    }
   }
 
   // enter id dialog
@@ -573,4 +398,185 @@ class PaintListScreenState extends State<PaintListScreen>
     Provider.of<ThemeModeObserver>(context, listen: false)
         .changeTheme(settingsProvider.theme, updateNavbarColor: true);
   }
+
+@override
+Widget build(BuildContext context) {
+  settingsProvider = Provider.of<SettingsProvider>(context);
+  user = Provider.of<UserProvider>(context);
+
+  buildPublicPaintTiles();
+
+  return AnimatedBuilder(
+    animation: _hideContainersController,
+    builder: (context, child) => Opacity(
+      opacity: 1 - _hideContainersController.value,
+      child: Scaffold(
+        appBar: AppBar(
+          surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+          leading: BackButton(color: AppColors.of(context).text),
+          title: Text(
+            "own_paints".i18n,
+            style: TextStyle(color: AppColors.of(context).text),
+          ),
+        ),
+        body: SingleChildScrollView(
+          controller: _scrollController,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+            child: Column(
+              children: [
+                SplittedPanel(
+                  padding: EdgeInsets.zero,
+                  cardPadding: const EdgeInsets.all(3.0),
+                  hasBorder: true,
+                  isTransparent: true,
+                  children: [
+                    PanelButton(
+                      onPressed: () => showEnterIDDialog(),
+                      title: Text(
+                        "enter_id".i18n,
+                        style: TextStyle(
+                          color: AppColors.of(context).text.withValues(alpha: .95),
+                        ),
+                      ),
+                      leading: Icon(
+                        FeatherIcons.plus,
+                        size: 22.0,
+                        color: AppColors.of(context).text.withValues(alpha: .95),
+                      ),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(12.0),
+                        bottom: Radius.circular(12.0),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 18.0),
+                SplittedPanel(
+                  title: Text('current_paint'.i18n),
+                  padding: EdgeInsets.zero,
+                  cardPadding: const EdgeInsets.all(4.0),
+                  children: [
+                    PanelButton(
+                      onPressed: () async {
+                        if (settingsProvider.currentThemeId != '') {
+                          Share.share(
+                            settingsProvider.currentThemeId,
+                            subject: 'share_subj_theme'.i18n,
+                          );
+                        } else {
+                          ShareThemeDialog.show(context);
+                        }
+                      },
+                      longPressInstead: true,
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            settingsProvider.currentThemeDisplayName != ''
+                                ? settingsProvider.currentThemeDisplayName
+                                : 'no_name'.i18n,
+                            style: TextStyle(
+                              color: AppColors.of(context).text.withValues(alpha: .95),
+                            ),
+                          ),
+                          Text(
+                            settingsProvider.currentThemeCreator != ''
+                                ? settingsProvider.currentThemeCreator
+                                : 'Anonymous',
+                            style: TextStyle(
+                              color: AppColors.of(context).text.withValues(alpha: .65),
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                      trailing: Transform.translate(
+                        offset: const Offset(8.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(left: 2.0),
+                              width: 14.0,
+                              height: 14.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: (settingsProvider.customBackgroundColor ??
+                                    SettingsProvider.defaultSettings().customBackgroundColor),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.of(context).text.withValues(alpha: 0.15),
+                                    offset: const Offset(1, 2),
+                                    blurRadius: 3,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Transform.translate(
+                              offset: const Offset(-4.0, 0.0),
+                              child: Container(
+                                margin: const EdgeInsets.only(left: 2.0),
+                                width: 14.0,
+                                height: 14.0,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: (settingsProvider.customHighlightColor ??
+                                      SettingsProvider.defaultSettings().customHighlightColor),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.of(context).text.withValues(alpha: 0.15),
+                                      offset: const Offset(1, 2),
+                                      blurRadius: 3,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Transform.translate(
+                              offset: const Offset(-8.0, 0.0),
+                              child: Container(
+                                margin: const EdgeInsets.only(left: 2.0),
+                                width: 14.0,
+                                height: 14.0,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: settingsProvider.customAccentColor ??
+                                      accentColorMap[settingsProvider.accentColor],
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.of(context).text.withValues(alpha: 0.15),
+                                      offset: const Offset(1, 2),
+                                      blurRadius: 3,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(12),
+                        bottom: Radius.circular(12),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 18.0),
+                SplittedPanel(
+                  title: Text('public_paint'.i18n),
+                  padding: EdgeInsets.zero,
+                  cardPadding: const EdgeInsets.all(4.0),
+                  children: tiles,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
 }

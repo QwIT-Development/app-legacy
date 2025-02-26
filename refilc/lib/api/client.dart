@@ -304,8 +304,9 @@ class FilcAPI {
       }
     } on Exception catch (error, stacktrace) {
       log("ERROR: FilcAPI.getAllSharedThemes: $error $stacktrace");
+      // return empty array if error
+      return [];
     }
-    return null;
   }
 
   static Future<int> addSharedGradeColors(SharedGradeColors gradeColors) async {
