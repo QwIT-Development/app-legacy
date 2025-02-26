@@ -6,6 +6,8 @@ jobs:
   build-android:
     name: Build for Android
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Download repository
@@ -60,6 +62,9 @@ jobs:
 #  build-ios:
 #    name: Build for IOS
 #    runs-on: macos-latest
+#    permissions:
+#      contents: read
+#
 #    steps:
 #      - name: Download repository
 #        uses: actions/checkout@v4.2.2
