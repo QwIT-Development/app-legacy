@@ -86,7 +86,7 @@ class ErrorReportScreen extends StatelessWidget {
                       child: Text(
                         details.exceptionAsString(),
                         style: TextStyle(
-                          fontFamily: 'GeistMono',
+                          fontFamily: 'monospace',
                           fontWeight: FontWeight.w500,
                           color:
                               AppColors.of(context).text.withValues(alpha: 0.9),
@@ -268,7 +268,7 @@ class ErrorDetail extends StatelessWidget {
             child: Text(
               content,
               style: const TextStyle(
-                fontFamily: 'GeistMono',
+                fontFamily: 'monospace',
                 color: Color.fromARGB(255, 0, 0, 0),
               ),
             ),

@@ -3,7 +3,6 @@ import 'package:refilc/theme/colors/colors.dart';
 import 'package:refilc_plus/providers/plus_provider.dart';
 import 'package:refilc_plus/ui/mobile/plus/activation_view/activation_dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:refilc_plus/ui/mobile/plus/plus_things.i18n.dart';
 
@@ -90,9 +89,16 @@ class _PremiumActivationViewState extends State<PremiumActivationView>
             ? Center(
                 child: SizedBox(
                   width: 400,
-                  child: Lottie.network(
-                    "https://assets2.lottiefiles.com/packages/lf20_wkebwzpz.json",
-                    controller: animation,
+                  child: ScaleTransition(
+                    scale: CurvedAnimation(
+                      parent: animation,
+                      curve: Curves.elasticOut,
+                    ),
+                    child: Icon(
+                      Icons.check_circle_outline,
+                      color: Colors.green,
+                      size: 120,
+                    ),
                   ),
                 ),
               )

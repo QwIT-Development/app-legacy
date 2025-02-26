@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 class HeadsUpCountdown extends StatefulWidget {
@@ -96,8 +95,11 @@ class _HeadsUpCountdownState extends State<HeadsUpCountdown> {
               AnimatedOpacity(
                 opacity: dur.inSeconds > 0 ? 0.0 : 1.0,
                 duration: const Duration(milliseconds: 500),
-                child: Lottie.asset("assets/animations/bell-alert.json",
-                    width: 400),
+                child: Icon(
+                  Icons.notifications_active,
+                  size: 120,
+                  color: Colors.white,
+                ),
               ),
           ],
         ),
