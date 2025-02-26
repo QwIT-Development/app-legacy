@@ -4,16 +4,25 @@ import 'package:refilc/theme/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 List<String> faces = [
-  "(·.·)",
-  "(≥o≤)",
-  "(·_·)",
-  "(˚Δ˚)b",
+  "(´-ω-)",
+  "(/ω＼)",
+  "( ´ ▽ )",
   "(^-^*)",
-  "(='X'=)",
-  "(>_<)",
-  "(;-;)",
-  "\\(^Д^)/",
-  "\\(o_o)/",
+  "(◕‿◕)",
+  "(￣ω￣)",
+  "ᕕ( ᐛ )ᕗ",
+  "(￣ω￣;)",
+  "(¬‿¬ )",
+  "(・ω・)ﾉ",
+  "(^▽^)",
+  "( =ω= )",
+  "／(≧ x ≦)＼",
+  "(｡◕‿◕｡)",
+  "(~‾▽‾)~",
+  "( ͡° ͜ʖ ͡°)",
+  "(^‿^)",
+  "(◕‿◕✿)",
+  "(*^‿^*)"
 ];
 
 class Empty extends StatelessWidget {
@@ -23,7 +32,7 @@ class Empty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int index = Random(DateTime.now().minute).nextInt(faces.length);
+    int index = Random().nextInt(faces.length);
 
     return Center(
       child: Padding(
