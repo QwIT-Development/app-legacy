@@ -4,35 +4,49 @@ import 'package:refilc/theme/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 List<String> faces = [
-  "(´-ω-)",
-  "(/ω＼)",
-  "( ´ ▽ )",
-  "(^-^*)",
-  "(◕‿◕)",
+  "(* ^ ω ^)",
+  "(´ ∀ *)",
+  "(o^▽^o)",
+  "(⌒▽⌒)☆",
   "(￣ω￣)",
+  "(≧◡≦)",
+  "(◕‿◕)",
+  "(⌒‿⌒)",
+  "(☆ω☆)",
+  "(^ヮ^)/",
+  "(⁀ᗢ⁀)",
+  "(≧ω≦)",
+  "(/ω＼)",
+  "(//▽//)",
   "ᕕ( ᐛ )ᕗ",
-  "(￣ω￣;)",
-  "(¬‿¬ )",
+  "¯\\(ツ)/¯",
+  "(￣▽￣)",
+  "(ᓀ ᓀ)",
+  "(・・?",
   "(・ω・)ﾉ",
-  "(^▽^)",
+  "(=^･ω･^=)",
   "( =ω= )",
-  "／(≧ x ≦)＼",
-  "(｡◕‿◕｡)",
-  "(~‾▽‾)~",
   "( ͡° ͜ʖ ͡°)",
-  "(^‿^)",
+  "( ͡• ͜ʖ ͡• )",
   "(◕‿◕✿)",
-  "(*^‿^*)"
+  "(✿◠‿◠)"
 ];
 
 class Empty extends StatelessWidget {
-  const Empty({super.key, this.subtitle});
+  const Empty({
+    super.key,
+    this.subtitle,
+    this.alwaysRandom = false
+  });
 
   final String? subtitle;
+  final bool alwaysRandom;
 
   @override
   Widget build(BuildContext context) {
-    int index = Random().nextInt(faces.length);
+    int index = alwaysRandom
+    ? Random().nextInt(faces.length)
+    : Random(DateTime.now().minute).nextInt(faces.length);
 
     return Center(
       child: Padding(
