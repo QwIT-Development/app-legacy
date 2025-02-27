@@ -6,6 +6,7 @@ import 'package:refilc/models/shared_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:refilc/models/user.dart';
 
 List? _cachedThemesJson;
 
@@ -24,17 +25,23 @@ class ShareProvider extends ChangeNotifier {
   Future<(SharedTheme?, int)> shareCurrentTheme(
     BuildContext context, {
     bool isPublic = false,
-    bool shareNick = true,
+    bool shareNick = false,
     required SharedGradeColors gradeColors,
     String displayName = '',
   }) async {
     final SettingsProvider settings =
         Provider.of<SettingsProvider>(context, listen: false);
 
+    String? nickname = _user.nickname;
+
+    if (_user.nickname == _user.name || _user.nickname == '') {
+      nickname = 'Anonymous';
+    }
+
     Map themeJson = {
       'public_id': const Uuid().v4(),
       'is_public': isPublic,
-      'nickname': shareNick ? _user.nickname : 'Anonymous',
+      'nickname': shareNick ? nickname : 'Anonymous',
       'display_name': displayName,
       'background_color': (settings.customBackgroundColor ??
               SettingsProvider.defaultSettings().customBackgroundColor)
@@ -168,7 +175,7 @@ Future<List<SharedTheme>> getAllPublicThemes(BuildContext context,
     Map gradeColorsJson = {
       'public_id': const Uuid().v4(),
       'is_public': isPublic,
-      'nickname': shareNick ? _user.nickname : 'Anonymous',
+      'nickname': 'Anonymous',
       'five_color': settings.gradeColors[4].value,
       'four_color': settings.gradeColors[3].value,
       'three_color': settings.gradeColors[2].value,

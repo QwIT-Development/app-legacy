@@ -46,6 +46,7 @@ class ShareThemeDialog extends StatefulWidget {
 class ShareThemeDialogState extends State<ShareThemeDialog> {
   final _title = TextEditingController();
   bool isPublic = false;
+  bool shareNick = false;
 
   late ShareProvider shareProvider;
 
@@ -111,6 +112,19 @@ class ShareThemeDialogState extends State<ShareThemeDialog> {
                 title: Text("is_public".i18n),
                 contentPadding: const EdgeInsets.only(left: 15.0, right: 10.0),
               ),
+              SwitchListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                value: shareNick,
+                onChanged: (value) {
+                  setState(() {
+                    shareNick = value;
+                  });
+                },
+                title: Text("shareNickname".i18n),
+                contentPadding: const EdgeInsets.only(left: 15.0, right: 10.0),
+              ),
             ],
           ),
         ],
@@ -160,6 +174,7 @@ class ShareThemeDialogState extends State<ShareThemeDialog> {
               gradeColors: gradeColors!,
               isPublic: isPublic,
               displayName: _title.text,
+              shareNick: shareNick
             );
 
             if (themeStatus == 429) {

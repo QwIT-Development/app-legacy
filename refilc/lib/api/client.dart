@@ -33,20 +33,20 @@ class FilcAPI {
   static const plusAuthLogin = "0.0.0.0";
   static const plusAuthCallback = "0.0.0.0";
   static const plusActivation = "0.0.0.0";
-  static const plusScopes = "0.0.0.0/";
+  static const plusScopes = "0.0.0.0";
 
   // Updates
-  static const repo = "refilc/naplo";
+  static const repo = "QwIT-Development/app-legacy";
   static const releases = "https://api.github.com/repos/$repo/releases";
 
   // Share API
-  static const themeShare = "https://api.refilcapp.hu/v3/shared/theme/add";
-  static const themeGet = "https://api.refilcapp.hu/v3/shared/theme/get";
+  static const themeShare = "$baseUrl/v3/shared/theme/add";
+  static const themeGet = "$baseUrl/v3/shared/theme/get";
   static const allThemes = "$themeGet/all";
   static const themeByID = "$themeGet/";
 
-  static const gradeColorsShare = "https://api.refilcapp.hu/v3/shared/grade-colors/add";
-  static const gradeColorsGet = "https://api.refilcapp.hu/v3/shared/grade-colors/get";
+  static const gradeColorsShare = "$baseUrl/v3/shared/grade-colors/add";
+  static const gradeColorsGet = "$baseUrl/v3/shared/grade-colors/get";
   static const allGradeColors = "$gradeColorsGet/all";
   static const gradeColorsByID = "$gradeColorsGet/";
 

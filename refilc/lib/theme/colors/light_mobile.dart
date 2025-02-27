@@ -7,9 +7,9 @@ class LightMobileAppColors implements ThemeAppColors {
   @override
   final text = const Color(0xFF000000);
   @override
-  final background = const Color(0xffF4F9FF);
+  final background = const Color(0xffFAFFF0); //
   @override
-  final highlight = const Color(0xffFFFFFF);
+  final highlight = const Color(0xffF3FBDE); //
   @override
   final red = const Color(0xffFF3B30);
   @override
@@ -19,7 +19,7 @@ class LightMobileAppColors implements ThemeAppColors {
   @override
   final green = const Color(0xff34C759);
   @override
-  final filc = const Color(0xff3d7bf4);
+  final filc = const Color(0xFFA7DC22); //
   @override
   final teal = const Color(0xff5AC8FA);
   @override
@@ -32,24 +32,24 @@ class LightMobileAppColors implements ThemeAppColors {
   final pink = const Color(0xffFF2D55);
   // new default grade colors
   @override
-  final gradeFive = const Color(0xff007D49);
+  final gradeFive = const Color(0xFF22CCAD); //
   @override
-  final gradeFour = const Color(0xFF34C759);
+  final gradeFour = const Color(0xFF92EA3B); //
   @override
-  final gradeThree = const Color(0xFFFFCC00);
+  final gradeThree = const Color(0xFFF9CF00); //
   @override
-  final gradeTwo = const Color(0xFFFF8008);
+  final gradeTwo = const Color(0xFFFFA046); //
   @override
-  final gradeOne = const Color(0xFFFF453A);
+  final gradeOne = const Color(0xFFFF54A1); //
   // ui v5 login
   @override
-  final loginPrimary = const Color(0xFF0A1C41);
+  final loginPrimary = const Color(0xFF394C0A); //
   @override
-  final loginSecondary = const Color(0xFF0A1C41);
+  final loginSecondary = const Color(0xCC394C0A); //
   @override
-  final inputBorder = const Color(0xFF586A8E);
+  final inputBorder = const Color(0xFFA7DC22); //
   @override
-  final loginBackground = const Color(0xFFEFF4FE);
+  final loginBackground = const Color(0xFFFAFFF0); //
   @override
-  final buttonBackground = const Color(0xFF0A1C41);
+  final buttonBackground = const Color(0xFFFEFFFD); //
 }

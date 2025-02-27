@@ -7,9 +7,9 @@ class DarkMobileAppColors implements ThemeAppColors {
   @override
   final text = Colors.white;
   @override
-  final background = const Color(0xff000000);
+  final background = const Color(0xff0D1202); //
   @override
-  final highlight = const Color(0xff141516);
+  final highlight = const Color(0xff141905); //
   @override
   final red = const Color(0xffFF453A);
   @override
@@ -19,7 +19,7 @@ class DarkMobileAppColors implements ThemeAppColors {
   @override
   final green = const Color(0xff32D74B);
   @override
-  final filc = const Color(0xff3d7bf4);
+  final filc = const Color(0xFFA7DC22); //
   @override
   final teal = const Color(0xff64D2FF);
   @override
@@ -32,24 +32,24 @@ class DarkMobileAppColors implements ThemeAppColors {
   final pink = const Color(0xffFF375F);
   // new default grade colors
   @override
-  final gradeFive = const Color(0xff007D49);
+  final gradeFive = const Color(0xFF22CCAD); //
   @override
-  final gradeFour = const Color(0xFF34C759);
+  final gradeFour = const Color(0xFF92EA3B); //
   @override
-  final gradeThree = const Color(0xFFFFCC00);
+  final gradeThree = const Color(0xFFF9CF00); //
   @override
-  final gradeTwo = const Color(0xFFFF8008);
+  final gradeTwo = const Color(0xFFFFA046); //
   @override
-  final gradeOne = const Color(0xFFFF453A);
+  final gradeOne = const Color(0xFFFF54A1); //
   // v5 ui login
   @override
-  final loginPrimary = const Color(0xFFD4DAE7);
+  final loginPrimary = const Color(0xFF394C0A); //
   @override
-  final loginSecondary = const Color(0xFFA4B1CC);
+  final loginSecondary = const Color(0xCC394C0A); //
   @override
-  final inputBorder = const Color(0xFF586A8E);
+  final inputBorder = const Color(0xFFA7DC22); //
   @override
-  final loginBackground = const Color(0xFF0F131D);
+  final loginBackground = const Color(0xFFFAFFF0); //
   @override
-  final buttonBackground = const Color(0xFF3D7BF4);
+  final buttonBackground = const Color(0xFFFEFFFD); //
 }
