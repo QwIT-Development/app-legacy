@@ -64,6 +64,11 @@ class GradeSubjectView extends StatefulWidget {
 
 class _GradeSubjectViewState extends State<GradeSubjectView>
     with TickerProviderStateMixin {
+
+  final Map<String, List<Grade>> _gradeCache = {};
+  final Map<String, List<Exam>> _examCache = {};
+  final Map<String, Widget> _graphCache = {};
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   // Controllers
@@ -90,11 +95,76 @@ class _GradeSubjectViewState extends State<GradeSubjectView>
 
   String plan = '';
 
-  List<Grade> getSubjectGrades(GradeSubject subject) => !gradeCalcMode
-      ? gradeProvider.grades.where((e) => e.subject == subject).toList()
-      : calculatorProvider.grades.where((e) => e.subject == subject).toList();
-  List<Exam> getSubjectExams(GradeSubject subject) =>
-      examProvider.exams.where((e) => e.subject == subject).toList();
+  List<Grade> getSubjectGrades(GradeSubject subject) {
+    final cacheKey = '${subject.id}_${gradeCalcMode}';
+    return _gradeCache.putIfAbsent(cacheKey, () {
+      return !gradeCalcMode
+          ? gradeProvider.grades.where((e) => e.subject == subject).toList()
+          : calculatorProvider.grades.where((e) => e.subject == subject).toList();
+    });
+  }
+  List<Exam> getSubjectExams(GradeSubject subject) {
+    return _examCache.putIfAbsent(subject.id, () {
+      return examProvider.exams.where((e) => e.subject == subject).toList();
+    });
+  }
+
+Widget buildGradeGraph(List<Grade> grades, double prevAvg) {
+  final cacheKey = '${grades.length}_$prevAvg';
+  return Padding(
+    padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+    child: Panel(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text("annual_average".i18n),
+          if (average != prevAvg)
+            TrendDisplay(current: average, previous: prevAvg),
+        ],
+      ),
+      child: Container(
+        padding: const EdgeInsets.only(top: 16.0, right: 12.0),
+        child: GradeGraph(
+          grades,
+          dayThreshold: 5,
+          classAvg: widget.groupAverage,
+        ),
+      ),
+    ),
+  );
+}
+
+
+Widget buildGradeTiles(List<Grade> grades) {
+  return ListView.builder(
+    physics: const BouncingScrollPhysics(),
+    itemCount: grades.length,
+    itemExtent: 80.0,
+    itemBuilder: (context, index) {
+      final grade = grades[index];
+      if (grade.type == GradeType.midYear) {
+        return GradeViewable(grade);
+      }
+      return CertificationTile(
+        grade,
+        padding: EdgeInsets.only(
+            bottom: 8.0,
+            top: (index == 0) ? 0.0 : 8.0),
+        newStyle: true,
+      );
+    },
+  );
+}
+
+  @override
+  void dispose() {
+    _gradeCache.clear();
+    _examCache.clear();
+    _graphCache.clear();
+    _scrollController.dispose();
+    _tabController.dispose();
+    super.dispose();
+  }
 
   bool showGraph(List<Grade> subjectGrades) {
     if (gradeCalcMode) return true;
@@ -331,31 +401,14 @@ class _GradeSubjectViewState extends State<GradeSubjectView>
     average = AverageHelper.averageEvals(subjectGrades);
     final prevAvg = subjectGrades.isNotEmpty
         ? AverageHelper.averageEvals(subjectGrades
-            .where((e) => e.date.isBefore(subjectGrades
-                .reduce((v, e) => e.date.isAfter(v.date) ? e : v)
-                .date
-                .subtract(const Duration(days: 30))))
-            .toList())
+        .where((e) => e.date.isBefore(subjectGrades
+        .reduce((v, e) => e.date.isAfter(v.date) ? e : v)
+        .date
+        .subtract(const Duration(days: 30))))
+        .toList())
         : 0.0;
 
-    gradeGraph = Padding(
-      padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
-      child: Panel(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("annual_average".i18n),
-            if (average != prevAvg)
-              TrendDisplay(current: average, previous: prevAvg),
-          ],
-        ),
-        child: Container(
-          padding: const EdgeInsets.only(top: 16.0, right: 12.0),
-          child: GradeGraph(subjectGrades,
-              dayThreshold: 5, classAvg: widget.groupAverage),
-        ),
-      ),
-    );
+      gradeGraph = buildGradeGraph(subjectGrades, prevAvg);
 
     if (!gradeCalcMode) {
       buildTiles(
@@ -415,19 +468,6 @@ class _GradeSubjectViewState extends State<GradeSubjectView>
                 heroTag: "btn_goal_planner",
                 backgroundColor: Theme.of(context).colorScheme.tertiary,
                 onPressed: () {
-                  // if (!Provider.of<PlusProvider>(context, listen: false)
-                  //     .hasScope(PremiumScopes.goalPlanner)) {
-                  //   PlusLockedFeaturePopup.show(
-                  //       context: context, feature: PremiumFeature.goalplanner);
-                  //   return;
-                  // }
-
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //     const SnackBar(content: Text("Hamarosan...")));
-
-                  // Navigator.of(context).push(CupertinoPageRoute(
-                  //     builder: (context) =>
-                  //         GoalPlannerScreen(subject: widget.subject)));
                   GoalTrackPopup.show(context, subject: widget.subject);
                 },
                 child: const Icon(FeatherIcons.flag, size: 20.0),
