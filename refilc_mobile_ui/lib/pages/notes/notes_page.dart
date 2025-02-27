@@ -107,7 +107,6 @@ Future<void> deleteTodoItem(TodoItem item) async {
         .where((e) => e.deadline.isAfter(DateTime.now()))
         .toList();
 
-    // Build todo tiles
     List<Widget> toDoTiles = [];
 
     if (hw.isNotEmpty &&
