@@ -26,7 +26,6 @@ dependencies:
   dropdown_button2: ^2.3.9
   home_widget: ^0.7.0+1
   image_picker: ^1.0.7
-  image_crop: ^0.4.1
   animations: ^2.0.11
   flutter_svg: ^2.0.10+1
   flutter_dynamic_icon: ^2.1.0
