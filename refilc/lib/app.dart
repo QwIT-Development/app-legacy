@@ -208,7 +208,7 @@ class App extends StatelessWidget {
                     ),
                   );
                 },
-                title: "reFilc",
+                title: "Firka",
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.lightTheme(context, palette: corePalette),
                 darkTheme: AppTheme.darkTheme(context, palette: corePalette),
