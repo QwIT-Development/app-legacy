@@ -97,9 +97,9 @@ jobs:
           mv Payload.zip firkaapp.ipa
           cd ../../..
 
-      - name: Upload Android Release
+      - name: Upload IOS Release (xcarchive)
         uses: actions/upload-artifact@v4.6.1
         with:
          name: ios-ipa
          # refilc/build/app/outputs/flutter-apk/app-*-release.apk
-         path: refilc/build/ios/iphoneos/firkaapp.ipa
+         path: refilc/build/ios/archive/*.xcarchive
