@@ -420,6 +420,8 @@ Widget build(BuildContext context) {
           ),
         ),
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
           controller: _scrollController,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
