@@ -1,6 +1,5 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:refilc_mobile_ui/common/bottom_sheet_menu/rounded_bottom_sheet.dart';
-import 'package:refilc_mobile_ui/plus/plus_screen.dart';
 import 'package:flutter/material.dart';
 import 'plus_things.i18n.dart';
 
@@ -445,7 +444,7 @@ class PlusLockedFeaturePopup extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context, rootNavigator: true)
                           .push(MaterialPageRoute(builder: (context) {
-                        return const PlusScreen();
+                        return Container();
                       }));
                     },
                     child: Container(

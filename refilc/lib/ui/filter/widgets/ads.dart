@@ -4,7 +4,6 @@ import 'package:refilc/models/ad.dart';
 import 'package:refilc/ui/date_widget.dart';
 import 'package:refilc_mobile_ui/common/widgets/ad/ad_tile.dart';
 import 'package:refilc_mobile_ui/common/widgets/ad/ad_viewable.dart' as mobile;
-import 'package:refilc_mobile_ui/plus/plus_screen.dart';
 import 'package:refilc_plus/providers/plus_provider.dart';
 import 'package:uuid/uuid.dart';
 
@@ -30,7 +29,7 @@ List<DateWidget> getWidgets(List<Ad> providerAds, BuildContext context) {
       ),
       onTap: () => Navigator.of(context, rootNavigator: true)
           .push(MaterialPageRoute(builder: (context) {
-        return const PlusScreen();
+        return Container();
       })),
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       showExternalIcon: false,

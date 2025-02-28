@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:refilc_mobile_ui/plus/plus_screen.dart';
 import 'package:refilc_plus/models/premium_scopes.dart';
 import 'package:refilc_plus/providers/plus_provider.dart';
 import 'plus_things.i18n.dart';
@@ -25,7 +24,8 @@ class PlusSettingsInline extends StatelessWidget {
           if (plusTier == 'none') {
             Navigator.of(context, rootNavigator: true)
                 .push(MaterialPageRoute(builder: (context) {
-              return const PlusScreen();
+                  // return empty container
+                  return Container();
             }));
           } else {
             SettingsHelper.plusOptions(context);
