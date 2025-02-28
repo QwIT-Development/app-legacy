@@ -1,7 +1,3 @@
 #!/bin/sh
 
-flutter clean
-dart pub get
-flutter doctor -v
-
-flutter build ipa --release --dart-define=APPVER=$(cat pubspec.yaml | grep version: | cut -d' ' -f2 | cut -d+ -f1) --tree-shake-icons
+flutter build ipa --release --tree-shake-icons --split-debug-info=debug-info --obfuscate --no-codesign
