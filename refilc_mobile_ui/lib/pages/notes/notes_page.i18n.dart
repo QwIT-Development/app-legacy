@@ -18,6 +18,8 @@ extension ScreensLocalization on String {
           "task_content": "Task content...",
           "task_name": "Task title...",
           "new_task": "New Task",
+          "next": "Next",
+          "cancel": "Cancel",
         },
         "hu_hu": {
           "notes": "Füzet",
@@ -34,6 +36,8 @@ extension ScreensLocalization on String {
           "task_content": "Feladat tartalma...",
           "task_name": "Feladat címe...",
           "new_task": "Új feladat",
+          "next": "Tovább",
+          "cancel": "Mégse",
         },
         "de_de": {
           "notes": "Broschüre",
@@ -50,6 +54,8 @@ extension ScreensLocalization on String {
           "task_content": "Aufgabeninhalt...",
           "task_name": "Aufgabentitel...",
           "new_task": "Neue Aufgabe",
+          "next": "Weiter",
+          "cancel": "Abbrechen",
         },
       };
 
