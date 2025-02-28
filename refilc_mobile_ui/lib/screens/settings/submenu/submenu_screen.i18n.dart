@@ -33,7 +33,6 @@ extension SettingsLocalization on String {
           "theme_share_failed": "An error occurred while sharing the theme.",
           "theme_share_ratelimit": "You can only share 1 theme per minute.",
           // cloud sync
-          "cloud_sync": "Cloud Sync",
           "secret": "Secret Settings",
           "goodstudent": "Good student mode",
           "presentation": "Presentation Mode",
@@ -70,8 +69,6 @@ extension SettingsLocalization on String {
           "understand": "Értem",
           "theme_share_failed": "Hiba történt a téma megosztása közben.",
           "theme_share_ratelimit": "Csak 1 témát oszthatsz meg percenként.",
-          // cloud sync
-          "cloud_sync": "Felhő szinkronizálás",
           "secret": "Titkos Beállítások",
           "goodstudent": "Jó tanuló mód",
           "presentation": "Bemutató mód",
@@ -109,8 +106,6 @@ extension SettingsLocalization on String {
           "theme_share_failed":
               "Beim Teilen des Themas ist ein Fehler aufgetreten.",
           "theme_share_ratelimit": "Sie können nur 1 Thema pro Minute teilen.",
-          // cloud sync
-          "cloud_sync": "Cloud-Synchronisierung",
           "secret": "Geheime Einstellungen",
           "presentation": "Präsentationsmodus",
           "goodstudent": "Guter Student Modus",

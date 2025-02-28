@@ -2,7 +2,6 @@ enum AccountType {
   apple,
   google,
   meta,
-  qwid,
 }
 
 class LinkedAccount {
@@ -26,9 +25,7 @@ class LinkedAccount {
           ? AccountType.apple
           : json['type'] == 'google'
               ? AccountType.google
-              : json['type'] == 'meta'
-                  ? AccountType.meta
-                  : AccountType.qwid,
+                : AccountType.meta,
       username: json['username'],
       displayName: json['display_name'],
       id: json['id'],
