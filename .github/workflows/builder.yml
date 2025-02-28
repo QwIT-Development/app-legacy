@@ -87,15 +87,15 @@ jobs:
           bash build-ipa.sh
           cd ..
 
-      - name: Create IPA
-        run: |
-          cd refilc
-          cd build/ios/iphoneos
-          mkdir Payload
-          cp -r Runner.app Payload/
-          zip -r Payload.zip Payload
-          mv Payload.zip firkaapp.ipa
-          cd ../../..
+#      - name: Create IPA
+#        run: |
+#          cd refilc
+#          cd build/ios/iphoneos
+#          mkdir Payload
+#          cp -r Runner.app Payload/
+#          zip -r Payload.zip Payload
+#          mv Payload.zip firkaapp.ipa
+#          cd ../../..
 
       - name: Upload IOS Release (xcarchive)
         uses: actions/upload-artifact@v4.6.1
