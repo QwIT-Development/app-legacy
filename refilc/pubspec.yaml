@@ -80,13 +80,9 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/icons/ic_launcher.png
     - assets/icons/ic_splash.png
     - assets/icons/ic_rounded.png
-    - assets/animations/
     - assets/images/
-    - assets/images/subject_covers/
-    - assets/images/ext_logo/
     - assets/svg/menu_icons/
     - assets/other/dirtywords.xml
     - assets/svg/
