@@ -37,7 +37,7 @@ extension SettingsLocalization on String {
           "secret": "Secret Settings",
           "goodstudent": "Good student mode",
           "presentation": "Presentation Mode",
-          "shareNickname": "Share Nickname",
+          "shareNickname": "Anonymous Share",
           "goodstudent_disclaimer":
           "reFilc can not be held liable for the usage of this feature.\n\n(if your mother beats you up because you showed her fake grades, you can only blame yourself for it)",
         },
@@ -75,7 +75,7 @@ extension SettingsLocalization on String {
           "secret": "Titkos Beállítások",
           "goodstudent": "Jó tanuló mód",
           "presentation": "Bemutató mód",
-          "shareNickname": "Megosztás becenévvel",
+          "shareNickname": "Anoním megosztás",
           "goodstudent_disclaimer":
           "A reFilc minden felelősséget elhárít a funkció használatával kapcsolatban.\n\n(Értsd: ha az anyád megver, mert megtévesztő ábrákat mutattál neki, azért csakis magadat hibáztathatod.)",
         },
@@ -114,7 +114,7 @@ extension SettingsLocalization on String {
           "secret": "Geheime Einstellungen",
           "presentation": "Präsentationsmodus",
           "goodstudent": "Guter Student Modus",
-          "shareNickname": "Nach Spitznamen teilen",
+          "shareNickname": "Anonymes Teilen",
           "goodstudent_disclaimer":
           "reFilc kann nicht für die Nutzung dieser Funktion haftbar gemacht werden.\n\n(Wenn deine Mutter dich verprügelt, weil du ihr falsche Noten gezeigt hast, kannst du dir nur die Schuld dafür geben)",
         },

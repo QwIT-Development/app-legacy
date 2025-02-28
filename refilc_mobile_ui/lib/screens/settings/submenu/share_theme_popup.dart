@@ -116,10 +116,10 @@ class ShareThemeDialogState extends State<ShareThemeDialog> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.0),
                 ),
-                value: !shareNick,
+                value: shareNick,
                 onChanged: (value) {
                   setState(() {
-                    shareNick = !value;
+                    shareNick = value;
                   });
                 },
                 title: Text("shareNickname".i18n),
@@ -174,7 +174,7 @@ class ShareThemeDialogState extends State<ShareThemeDialog> {
               gradeColors: gradeColors!,
               isPublic: isPublic,
               displayName: _title.text,
-              shareNick: shareNick
+              shareNick: !shareNick
             );
 
             if (themeStatus == 429) {
