@@ -2,7 +2,8 @@
 
 ### Nem hivatalos e-napló alkalmazás az e-KRÉTA rendszerhez - tanulóktól, tanulóknak.
 
-[![Letöltések](https://img.shields.io/github/downloads-pre/QwIT-Development/app-legacy/total?&logo=github&label=Letöltések)](https://github.com/QwIT-Development/app-legacy/releases) [![Discord](https://img.shields.io/discord/1111649116020285532?logo=discord&label=Discord)](https://discord.gg/6DvjyPAw2T)
+[![GitHub Letöltések](https://img.shields.io/github/downloads-pre/QwIT-Development/app-legacy/latest/total?style=for-the-badge&logo=github&logoColor=EAF7CC&label=Let%C3%B6lt%C3%A9sek&labelColor=141905&color=A7DC22)](https://github.com/QwIT-Development/app-legacy/releases/latest)
+[![Discord](https://img.shields.io/discord/1111649116020285532?style=for-the-badge&logo=discord&logoColor=EAF7CC&label=Discord&labelColor=0D1202&color=A7DC22)](https://discord.gg/6DvjyPAw2T)
 
 ### Hozzájárulás
 
