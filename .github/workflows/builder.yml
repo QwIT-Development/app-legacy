@@ -87,19 +87,19 @@ jobs:
           bash build-ipa.sh
           cd ..
 
-#      - name: Create IPA
-#        run: |
-#          cd refilc
-#          cd build/ios/iphoneos
-#          mkdir Payload
-#          cp -r Runner.app Payload/
-#          zip -r Payload.zip Payload
-#          mv Payload.zip firkaapp.ipa
-#          cd ../../..
+      - name: Create IPA
+        run: |
+          cd refilc
+          cd build/ios/archive/Runner.xcarchive/Products/Applications
+          mkdir Payload
+          cp -r Runner.app Payload/
+          zip -r Payload.zip Payload
+          mv Payload.zip firkaapp.ipa
+          cd ../../../../..
 
-      - name: Upload IOS Release (xcarchive)
+      - name: Upload IOS Release
         uses: actions/upload-artifact@v4.6.1
         with:
          name: ios-ipa
          # refilc/build/app/outputs/flutter-apk/app-*-release.apk
-         path: refilc/build/ios/archive/*.xcarchive
+         path: refilc/build/ios/archive/Runner.xcarchive/Products/Applications/*.ipa
