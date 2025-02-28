@@ -47,10 +47,6 @@ class AppIconHelper {
     //     isNewIcon: iconName != 'refilc_default' ? true : false,
     //     iconName: iconName != 'refilc_default' ? iconName : '',
     //     iconNames: [
-    //       'refilc_default',
-    //       'refilc_overcomplicated',
-    //       'refilc_concept',
-    //       'refilc_pride',
     //     ],
     //   );
     // } else {

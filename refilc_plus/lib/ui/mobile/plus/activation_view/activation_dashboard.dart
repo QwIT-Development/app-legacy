@@ -58,10 +58,6 @@ class _ActivationDashboardState extends State<ActivationDashboard> {
               "assets/icons/ic_rounded.png",
               height: 64.0,
             ),
-            // child: SvgPicture.asset(
-            //   "assets/images/github.svg",
-            //   height: 64.0,
-            // ),
           ),
           const SizedBox(height: 32.0),
           const Text(

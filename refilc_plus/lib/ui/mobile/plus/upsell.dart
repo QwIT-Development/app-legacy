@@ -345,7 +345,7 @@ class PlusLockedFeaturePopup extends StatelessWidget {
                     height: 38.0,
                   ),
                   Image.asset(
-                    'assets/images/plus_${isGold ? 'gold' : 'standard'}.png',
+                    'assets/images/pixel.png',
                     width: 66,
                     height: 66,
                   ),
@@ -452,7 +452,7 @@ class PlusLockedFeaturePopup extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(
-                              'assets/images/btn_plus_${isGold ? 'gold' : 'standard'}.png'),
+                              'assets/images/pixel.png'),
                         ),
                         borderRadius: BorderRadius.circular(12.0),
                       ),

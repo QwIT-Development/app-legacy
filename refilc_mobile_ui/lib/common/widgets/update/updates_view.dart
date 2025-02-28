@@ -63,7 +63,7 @@ class UpdateViewState extends State<UpdateView> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(18.0),
                   child: Image.asset(
-                    "assets/icons/ic_launcher.png",
+                    "assets/images/pixel.png",
                     width: 64.0,
                   ),
                 )

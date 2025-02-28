@@ -251,11 +251,6 @@ class CalendarSyncScreenState extends State<GradeExportingScreen>
                                     AppColors.of(context).text.withOpacity(.95),
                               ),
                             ),
-                            // leading: Image.asset(
-                            //   'assets/images/ext_logo/google.png',
-                            //   width: 24.0,
-                            //   height: 24.0,
-                            // ),
                             borderRadius: const BorderRadius.vertical(
                               top: Radius.circular(12),
                               bottom: Radius.circular(12),

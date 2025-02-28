@@ -75,86 +75,21 @@ class _ModifyAppIconState extends State<ModifyAppIcon> {
                 Panel(
                   title: Text("basic".i18n),
                   child: Column(
-                    children: [
-                      AppIconItem(
-                        iconName: 'refilc_default',
-                        iconPath: 'assets/launch_icons/refilc_default.png',
-                        displayName: 'reFilc Default',
-                        description: 'Az alapértelmezett ikon.',
-                        selected: settings.appIcon == 'refilc_default',
-                        selectCallback: () async {
-                          await AppIconHelper.setAppIcon('refilc_default');
-                          settings.update(appIcon: 'refilc_default');
-                        },
-                      ),
-                    ],
+                    children: [],
                   ),
                 ),
-                // const SizedBox(height: 16.0),
-                // Panel(
-                //   title: Text("seasonal".i18n),
-                //   child: Column(
-                //     children: [
-                //       // AppIconItem(
-                //       //   iconName: 'refilc_default',
-                //       //   iconPath: 'assets/launch_icons/refilc_default.png',
-                //       //   displayName: 'reFilc Default',
-                //       //   description: 'Az alapértelmezett ikon.',
-                //       //   selected: true,
-                //       //   selectCallback: () {},
-                //       // ),
-                //     ],
-                //   ),
-                // ),
                 const SizedBox(height: 16.0),
                 Panel(
                   title: Text("special".i18n),
                   child: Column(
-                    children: [
-                      AppIconItem(
-                        iconName: 'refilc_overcomplicated',
-                        iconPath:
-                            'assets/launch_icons/refilc_overcomplicated.png',
-                        displayName: 'Overcomplicated',
-                        // description: 'Egy túlkomplikált ikon.',
-                        selected: settings.appIcon == 'refilc_overcomplicated',
-                        selectCallback: () async {
-                          await AppIconHelper.setAppIcon(
-                              'refilc_overcomplicated');
-                          settings.update(appIcon: 'refilc_overcomplicated');
-                        },
-                      ),
-                      AppIconItem(
-                        iconName: 'refilc_concept',
-                        iconPath: 'assets/launch_icons/refilc_concept.png',
-                        displayName: 'Modern Concept',
-                        // description: 'Egy modernebb, letisztultabb ikon.',
-                        selected: settings.appIcon == 'refilc_concept',
-                        selectCallback: () async {
-                          await AppIconHelper.setAppIcon('refilc_concept');
-                          settings.update(appIcon: 'refilc_concept');
-                        },
-                      ),
-                    ],
+                    children: [],
                   ),
                 ),
                 const SizedBox(height: 16.0),
                 Panel(
                   title: Text("other".i18n),
                   child: Column(
-                    children: [
-                      AppIconItem(
-                        iconName: 'refilc_pride',
-                        iconPath: 'assets/launch_icons/refilc_pride.png',
-                        displayName: 'Pride',
-                        // description: '',
-                        selected: settings.appIcon == 'refilc_pride',
-                        selectCallback: () async {
-                          await AppIconHelper.setAppIcon('refilc_pride');
-                          settings.update(appIcon: 'refilc_pride');
-                        },
-                      ),
-                    ],
+                    children: [],
                   ),
                 ),
               ],
