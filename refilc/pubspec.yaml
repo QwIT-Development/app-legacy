@@ -46,7 +46,6 @@ dependencies:
   elegant_notification: ^2.4.1
   flutter_feather_icons: ^2.0.0+1
   animated_flip_counter: ^0.3.4
-  rive: ^0.12.4
   animated_background: ^2.0.0
   dropdown_button2: ^2.3.9
   home_widget: ^0.7.0+1

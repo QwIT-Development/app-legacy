@@ -56,15 +56,15 @@ class GradeProvider with ChangeNotifier {
     }
   }
 
-  Future<void> unseenAll() async {
-    String? userId = _user.id;
-    if (userId != null) {
-      final userStore = _database.userStore;
-      userStore.storeLastSeen(DateTime(1969),
-          userId: userId, category: LastSeenCategory.surprisegrade);
-      _lastSeen = DateTime(1969);
-    }
+Future<void> unseenAll() async {
+  String? userId = _user.id;
+  if (userId != null) {
+    final userStore = _database.userStore;
+    await userStore.storeLastSeen(DateTime(1969),
+        userId: userId, category: LastSeenCategory.surprisegrade);
+    _lastSeen = DateTime(1969);
   }
+}
 
   Future<void> restore() async {
     String? userId = _user.id;

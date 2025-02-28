@@ -33,8 +33,6 @@ dependencies:
   confetti: ^0.8.0
   # live_activities: ^1.9.1+1
   animated_flip_counter: ^0.3.4
-  lottie: ^3.3.1
-  rive: ^0.12.4
   animated_background: ^2.0.0
   home_widget: ^0.7.0+1
   dropdown_button2: ^2.3.9
@@ -68,7 +66,6 @@ dependencies:
   webview_flutter: ^4.10.0
   file_picker: ^8.3.7
   shake_flutter: ^17.1.0
-  qr_code_scanner_plus: ^2.0.10+1
   wakelock_plus: ^1.2.10
 
 dependency_overrides:

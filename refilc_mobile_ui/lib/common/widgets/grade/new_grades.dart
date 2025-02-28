@@ -7,7 +7,6 @@ import 'package:refilc_kreta_api/providers/grade_provider.dart';
 import 'package:refilc_mobile_ui/common/widgets/grade/surprise_grade.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rive/rive.dart';
 
 import 'new_grades.i18n.dart';
 
@@ -49,8 +48,11 @@ class NewGradesSurprise extends StatelessWidget {
                     blurRadius: 18.0,
                   )
                 ]),
-                child: const RiveAnimation.asset(
-                    "assets/animations/backpack-2.riv"),
+                child: Icon(
+                  Icons.backpack,
+                  size: 36.0,
+                  color: Theme.of(context).colorScheme.secondary,
+                )
               ),
             ),
           ),

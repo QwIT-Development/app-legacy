@@ -127,10 +127,6 @@ extension SettingsLocalization on String {
           "feedback": "Feedback",
           "other": "Other",
           "stickermap": "Sticker Map",
-          "qr_scanner": "QR Scanner",
-          "camera_perm_error":
-              "Camera permission is required to scan QR codes.",
-          "invalid_qr_code": "Invalid QR code!",
           "success": "Success!",
           "versiontext": "v%s, modified by the Firka team",
           "packagetext": "reFilc, modified by the Firka team",
@@ -259,10 +255,6 @@ extension SettingsLocalization on String {
           "feedback": "Visszajelzés",
           "other": "Egyéb",
           "stickermap": "Matrica térkép",
-          "qr_scanner": "QR Kódolvasó",
-          "camera_perm_error":
-              "A kamera engedély szükséges a QR kódok beolvasásához.",
-          "invalid_qr_code": "Érvénytelen QR kód!",
           "success": "Siker!",
           "versiontext": "v%s, módosítva a Firka csapat által",
           "packagetext": "reFilc, módosítva a Firka csapat által",
@@ -391,10 +383,6 @@ extension SettingsLocalization on String {
           "feedback": "Feedback",
           "other": "Sonstiges",
           "stickermap": "Sticker Map",
-          "qr_scanner": "QR-Scanner",
-          "camera_perm_error":
-              "Kameraberechtigung ist erforderlich, um QR-Codes zu scannen.",
-          "invalid_qr_code": "Ungültiger QR-Code!",
           "success": "Erfolg!",
           "versiontext": "v%s, geändert vom Firka",
           "packagetext": "reFilc, geändert vom Firka",

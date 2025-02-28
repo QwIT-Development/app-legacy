@@ -62,7 +62,6 @@ import 'package:provider/provider.dart';
 import 'package:shake_flutter/enums/shake_screen.dart';
 import 'package:shake_flutter/shake_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'debug/subject_icon_gallery.dart';
 import 'settings_screen.i18n.dart';
 import 'package:flutter/services.dart';
 import 'package:refilc_mobile_ui/screens/settings/user/nickname.dart';
@@ -778,33 +777,6 @@ class SettingsScreenState extends State<SettingsScreen>
                 ],
               ),
             ),
-
-            // // icon gallery (debug mode)
-            if (kDebugMode)
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 16.0, left: 24.0, right: 24.0),
-                child: Panel(
-                  title: const Text("Debug"),
-                  child: Column(
-                    children: [
-                      PanelButton(
-                        title: const Text("Subject Icon Gallery"),
-                        leading:
-                            const Icon(CupertinoIcons.rectangle_3_offgrid_fill),
-                        trailing: const Icon(Icons.arrow_forward),
-                        onPressed: () {
-                          Navigator.of(context, rootNavigator: true).push(
-                            CupertinoPageRoute(
-                                builder: (context) =>
-                                    const SubjectIconGallery()),
-                          );
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
 
             // other secion
             SplittedPanel(
