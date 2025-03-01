@@ -259,7 +259,8 @@ class FilcAPI {
       http.Response res = await http.post(
         Uri.parse(themeShare),
         body: theme.json,
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        // why tf would you urlencode a json, u want to parse it 2 times or what?
+        headers: {'Content-Type': 'application/json'},
       );
 
       // if (res.statusCode != 201) {
@@ -322,7 +323,7 @@ class FilcAPI {
       http.Response res = await http.post(
         Uri.parse(gradeColorsShare),
         body: gradeColors.json,
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        headers: {'Content-Type': 'application/json'},
       );
 
       // if (res.statusCode != 201) {
