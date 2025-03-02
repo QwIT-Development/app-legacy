@@ -1,9 +1,9 @@
 # <img src="https://github.com/user-attachments/assets/dadb8ed3-7073-4591-a004-0d4c646fa963" alt width="100px"> A Firka IPA fájlainak telepítéséhez kövesd ezt az útmutatót.
 
 Három lehetőséged van a Firka telepítésére:
-- [Feather](#1-feather-metódus) - Fizetős, nem kell gép hozzá, 1 évre érvényes (a cert nem kell)
-- [ESign](#2-esign-metódus) - Ingyenes, nem kell gép hozzá, örökre
-- [SideStore](#3-sidestore-metódus-a-sidestore-az-altstore-nak-egy-jobb-verziója) - Ingyenes, kell hozzá Mac, örökre
+- [Feather](#1-feather-metódus) - Fizetős, nem kell gép hozzá, 1 évre érvényes (a cert jar le, meg kell hosszabbítani)
+- [ESign](#2-esign-metódus) - Ingyenes, nem kell gép hozzá, örökre (ajanlott)
+- [SideStore](#3-sidestore-metódus-a-sidestore-az-altstore-nak-egy-jobb-verziója) - Ingyenes, kell hozzá Mac, 7 naponta reinstall
 
 
 ## 1. Feather metódus
