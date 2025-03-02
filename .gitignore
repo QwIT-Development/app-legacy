@@ -41,6 +41,7 @@ refilc/android/*key.properties
 **/.swiftpm/
 **/migrate_working_dir/
 **/.plugin_symlinks/
+**/local.properties
 
 # symbols, obfuscations
 **/app.*.symbols
