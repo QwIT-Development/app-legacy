@@ -6,7 +6,6 @@ import 'package:refilc/models/shared_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
-import 'package:refilc/models/user.dart';
 
 List? _cachedThemesJson;
 
@@ -113,9 +112,7 @@ class ShareProvider extends ChangeNotifier {
 Future<List<SharedTheme>> getAllPublicThemes(BuildContext context,
     {int offset = 0, int limit = 10}) async {
   // Fetch all themes only once if not already fetched
-  if (_cachedThemesJson == null) {
-    _cachedThemesJson = await FilcAPI.getAllSharedThemes(0);
-  }
+  _cachedThemesJson ??= await FilcAPI.getAllSharedThemes(0);
 
   List<SharedTheme> themes = [];
 

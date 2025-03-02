@@ -3,13 +3,11 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:refilc/models/ad.dart';
 import 'package:refilc/models/config.dart';
 import 'package:refilc/models/news.dart';
 import 'package:refilc/models/release.dart';
 import 'package:refilc/models/settings.dart';
 import 'package:refilc/models/shared_theme.dart';
-import 'package:refilc/models/supporter.dart';
 import 'package:refilc_kreta_api/models/school.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,50 +15,39 @@ import 'package:http/http.dart' as http;
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class FilcAPI {
-  // API base
+  // base url
   static const baseUrl = "https://api.refilcapp.hu";
 
-  // Public API
+  // unused schools list
   static const schoolList = "https://api.refilcapp.hu/v3/public/school-list";
+
+  // news endpoint
   static const news = "https://staticrf-api.pages.dev/news/index.json";
-  static const supporters = "0.0.0.0";
 
-  // Private API
-  static const ads = "0.0.0.0";
+  // analytics endpoint
   static const config = "$baseUrl/v3/private/config";
+
+  // bug report endpoint, always gets sent, no matter if the user pressed the button or no
   static const reportApi = "$baseUrl/v3/private/crash-report";
-  static const rfPlus = "0.0.0.0";
-  static const plusAuthLogin = "0.0.0.0";
-  static const plusAuthCallback = "0.0.0.0";
-  static const plusActivation = "0.0.0.0";
-  static const plusScopes = "0.0.0.0";
 
-  // Updates
-  static const repo = "QwIT-Development/app-legacy";
-  static const releases = "https://api.github.com/repos/$repo/releases";
+  // updates path to github
+  static const releases =
+      "https://api.github.com/repos/QwIT-Development/app-legacy/releases";
 
-  // Share API
+  // theme sharing api
   static const themeShare = "$baseUrl/v3/shared/theme/add";
   static const themeGet = "$baseUrl/v3/shared/theme/get";
   static const allThemes = "$themeGet/all";
   static const themeByID = "$themeGet/";
 
+  // i don't know why it is separated
   static const gradeColorsShare = "$baseUrl/v3/shared/grade-colors/add";
   static const gradeColorsGet = "$baseUrl/v3/shared/grade-colors/get";
   static const allGradeColors = "$gradeColorsGet/all";
   static const gradeColorsByID = "$gradeColorsGet/";
 
-  // Payment API
-  static const payment = "0.0.0.0";
-  static const stripeSheet = "0.0.0.0";
-
-  // Cloud Sync
-  // cloud sync? for what reason
-  static const cloudSyncApi = "0.0.0.0";
-
   static Future<bool> checkConnectivity() async =>
       (await Connectivity().checkConnectivity())[0] != ConnectivityResult.none;
-
 
   // nem tudom nem vazar-e senkit se, de mar ertelmetlen ez
   static Future<List<School>?> getSchools() async {
@@ -94,7 +81,8 @@ class FilcAPI {
       "rf-platform-version": settings.analyticsEnabled
           ? Platform.operatingSystemVersion
           : "unknown",
-      "rf-app-version": const String.fromEnvironment("APPVER", defaultValue: "?"),
+      "rf-app-version":
+          const String.fromEnvironment("APPVER", defaultValue: "?"),
       "rf-uinid": settings.xFilcId,
     };
 
@@ -139,45 +127,12 @@ class FilcAPI {
     return null;
   }
 
-  static Future<Supporters?> getSupporters() async {
-    try {
-      http.Response res = await http.get(Uri.parse(supporters));
-
-      if (res.statusCode == 200) {
-        return Supporters.fromJson(jsonDecode(res.body));
-      } else {
-        throw "HTTP ${res.statusCode}: ${res.body}";
-      }
-    } on Exception catch (error, stacktrace) {
-      log("ERROR: FilcAPI.getSupporters: $error $stacktrace");
-    }
-    return null;
-  }
-
-  static Future<List<Ad>?> getAds() async {
-    try {
-      http.Response res = await http.get(Uri.parse(ads));
-
-      if (res.statusCode == 200) {
-        return (jsonDecode(res.body) as List)
-            .cast<Map>()
-            .map((e) => Ad.fromJson(e))
-            .toList();
-      } else {
-        throw "HTTP ${res.statusCode}: ${res.body}";
-      }
-    } on Exception catch (error, stacktrace) {
-      log("ERROR: FilcAPI.getAds: $error $stacktrace");
-    }
-    return null;
-  }
-
   static Future<List<Release>?> getReleases() async {
     try {
       http.Response res = await http.get(Uri.parse(releases));
 
       if (res.statusCode == 200) {
-        return (jsonDecode(res.body) as List)
+        return (jsonDecode(utf8.decode(res.bodyBytes)) as List)
             .cast<Map>()
             .map((e) => Release.fromJson(e))
             .toList();
@@ -299,7 +254,7 @@ class FilcAPI {
       http.Response res = await http.get(Uri.parse(allThemes));
 
       if (res.statusCode == 200) {
-        return (jsonDecode(res.body) as List);
+        return (jsonDecode(utf8.decode(res.bodyBytes)) as List);
       } else {
         throw "HTTP ${res.statusCode}: ${res.body}";
       }
@@ -356,40 +311,6 @@ class FilcAPI {
     } on Exception catch (error, stacktrace) {
       log("ERROR: FilcAPI.getSharedGradeColors: $error $stacktrace");
     }
-    return null;
-  }
-
-  // payment
-  static Future<Map?> createPaymentSheet(String product) async {
-    try {
-      Map body = {
-        "product": product,
-      };
-
-      var client = http.Client();
-
-      http.Response res = await client.post(
-        Uri.parse(stripeSheet),
-        body: body,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      );
-
-      if (res.statusCode != 200) {
-        throw "HTTP ${res.statusCode}: ${res.body}";
-      }
-
-      return jsonDecode(res.body);
-    } on Exception catch (error, stacktrace) {
-      log("ERROR: FilcAPI.sendReport: $error $stacktrace");
-    }
-
-    return null;
-  }
-
-  // cloud sync
-  static Future<Map?> cloudSync(Map<String, String> data, String token) async {
     return null;
   }
 }
