@@ -1,6 +1,44 @@
-# <img src="https://github.com/user-attachments/assets/dadb8ed3-7073-4591-a004-0d4c646fa963" alt width="100px"> A Firka IPA fájlainak telepítéséhez kövesd ezt a útmutatót.
+# <img src="https://github.com/user-attachments/assets/dadb8ed3-7073-4591-a004-0d4c646fa963" alt width="100px"> A Firka IPA fájlainak telepítéséhez kövesd ezt az útmutatót.
 
-## WSF metódus (**FONTOS**: az iPhoneodon csináld.)
+Kettő lehetőséged van a Firka telepítésére:
+- [Feather](#1-feather-metódus) - Fizetős, nem kell gép hozzá, 1 évre érvényes (a cert nem kell)
+- [ESign](#2-esign-metódus) - Ingyenes, nem kell gép hozzá, örökre
+
+
+## 1. Feather metódus
+
+### 1. A .p12 és .mobileprovision beszerzése
+   - Vegyél certet a [kravasign.com](https://kravasign.com) oldalon
+   - Várnod kell kis időt (általában 72 óra)
+   - Csatlakozz a Discord szerverükhöz és nyiss egy ticketet a rendelési számoddal
+
+### 2. A várakozás után kapsz egy letöltési linket egy zip fájlhoz, ami három dolgot tartalmaz:
+   - .p12 
+   - .mobileprovision 
+   - Egy mappa a tanúsítvány jelszavával
+
+### 3. Töltsd le a legújabb Feather ipa-t innen: https://github.com/khcrysalis/Feather/releases
+### 4. Telepítés:
+   - Menj a sign.kravasign.com oldalra
+   - Töltsd fel a szükséges fájlokat:
+     - .p12
+     - .mobileprovision
+     - feather.ipa
+     - Add meg a tanúsítvány jelszavát
+   - Nyomd meg az `Upload and Sign` gombot, és várj, ez egy kis ideig eltarthat
+
+### 5. Certificate importálása:
+   - Menj a `Settings` fülre és kattints a `Add Certificate` gombra
+   - Kattints a `+`-ra és importáld a .mobileprovision-t a .p12-t és írd be a .p12 jelszavát aztán kattints a `Save` gombra
+
+### 6. Firka telepítése:
+   - Amint telepített a Feather, nyisd meg és menj a `Sources` fülre alul
+   - Kattints a `Add Repo` gombra és másold be hogy `https://raw.githubusercontent.com/spitkov/firkarepo/refs/heads/main/feather.json` és kattints az `Add` gombra
+   - Menj a `Firka Repository` menüpontra és kattints a letöltésre
+   - Ha letöltött menj a `Library` fülre és kattints a Firka appra azután `Sign Firka` aztán `Start Signing`
+   - A Signed Apps alatt látni fogod a firkát kattints rá és `Install Firka`
+
+## 2. ESign metódus
 
 ### 1. DNS profil telepítése
 - Nyisd meg az [Ultimate Sideloading Guide by WSF](https://whysoooofurious.netlify.app/) weboldalt a Safariban
@@ -52,17 +90,13 @@
 - Add meg a jelszót: `WSF`
 
 ### 6. Firka telepítése
-- Töltsd le a Firka IPA fájlt a Firka [Github repojából](https://github.com/QwIT-Development/app-legacy/releases/latest)
-- Nyisd meg az **ESignt**
-- Az `Import` gombbal importáld a Firka IPA fájlt
-- Nyomj rá a fájlra, majd válaszd az `Import App Library` opciót
-- Menj az `Apps` fülre
-- Nyomj a Firka appra, majd a `Signature` opcióra
-- Kapcsold be az `Install After Signed` opciót
-- Nyomj a piros `Signature` gombra
-- Amikor megjelenik az "*esign.yyyue.xyz* would like to Install **Firka**" üzenet, nyomj a **Telepítés/Install** gombra
-- Várj, amíg befejeződik a telepítés
-- Menj a kezdőképernyőre és nyisd meg a Firkát
+- Menj az `AppStore` fülre alul aztán bal felül kattints az `App Source` gombra azután jobb felül kattints az +-ra és másold be hogy `https://raw.githubusercontent.com/spitkov/firkarepo/refs/heads/main/esign.json`
+- Menj vissza és az AppStore fülben látni fogod a Firká-t
+- Kattints hogy `Download`
+- A `Download` fülben láthatod a letöltést, ha letöltött kattints rá és nyomd meg a `Import App Library` gombot
+- Azután menj a `Apps` fülre és válaszd ki a Firkát kattints a `Signature`-re aztán megint `Signature` (fontos ne lépj ki az esign-bol amíg nem jelentek meg az `Install` és az `Exit` gombok)
+- Ha végzett kattints az `Install` gombra és fel fog jönni egy kis menü hogy esign.yyyue.xyz telepíteni akarja a Firkát akkor kattints arra hogy Telepítés
+- És kész is 🎉
 
 ## Kreditek
 - **A Firka csapat**: Az app zöld verziójának fejlesztői
