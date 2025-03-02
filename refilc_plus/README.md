@@ -5,23 +5,23 @@
 Ez a verzió **NEM** sérti az **[AGPL](https://github.com/QwIT-Development/app-legacy/blob/master/LICENSE)** licenszt, ami alatt van az alkalmazás, ellentétben a [korábbi verziójával](https://github.com/refilc/naplo/).
 
 Korábbi verzió:<br>
-![image](https://github.com/user-attachments/assets/170dc789-bb7e-449f-8aca-5a767d1097e8)<br>
+[![image](https://github.com/user-attachments/assets/170dc789-bb7e-449f-8aca-5a767d1097e8)](https://github.com/refilc/naplo/commit/8583609abbd6a93ac55ecff93c886d0898f71f12)<br>
 ([repo](https://github.com/refilc/naplo-plus/))
 
 Ha a projekt AGPL licenc alatt van terjesztve, akkor a teljes forráskódnak, beleértve a **nélkülözhetetlen** részeket is, nyíltnak kell lennie. Ha ez nem lehetséges, akkor a projekt nem terjeszthető **AGPL** licenc alatt.\
 Ha a reFilc egy másik licensz alatt lett volna, akkor a jelen kód talán lehetett volna zárt forráskódú. Igen, a Filc premium repoja jól volt licenszelve.
 
-ui.: *A "fixed plus bypass" (8583609abbd6a93ac55ecff93c886d0898f71f12) nevű commit nem ér semmit, mert még mindig ugyan úgy be lehet aktiválni az appot, de lehet próbálkozni...*\
-*Még valami MD5 már nem biztonságos hashing, de jól van ha azt szeretnéd, hogy crackeljék a hasheket az emberek csak hajrá*
+ui.: *A "fixed plus bypass" ([8583609abbd6a93ac55ecff93c886d0898f71f12](https://github.com/refilc/naplo-plus/commit/9516f7d94bad8edc910113ea52250349f391ee0e)) nevű commit nem ér semmit, mert még mindig ugyan úgy be lehet aktiválni az appot, de lehet próbálkozni...*\
+*Még valami az [MD5 már nem biztonságos](https://en.wikipedia.org/wiki/MD5#Overview_of_security_issues) hashing, de jól van ha azt szeretnéd, hogy crackeljék a hasheket az emberek csak hajrá*
 
-Jé, hát ez meg mi? 2 éven keresztül AGPL alatt volt licenszelve a repo és nem volt publikus?\
-![image](https://github.com/user-attachments/assets/d2e35a6b-9a72-4c89-8a83-46369442c1fd)
+[Jé](https://github.com/refilc/naplo-plus/blob/main/LICENSE), hát ez meg mi? [2 éven keresztül AGPL alatt volt licenszelve](https://github.com/refilc/naplo-plus/commits/main/LICENSE) a repo és nem volt publikus?\
+[![image](https://github.com/user-attachments/assets/d2e35a6b-9a72-4c89-8a83-46369442c1fd)](https://github.com/refilc/naplo-plus/blob/main/LICENSE)
 
-Több sebből vérzik ez a reFilc+
+Több sebből vérzik ez a *reFilc+*
 
 ### Működés
 
-A működése az rf+-nak elég egyszerű, vannak scopek és a szervernek vissza kell adnia azt.\
+A működése az *rf+*nak elég egyszerű, vannak scopek és a szervernek vissza kell adnia azt.\
 Viszont Filc óta van benne egy *all* scope, ami minden funkciót felold (`refilc.plus.*`)\
 A fél auth.dart kódot meggyilkolva skippelni lehet az egész rf apit, hogy állandóan `...*` scopet adjon vissza, ezzel aktiválva az appot. (take notes)\
 Ha mindenhova hardcodelve lett volna az auth, akkor *talán* ez a bypass nem működött volna. (jaj ne, de akkor leakelve lett volna az auth és megint csak működött volna)\
