@@ -1,22 +1,72 @@
-# A Firka, és más IPA fájlok telepítéséhez kövesd ezt a útmutatót.
+# <img src="https://github.com/user-attachments/assets/dadb8ed3-7073-4591-a004-0d4c646fa963" alt width="100px"> A Firka IPA fájlainak telepítéséhez kövesd ezt a útmutatót.
 
-## WSF metódus **FONTOS**: az iPhoneodon csináld.
+## WSF metódus (**FONTOS**: az iPhoneodon csináld.)
 
-Nyisd meg a https://whysoooofurious.netlify.app/ weboldalt a Safariban, és nyomj rá a Downloads gombra, majd a Config Profiles gombra. Válszd a madNS profilt, mivel az jobb. (most nem megyek bele sorry) Amint letöltötted a profilt, nyisd meg a Beállításokat és a Neved alatt, lesz az hogy: Profil Letöltve, vagy ha angol a telód: Profile Downloaded. Nyomj rá, és nyomd meg a Telepítés/Install gombot. (Lehet hogy bejon par extra popup, csak nyomd hogy következő/next). Amint telepítetted, görgess le az Általánoshoz/General, nyomj a VPN, DNS, és eszközfelügyelet/VPN, DNS and Device Management vagy iOS 18-ba: VPN és eszközfelügyelet/VPN and Device Managementre. Nyomj a DNS opcióra és válazd bármelyiket (Az AdBlock letiltja a reklámokat habár pár scripted is letilt, ami nem a legjobb mert én alap böngészéslor és probémákba futottam. Az OTA blocker az letiltja az Over-The-Air frissítéseket. Én a símát ajánlom, az AdBlocker és a OTA block nélkülit. 
+### 1. DNS profil telepítése
+- Nyisd meg az [Ultimate Sideloading Guide by WSF](https://whysoooofurious.netlify.app/) weboldalt a Safariban
+- Nyomj rá a `Downloads` gombra, majd a `Config Profiles` gombra
+- Válaszd a `madNS` profilt
+- A profil letöltése után nyisd meg a **Beállításokat**
+- A neved alatt megjelenik a **Profil Letöltve** (vagy angolul: **Profile Downloaded**)
+- Nyomj rá, majd nyomd meg a **Telepítés/Install** gombot
+- Kövesd az utasításokat (a felugró ablakokon nyomd a **Következő/Next** gombot)
+- A telepítés után görgess le az **Általános/General** menüpontra
+- Nyomj a **VPN, DNS, és eszközfelügyelet** (vagy iOS 18-ban: **VPN és eszközfelügyelet**) opcióra
+- Válaszd a **DNS** opciót és válassz egyet a lehetőségek közül:
+    - **Sima**: Ajánlott, alap funkcionalitás
+    - **AdBlock**: Letiltja a reklámokat (néhány script is letiltásra kerülhet, ami problémákat okozhat)
+    - **OTA blocker**: Letiltja az Over-The-Air (rendszer) frissítéseket
 
-Amint megvan, menj vissza a weboldalra amit megnyitottunk korábban. Nyomj a Certificates gombra, és abban, újra nyomhj rá hogy Certificates. Engedélyezd a fájl letöltését, és amint letöltötted, csomizd ki a ZIPet. 
+### 2. Tanúsítványok telepítése
+- Menj vissza a korábban megnyitott weboldalra
+- Nyomj a `Certificates` gombra, majd újra a `Certificates` opcióra
+- Engedélyezd a fájl letöltését
+- Töltsd le és csomagold ki a ZIP fájlt
 
-Amint ez is megvan, nyomd meg hogy vissza hogy visszatérj a többi letöltéshez. Ezután, nyomj a Portal gombra. Itt próbáld meg a Portal - Continentet. Ha olyan hibát dob letöltés után hogy Integritás nem ellenőrizhető, akkor próbáld meg a többit. De ha az Avex műkődik, akkor csak az egyik appot választhatod. (erre visszatérek később.) Ha egyik se sikerűl, feketelistán vagy. Írj a Firka szerverbe ha nem működik valami.
+### 3. Portal telepítése
+- Menj vissza a letöltési oldalra
+- Nyomj a `Portal` gombra
+- Próbáld meg a `Portal - Continent` opciót
+- Ha "*Integritás nem ellenőrizhető*" hibát kapsz, próbáld a többi lehetőséget
+- Ha az **Avex** működik, csak azt az egy appot választhatod
+- Ha egyik sem működik, feketelistán lehetsz - írj a Firka Discord szerverbe segítségért
 
-Ha megvan a Portal, nyisd meg, és menj végig a Setupon, azt menj a Downloads tabra, na és itt ha az Avexet választottad mikor a Portált töltötted le, csak ESignt választhatsz. A Firka az Esignt ajánlja.
+### 4. ESign telepítése
+- Nyisd meg a **Portal**t
+- Menj végig a beállítási folyamaton
+- Navigálj a `Downloads` fülre
+- Ha az **Avex**et választottad a **Portal** telepítésekor, csak az **ESign** opciót választhatod (a Firka ezt ajánlja)
+- Nyomd meg az **ESign** opciót, majd telepítsd ugyanúgy, mint a **Portal**t
+- Nyisd meg az **ESignt** és fogadd el a licencszerződést
 
-Nyomd meg az Esignt és nyomj ugyanarra a helyre, amivel a portált töltötted le. Amint rányomtál, telepítsd, és nyisd meg az Esignt. Fogadd el a licencszerződést, és amint bent vagy a fájlnézetbe, nyomj a három pontra a sarokba, és nyomj az Import gombra. Navigálj ahhoz a mappához amit letöltöttünk és kicsomagoltunk. (Ne a ZIPet, hanem a mappát nézd). Nyisd meg a mappát, és válaszd ki azt a Mappát ami az a helynek a neve amivel A portalt töltötted le. Nyomj rá a "cert neve.p12" fájlra, és miután be lett importálva, nyomj a 3 pontra újra, és nyomj az "Import" gombra, és navigálj ugyanoda. A p12 melett találsz egy .mobileprovision fájlt. Ezt is töltsd be, és amint betöltötted, nyomj rá a fájlnézetből az Esignba a "certneve.p12" fájlra és a menüben nyomj az "Import certificate management" gombra. Kérni fogja a jelszót ami "WSF".
+### 5. Tanúsítványok importálása
+- A fájlnézetben nyomj a három pontra a sarokban
+- Válaszd az `Import` opciót
+- Navigálj a korábban letöltött és kicsomagolt mappához
+- Nyisd meg azt a mappát, ami a Portal letöltési helyének nevét viseli
+- Válaszd ki a "*cert_neve.p12*" fájlt és importáld
+- Nyomj újra a három pontra, válaszd az `Import` opciót
+- Importáld a *.mobileprovision* fájlt is ugyanabból a mappából
+- A fájlnézetben nyomj rá a "*cert_neve.p12*" fájlra
+- Válaszd az `Import certificate management` opciót
+- Add meg a jelszót: `WSF`
 
-Ezzenel készenállsz. Töltsd le a Firka IPA fájlt a Firka szerverről, és nyisd meg az Esignt, ugyanúgy az Import gombal importáld be a Firka ipát. Amint bent van az Esignba, nyomj rá, és nyomd meg hogy Import App Library. Aztán menj az Apps tabba, és nyomj a Firka appra, nyomj rá hogy Signature, kapcsold be hogy "Install After Signed"ot. Nyomj aztán a Piros "Signature" gombra. Várj egy kicsit míg nem írja azt hogy
+### 6. Firka telepítése
+- Töltsd le a Firka IPA fájlt a Firka [Github repojából](https://github.com/QwIT-Development/app-legacy/releases/latest)
+- Nyisd meg az **ESignt**
+- Az `Import` gombbal importáld a Firka IPA fájlt
+- Nyomj rá a fájlra, majd válaszd az `Import App Library` opciót
+- Menj az `Apps` fülre
+- Nyomj a Firka appra, majd a `Signature` opcióra
+- Kapcsold be az `Install After Signed` opciót
+- Nyomj a piros `Signature` gombra
+- Amikor megjelenik az "*esign.yyyue.xyz* would like to Install **Firka**" üzenet, nyomj a **Telepítés/Install** gombra
+- Várj, amíg befejeződik a telepítés
+- Menj a kezdőképernyőre és nyisd meg a Firkát
 
-"esign.yyyue.xyz" would like to Install "Firka". Nyomj az Telepítés/Install Gombra. Várj egy kicsit, menj a Home Screenhez, és nyisd meg a Firkát. 
-
-# Kreditek
-### A Firka csapat aki az app zöld verzióját lehetővé tette
-[Discord](https://discord.gg/6awUPSMFKe) [GitHub](https://github.com/QwIT-Development/app-legacy)
-### WSF: Aki lehetővé tette a Permanent Signingot, X(aka Twitter): https://x.com/wsf_team
+## Kreditek
+- **A Firka csapat**: Az app zöld verziójának fejlesztői
+    - Discord: [https://discord.gg/6awUPSMFKe](https://discord.gg/6awUPSMFKe)
+    - GitHub: [https://github.com/QwIT-Development/app-legacy](https://github.com/QwIT-Development/app-legacy)
+- **WSF**: A Permanent Signing lehetővé tétele
+    - X (korábban Twitter): [https://x.com/wsf_team](https://x.com/wsf_team)
