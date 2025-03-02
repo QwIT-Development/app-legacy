@@ -16,6 +16,7 @@ ui.: *A "fixed plus bypass" ([8583609abbd6a93ac55ecff93c886d0898f71f12](https://
 
 [Jé](https://github.com/refilc/naplo-plus/blob/main/LICENSE), hát ez meg mi? [2 éven keresztül AGPL alatt volt licenszelve](https://github.com/refilc/naplo-plus/commits/main/LICENSE) a repo és nem volt publikus?\
 [![image](https://github.com/user-attachments/assets/d2e35a6b-9a72-4c89-8a83-46369442c1fd)](https://github.com/refilc/naplo-plus/blob/main/LICENSE)
+(ha esetleg átírná idő közben [itt megtudod nézni](https://github.com/refilc/naplo-plus/blob/3cb656418f669522539547cfb9169edb6cfdc4de/LICENSE) eredeti állapotában, vagy nézd meg a jelen mappában lévő LICENSE fájlt)
 
 Több sebből vérzik ez a *reFilc+*
 
