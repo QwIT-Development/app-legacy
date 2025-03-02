@@ -9,9 +9,15 @@ Korábbi verzió:<br>
 ([repo](https://github.com/refilc/naplo-plus/))
 
 Ha a projekt AGPL licenc alatt van terjesztve, akkor a teljes forráskódnak, beleértve a **nélkülözhetetlen** részeket is, nyíltnak kell lennie. Ha ez nem lehetséges, akkor a projekt nem terjeszthető **AGPL** licenc alatt.\
-Ha a reFilc egy másik licensz alatt lett volna, akkor a jelen kód lehetett volna zárt forráskódú. Igen, a Filc premium repoja jól volt licenszelve.
+Ha a reFilc egy másik licensz alatt lett volna, akkor a jelen kód talán lehetett volna zárt forráskódú. Igen, a Filc premium repoja jól volt licenszelve.
 
-ui.: *A "fixed plus bypass" (8583609abbd6a93ac55ecff93c886d0898f71f12) nevű commit nem ér semmit, mert még mindig ugyan úgy be lehet aktiválni az appot, de lehet próbálkozni...*
+ui.: *A "fixed plus bypass" (8583609abbd6a93ac55ecff93c886d0898f71f12) nevű commit nem ér semmit, mert még mindig ugyan úgy be lehet aktiválni az appot, de lehet próbálkozni...*\
+*Még valami MD5 már nem biztonságos hashing, de jól van ha azt szeretnéd, hogy crackeljék a hasheket az emberek csak hajrá*
+
+Jé, hát ez meg mi? 2 éven keresztül AGPL alatt volt licenszelve a repo és nem volt publikus?\
+![image](https://github.com/user-attachments/assets/d2e35a6b-9a72-4c89-8a83-46369442c1fd)
+
+Több sebből vérzik ez a reFilc+
 
 ### Működés
 
@@ -46,3 +52,4 @@ Eredeti filc scopekhez képest a reFilcben sokkal több dolog volt paywalleve
 + ...CALENDAR_SYNC
 ```
 Szegjük meg a licenszt és rakjunk dolgokat paywall mögé!!1!
+
