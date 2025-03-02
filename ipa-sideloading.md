@@ -1,8 +1,9 @@
 # <img src="https://github.com/user-attachments/assets/dadb8ed3-7073-4591-a004-0d4c646fa963" alt width="100px"> A Firka IPA fájlainak telepítéséhez kövesd ezt az útmutatót.
 
-Kettő lehetőséged van a Firka telepítésére:
+Három lehetőséged van a Firka telepítésére:
 - [Feather](#1-feather-metódus) - Fizetős, nem kell gép hozzá, 1 évre érvényes (a cert nem kell)
 - [ESign](#2-esign-metódus) - Ingyenes, nem kell gép hozzá, örökre
+- [SideStore](#3-sidestore-metódus-a-sidestore-az-altstore-nak-egy-jobb-verziója) - Ingyenes, kell hozzá Mac, örökre
 
 
 ## 1. Feather metódus
@@ -98,9 +99,76 @@ Kettő lehetőséged van a Firka telepítésére:
 - Ha végzett kattints az `Install` gombra és fel fog jönni egy kis menü hogy esign.yyyue.xyz telepíteni akarja a Firkát akkor kattints arra hogy Telepítés
 - És kész is 🎉
 
+## 3. SideStore metódus (A SideStore az AltStore-nak egy jobb verziója)
+
+### 1. Előfeltételek
+- Mac számítógép macOS 10.15 vagy újabb verzióval
+- Apple fiók
+- Internet kapcsolat
+- iPhone iOS 14 vagy újabb verzióval
+
+### 2. Szükséges fájlok letöltése
+- AltServer: https://cdn.altstore.io/file/altstore/altserver.zip
+- SideStore IPA: https://github.com/sidestore/sidestore/releases/latest/download/sidestore.ipa
+- JitterBugPair: https://github.com/osy/Jitterbug/releases/download/v1.3.1/jitterbugpair-macos.zip
+
+### 3. AltServer telepítése és beállítása
+- Csomagold ki az AltServer-t a ZIP fájlból
+- Helyezd át az Alkalmazások mappába
+- Indítsd el az AltServer-t
+
+### 4. SideStore telepítése
+- Csatlakoztasd az iPhone-od a Mac-hez
+- Engedélyezd a "Megbízható számítógép" opciót az iPhone-on (ha kéri)
+- A Mac menüsorában tartsd nyomva az Option⌥/Alt⌥ gombot
+- Kattints az AltStore ikonra (rombusz alakú)
+- Válaszd a "Sideload .ipa" opciót
+- Válaszd ki az eszközöd nevét
+- Válaszd ki a letöltött SideStore IPA fájlt
+- Add meg az Apple fiókod adatait
+- Várd meg a telepítést
+- Az iPhone-on menj a Beállítások > Általános > VPN & Eszközfelügyelet menübe
+- Keresd meg az Apple email címed és nyomd meg a "Megbízható" gombot
+
+### 5. Fejlesztői mód engedélyezése (iOS 16 vagy újabb esetén)
+- Menj a Beállítások > Adatvédelem és Biztonság menübe
+- Görgess az aljára
+- Kapcsold be a Fejlesztői módot
+- Várd meg az iPhone újraindulását
+- Húzd fel a képernyőt az indítás közben amikor kéri
+
+### 6. Párosítás beállítása
+- Csomagold ki a JitterBugPair ZIP fájlt
+- Állíts be jelkódot az iPhone-on (ha még nincs)
+- Csatlakoztasd az iPhone-od
+- Oldd fel az eszközt és hagyd a kezdőképernyőn
+- Futtasd a JitterBugPair parancs fájlt
+- A generált párosító fájl neve: "(UDID).mobiledevicepairing"
+- Tömörítsd be a párosító fájlt
+- Küldd át az iPhone-ra (AirDrop vagy email)
+- Az iPhone-on nyisd meg a Fájlok alkalmazást
+- Csomagold ki a ZIP fájlt
+- Indítsd el a SideStore alkalmazást
+- Nyomj az OK gombra
+- Válaszd ki a párosító fájlt
+
+### 7. WireGuard VPN beállítása
+- Töltsd le a WireGuard VPN alkalmazást az App Store-ból: https://apps.apple.com/us/app/wireguard/id1441195209
+
+### Megjegyzések:
+- Ha frissíted az eszközöd, újra kell csinálnod a párosítást
+- Új párosító fájl hozzáadásához:
+  - Menj a SideStore beállításaiba
+  - Nyomd meg a "Reset Pairing File" gombot
+  - Add hozzá az új verziót
+
 ## Kreditek
 - **A Firka csapat**: Az app zöld verziójának fejlesztői
     - Discord: [https://discord.gg/6awUPSMFKe](https://discord.gg/6awUPSMFKe)
     - GitHub: [https://github.com/QwIT-Development/app-legacy](https://github.com/QwIT-Development/app-legacy)
 - **WSF**: A Permanent Signing lehetővé tétele
     - X (korábban Twitter): [https://x.com/wsf_team](https://x.com/wsf_team)
+- **Spitkov**: A Feather útmutató írója, és a repok készítője/maintainelője.
+    - Weboldal: [https://spitkov.hu](https://spitkov.hu)
+- **TheAppleUser**: Az Esign és SideStore útmutató írója.
+    - X (korábban Twitter): [https://x.com/TheAppleUser11](https://x.com/TheAppleUser11)
