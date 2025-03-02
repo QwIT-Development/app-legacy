@@ -1,57 +1,96 @@
+# /refilc
+refilc/debug-info/
 
-refilc/.flutter-plugins
-refilc/.flutter-plugins-dependencies
-refilc/pubspec.lock
-refilc/.dart_tool/
-# refilc/android/
-# refilc/ios/
-# refilc/windows/
-# refilc/linux/
-# refilc/macos/
-refilc/build/
-refilc/android/key.properties
-refilc/android/debug.keystore
+# /refilc/android
+refilc/android/*.jks
+refilc/android/*key.properties
+**/.gradle/
+**/.kotlin/
 
-# refilc_desktop_ui/.flutter-plugins
-# refilc_desktop_ui/.flutter-plugins-dependencies
-# refilc_desktop_ui/pubspec.lock
-# refilc_desktop_ui/.dart_tool/
+# flutter
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/pubspec.lock
+**/.pub-cache/
+**/.pub/
+**/build/
+**/.packages
+**/doc/api/
+**/ios/Flutter/.last_build_id
+**/.symlinks/
 
-refilc_kreta_api/.flutter-plugins
-refilc_kreta_api/.flutter-plugins-dependencies
-refilc_kreta_api/pubspec.lock
-refilc_kreta_api/.dart_tool/
+# ides
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
 
-refilc_mobile_ui/.flutter-plugins
-refilc_mobile_ui/.flutter-plugins-dependencies
-refilc_mobile_ui/pubspec.lock
-refilc_mobile_ui/.dart_tool/
+# Miscellaneous
+**.class
+**.log
+**.pyc
+**.swp
+**/.DS_Store
+**/.atom/
+**/.build/
+**/.buildlog/
+**/.history
+**/.svn/
+**/.swiftpm/
+**/migrate_working_dir/
+**/.plugin_symlinks/
 
-# filcnaplo_premium/.flutter-plugins
-# filcnaplo_premium/.flutter-plugins-dependencies
-# filcnaplo_premium/pubspec.lock
-# filcnaplo_premium/.dart_tool/
+# symbols, obfuscations
+**/app.*.symbols
+**/app.*.map.json
 
-.vscode
-.github
-.idea
-.gitmodules
-.gradle
-.kotlin
+# android releated
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+**/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
 
-refilc/.DS_Store
-.DS_Store
-refilc/linux/flutter/
-.plugin_symlinks/
-refilc/macos/Flutter/
-refilc/ios/Flutter/
-refilc/ios/Runner/GeneratedPluginRegistrant.h
-refilc/ios/Runner/GeneratedPluginRegistrant.m
-refilc/android/local.properties
-refilc/android/debugkey.properties
-refilc/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+# ios releated
+**/Pods
+**/Podfile.lock
+**/UserInterfaceState.xcuserstate
+**/ios/**/*.mode1v3
+**/ios/**/*.mode2v3
+**/ios/**/*.moved-aside
+**/ios/**/*.pbxuser
+**/ios/**/*.perspectivev3
+**/ios/**/*sync/
+**/ios/**/.sconsign.dblite
+**/ios/**/.tags*
+**/ios/**/.vagrant/
+**/ios/**/DerivedData/
+**/ios/**/Icon?
+**/ios/**/Pods/
+**/ios/**/.symlinks/
+**/ios/**/profile
+**/ios/**/xcuserdata
+**/ios/.generated/
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/Flutter/
 
+# dart
+**/.env*
+**/*.dart.js
+**/*.info.json
+
+# tools.py logs
 tool_logs/build/*.log
 tool_logs/d8dx_fix/*.log
 tool_logs/pub_fix/*.log
-refilc_mobile_ui/android/local.properties
