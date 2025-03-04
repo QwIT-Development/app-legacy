@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#    refilc, the unofficial client for e-Kréta
+#    Firka legacy (formely "refilc"), the unofficial client for e-Kréta
 #    Copyright (C) 2025  Firka team (QwIT development)
 #
 #    This program is free software: you can redistribute it and/or modify
