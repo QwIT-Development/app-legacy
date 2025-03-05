@@ -107,17 +107,17 @@ Három lehetőséged van a Firka telepítésére:
 - Internet kapcsolat
 - iPhone iOS 14 vagy újabb verzióval
 
-### 2. Szükséges fájlok letöltése
+### 2. Szükséges fájlok letöltése (Maceden)
 - AltServer: https://cdn.altstore.io/file/altstore/altserver.zip
 - SideStore IPA: https://github.com/sidestore/sidestore/releases/latest/download/sidestore.ipa
 - JitterBugPair: https://github.com/osy/Jitterbug/releases/download/v1.3.1/jitterbugpair-macos.zip
 
-### 3. AltServer telepítése és beállítása
+### 3. AltServer telepítése és beállítása (Maceden)
 - Csomagold ki az AltServer-t a ZIP fájlból
 - Helyezd át az Alkalmazások mappába
 - Indítsd el az AltServer-t
 
-### 4. SideStore telepítése
+### 4. SideStore telepítése (Maceden és az iPhoneodon)
 - Csatlakoztasd az iPhone-od a Mac-hez
 - Engedélyezd a "Megbízható számítógép" opciót az iPhone-on (ha kéri)
 - A Mac menüsorában tartsd nyomva az Option⌥/Alt⌥ gombot
@@ -130,14 +130,14 @@ Három lehetőséged van a Firka telepítésére:
 - Az iPhone-on menj a Beállítások > Általános > VPN & Eszközfelügyelet menübe
 - Keresd meg az Apple email címed és nyomd meg a "Megbízható" gombot
 
-### 5. Fejlesztői mód engedélyezése (iOS 16 vagy újabb esetén)
+### 5. Fejlesztői mód engedélyezése (iOS 16 vagy újabb esetén) (iPhoneodon)
 - Menj a Beállítások > Adatvédelem és Biztonság menübe
 - Görgess az aljára
 - Kapcsold be a Fejlesztői módot
 - Várd meg az iPhone újraindulását
 - Húzd fel a képernyőt az indítás közben amikor kéri
 
-### 6. Párosítás beállítása
+### 6. Párosítás beállítása (Maceden)
 - Csomagold ki a JitterBugPair ZIP fájlt
 - Állíts be jelkódot az iPhone-on (ha még nincs)
 - Csatlakoztasd az iPhone-od
@@ -147,13 +147,21 @@ Három lehetőséged van a Firka telepítésére:
 - Tömörítsd be a párosító fájlt
 - Küldd át az iPhone-ra (AirDrop vagy email)
 - Az iPhone-on nyisd meg a Fájlok alkalmazást
-- Csomagold ki a ZIP fájlt
+- Csomagold ki a ZIP fájlt.
+
+### 7. WireGuard VPN beállítása (iPhoneodon)
+- Töltsd le a WireGuard VPN alkalmazást az App Store-ból: https://apps.apple.com/us/app/wireguard/id1441195209
+- Telepítsd az alábbi Configuration Fájlt: https://github.com/sidestore/sidestore/releases/download/0.1.1/sidestore.conf Amint ez megvan, nyisd meg a Fájlok alkalmazást, és keresd meg hogy "SideStore.conf". Nyomj rá hosszan és "oszd meg". A Megosztó ablakba ha kell, görgess a "Több/More" gombra, és nyisd meg a WireGuard-al.
+- Nyomj az Engedélyezésre mikor azt mondja hogy: "A "WireGuard" VPN konfigurációt szeretne hozzáadni". Megynyitja a Beállításokat. Mikor kéri, írd be a jelkódodat. Ez vissza fog dobni a WireGuardba. Kapcsold be a SideStore-t. (Ez a "VPN" quote-unquote nem egy VPN, csak letiltja az Applenek az oscp-jét. Az OSCP az ami ellenőrzi hogy mit sideloadingolsz. Magyarúl, ez bisztonságos)
+
+### 8. SideStore app beállítása (iPhoneodon)
 - Indítsd el a SideStore alkalmazást
 - Nyomj az OK gombra
 - Válaszd ki a párosító fájlt
+- Jelentkezz be az Apple Fiókoddal
 
-### 7. WireGuard VPN beállítása
-- Töltsd le a WireGuard VPN alkalmazást az App Store-ból: https://apps.apple.com/us/app/wireguard/id1441195209
+
+
 
 ### Megjegyzések:
 - Ha frissíted az eszközöd, újra kell csinálnod a párosítást
