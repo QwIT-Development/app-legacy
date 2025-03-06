@@ -42,7 +42,7 @@ dependencies:
   package_info_plus: ^8.2.1
   dotted_border: ^2.1.0
   screenshot: ^3.0.0
-  image_gallery_saver_plus: ^3.0.5
+  image_gallery_saver_plus: ^4.0.0
   rounded_expansion_tile: ^0.0.13
   flutter_expandable_fab: ^2.3.0
   intl: ^0.19.0
