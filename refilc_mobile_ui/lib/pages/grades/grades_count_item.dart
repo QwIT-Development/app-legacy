@@ -67,12 +67,15 @@ class GradesCountItem extends StatelessWidget {
         ),
         SizedBox(
           width: 22.0,
-          child: Text(
-            count.toString(),
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14.0,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              count.toString(),
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 14.0,
+              ),
             ),
           ),
         ),
