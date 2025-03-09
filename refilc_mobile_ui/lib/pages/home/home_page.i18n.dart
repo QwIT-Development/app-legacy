@@ -38,7 +38,7 @@ extension Localization on String {
           "Messages": "Üzenetek",
           "Absences": "Hiányzások",
           "update_available": "Frissítés elérhető",
-          "missed_exams": "Ezen a héten hiányoztál %s dolgozatról.",
+          "missed_exams": "Ezen a héten hiányoztál %s számonkérésről.",
           "missed_exam_contact": "Keresd %s tanár urat/hölgyet, hogy pótold!",
         },
         "de_de": {
