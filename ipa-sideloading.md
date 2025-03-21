@@ -1,9 +1,9 @@
 # <img src="https://github.com/user-attachments/assets/dadb8ed3-7073-4591-a004-0d4c646fa963" alt width="100px"> A Firka IPA fájlainak telepítéséhez kövesd ezt az útmutatót.
 
 Három lehetőséged van a Firka telepítésére:
-- [Feather](#1-feather-metódus) - Fizetős, nem kell gép hozzá, 1 évre érvényes (a cert jár le, meg kell hosszabbítani)
+- [Feather](#1-feather-metódus) - Fizetős, nem kell gép hozzá, 1 évre érvényes (ha lejár a certificate, újra meg kell vásárolni!)
 - [ESign](#2-esign-metódus) - Ingyenes, nem kell gép hozzá, örökre van (ajánlott)
-- [SideStore](#3-sidestore-metódus-a-sidestore-az-altstore-nak-egy-jobb-verziója) - Ingyenes, kell hozzá Mac, 7 naponta reinstall
+- [SideStore](#3-sidestore-metódus-a-sidestore-az-altstore-nak-egy-jobb-verziója) - Ingyenes, kell hozzá Mac, viszont Windowsal is működik, 7 naponta resign (telefonon megteheted lejárat előtt.)
 
 
 ## 1. Feather metódus
@@ -11,14 +11,14 @@ Három lehetőséged van a Firka telepítésére:
 ### 1. A .p12 és .mobileprovision beszerzése
    - Vegyél certet a [kravasign.com](https://kravasign.com) oldalon
    - Várnod kell kis időt (általában 72 óra)
-   - Csatlakozz a Discord szerverükhöz és nyiss egy ticketet a rendelési számoddal
+   - Csatlakozz a [Discord szerverünkhöz](https://discord.gg/6awUPSMFKe) és nyiss egy ticketet a rendelési számoddal
 
 ### 2. A várakozás után kapsz egy letöltési linket egy zip fájlhoz, ami három dolgot tartalmaz:
    - .p12 
    - .mobileprovision 
    - Egy mappa a tanúsítvány jelszavával
 
-### 3. Töltsd le a legújabb Feather ipa-t innen: https://github.com/khcrysalis/Feather/releases
+### 3. Töltsd le a legújabb Feather ipa-t innen: [Feather GitHub Releases](https://github.com/khcrysalis/Feather/releases)
 ### 4. Telepítés:
    - Menj a sign.kravasign.com oldalra
    - Töltsd fel a szükséges fájlokat:
@@ -41,8 +41,10 @@ Három lehetőséged van a Firka telepítésére:
 
 ## 2. ESign metódus
 
+## Szükséged van iOS 16 vagy újabb iOSre.
+
 ### 1. DNS profil telepítése
-- Nyisd meg az [Ultimate Sideloading Guide by WSF](https://whysoooofurious.netlify.app/) weboldalt a Safariban
+- Nyisd meg az [WSF Sideloading](https://whysoooofurious.netlify.app/) weboldalt a Safariban
 - Nyomj rá a `Downloads` gombra, majd a `Config Profiles` gombra
 - Válaszd a `madNS` profilt
 - A profil letöltése után nyisd meg a **Beállításokat**
@@ -54,7 +56,7 @@ Három lehetőséged van a Firka telepítésére:
 - Válaszd a **DNS** opciót és válassz egyet a lehetőségek közül:
     - **Sima**: Ajánlott, alap funkcionalitás
     - **AdBlock**: Letiltja a reklámokat (néhány script is letiltásra kerülhet, ami problémákat okozhat)
-    - **OTA blocker**: Letiltja az Over-The-Air (rendszer) frissítéseket
+    - **OTA blocker**: Letiltja az Over-The-Air (Apple szerverekről küldött) frissítéseket
 
 ### 2. Tanúsítványok telepítése
 - Menj vissza a korábban megnyitott weboldalra
@@ -150,7 +152,7 @@ Három lehetőséged van a Firka telepítésére:
 - Csomagold ki a ZIP fájlt.
 
 ### 7. WireGuard VPN beállítása (iPhoneodon)
-- Töltsd le a WireGuard VPN alkalmazást az App Store-ból: https://apps.apple.com/us/app/wireguard/id1441195209
+- Töltsd le a WireGuard VPN alkalmazást az App Store-ból: https://apps.apple.com/us/app/wireguard/id1441195209 [WireGuard App Store link](https://apps.apple.com/us/app/wireguard/id1441195209)
 - Telepítsd az alábbi Configuration Fájlt: https://github.com/sidestore/sidestore/releases/download/0.1.1/sidestore.conf Amint ez megvan, nyisd meg a Fájlok alkalmazást, és keresd meg hogy "SideStore.conf". Nyomj rá hosszan és "oszd meg". A Megosztó ablakba ha kell, görgess a "Több/More" gombra, és nyisd meg a WireGuard-al.
 - Nyomj az Engedélyezésre mikor azt mondja hogy: "A "WireGuard" VPN konfigurációt szeretne hozzáadni". Megynyitja a Beállításokat. Mikor kéri, írd be a jelkódodat. Ez vissza fog dobni a WireGuardba. Kapcsold be a SideStore-t. (Ez a "VPN" quote-unquote nem egy VPN, csak letiltja az Applenek az oscp-jét. Az OSCP az ami ellenőrzi hogy mit sideloadingolsz. Magyarúl, ez bisztonságos)
 
