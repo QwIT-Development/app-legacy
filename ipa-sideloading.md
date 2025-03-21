@@ -11,7 +11,7 @@ Három lehetőséged van a Firka telepítésére:
 ### 1. A .p12 és .mobileprovision beszerzése
    - Vegyél certet a [kravasign.com](https://kravasign.com) oldalon
    - Várnod kell kis időt (általában 72 óra)
-   - Csatlakozz a [Discord szerverünkhöz](https://discord.gg/6awUPSMFKe) és nyiss egy ticketet a rendelési számoddal
+   - Csatlakozz a [Discord szerverünkhöz](https://discord.gg/kravasign) és nyiss egy ticketet a rendelési számoddal
 
 ### 2. A várakozás után kapsz egy letöltési linket egy zip fájlhoz, ami három dolgot tartalmaz:
    - .p12 
