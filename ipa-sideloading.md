@@ -71,7 +71,8 @@ Három lehetőséged van a Firka telepítésére:
 - Ha "*Integritás nem ellenőrizhető*" hibát kapsz, próbáld a többi lehetőséget
 - Ha az **Avex** működik, csak azt az egy appot választhatod
 - Ha egyik sem működik, feketelistán lehetsz - írj a Firka Discord szerverbe segítségért
-
+- Menj a beállitásokba utána Általános az alatt VPN és eszközfelügyelet ott keresd meg a Profilt amit letöltöttél menjn rá és azon belül kattints a megbizásra utána megbizás (vagy megbizás és újraindítás) 
+  
 ### 4. ESign telepítése
 - Nyisd meg a **Portal**t
 - Menj végig a beállítási folyamaton
