@@ -1,4 +1,4 @@
-# <img src="https://github.com/user-attachments/assets/dadb8ed3-7073-4591-a004-0d4c646fa963" alt width="100px"> A Firka IPA fájlainak telepítéséhez kövesd ezt az útmutatót.
+# <img src="https://github.com/user-attachments/assets/dadb8ed3-7073-4591-a004-0d4c646fa963" alt width="24px"> A Firka IPA fájlainak telepítéséhez kövesd ezt az útmutatót.
 
 Három lehetőséged van a Firka telepítésére:
 - [Feather](#1-feather-metódus) - Fizetős, nem kell gép hozzá, 1 évre érvényes (ha lejár a certificate, újra meg kell vásárolni!)
@@ -69,8 +69,8 @@ Három lehetőséged van a Firka telepítésére:
 - Nyomj a `Portal` gombra
 - Próbáld meg a `Portal - Continent` opciót
 - Ha "*Integritás nem ellenőrizhető*" hibát kapsz, próbáld a többi lehetőséget
-- Ha az **Avex** működik, csak azt az egy appot választhatod
-- Ha egyik sem működik, feketelistán lehetsz - írj a Firka Discord szerverbe segítségért
+- Ha az **Avex** működik, csak az ESign-t választhatod
+- Ha egyik sem működik, feketelistán lehetsz - írj a Firka Discord szerverbe segítségért, vagy olvasd el a "[Revoke Fix Guide](https://github.com/TheAppleUser1/Revoke-Fixing-Guide)"-ot.
 - Menj a beállitásokba utána Általános az alatt VPN és eszközfelügyelet ott keresd meg a Profilt amit letöltöttél menjn rá és azon belül kattints a megbizásra utána megbizás (vagy megbizás és újraindítás) 
   
 ### 4. ESign telepítése
@@ -101,6 +101,11 @@ Három lehetőséged van a Firka telepítésére:
 - Azután menj a `Apps` fülre és válaszd ki a Firkát kattints a `Signature`-re aztán megint `Signature` (fontos ne lépj ki az esign-bol amíg nem jelentek meg az `Install` és az `Exit` gombok)
 - Ha végzett kattints az `Install` gombra és fel fog jönni egy kis menü hogy esign.yyyue.xyz telepíteni akarja a Firkát akkor kattints arra hogy Telepítés
 - És kész is 🎉
+
+### ESign FAQ:
+- Q1: Törölhetem az ESignt meg a profilt amiután meg lett a Firka?
+- A1: Igen, ha elakarod b*szni az egészet. Nem, ha meg szeretnéd tartani.
+- Több kérdés? Írj a Firka Discord szerverébe.
 
 ## 3. SideStore metódus (A SideStore az AltStore-nak egy jobb verziója)
 
@@ -172,6 +177,7 @@ Három lehetőséged van a Firka telepítésére:
   - Menj a SideStore beállításaiba
   - Nyomd meg a "Reset Pairing File" gombot
   - Add hozzá az új verziót
+  - Sajnáljuk a komplikált fojamatot. Sajnálatos módon a Testflight vagy az App Storera való kitétel jelenleg nem nagyon egy opció, mivel az Applenek 100 eurós fejelsztői membership vásárlása kötelező.
 
 ## Kreditek
 - **A Firka csapat**: Az app zöld verziójának fejlesztői
