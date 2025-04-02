@@ -34,34 +34,34 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 
 class FilcAPI {
   // base url
-  static const baseUrl = "https://api.refilcapp.hu";
+  static const baseUrl = "https://firka.app/api/v1";
 
   // unused schools list
-  static const schoolList = "https://api.refilcapp.hu/v3/public/school-list";
+  static const schoolList = "0.0.0.0";
 
   // news endpoint
-  static const news = "https://staticrf-api.pages.dev/news/index.json";
+  static const news = "$baseUrl/news/";
 
   // analytics endpoint
-  static const config = "$baseUrl/v3/private/config";
+  static const config = "$baseUrl/config/";
 
   // bug report endpoint, always gets sent, no matter if the user pressed the button or no
-  static const reportApi = "$baseUrl/v3/private/crash-report";
+  static const reportApi = "$baseUrl/crash/legacy";
 
   // updates path to github
   static const releases =
       "https://api.github.com/repos/QwIT-Development/app-legacy/releases";
 
   // theme sharing api
-  static const themeShare = "$baseUrl/v3/shared/theme/add";
-  static const themeGet = "$baseUrl/v3/shared/theme/get";
-  static const allThemes = "$themeGet/all";
-  static const themeByID = "$themeGet/";
+  static const themeShare = "$baseUrl/theme/";
+  static const themeGet = "$baseUrl/theme/";
+  static const allThemes = "$themeGet/theme/";
+  static const themeByID = "$themeGet/theme/";
 
   // i don't know why it is separated
-  static const gradeColorsShare = "$baseUrl/v3/shared/grade-colors/add";
-  static const gradeColorsGet = "$baseUrl/v3/shared/grade-colors/get";
-  static const allGradeColors = "$gradeColorsGet/all";
+  static const gradeColorsShare = "$baseUrl/theme/color/";
+  static const gradeColorsGet = "$baseUrl/theme/color/";
+  static const allGradeColors = "$gradeColorsGet/";
   static const gradeColorsByID = "$gradeColorsGet/";
 
   static Future<bool> checkConnectivity() async =>
