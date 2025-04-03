@@ -40,7 +40,7 @@ class FilcAPI {
   static const schoolList = "0.0.0.0";
 
   // news endpoint
-  static const news = "$baseUrl/news/";
+  static const news = "$baseUrl/news/legacy";
 
   // analytics endpoint
   static const config = "$baseUrl/config/";
