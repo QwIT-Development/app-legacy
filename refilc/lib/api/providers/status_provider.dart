@@ -42,7 +42,7 @@ class StatusProvider extends ChangeNotifier {
 
   void _handleDNSFailure() {
     try {
-      InternetAddress.lookup('api.refilc.hu').then((status) {
+      InternetAddress.lookup('firka.app').then((status) { // koszonjuk klima a hardcoded checket
         if (status.isEmpty) {
           if (!_stack.contains(Status.network)) {
             _stack.remove(Status.apiError);
