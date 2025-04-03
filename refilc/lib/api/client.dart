@@ -34,7 +34,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 
 class FilcAPI {
   // base url
-  static const baseUrl = "https://firka.app/api/v1";
+  static const baseUrl = "https://api.firka.app/api/v1";
 
   // unused schools list
   static const schoolList = "0.0.0.0";
