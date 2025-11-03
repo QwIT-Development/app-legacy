@@ -42,13 +42,16 @@ class TimetableController extends ChangeNotifier {
 
   static DateTime _getYearStart(int year) {
     var s1 = DateTime(year, DateTime.september, 1);
-    if (s1.weekday == 6) {
-      s1.add(const Duration(days: 2));
-    } else if (s1.weekday == 7) {
-      s1.add(const Duration(days: 1));
+    if (s1.weekday == DateTime.saturday) {
+      s1 = s1.add(const Duration(days: 2, hours: 2));
+    } else if (s1.weekday == DateTime.sunday) {
+      s1 = s1.add(const Duration(days: 1, hours: 2));
+    } else {
+      s1 = s1.add(const Duration(hours: 2));
     }
     return s1;
   }
+
 
   // Jump shortcuts
   Future<void> next(BuildContext context) =>
