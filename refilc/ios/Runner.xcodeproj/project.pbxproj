@@ -531,7 +531,7 @@
 				FLUTTER_BUILD_NAME = 5.1.1;
 				FLUTTER_BUILD_NUMBER = 283;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Firka;
+				INFOPLIST_KEY_CFBundleDisplayName = "Firka Legacy";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -791,7 +791,7 @@
 				FLUTTER_BUILD_NAME = 5.1.1;
 				FLUTTER_BUILD_NUMBER = 283;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Firka;
+				INFOPLIST_KEY_CFBundleDisplayName = "Firka Legacy";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -821,7 +821,7 @@
 				FLUTTER_BUILD_NAME = 5.1.1;
 				FLUTTER_BUILD_NUMBER = 283;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Firka;
+				INFOPLIST_KEY_CFBundleDisplayName = "Firka Legacy";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
