@@ -40,6 +40,7 @@ dependencies:
 
 dependency_overrides:
   webview_flutter_wkwebview: 3.17.0
+  intl: 0.20.2
 
 dev_dependencies:
   flutter_lints: ^5.0.0
