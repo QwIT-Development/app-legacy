@@ -38,6 +38,12 @@ Future<void> syncAll(BuildContext context) async {
   print("INFO Syncing all");
 
   UserProvider user = Provider.of<UserProvider>(context, listen: false);
+
+  // Demo mode: skip all API calls
+  if (user.isDemo) {
+    lock = false;
+    return Future.value();
+  }
   StatusProvider statusProvider =
       Provider.of<StatusProvider>(context, listen: false);
 

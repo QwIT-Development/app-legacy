@@ -20,6 +20,8 @@
 
 import 'dart:io' show Platform;
 import 'package:refilc/api/login.dart';
+import 'package:refilc/api/providers/user_provider.dart';
+import 'package:refilc/models/user.dart';
 import 'package:refilc/theme/colors/colors.dart';
 import 'package:refilc_mobile_ui/common/custom_snack_bar.dart';
 import 'package:refilc_mobile_ui/common/system_chrome.dart';
@@ -30,6 +32,7 @@ import 'package:flutter/services.dart';
 import 'login_screen.i18n.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:refilc_mobile_ui/screens/login/kreten_login.dart'; //new library for new web login
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, this.back = false});
@@ -360,6 +363,26 @@ class LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               const SizedBox(height: 19),
+                              // demo mode button
+                              GestureDetector(
+                                onTap: () {
+                                  final userProvider = Provider.of<UserProvider>(context, listen: false);
+                                  final demoUser = User.demo();
+                                  userProvider.addUser(demoUser);
+                                  userProvider.setUser(demoUser.id);
+                                  setSystemChrome(context);
+                                  Navigator.of(context).pushReplacementNamed('login_to_navigation');
+                                },
+                                child: Text(
+                                  'Demo mód',
+                                  style: TextStyle(
+                                    color: AppColors.of(context).loginSecondary,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 12),
                               // privacy policy
                               GestureDetector(
                                 onTap: () => PrivacyView.show(context),
