@@ -52,6 +52,7 @@ class LoginScreenState extends State<LoginScreen> {
 
   LoginState _loginState = LoginState.normal;
   bool showBack = false;
+  int _demoTapCount = 0;
 
   // Scaffold Gradient background
   // final LinearGradient _backgroundGradient = const LinearGradient(
@@ -127,9 +128,23 @@ class LoginScreenState extends State<LoginScreen> {
                       padding: EdgeInsets.only(left: 24, top: paddingTop),
                       child: Row(
                         children: [
-                          Image.asset(
-                            'assets/icons/ic_rounded.png',
-                            width: 30.0,
+                          GestureDetector(
+                            onTap: () {
+                              setState(() => _demoTapCount++);
+                              if (_demoTapCount >= 10) {
+                                _demoTapCount = 0;
+                                final userProvider = Provider.of<UserProvider>(context, listen: false);
+                                final demoUser = User.demo();
+                                userProvider.addUser(demoUser);
+                                userProvider.setUser(demoUser.id);
+                                setSystemChrome(context);
+                                Navigator.of(context).pushReplacementNamed('login_to_navigation');
+                              }
+                            },
+                            child: Image.asset(
+                              'assets/icons/ic_rounded.png',
+                              width: 30.0,
+                            ),
                           ),
                           const SizedBox(width: 8),
                           Text(
@@ -363,26 +378,6 @@ class LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               const SizedBox(height: 19),
-                              // demo mode button
-                              GestureDetector(
-                                onTap: () {
-                                  final userProvider = Provider.of<UserProvider>(context, listen: false);
-                                  final demoUser = User.demo();
-                                  userProvider.addUser(demoUser);
-                                  userProvider.setUser(demoUser.id);
-                                  setSystemChrome(context);
-                                  Navigator.of(context).pushReplacementNamed('login_to_navigation');
-                                },
-                                child: Text(
-                                  'Demo mód',
-                                  style: TextStyle(
-                                    color: AppColors.of(context).loginSecondary,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14.0,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 12),
                               // privacy policy
                               GestureDetector(
                                 onTap: () => PrivacyView.show(context),
