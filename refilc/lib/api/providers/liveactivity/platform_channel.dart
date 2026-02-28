@@ -4,18 +4,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class PlatformChannel {
-  static const MethodChannel _channel = MethodChannel('hu.refilc/liveactivity');
+  static const MethodChannel _channel = MethodChannel('app.firka/liveactivity');
 
-  static Future<void> createLiveActivity(
+  /// Létrehozza a Live Activity-t és visszaadja az APNs push tokent (ha elérhető).
+  static Future<String?> createLiveActivity(
       Map<String, dynamic> activityData) async {
     if (Platform.isIOS) {
       try {
         debugPrint("creating...");
-        await _channel.invokeMethod('createLiveActivity', activityData);
+        final String? pushToken = await _channel.invokeMethod<String>(
+            'createLiveActivity', activityData);
+        debugPrint("Live Activity push token: $pushToken");
+        return pushToken;
       } on PlatformException catch (e) {
         debugPrint("Hiba történt a Live Activity létrehozásakor: ${e.message}");
       }
     }
+    return null;
   }
 
   static Future<void> updateLiveActivity(
