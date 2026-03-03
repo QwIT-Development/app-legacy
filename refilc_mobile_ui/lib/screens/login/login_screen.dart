@@ -72,6 +72,11 @@ class LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     showBack = widget.back;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
