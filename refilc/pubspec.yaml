@@ -41,7 +41,7 @@ dependencies:
   quick_actions: ^1.1.0
   animated_list_plus: ^0.5.2
   dynamic_color: 1.7.0
-  material_color_utilities: ^0.11.1
+  material_color_utilities: ^0.13.0
   crypto: ^3.0.6
   elegant_notification: ^2.4.1
   flutter_feather_icons: ^2.0.0+1
