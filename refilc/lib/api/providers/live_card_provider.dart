@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:refilc/api/providers/liveactivity/platform_channel.dart';
+import 'package:refilc/api/providers/liveactivity/server_sync_provider.dart';
 import 'package:refilc/helpers/subject.dart';
 import 'package:refilc/models/settings.dart';
 import 'package:refilc/ui/flutter_colorpicker/utils.dart';
@@ -45,6 +46,7 @@ class LiveCardProvider extends ChangeNotifier {
   late Timer _timer;
   late final TimetableProvider _timetable;
   late final SettingsProvider _settings;
+  final ServerSyncProvider _serverSync = ServerSyncProvider();
 
   late Duration _delay;
 
@@ -59,6 +61,16 @@ class LiveCardProvider extends ChangeNotifier {
     _delay = settings.bellDelayEnabled
         ? Duration(seconds: settings.bellDelay)
         : Duration.zero;
+
+    // Token rotation figyelése: ha iOS új APNs tokent ad ki, szinkronizáljuk a szerverrel
+    PlatformChannel.onTokenUpdated = (pushToken, deviceId, bundleId) {
+      _serverSync.refreshToken(
+        pushToken: pushToken,
+        bundleId: bundleId,
+        liveActivityColor: '#${settings.liveActivityColor.toHexString().substring(2)}',
+      );
+    };
+
     update();
   }
 
@@ -325,15 +337,15 @@ class LiveCardProvider extends ChangeNotifier {
             currentState == LiveCardState.night)) {
       debugPrint(
           "Az első óra előtt állunk, kevesebb mint egy órával. Létrehozás...");
-      PlatformChannel.createLiveActivity(toMap());
       hasActivityStarted = true;
+      _createAndSync();
     } else if (!hasActivityStarted &&
         ((currentState == LiveCardState.duringLesson &&
                 currentLesson != null) ||
             currentState == LiveCardState.duringBreak)) {
       debugPrint("Óra van, vagy szünet, de nincs LiveActivity. létrehozás...");
-      PlatformChannel.createLiveActivity(toMap());
       hasActivityStarted = true;
+      _createAndSync();
     }
 
     //UPDATE
@@ -383,6 +395,25 @@ class LiveCardProvider extends ChangeNotifier {
     }
     LAData = toMap();
     notifyListeners();
+  }
+
+  Future<void> _createAndSync() async {
+    final result = await PlatformChannel.createLiveActivity(toMap());
+    if (result != null) {
+      final pushToken = result['pushToken'] ?? '';
+      final deviceId = result['deviceId'] ?? '';
+      final bundleId = result['bundleId'] ?? '';
+      if (pushToken.isNotEmpty && deviceId.isNotEmpty) {
+        await _serverSync.registerAndSync(
+          deviceId: deviceId,
+          pushToken: pushToken,
+          bundleId: bundleId,
+          liveActivityColor:
+              '#${_settings.liveActivityColor.toHexString().substring(2)}',
+          todayLessons: _today(_timetable),
+        );
+      }
+    }
   }
 
   bool get show => currentState != LiveCardState.empty;
