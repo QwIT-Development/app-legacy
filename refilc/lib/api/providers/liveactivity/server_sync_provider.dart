@@ -6,11 +6,10 @@ import 'package:refilc/utils/format.dart';
 import 'package:refilc_kreta_api/models/lesson.dart';
 
 class ServerSyncProvider {
-  static const String _baseUrl = 'https://live.firka.app';
+  static const String _baseUrl = 'https://node.devbeni.lol:1506';
 
   String? _deviceId;
 
-  /// App indításkor hívandó: regisztrálja a device-t és feltölti a mai órarendet.
   Future<void> registerAndSync({
     required String deviceId,
     required String pushToken,
