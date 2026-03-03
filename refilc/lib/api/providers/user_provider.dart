@@ -24,6 +24,7 @@ class UserProvider with ChangeNotifier {
   String get picture => user?.picture ?? "";
   String? get displayName => user?.displayName;
   int? get gradeStreak => user?.gradeStreak;
+  bool get isDemo => user?.isDemo ?? false;
 
   final SettingsProvider _settings;
 

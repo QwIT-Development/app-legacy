@@ -4,6 +4,8 @@ import 'package:refilc_kreta_api/models/school.dart';
 import 'package:refilc_kreta_api/models/student.dart';
 import 'package:uuid/uuid.dart';
 
+const String demoUserId = 'demo-user-00000000-0000-0000-0000-000000000000';
+
 enum Role { student, parent }
 
 class User {
@@ -114,6 +116,36 @@ class User {
 
   @override
   String toString() => jsonEncode(toMap());
+
+  static User demo() {
+    return User(
+      id: demoUserId,
+      name: 'Demo Diák',
+      username: 'demo',
+      password: '',
+      instituteCode: 'demo',
+      student: Student(
+        id: demoUserId,
+        name: 'Demo Diák',
+        school: School(
+          instituteCode: 'demo',
+          name: 'Demo Iskola',
+          city: 'Budapest',
+        ),
+        birth: DateTime(2005, 9, 1),
+        yearId: '1',
+        parents: [],
+        gradeDelay: 0,
+      ),
+      role: Role.student,
+      nickname: 'Demo',
+      accessToken: 'demo',
+      accessTokenExpire: DateTime.now().add(const Duration(days: 365)),
+      refreshToken: 'demo',
+    );
+  }
+
+  bool get isDemo => id == demoUserId;
 
   static Map<String, Object?> loginBody({
     required String username,

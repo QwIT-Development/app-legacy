@@ -20,6 +20,8 @@
 
 import 'dart:io' show Platform;
 import 'package:refilc/api/login.dart';
+import 'package:refilc/api/providers/user_provider.dart';
+import 'package:refilc/models/user.dart';
 import 'package:refilc/theme/colors/colors.dart';
 import 'package:refilc_mobile_ui/common/custom_snack_bar.dart';
 import 'package:refilc_mobile_ui/common/system_chrome.dart';
@@ -30,6 +32,7 @@ import 'package:flutter/services.dart';
 import 'login_screen.i18n.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:refilc_mobile_ui/screens/login/kreten_login.dart'; //new library for new web login
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, this.back = false});
@@ -49,6 +52,7 @@ class LoginScreenState extends State<LoginScreen> {
 
   LoginState _loginState = LoginState.normal;
   bool showBack = false;
+  int _demoTapCount = 0;
 
   // Scaffold Gradient background
   // final LinearGradient _backgroundGradient = const LinearGradient(
@@ -68,6 +72,11 @@ class LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     showBack = widget.back;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -124,9 +133,23 @@ class LoginScreenState extends State<LoginScreen> {
                       padding: EdgeInsets.only(left: 24, top: paddingTop),
                       child: Row(
                         children: [
-                          Image.asset(
-                            'assets/icons/ic_rounded.png',
-                            width: 30.0,
+                          GestureDetector(
+                            onTap: () {
+                              setState(() => _demoTapCount++);
+                              if (_demoTapCount >= 10) {
+                                _demoTapCount = 0;
+                                final userProvider = Provider.of<UserProvider>(context, listen: false);
+                                final demoUser = User.demo();
+                                userProvider.addUser(demoUser);
+                                userProvider.setUser(demoUser.id);
+                                setSystemChrome(context);
+                                Navigator.of(context).pushReplacementNamed('login_to_navigation');
+                              }
+                            },
+                            child: Image.asset(
+                              'assets/icons/ic_rounded.png',
+                              width: 30.0,
+                            ),
                           ),
                           const SizedBox(width: 8),
                           Text(
