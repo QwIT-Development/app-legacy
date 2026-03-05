@@ -3,6 +3,7 @@ import 'package:refilc_kreta_api/models/absence.dart';
 import 'package:refilc_kreta_api/models/category.dart';
 import 'package:refilc_kreta_api/models/exam.dart';
 import 'package:refilc_kreta_api/models/grade.dart';
+import 'package:refilc_kreta_api/models/group_average.dart';
 import 'package:refilc_kreta_api/models/homework.dart';
 import 'package:refilc_kreta_api/models/lesson.dart';
 import 'package:refilc_kreta_api/models/message.dart';
@@ -367,6 +368,18 @@ class DemoData {
       ),
     ];
   }
+
+  static List<GroupAverage> get groupAverages => [
+        GroupAverage(uid: 'demo-avg-math', average: 4.2, subject: _subjectMath),
+        GroupAverage(uid: 'demo-avg-hun', average: 3.8, subject: _subjectHun),
+        GroupAverage(uid: 'demo-avg-hist', average: 3.9, subject: _subjectHist),
+        GroupAverage(uid: 'demo-avg-eng', average: 4.5, subject: _subjectEng),
+        GroupAverage(uid: 'demo-avg-phy', average: 3.6, subject: _subjectPhy),
+        GroupAverage(uid: 'demo-avg-bio', average: 4.1, subject: _subjectBio),
+        GroupAverage(uid: 'demo-avg-chem', average: 3.7, subject: _subjectChem),
+        GroupAverage(uid: 'demo-avg-pe', average: 4.8, subject: _subjectPE),
+        GroupAverage(uid: 'demo-avg-it', average: 4.3, subject: _subjectIT),
+      ];
 
   static bool isDemo(String? userId) => userId == demoUserId;
 }

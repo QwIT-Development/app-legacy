@@ -170,6 +170,7 @@ Future<void> unseenAll() async {
 
     if (DemoData.isDemo(user.id)) {
       await store(DemoData.grades);
+      await storeGroupAvg(DemoData.groupAverages);
       return;
     }
 
