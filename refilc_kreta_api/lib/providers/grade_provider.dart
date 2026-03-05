@@ -5,6 +5,7 @@ import 'package:refilc/models/settings.dart';
 import 'package:refilc/models/user.dart';
 import 'package:refilc_kreta_api/client/api.dart';
 import 'package:refilc_kreta_api/client/client.dart';
+import 'package:refilc_kreta_api/demo/demo_data.dart';
 import 'package:refilc_kreta_api/models/grade.dart';
 import 'package:refilc_kreta_api/models/group_average.dart';
 import 'package:refilc_kreta_api/providers/grade_provider.i18n.dart';
@@ -164,11 +165,14 @@ Future<void> unseenAll() async {
 
   // Fetches Grades from the Kreta API then stores them in the database
   Future<void> fetch() async {
-    // test cucc
-    // unseenAll();
-
     User? user = _user.user;
     if (user == null) throw "Cannot fetch Grades for User null";
+
+    if (DemoData.isDemo(user.id)) {
+      await store(DemoData.grades);
+      return;
+    }
+
     String iss = user.instituteCode;
 
     List? gradesJson = await _kreta.getAPI(KretaAPI.grades(iss));

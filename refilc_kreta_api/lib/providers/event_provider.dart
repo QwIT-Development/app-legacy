@@ -3,6 +3,7 @@ import 'package:refilc/api/providers/database_provider.dart';
 import 'package:refilc/models/user.dart';
 import 'package:refilc_kreta_api/client/api.dart';
 import 'package:refilc_kreta_api/client/client.dart';
+import 'package:refilc_kreta_api/demo/demo_data.dart';
 import 'package:refilc_kreta_api/models/event.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +41,7 @@ class EventProvider with ChangeNotifier {
   Future<void> fetch() async {
     User? user = Provider.of<UserProvider>(_context, listen: false).user;
     if (user == null) throw "Cannot fetch Events for User null";
+    if (DemoData.isDemo(user.id)) return;
     String iss = user.instituteCode;
 
     List? eventsJson = await Provider.of<KretaClient>(_context, listen: false)

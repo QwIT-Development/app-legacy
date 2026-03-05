@@ -3,6 +3,7 @@ import 'package:refilc/api/providers/database_provider.dart';
 import 'package:refilc/models/user.dart';
 import 'package:refilc_kreta_api/client/api.dart';
 import 'package:refilc_kreta_api/client/client.dart';
+import 'package:refilc_kreta_api/demo/demo_data.dart';
 import 'package:refilc_kreta_api/models/exam.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -68,6 +69,12 @@ class ExamProvider with ChangeNotifier {
   Future<void> fetch() async {
     User? user = Provider.of<UserProvider>(_context, listen: false).user;
     if (user == null) throw "Cannot fetch Exams for User null";
+
+    if (DemoData.isDemo(user.id)) {
+      await store(DemoData.exams);
+      return;
+    }
+
     String iss = user.instituteCode;
 
     List? examsJson = await Provider.of<KretaClient>(_context, listen: false)

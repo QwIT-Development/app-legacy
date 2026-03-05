@@ -3,6 +3,7 @@ import 'package:refilc/api/providers/database_provider.dart';
 import 'package:refilc/models/user.dart';
 import 'package:refilc_kreta_api/client/api.dart';
 import 'package:refilc_kreta_api/client/client.dart';
+import 'package:refilc_kreta_api/demo/demo_data.dart';
 import 'package:refilc_kreta_api/models/lesson.dart';
 import 'package:refilc_kreta_api/models/week.dart';
 import 'package:flutter/foundation.dart';
@@ -73,6 +74,13 @@ class TimetableProvider with ChangeNotifier {
     if (week == null) return;
     User? user = _user.user;
     if (user == null) throw "Cannot fetch Lessons for User null";
+
+    if (DemoData.isDemo(user.id)) {
+      lessons = DemoData.timetable;
+      notifyListeners();
+      return;
+    }
+
     String iss = user.instituteCode;
 
     List? lessonsJson;

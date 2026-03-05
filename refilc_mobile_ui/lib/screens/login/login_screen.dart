@@ -383,6 +383,25 @@ class LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               const SizedBox(height: 19),
+                              GestureDetector(
+                                onTap: () {
+                                  final userProvider = Provider.of<UserProvider>(context, listen: false);
+                                  final demoUser = User.demo();
+                                  userProvider.addUser(demoUser);
+                                  userProvider.setUser(demoUser.id);
+                                  setSystemChrome(context);
+                                  Navigator.of(context).pushReplacementNamed('login_to_navigation');
+                                },
+                                child: Text(
+                                  'demo_login'.i18n,
+                                  style: TextStyle(
+                                    color: AppColors.of(context).loginSecondary,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 12),
                               // privacy policy
                               GestureDetector(
                                 onTap: () => PrivacyView.show(context),
