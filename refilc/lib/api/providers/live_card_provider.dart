@@ -34,6 +34,7 @@ class LiveCardProvider extends ChangeNotifier {
   // new variables
   static bool hasActivityStarted = false;
   static bool hasDayEnd = false;
+  static bool hasUserDismissed = false;
   static DateTime? storeFirstRunDate;
   static bool hasActivitySettingsChanged = false;
   // ignore: non_constant_identifier_names
@@ -76,6 +77,7 @@ class LiveCardProvider extends ChangeNotifier {
       debugPrint("Live Activity dismissed - unregistering from server");
       serverSync.unregister();
       hasActivityStarted = false;
+      hasUserDismissed = true;
     };
 
     update();
@@ -337,6 +339,7 @@ class LiveCardProvider extends ChangeNotifier {
 
     //CREATE
     if (!hasActivityStarted &&
+        !hasUserDismissed &&
         nextLesson != null &&
         nextLesson!.start.difference(now).inMinutes <= 60 &&
         (currentState == LiveCardState.morning ||
@@ -347,6 +350,7 @@ class LiveCardProvider extends ChangeNotifier {
       hasActivityStarted = true;
       _createAndSync();
     } else if (!hasActivityStarted &&
+        !hasUserDismissed &&
         ((currentState == LiveCardState.duringLesson &&
                 currentLesson != null) ||
             currentState == LiveCardState.duringBreak)) {
@@ -401,6 +405,7 @@ class LiveCardProvider extends ChangeNotifier {
       serverSync.unregister();
       hasDayEnd = true;
       hasActivityStarted = false;
+      hasUserDismissed = false;
     }
     LAData = toMap();
     notifyListeners();
