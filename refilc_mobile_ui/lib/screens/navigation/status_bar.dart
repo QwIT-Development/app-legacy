@@ -55,9 +55,8 @@ class StatusBarState extends State<StatusBar> {
                 height: currentStatus != null ? 4.0 : 0,
                 duration: const Duration(milliseconds: 250),
                 curve: Curves.easeInOut,
-                width: MediaQuery.of(context).size.width *
-                        statusProvider.progress -
-                    36.0,
+                width: (MediaQuery.of(context).size.width - 36.0) *
+                    statusProvider.progress,
                 decoration: BoxDecoration(
                   color: Theme.of(context)
                       .colorScheme
