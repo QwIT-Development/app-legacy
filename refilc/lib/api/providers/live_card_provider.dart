@@ -366,6 +366,16 @@ class LiveCardProvider extends ChangeNotifier {
       hasActivityStarted = true;
       _createAndSync();
     }
+    // Fake mód: mindig hozzuk létre a Live Activity-t ha nincs elindítva
+    else if (!hasActivityStarted &&
+        _settings.developerMode &&
+        _settings.devLiveFakeLessons &&
+        today.isNotEmpty) {
+      debugPrint("Fake mód: Live Activity létrehozás...");
+      hasActivityStarted = true;
+      hasUserDismissed = false;
+      _createAndSync();
+    }
 
     //UPDATE
     else if (hasActivityStarted) {
@@ -394,7 +404,10 @@ class LiveCardProvider extends ChangeNotifier {
     }
 
     //END
-    if ((currentState == LiveCardState.afternoon ||
+    // Fake módban ne fejezzük be a Live Activity-t
+    if (_settings.developerMode && _settings.devLiveFakeLessons) {
+      // skip end logic in fake mode
+    } else if ((currentState == LiveCardState.afternoon ||
             currentState == LiveCardState.morning ||
             currentState == LiveCardState.night) &&
         hasActivityStarted &&
@@ -423,8 +436,6 @@ class LiveCardProvider extends ChangeNotifier {
     final result = await PlatformChannel.createLiveActivity(toMap());
     if (result != null && result['success'] == 'true') {
       debugPrint("Live Activity létrehozva, várunk a push tokenre...");
-      // A regisztráció az onTokenUpdated callback-ben történik,
-      // amikor az APNs elküldi a push tokent.
     } else {
       debugPrint("Live Activity létrehozás sikertelen");
       hasActivityStarted = false;
@@ -441,17 +452,32 @@ class LiveCardProvider extends ChangeNotifier {
     final real = (p.getWeek(Week.current()) ?? [])
         .where((l) => _sameDate(l.date, _now()))
         .toList();
-    if (real.isNotEmpty || !_settings.developerMode || !_settings.devLiveFakeLessons) {
+    if (!_settings.developerMode || !_settings.devLiveFakeLessons) {
       return real;
+    }
+    // Fake mód: ha vannak valódi órák, a fake órákat utánuk rakjuk
+    // DE: ha az utolsó valódi óra már véget ért, a fake-ek a jelen idő köré kerülnek
+    if (real.isNotEmpty) {
+      final sorted = List<Lesson>.from(real)
+        ..sort((a, b) => a.end.compareTo(b.end));
+      final lastEnd = sorted.last.end;
+      final now = _now();
+      final nextIndex = sorted.length;
+      if (lastEnd.isBefore(now)) {
+        // Az órák már véget értek — fake órákat a jelen idő köré
+        return [...real, ..._generateFakeLessons(startIndex: nextIndex)];
+      }
+      // Van még óra — fake órákat az utolsó után
+      final fakeStart = lastEnd.add(const Duration(minutes: 10));
+      return [...real, ..._generateFakeLessons(baseStart: fakeStart, startIndex: nextIndex)];
     }
     return _generateFakeLessons();
   }
 
   /// Generál fake órákat a jelenlegi idő köré, hogy a Live Activity tesztelhető legyen.
-  static List<Lesson> _generateFakeLessons() {
+  static List<Lesson> _generateFakeLessons({DateTime? baseStart, int startIndex = 0}) {
     final now = _now();
-    // Az első óra 10 perccel ezelőtt kezdődött (vagy ha nincs, 5 perc múlva)
-    final baseStart = now.subtract(const Duration(minutes: 10));
+    final start0 = baseStart ?? now.subtract(const Duration(minutes: 10));
 
     const subjects = [
       ('Matematika', 'fake_math', 'Egyenletek'),
@@ -464,18 +490,18 @@ class LiveCardProvider extends ChangeNotifier {
 
     final lessons = <Lesson>[];
     for (int i = 0; i < 6; i++) {
-      final start = baseStart.add(Duration(minutes: i * 55));
+      final start = start0.add(Duration(minutes: i * 55));
       final end = start.add(const Duration(minutes: 45));
       final (name, id, desc) = subjects[i];
       lessons.add(Lesson(
-        id: 'fake_lesson_$i',
+        id: 'fake_lesson_${startIndex + i}',
         date: DateTime(now.year, now.month, now.day),
         subject: GradeSubject(
           id: id,
           category: kreta.Category(id: '', name: ''),
           name: name,
         ),
-        lessonIndex: '${i + 1}',
+        lessonIndex: '${startIndex + i + 1}',
         teacher: Teacher(id: 'fake_teacher', name: 'Teszt Tanár'),
         start: start,
         end: end,

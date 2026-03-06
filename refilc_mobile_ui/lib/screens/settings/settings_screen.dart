@@ -1046,7 +1046,7 @@ class SettingsScreenState extends State<SettingsScreen>
                 ],
               ),
             // developer options
-            if (true)
+            if (settings.developerMode)
               SplittedPanel(
                 title: Text("devsettings".i18n),
                 cardPadding: const EdgeInsets.all(4.0),
@@ -1126,6 +1126,8 @@ class SettingsScreenState extends State<SettingsScreen>
                             LiveCardProvider.hasDayEnd = false;
                             LiveCardProvider.hasUserDismissed = false;
                           }
+                          // Trigger LiveCardProvider update immediately
+                          Provider.of<LiveCardProvider>(context, listen: false).update();
                         },
                         value: settings.devLiveFakeLessons,
                         activeColor: Theme.of(context).colorScheme.secondary,
