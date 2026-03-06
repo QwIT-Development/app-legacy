@@ -52,71 +52,65 @@ struct LockScreenLiveActivityView: View {
     let context: ActivityViewContext<LiveActivitiesAppAttributes>
 
     var body: some View {
-        HStack(alignment: .center) {
+        HStack(alignment: .center, spacing: 0) {
             // Ikon
             Image(systemName: context.state.icon)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: CGFloat(30), height: CGFloat(30))
-                .padding(.leading, CGFloat(24))
+                .frame(width: 28, height: 28)
+                .padding(.leading, 16)
 
-            VStack(alignment: .center) {
+            VStack(alignment: .leading, spacing: 3) {
                 // Jelenlegi óra
-                VStack {
-                  if(context.state.title.contains("Az első órádig")) {
+                if context.state.title.contains("Az első órádig") {
                     Text(context.state.title)
-                      .font(.system(size: 15))
-                      .bold()
-                      .multilineTextAlignment(.center)
-                  } else if(context.state.title == "Szünet") {
+                        .font(.system(size: 14, weight: .semibold))
+                        .lineLimit(2)
+                } else if context.state.title == "Szünet" {
                     Text(context.state.title)
-                      .font(.body)
-                      .bold()
-                      .padding(.trailing, 90)
-                  } else {
-                    MultilineTextView(text: "\(context.state.index) \(context.state.title) -  \(context.state.subtitle)", limit: 25)
-                      .font(.body)
-                      .bold()
-                      .multilineTextAlignment(.center)
-                  }
+                        .font(.system(size: 15, weight: .bold))
+                } else {
+                    Text("\(context.state.index) \(context.state.title) - \(context.state.subtitle)")
+                        .font(.system(size: 15, weight: .bold))
+                        .lineLimit(2)
                 }
 
                 // Leírás
-                if (context.state.description != "") {
-                  Text(context.state.description)
-                    .font(.subheadline)
+                if !context.state.description.isEmpty {
+                    Text(context.state.description)
+                        .font(.system(size: 13))
+                        .lineLimit(2)
+                        .foregroundStyle(.secondary)
                 }
 
                 // Következő óra
-              if(context.state.nextSubject != "" && context.state.nextRoom != "") {
-                HStack {
-                    Image(systemName: "arrow.right")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: CGFloat(8), height: CGFloat(8))
+                if !context.state.nextSubject.isEmpty && !context.state.nextRoom.isEmpty {
+                    HStack(spacing: 4) {
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 8, weight: .semibold))
+                            .foregroundStyle(.secondary)
+                        Text("\(context.state.nextSubject) - \(context.state.nextRoom)")
+                            .font(.system(size: 12))
+                            .foregroundStyle(.secondary)
+                    }
+                } else {
+                    Text("Ez az utolsó óra! Kitartást!")
+                        .font(.system(size: 13))
                         .foregroundStyle(.secondary)
-                  Text("\(context.state.nextSubject) -  \(context.state.nextRoom)")
-                        .font(.caption)
                 }
-                .multilineTextAlignment(.center)
-              } else {
-                Spacer(minLength: 5)
-                Text("Ez az utolsó óra! Kitartást!")
-                  .font(.system(size: 15))
-              }
-                
             }
-            .padding(15)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 14)
 
-            Spacer()
+            Spacer(minLength: 4)
 
             // Visszaszámláló
             Text(timerInterval: context.state.date, countsDown: true)
-                .multilineTextAlignment(.center)
-                .frame(width: 85)
+                .multilineTextAlignment(.trailing)
+                .frame(width: 75)
                 .font(.title2)
                 .monospacedDigit()
-                .padding(.trailing)
+                .padding(.trailing, 16)
         }
 //        .activityBackgroundTint(
 //            context.state.color != "#676767"

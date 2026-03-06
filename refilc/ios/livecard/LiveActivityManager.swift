@@ -29,6 +29,11 @@ final class LiveActivityManager {
     /// Létrehozza a Live Activity-t pushType: .token-nel, majd visszaadja az APNs push tokent.
     class func create(completion: @escaping (String?) -> Void) {
         Task {
+            // Előző activity-k eltakarítása, hogy ne legyen dupla
+            for activity in Activity<LiveActivitiesAppAttributes>.activities {
+                await activity.end(nil, dismissalPolicy: .immediate)
+            }
+
             do {
                 let contentState = LiveActivitiesAppAttributes.ContentState(
                     color: globalLessonData.color,
