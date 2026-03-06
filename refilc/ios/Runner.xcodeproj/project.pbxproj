@@ -520,8 +520,8 @@
 				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = R9PZGUCNJ3;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 5.1.1;
-				FLUTTER_BUILD_NUMBER = 283;
+				FLUTTER_BUILD_NAME = 5.1.2;
+				FLUTTER_BUILD_NUMBER = 0;
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Firka Legacy";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -793,8 +793,8 @@
 				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = R9PZGUCNJ3;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 5.1.1;
-				FLUTTER_BUILD_NUMBER = 283;
+				FLUTTER_BUILD_NAME = 5.1.2;
+				FLUTTER_BUILD_NUMBER = 0;
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Firka Legacy";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -827,8 +827,8 @@
 				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = R9PZGUCNJ3;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 5.1.1;
-				FLUTTER_BUILD_NUMBER = 283;
+				FLUTTER_BUILD_NAME = 5.1.2;
+				FLUTTER_BUILD_NUMBER = 0;
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Firka Legacy";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
