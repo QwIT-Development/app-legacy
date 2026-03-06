@@ -7,10 +7,12 @@ class PlatformChannel {
   static const MethodChannel _channel = MethodChannel('app.firka/liveactivity');
 
   /// Callback token rotation esetén (iOS APNs új tokent ad ki).
-  /// A szerver szinkronizálásért felelős kód regisztrálhat ide.
   static void Function(String pushToken, String deviceId, String bundleId)? onTokenUpdated;
 
-  static void _setupTokenRotationListener() {
+  /// Callback ha a user dismiss-eli a Live Activity-t (swipe left).
+  static void Function()? onActivityDismissed;
+
+  static void _setupMethodCallListener() {
     _channel.setMethodCallHandler((call) async {
       if (call.method == 'liveActivityTokenUpdated') {
         final args = call.arguments as Map?;
@@ -21,6 +23,9 @@ class PlatformChannel {
             args['bundleId'] as String? ?? '',
           );
         }
+      } else if (call.method == 'liveActivityDismissed') {
+        debugPrint("Live Activity dismissed by user");
+        onActivityDismissed?.call();
       }
     });
   }
@@ -30,7 +35,7 @@ class PlatformChannel {
   static Future<Map<String, String>?> createLiveActivity(
       Map<String, dynamic> activityData) async {
     if (Platform.isIOS) {
-      _setupTokenRotationListener();
+      _setupMethodCallListener();
       try {
         debugPrint("creating live activity...");
         final result = await _channel.invokeMethod<Map>(

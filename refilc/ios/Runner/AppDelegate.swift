@@ -32,6 +32,15 @@ import Security
             self?.handleMethodCall(call, result: result)
         })
 
+        // Activity dismiss figyelése: ha a user swipe-olja, értesítjük Flutter-t
+        NotificationCenter.default.addObserver(
+            forName: NSNotification.Name("LiveActivityDismissed"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.methodChannel?.invokeMethod("liveActivityDismissed", arguments: nil)
+        }
+
         // Token rotation figyelése: ha az APNs új tokent ad, értesítjük Flutter-t
         tokenRotationObserver = NotificationCenter.default.addObserver(
             forName: NSNotification.Name("LiveActivityTokenUpdated"),

@@ -59,6 +59,9 @@ final class LiveActivityManager {
                 activityID = activity.id
                 print("Live Activity létrehozva. Azonosító: \(activity.id)")
 
+                // Dismiss/end figyelése háttérben
+                Task { await monitorActivityState(activity: activity) }
+
                 // Az APNs token aszinkron érkezik – megvárjuk az elsőt
                 for await tokenData in activity.pushTokenUpdates {
                     let tokenHex = tokenData.map { String(format: "%02x", $0) }.joined()
@@ -72,6 +75,22 @@ final class LiveActivityManager {
             } catch {
                 print("Hiba történt a Live Activity létrehozásakor: \(error)")
                 completion(nil)
+            }
+        }
+    }
+
+    /// Activity state figyelése: ha a user dismiss-eli vagy véget ér, értesítjük a Flutter-t.
+    private class func monitorActivityState(activity: Activity<LiveActivitiesAppAttributes>) async {
+        for await state in activity.activityStateUpdates {
+            if state == .dismissed || state == .ended {
+                print("Live Activity dismissed/ended by user or system")
+                activityID = nil
+                activityPushToken = nil
+                NotificationCenter.default.post(
+                    name: NSNotification.Name("LiveActivityDismissed"),
+                    object: nil
+                )
+                break
             }
         }
     }
