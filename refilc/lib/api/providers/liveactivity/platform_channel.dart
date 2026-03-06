@@ -10,7 +10,7 @@ class PlatformChannel {
   static void Function(String pushToken, String deviceId, String bundleId)? onTokenUpdated;
 
   /// Callback ha a user dismiss-eli a Live Activity-t (swipe left).
-  static void Function()? onActivityDismissed;
+  static void Function(String deviceId)? onActivityDismissed;
 
   static void _setupMethodCallListener() {
     _channel.setMethodCallHandler((call) async {
@@ -24,8 +24,10 @@ class PlatformChannel {
           );
         }
       } else if (call.method == 'liveActivityDismissed') {
-        debugPrint("Live Activity dismissed by user");
-        onActivityDismissed?.call();
+        final args = call.arguments as Map?;
+        final deviceId = args?['deviceId'] as String? ?? '';
+        debugPrint("Live Activity dismissed by user (device: $deviceId)");
+        onActivityDismissed?.call(deviceId);
       }
     });
   }

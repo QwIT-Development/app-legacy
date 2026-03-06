@@ -119,20 +119,26 @@ class ServerSyncProvider {
 
   Future<void> unregister() async {
     if (_deviceId == null) return;
+    await forceUnregister(_deviceId!);
+  }
+
+  /// Unregister egy adott deviceId-vel, akkor is ha a _deviceId nincs beállítva (pl. app restart után).
+  Future<void> forceUnregister(String deviceId) async {
     try {
       final response = await http.post(
         Uri.parse('$_baseUrl/unregister'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'device_id': _deviceId}),
+        body: jsonEncode({'device_id': deviceId}),
       ).timeout(const Duration(seconds: 10));
       if (response.statusCode == 200) {
-        debugPrint('ServerSync: schedule törölve (unregister)');
+        debugPrint('ServerSync: device + schedule törölve (unregister)');
       } else {
         debugPrint('ServerSync unregister hiba: ${response.statusCode}');
       }
     } catch (e) {
       debugPrint('ServerSync unregister kivétel: $e');
     }
+    _deviceId = null;
   }
 
   List<Lesson> _filterLessons(List<Lesson> lessons) {
