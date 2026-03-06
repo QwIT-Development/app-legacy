@@ -14,6 +14,7 @@ const settingsDB = DatabaseStruct("settings", {
   "language": String, "start_page": int, "rounding": int, "theme": int,
   "accent_color": int, "news": int, "seen_news": String,
   "developer_mode": int,
+  "dev_live_fake_lessons": int,
   "update_channel": int, "config": String, "custom_accent_color": int,
   "custom_background_color": int, "custom_highlight_color": int,
   "custom_text_color": int, // new txt color
