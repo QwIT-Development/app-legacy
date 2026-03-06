@@ -38,7 +38,10 @@ import Security
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            self?.methodChannel?.invokeMethod("liveActivityDismissed", arguments: nil)
+            let deviceId = self?.getOrCreateDeviceId() ?? ""
+            self?.methodChannel?.invokeMethod("liveActivityDismissed", arguments: [
+                "deviceId": deviceId,
+            ])
         }
 
         // Token rotation figyelése: ha az APNs új tokent ad, értesítjük Flutter-t

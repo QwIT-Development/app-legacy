@@ -95,6 +95,8 @@ final class LiveActivityManager {
                     name: NSNotification.Name("LiveActivityDismissed"),
                     object: nil
                 )
+                // Activity formálisan is leállítjuk ha még fut
+                await activity.end(nil, dismissalPolicy: .immediate)
                 break
             }
         }

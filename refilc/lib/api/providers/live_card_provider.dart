@@ -73,9 +73,9 @@ class LiveCardProvider extends ChangeNotifier {
     };
 
     // Ha a user dismiss-eli a Live Activity-t (swipe), értesítjük a szervert
-    PlatformChannel.onActivityDismissed = () {
+    PlatformChannel.onActivityDismissed = (deviceId) {
       debugPrint("Live Activity dismissed - unregistering from server");
-      serverSync.unregister();
+      serverSync.forceUnregister(deviceId);
       hasActivityStarted = false;
       hasUserDismissed = true;
     };
