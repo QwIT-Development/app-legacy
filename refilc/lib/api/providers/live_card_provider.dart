@@ -8,6 +8,9 @@ import 'package:refilc/helpers/subject.dart';
 import 'package:refilc/models/settings.dart';
 import 'package:refilc/ui/flutter_colorpicker/utils.dart';
 import 'package:refilc_kreta_api/models/lesson.dart';
+import 'package:refilc_kreta_api/models/subject.dart';
+import 'package:refilc_kreta_api/models/category.dart' as kreta;
+import 'package:refilc_kreta_api/models/teacher.dart';
 import 'package:refilc_kreta_api/models/week.dart';
 import 'package:refilc/utils/format.dart';
 import 'package:refilc_kreta_api/providers/timetable_provider.dart';
@@ -318,7 +321,8 @@ class LiveCardProvider extends ChangeNotifier {
     }
 
     if (now.isBefore(DateTime(now.year, DateTime.august, 31)) &&
-        now.isAfter(DateTime(now.year, DateTime.june, 14))) {
+        now.isAfter(DateTime(now.year, DateTime.june, 14)) &&
+        !(_settings.developerMode && _settings.devLiveFakeLessons)) {
       currentState = LiveCardState.summary;
     } else if (currentLesson != null) {
       currentState = LiveCardState.duringLesson;
@@ -329,7 +333,8 @@ class LiveCardProvider extends ChangeNotifier {
     } else if (now.hour >= 20) {
       currentState = LiveCardState.night;
     } else if (now.hour >= 5 && now.hour <= 10) {
-      if (nextLesson == null || now.weekday == 6 || now.weekday == 7) {
+      if (nextLesson == null || ((now.weekday == 6 || now.weekday == 7) &&
+          !(_settings.developerMode && _settings.devLiveFakeLessons))) {
         currentState = LiveCardState.empty;
       } else {
         currentState = LiveCardState.morning;
@@ -432,7 +437,55 @@ class LiveCardProvider extends ChangeNotifier {
   bool _sameDate(DateTime a, DateTime b) =>
       (a.year == b.year && a.month == b.month && a.day == b.day);
 
-  List<Lesson> _today(TimetableProvider p) => (p.getWeek(Week.current()) ?? [])
-      .where((l) => _sameDate(l.date, _now()))
-      .toList();
+  List<Lesson> _today(TimetableProvider p) {
+    final real = (p.getWeek(Week.current()) ?? [])
+        .where((l) => _sameDate(l.date, _now()))
+        .toList();
+    if (real.isNotEmpty || !_settings.developerMode || !_settings.devLiveFakeLessons) {
+      return real;
+    }
+    return _generateFakeLessons();
+  }
+
+  /// Generál fake órákat a jelenlegi idő köré, hogy a Live Activity tesztelhető legyen.
+  static List<Lesson> _generateFakeLessons() {
+    final now = _now();
+    // Az első óra 10 perccel ezelőtt kezdődött (vagy ha nincs, 5 perc múlva)
+    final baseStart = now.subtract(const Duration(minutes: 10));
+
+    const subjects = [
+      ('Matematika', 'fake_math', 'Egyenletek'),
+      ('Magyar', 'fake_hun', 'Nyelvtan'),
+      ('Angol', 'fake_eng', 'Writing'),
+      ('Fizika', 'fake_phys', 'Mechanika'),
+      ('Történelem', 'fake_hist', 'XX. század'),
+      ('Informatika', 'fake_info', 'Programozás'),
+    ];
+
+    final lessons = <Lesson>[];
+    for (int i = 0; i < 6; i++) {
+      final start = baseStart.add(Duration(minutes: i * 55));
+      final end = start.add(const Duration(minutes: 45));
+      final (name, id, desc) = subjects[i];
+      lessons.add(Lesson(
+        id: 'fake_lesson_$i',
+        date: DateTime(now.year, now.month, now.day),
+        subject: GradeSubject(
+          id: id,
+          category: kreta.Category(id: '', name: ''),
+          name: name,
+        ),
+        lessonIndex: '${i + 1}',
+        teacher: Teacher(id: 'fake_teacher', name: 'Teszt Tanár'),
+        start: start,
+        end: end,
+        homeworkId: '',
+        description: desc,
+        room: '${(i + 1) * 100 + 1}',
+        groupName: '',
+        name: name,
+      ));
+    }
+    return lessons;
+  }
 }

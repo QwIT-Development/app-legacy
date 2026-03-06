@@ -19,7 +19,9 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers, use_build_context_synchronously, deprecated_member_use
 
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:refilc/api/providers/live_card_provider.dart';
 import 'package:refilc/api/providers/update_provider.dart';
 import 'package:refilc_kreta_api/providers/absence_provider.dart';
 import 'package:refilc_kreta_api/providers/event_provider.dart';
@@ -1083,8 +1085,9 @@ class SettingsScreenState extends State<SettingsScreen>
                   PanelButton(
                     borderRadius: BorderRadius.vertical(
                       top: const Radius.circular(4.0),
-                      bottom: Provider.of<PlusProvider>(context, listen: false)
-                              .hasPremium
+                      bottom: (Platform.isIOS ||
+                              Provider.of<PlusProvider>(context, listen: false)
+                                  .hasPremium)
                           ? const Radius.circular(4.0)
                           : const Radius.circular(12.0),
                     ),
@@ -1097,7 +1100,37 @@ class SettingsScreenState extends State<SettingsScreen>
                     onPressed: () => Clipboard.setData(ClipboardData(
                         text: Provider.of<KretaClient>(context, listen: false)
                             .accessToken!)),
-                  )
+                  ),
+                  if (Platform.isIOS)
+                    Material(
+                      type: MaterialType.transparency,
+                      child: SwitchListTile(
+                        contentPadding:
+                            const EdgeInsets.only(left: 12.0, right: 4.0),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(4.0),
+                                bottom: Radius.circular(12.0))),
+                        title: Text("dev_fake_lessons".i18n,
+                            style: const TextStyle(fontWeight: FontWeight.w500)),
+                        subtitle: Text("dev_fake_lessons_desc".i18n,
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              color: AppColors.of(context).text.withOpacity(0.65),
+                            )),
+                        onChanged: (v) {
+                          settings.update(devLiveFakeLessons: v);
+                          if (v) {
+                            // Reset Live Activity state to force recreation
+                            LiveCardProvider.hasActivityStarted = false;
+                            LiveCardProvider.hasDayEnd = false;
+                            LiveCardProvider.hasUserDismissed = false;
+                          }
+                        },
+                        value: settings.devLiveFakeLessons,
+                        activeColor: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
                 ],
               ),
 
