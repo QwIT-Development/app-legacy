@@ -305,6 +305,8 @@ class _GradeSubjectViewState extends State<GradeSubjectView>
     if (DateTime.now().day > 5) {
       _timetableController.next(context);
     }
+
+    fetchGoalPlans();
   }
 
   void fetchGoalPlans() async {
@@ -369,8 +371,6 @@ class _GradeSubjectViewState extends State<GradeSubjectView>
           .toList();
       buildTiles(ghostGrades);
     }
-
-    fetchGoalPlans();
 
     return Scaffold(
         key: _scaffoldKey,

@@ -86,9 +86,8 @@ class StatusBarState extends State<StatusBar> {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
                 curve: Curves.easeInOut,
-                width: MediaQuery.of(context).size.width *
-                        statusProvider.progress -
-                    36.0,
+                width: (MediaQuery.of(context).size.width - 36.0) *
+                    statusProvider.progress,
                 alignment: Alignment.centerRight,
                 child: Container(
                   decoration: BoxDecoration(
