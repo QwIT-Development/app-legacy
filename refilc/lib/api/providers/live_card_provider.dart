@@ -46,7 +46,7 @@ class LiveCardProvider extends ChangeNotifier {
   late Timer _timer;
   late final TimetableProvider _timetable;
   late final SettingsProvider _settings;
-  final ServerSyncProvider _serverSync = ServerSyncProvider();
+  static final ServerSyncProvider serverSync = ServerSyncProvider();
 
   late Duration _delay;
 
@@ -64,7 +64,7 @@ class LiveCardProvider extends ChangeNotifier {
 
     // Token rotation figyelése: ha iOS új APNs tokent ad ki, szinkronizáljuk a szerverrel
     PlatformChannel.onTokenUpdated = (pushToken, deviceId, bundleId) {
-      _serverSync.refreshToken(
+      serverSync.refreshToken(
         pushToken: pushToken,
         bundleId: bundleId,
         liveActivityColor: '#${settings.liveActivityColor.toHexString().substring(2)}',
@@ -383,6 +383,7 @@ class LiveCardProvider extends ChangeNotifier {
         nextLesson!.start.difference(now).inMinutes > 60) {
       debugPrint("Több, mint 1 óra van az első óráig. Befejezés...");
       PlatformChannel.endLiveActivity();
+      serverSync.unregister();
       hasActivityStarted = false;
     } else if (hasActivityStarted &&
         !hasDayEnd &&
@@ -390,6 +391,7 @@ class LiveCardProvider extends ChangeNotifier {
         now.isAfter(prevLesson!.end)) {
       debugPrint("Az utolsó óra véget ért. Befejezés...");
       PlatformChannel.endLiveActivity();
+      serverSync.unregister();
       hasDayEnd = true;
       hasActivityStarted = false;
     }
@@ -404,7 +406,7 @@ class LiveCardProvider extends ChangeNotifier {
       final deviceId = result['deviceId'] ?? '';
       final bundleId = result['bundleId'] ?? '';
       if (pushToken.isNotEmpty && deviceId.isNotEmpty) {
-        await _serverSync.registerAndSync(
+        await serverSync.registerAndSync(
           deviceId: deviceId,
           pushToken: pushToken,
           bundleId: bundleId,

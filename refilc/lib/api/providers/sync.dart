@@ -153,6 +153,7 @@ Future<void> syncAll(BuildContext context) async {
 
     if (Platform.isIOS && LiveCardProvider.hasActivityStarted == true) {
       PlatformChannel.endLiveActivity();
+      LiveCardProvider.serverSync.unregister();
       LiveCardProvider.hasActivityStarted = false;
     }
 

@@ -123,6 +123,27 @@ class ServerSyncProvider {
     }
   }
 
+  Future<void> unregister() async {
+    if (_deviceId == null) return;
+    try {
+      final client = HttpClient();
+      final uri = Uri.parse('$_baseUrl/unregister');
+      final request = await client.postUrl(uri);
+      request.headers.contentType = ContentType.json;
+      request.write(jsonEncode({'device_id': _deviceId}));
+      final response =
+          await request.close().timeout(const Duration(seconds: 10));
+      if (response.statusCode == 200) {
+        debugPrint('ServerSync: schedule törölve (unregister)');
+      } else {
+        debugPrint('ServerSync unregister hiba: ${response.statusCode}');
+      }
+      client.close();
+    } catch (e) {
+      debugPrint('ServerSync unregister kivétel: $e');
+    }
+  }
+
   List<Lesson> _filterLessons(List<Lesson> lessons) {
     return lessons
         .where((l) =>
