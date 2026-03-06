@@ -392,14 +392,6 @@ class LoginScreenState extends State<LoginScreen> {
                                   setSystemChrome(context);
                                   Navigator.of(context).pushReplacementNamed('login_to_navigation');
                                 },
-                                child: Text(
-                                  'demo_login'.i18n,
-                                  style: TextStyle(
-                                    color: AppColors.of(context).loginSecondary,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14.0,
-                                  ),
-                                ),
                               ),
                               const SizedBox(height: 12),
                               // privacy policy
