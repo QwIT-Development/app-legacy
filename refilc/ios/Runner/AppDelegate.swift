@@ -90,15 +90,11 @@ import Security
             }
 
             if #available(iOS 16.2, *) {
-                LiveActivityManager.create { [weak self] pushToken in
-                    guard let self = self, let token = pushToken else {
-                        result(nil)
-                        return
-                    }
+                LiveActivityManager.create { success in
                     let deviceId = self.getOrCreateDeviceId()
                     let bundleId = Bundle.main.bundleIdentifier ?? ""
                     result([
-                        "pushToken": token,
+                        "success": success,
                         "deviceId": deviceId,
                         "bundleId": bundleId,
                     ])

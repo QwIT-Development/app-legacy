@@ -63,12 +63,15 @@ class LiveCardProvider extends ChangeNotifier {
         ? Duration(seconds: settings.bellDelay)
         : Duration.zero;
 
-    // Token rotation figyelése: ha iOS új APNs tokent ad ki, szinkronizáljuk a szerverrel
+    // Token figyelése: amikor az APNs tokent ad (első vagy rotation), regisztráljuk a szerverrel
     PlatformChannel.onTokenUpdated = (pushToken, deviceId, bundleId) {
-      serverSync.refreshToken(
+      debugPrint("Push token érkezett: $pushToken");
+      serverSync.registerAndSync(
+        deviceId: deviceId,
         pushToken: pushToken,
         bundleId: bundleId,
         liveActivityColor: '#${settings.liveActivityColor.toHexString().substring(2)}',
+        todayLessons: _today(_timetable),
       );
     };
 
@@ -413,20 +416,13 @@ class LiveCardProvider extends ChangeNotifier {
 
   Future<void> _createAndSync() async {
     final result = await PlatformChannel.createLiveActivity(toMap());
-    if (result != null) {
-      final pushToken = result['pushToken'] ?? '';
-      final deviceId = result['deviceId'] ?? '';
-      final bundleId = result['bundleId'] ?? '';
-      if (pushToken.isNotEmpty && deviceId.isNotEmpty) {
-        await serverSync.registerAndSync(
-          deviceId: deviceId,
-          pushToken: pushToken,
-          bundleId: bundleId,
-          liveActivityColor:
-              '#${_settings.liveActivityColor.toHexString().substring(2)}',
-          todayLessons: _today(_timetable),
-        );
-      }
+    if (result != null && result['success'] == 'true') {
+      debugPrint("Live Activity létrehozva, várunk a push tokenre...");
+      // A regisztráció az onTokenUpdated callback-ben történik,
+      // amikor az APNs elküldi a push tokent.
+    } else {
+      debugPrint("Live Activity létrehozás sikertelen");
+      hasActivityStarted = false;
     }
   }
 

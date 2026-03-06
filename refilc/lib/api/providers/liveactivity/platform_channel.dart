@@ -32,8 +32,8 @@ class PlatformChannel {
     });
   }
 
-  /// Létrehozza a Live Activity-t és visszaadja az APNs push tokent,
-  /// a device ID-t (Keychain UUID) és a bundle ID-t.
+  /// Létrehozza a Live Activity-t. Azonnal visszatér deviceId/bundleId-vel.
+  /// A push token később érkezik az onTokenUpdated callback-en.
   static Future<Map<String, String>?> createLiveActivity(
       Map<String, dynamic> activityData) async {
     if (Platform.isIOS) {
@@ -44,7 +44,7 @@ class PlatformChannel {
             'createLiveActivity', activityData);
         if (result == null) return null;
         return {
-          'pushToken': result['pushToken'] as String? ?? '',
+          'success': (result['success'] as bool? ?? false).toString(),
           'deviceId': result['deviceId'] as String? ?? '',
           'bundleId': result['bundleId'] as String? ?? '',
         };

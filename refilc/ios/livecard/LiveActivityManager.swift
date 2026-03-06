@@ -26,8 +26,10 @@ final class LiveActivityManager {
     static let shared = LiveActivityManager()
     var currentActivity: Activity<LiveActivitiesAppAttributes>?
 
-    /// Létrehozza a Live Activity-t pushType: .token-nel, majd visszaadja az APNs push tokent.
-    class func create(completion: @escaping (String?) -> Void) {
+    /// Létrehozza a Live Activity-t pushType: .token-nel.
+    /// A completion azonnal meghívódik a létrehozás után (success/fail).
+    /// A push token később érkezik a pushTokenUpdates-en keresztül.
+    class func create(completion: @escaping (Bool) -> Void) {
         Task {
             // Előző activity-k eltakarítása, hogy ne legyen dupla
             for activity in Activity<LiveActivitiesAppAttributes>.activities {
@@ -64,22 +66,28 @@ final class LiveActivityManager {
                 activityID = activity.id
                 print("Live Activity létrehozva. Azonosító: \(activity.id)")
 
+                // Azonnal visszatérünk — a LA látszik
+                completion(true)
+
                 // Dismiss/end figyelése háttérben
                 Task { await monitorActivityState(activity: activity) }
 
-                // Az APNs token aszinkron érkezik – megvárjuk az elsőt
-                for await tokenData in activity.pushTokenUpdates {
-                    let tokenHex = tokenData.map { String(format: "%02x", $0) }.joined()
-                    activityPushToken = tokenHex
-                    print("Live Activity push token: \(tokenHex)")
-                    completion(tokenHex)
-                    // Token rotation figyelése a háttérben
-                    Task { await monitorTokenRotation(activity: activity) }
-                    break
+                // Push token figyelése háttérben — az első és a rotation is
+                // a LiveActivityTokenUpdated notification-ön keresztül megy Flutter felé
+                Task {
+                    for await tokenData in activity.pushTokenUpdates {
+                        let tokenHex = tokenData.map { String(format: "%02x", $0) }.joined()
+                        activityPushToken = tokenHex
+                        print("Live Activity push token: \(tokenHex)")
+                        NotificationCenter.default.post(
+                            name: NSNotification.Name("LiveActivityTokenUpdated"),
+                            object: tokenHex
+                        )
+                    }
                 }
             } catch {
                 print("Hiba történt a Live Activity létrehozásakor: \(error)")
-                completion(nil)
+                completion(false)
             }
         }
     }
@@ -103,19 +111,8 @@ final class LiveActivityManager {
     }
 
     /// Token rotation figyelése: ha az APNs új tokent ad ki, értesítjük a Flutter oldalt.
-    private class func monitorTokenRotation(activity: Activity<LiveActivitiesAppAttributes>) async {
-        var isFirst = true
-        for await tokenData in activity.pushTokenUpdates {
-            if isFirst { isFirst = false; continue } // Az első tokent már kezeltük
-            let tokenHex = tokenData.map { String(format: "%02x", $0) }.joined()
-            activityPushToken = tokenHex
-            print("Live Activity push token frissítve (rotation): \(tokenHex)")
-            NotificationCenter.default.post(
-                name: NSNotification.Name("LiveActivityTokenUpdated"),
-                object: tokenHex
-            )
-        }
-    }
+    /// MEGJEGYZÉS: Már nem használjuk külön — a create() maga figyeli a pushTokenUpdates-t
+    /// és minden tokent (elsőt is, rotation-t is) a LiveActivityTokenUpdated notification-ön küld.
 
     class func update() {
         Task {
