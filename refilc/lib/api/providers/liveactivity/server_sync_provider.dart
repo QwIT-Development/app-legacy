@@ -6,7 +6,7 @@ import 'package:refilc/utils/format.dart';
 import 'package:refilc_kreta_api/models/lesson.dart';
 
 class ServerSyncProvider {
-  static const String _baseUrl = 'https://node.devbeni.lol:1506';
+  static const String _baseUrl = 'https://legacy-la.devbeni.lol';
 
   String? _deviceId;
 
