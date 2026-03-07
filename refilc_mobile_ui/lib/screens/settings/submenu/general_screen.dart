@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:refilc_mobile_ui/screens/settings/settings_screen.i18n.dart';
+import 'package:refilc_mobile_ui/screens/settings/live_activity_consent_dialog.dart';
 
 class MenuGeneralSettings extends StatelessWidget {
   const MenuGeneralSettings({
@@ -135,6 +136,10 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                     PanelButton(
                       padding: const EdgeInsets.only(left: 14.0, right: 6.0),
                       onPressed: () {
+                        if (!settingsProvider.liveActivityEnabled && !settingsProvider.liveActivityConsentAccepted) {
+                          LiveActivityConsentDialog.show(context).then((_) => setState(() {}));
+                          return;
+                        }
                         final newVal = !settingsProvider.liveActivityEnabled;
                         settingsProvider.update(liveActivityEnabled: newVal);
                         if (!newVal) {
@@ -163,6 +168,10 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                       ),
                       trailing: Switch(
                         onChanged: (v) {
+                          if (v && !settingsProvider.liveActivityConsentAccepted) {
+                            LiveActivityConsentDialog.show(context).then((_) => setState(() {}));
+                            return;
+                          }
                           settingsProvider.update(liveActivityEnabled: v);
                           if (!v) {
                             PlatformChannel.endLiveActivity();

@@ -59,6 +59,7 @@ const settingsDB = DatabaseStruct("settings", {
   "new_popups": int,
   "unseen_new_features": String,
   "live_activity_enabled": int,
+  "live_activity_consent_accepted": int,
   "cloud_sync_enabled": int,
   "cloud_sync_token": String,
   "local_updated_at": String,

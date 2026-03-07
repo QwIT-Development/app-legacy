@@ -111,6 +111,7 @@ class SettingsProvider extends ChangeNotifier {
   bool _newPopups;
   List<String> _unseenNewFeatures;
   bool _liveActivityEnabled;
+  bool _liveActivityConsentAccepted;
   bool _cloudSyncEnabled;
   String _cloudSyncToken;
   DateTime _updatedAt;
@@ -191,6 +192,7 @@ class SettingsProvider extends ChangeNotifier {
     required bool newPopups,
     required List<String> unseenNewFeatures,
     required bool liveActivityEnabled,
+    required bool liveActivityConsentAccepted,
     required bool cloudSyncEnabled,
     required String cloudSyncToken,
     required DateTime updatedAt,
@@ -268,6 +270,7 @@ class SettingsProvider extends ChangeNotifier {
         _newPopups = newPopups,
         _unseenNewFeatures = unseenNewFeatures,
         _liveActivityEnabled = liveActivityEnabled,
+        _liveActivityConsentAccepted = liveActivityConsentAccepted,
         _cloudSyncEnabled = cloudSyncEnabled,
         _cloudSyncToken = cloudSyncToken,
         _updatedAt = updatedAt,
@@ -364,6 +367,7 @@ class SettingsProvider extends ChangeNotifier {
       newPopups: map['new_popups'] == 1,
       unseenNewFeatures: jsonDecode(map["unseen_new_features"]).cast<String>(),
       liveActivityEnabled: map['live_activity_enabled'] == 1,
+      liveActivityConsentAccepted: map['live_activity_consent_accepted'] == 1,
       cloudSyncEnabled: map['cloud_sync_enabled'] == 1,
       cloudSyncToken: map['cloud_sync_token'],
       updatedAt: DateTime.tryParse(map['local_updated_at']) ?? DateTime.now(),
@@ -448,6 +452,7 @@ class SettingsProvider extends ChangeNotifier {
       "new_popups": _newPopups ? 1 : 0,
       "unseen_new_features": jsonEncode(_unseenNewFeatures),
       "live_activity_enabled": _liveActivityEnabled ? 1 : 0,
+      "live_activity_consent_accepted": _liveActivityConsentAccepted ? 1 : 0,
       "cloud_sync_enabled": _cloudSyncEnabled ? 1 : 0,
       "cloud_sync_token": _cloudSyncToken,
       "local_updated_at": _updatedAt.toIso8601String(),
@@ -536,6 +541,7 @@ class SettingsProvider extends ChangeNotifier {
       newPopups: false,
       unseenNewFeatures: ['live_activity_consent'],
       liveActivityEnabled: false,
+      liveActivityConsentAccepted: false,
       cloudSyncEnabled: false,
       cloudSyncToken: '',
       updatedAt: DateTime.now(),
@@ -615,6 +621,7 @@ class SettingsProvider extends ChangeNotifier {
   bool get newPopups => _newPopups;
   List<String> get unseenNewFeatures => _unseenNewFeatures;
   bool get liveActivityEnabled => _liveActivityEnabled;
+  bool get liveActivityConsentAccepted => _liveActivityConsentAccepted;
   bool get cloudSyncEnabled => _cloudSyncEnabled;
   String get cloudSyncToken => _cloudSyncToken;
   DateTime get updatedAt => _updatedAt;
@@ -691,6 +698,7 @@ class SettingsProvider extends ChangeNotifier {
     bool? newPopups,
     List<String>? unseenNewFeatures,
     bool? liveActivityEnabled,
+    bool? liveActivityConsentAccepted,
     bool? cloudSyncEnabled,
     String? cloudSyncToken,
     bool? qTimetableLessonNum,
@@ -900,6 +908,9 @@ class SettingsProvider extends ChangeNotifier {
         LiveCardProvider.hasActivitySettingsChanged = true;
       }
     }
+    if (liveActivityConsentAccepted != null && liveActivityConsentAccepted != _liveActivityConsentAccepted) {
+      _liveActivityConsentAccepted = liveActivityConsentAccepted;
+    }
     if (cloudSyncEnabled != null && cloudSyncEnabled != _cloudSyncEnabled) {
       _cloudSyncEnabled = cloudSyncEnabled;
     }
@@ -1020,6 +1031,7 @@ class SettingsProvider extends ChangeNotifier {
       unseenNewFeatures:
           jsonDecode(map["unseen_new_features"] ?? "[]").cast<String>(),
       liveActivityEnabled: map['live_activity_enabled'] == 1,
+      liveActivityConsentAccepted: map['live_activity_consent_accepted'] == 1,
       cloudSyncEnabled: map['cloud_sync_enabled'] == 1,
       cloudSyncToken: map['cloud_sync_token'],
       qTimetableLessonNum: map['q_timetable_lesson_num'] == 1,

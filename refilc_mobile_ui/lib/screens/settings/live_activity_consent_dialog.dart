@@ -260,10 +260,17 @@ class LiveActivityConsentDialog extends StatelessWidget {
     final settings = Provider.of<SettingsProvider>(context, listen: false);
     final unseen = List<String>.from(settings.unseenNewFeatures);
     unseen.remove('live_activity_consent');
-    settings.update(
-      liveActivityEnabled: accepted,
-      unseenNewFeatures: unseen,
-    );
+    if (accepted) {
+      settings.update(
+        liveActivityEnabled: true,
+        liveActivityConsentAccepted: true,
+        unseenNewFeatures: unseen,
+      );
+    } else {
+      settings.update(
+        unseenNewFeatures: unseen,
+      );
+    }
     Navigator.of(context).pop();
   }
 }
