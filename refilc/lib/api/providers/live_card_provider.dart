@@ -68,6 +68,10 @@ class LiveCardProvider extends ChangeNotifier {
 
     // Token figyelése: amikor az APNs tokent ad (első vagy rotation), regisztráljuk a szerverrel
     PlatformChannel.onTokenUpdated = (pushToken, deviceId, bundleId) {
+      if (!_settings.liveActivityEnabled) {
+        debugPrint("Push token érkezett, de Live Activity nincs engedélyezve - skip");
+        return;
+      }
       debugPrint("Push token érkezett: $pushToken");
       serverSync.registerAndSync(
         deviceId: deviceId,
@@ -345,6 +349,16 @@ class LiveCardProvider extends ChangeNotifier {
 
     //LIVE ACTIVITIES
 
+    // Guard: if not enabled, stop any running activity and skip
+    if (!_settings.liveActivityEnabled) {
+      if (hasActivityStarted) {
+        debugPrint("Live Activity nincs engedélyezve, de fut – leállítás...");
+        PlatformChannel.endLiveActivity();
+        serverSync.unregister();
+        hasActivityStarted = false;
+      }
+    } else {
+
     //CREATE
     if (!hasActivityStarted &&
         !hasUserDismissed &&
@@ -428,6 +442,9 @@ class LiveCardProvider extends ChangeNotifier {
       hasActivityStarted = false;
       hasUserDismissed = false;
     }
+
+    } // end of liveActivityEnabled else block
+
     LAData = toMap();
     notifyListeners();
   }

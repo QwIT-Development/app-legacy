@@ -1,3 +1,6 @@
+import 'dart:io' show Platform;
+import 'package:refilc/api/providers/liveactivity/platform_channel.dart';
+import 'package:refilc/api/providers/live_card_provider.dart';
 import 'package:refilc/models/settings.dart';
 import 'package:refilc/theme/colors/colors.dart';
 import 'package:refilc/utils/format.dart';
@@ -123,6 +126,61 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                   ),
                 ],
               ),
+              if (Platform.isIOS)
+                SplittedPanel(
+                  padding: const EdgeInsets.only(top: 9.0),
+                  cardPadding: const EdgeInsets.all(4.0),
+                  isSeparated: true,
+                  children: [
+                    PanelButton(
+                      padding: const EdgeInsets.only(left: 14.0, right: 6.0),
+                      onPressed: () {
+                        final newVal = !settingsProvider.liveActivityEnabled;
+                        settingsProvider.update(liveActivityEnabled: newVal);
+                        if (!newVal) {
+                          PlatformChannel.endLiveActivity();
+                          LiveCardProvider.serverSync.unregister();
+                          LiveCardProvider.hasActivityStarted = false;
+                        }
+                        setState(() {});
+                      },
+                      title: Text(
+                        "live_activity_enabled".i18n,
+                        style: TextStyle(
+                          color: AppColors.of(context).text.withValues(
+                              alpha: settingsProvider.liveActivityEnabled
+                                  ? .95
+                                  : .25),
+                        ),
+                      ),
+                      leading: Icon(
+                        FeatherIcons.activity,
+                        size: 22.0,
+                        color: AppColors.of(context).text.withValues(
+                            alpha: settingsProvider.liveActivityEnabled
+                                ? .95
+                                : .25),
+                      ),
+                      trailing: Switch(
+                        onChanged: (v) {
+                          settingsProvider.update(liveActivityEnabled: v);
+                          if (!v) {
+                            PlatformChannel.endLiveActivity();
+                            LiveCardProvider.serverSync.unregister();
+                            LiveCardProvider.hasActivityStarted = false;
+                          }
+                          setState(() {});
+                        },
+                        value: settingsProvider.liveActivityEnabled,
+                        activeColor: Theme.of(context).colorScheme.secondary,
+                      ),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(12.0),
+                        bottom: Radius.circular(12.0),
+                      ),
+                    ),
+                  ],
+                ),
               SplittedPanel(
                 padding: const EdgeInsets.only(top: 9.0),
                 cardPadding: const EdgeInsets.all(4.0),

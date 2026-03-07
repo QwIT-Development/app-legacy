@@ -18,6 +18,7 @@ import 'package:refilc_mobile_ui/screens/navigation/navigation_route_handler.dar
 import 'package:refilc_mobile_ui/screens/navigation/status_bar.dart';
 import 'package:refilc_mobile_ui/screens/news/news_view.dart';
 import 'package:refilc_mobile_ui/screens/settings/settings_screen.dart';
+import 'package:refilc_mobile_ui/screens/settings/live_activity_consent_dialog.dart';
 import 'package:refilc_plus/ui/mobile/goal_planner/goal_complete_modal.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ import 'package:wtf_sliding_sheet/wtf_sliding_sheet.dart';
 import 'package:background_fetch/background_fetch.dart';
 import 'package:refilc_plus/providers/goal_provider.dart';
 import 'package:refilc/api/providers/ad_provider.dart';
+import 'dart:io' show Platform;
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({super.key});
@@ -190,6 +192,14 @@ class NavigationScreenState extends State<NavigationScreen>
     // initial sync
     syncAll(context);
     setupQuickActions();
+
+    // Show live activity consent dialog on iOS
+    if (Platform.isIOS &&
+        settings.unseenNewFeatures.contains('live_activity_consent')) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        LiveActivityConsentDialog.show(context);
+      });
+    }
   }
 
   @override
