@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:refilc/api/providers/database_provider.dart';
@@ -57,6 +58,7 @@ const settingsDB = DatabaseStruct("settings", {
   "uwu_mode": int,
   "new_popups": int,
   "unseen_new_features": String,
+  "live_activity_enabled": int,
   "cloud_sync_enabled": int,
   "cloud_sync_token": String,
   "local_updated_at": String,
@@ -183,6 +185,21 @@ Future<Database> initDB(DatabaseProvider database) async {
     });
   } catch (error) {
     print("ERROR: migrateDB: $error");
+  }
+
+  // One-time migration: add 'live_activity_consent' to unseen_new_features for existing users
+  try {
+    final rows = await db.query('settings', columns: ['unseen_new_features']);
+    if (rows.isNotEmpty) {
+      final raw = rows.first['unseen_new_features'] as String? ?? '[]';
+      final list = (jsonDecode(raw) as List).cast<String>();
+      if (!list.contains('live_activity_consent')) {
+        list.add('live_activity_consent');
+        await db.update('settings', {'unseen_new_features': jsonEncode(list)});
+      }
+    }
+  } catch (e) {
+    print("ERROR: live_activity_consent migration: $e");
   }
 
   return db;

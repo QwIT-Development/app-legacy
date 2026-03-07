@@ -110,6 +110,7 @@ class SettingsProvider extends ChangeNotifier {
   bool _uwuMode;
   bool _newPopups;
   List<String> _unseenNewFeatures;
+  bool _liveActivityEnabled;
   bool _cloudSyncEnabled;
   String _cloudSyncToken;
   DateTime _updatedAt;
@@ -189,6 +190,7 @@ class SettingsProvider extends ChangeNotifier {
     required bool uwuMode,
     required bool newPopups,
     required List<String> unseenNewFeatures,
+    required bool liveActivityEnabled,
     required bool cloudSyncEnabled,
     required String cloudSyncToken,
     required DateTime updatedAt,
@@ -265,6 +267,7 @@ class SettingsProvider extends ChangeNotifier {
         _uwuMode = uwuMode,
         _newPopups = newPopups,
         _unseenNewFeatures = unseenNewFeatures,
+        _liveActivityEnabled = liveActivityEnabled,
         _cloudSyncEnabled = cloudSyncEnabled,
         _cloudSyncToken = cloudSyncToken,
         _updatedAt = updatedAt,
@@ -360,6 +363,7 @@ class SettingsProvider extends ChangeNotifier {
       uwuMode: map['uwu_mode'] == 1,
       newPopups: map['new_popups'] == 1,
       unseenNewFeatures: jsonDecode(map["unseen_new_features"]).cast<String>(),
+      liveActivityEnabled: map['live_activity_enabled'] == 1,
       cloudSyncEnabled: map['cloud_sync_enabled'] == 1,
       cloudSyncToken: map['cloud_sync_token'],
       updatedAt: DateTime.tryParse(map['local_updated_at']) ?? DateTime.now(),
@@ -443,6 +447,7 @@ class SettingsProvider extends ChangeNotifier {
       "uwu_mode": _uwuMode ? 1 : 0,
       "new_popups": _newPopups ? 1 : 0,
       "unseen_new_features": jsonEncode(_unseenNewFeatures),
+      "live_activity_enabled": _liveActivityEnabled ? 1 : 0,
       "cloud_sync_enabled": _cloudSyncEnabled ? 1 : 0,
       "cloud_sync_token": _cloudSyncToken,
       "local_updated_at": _updatedAt.toIso8601String(),
@@ -529,7 +534,8 @@ class SettingsProvider extends ChangeNotifier {
       newColors: true,
       uwuMode: false,
       newPopups: false,
-      unseenNewFeatures: [],
+      unseenNewFeatures: ['live_activity_consent'],
+      liveActivityEnabled: false,
       cloudSyncEnabled: false,
       cloudSyncToken: '',
       updatedAt: DateTime.now(),
@@ -608,6 +614,7 @@ class SettingsProvider extends ChangeNotifier {
   bool get uwuMode => _uwuMode;
   bool get newPopups => _newPopups;
   List<String> get unseenNewFeatures => _unseenNewFeatures;
+  bool get liveActivityEnabled => _liveActivityEnabled;
   bool get cloudSyncEnabled => _cloudSyncEnabled;
   String get cloudSyncToken => _cloudSyncToken;
   DateTime get updatedAt => _updatedAt;
@@ -683,6 +690,7 @@ class SettingsProvider extends ChangeNotifier {
     bool? uwuMode,
     bool? newPopups,
     List<String>? unseenNewFeatures,
+    bool? liveActivityEnabled,
     bool? cloudSyncEnabled,
     String? cloudSyncToken,
     bool? qTimetableLessonNum,
@@ -886,6 +894,12 @@ class SettingsProvider extends ChangeNotifier {
     if (unseenNewFeatures != null && unseenNewFeatures != _unseenNewFeatures) {
       _unseenNewFeatures = unseenNewFeatures;
     }
+    if (liveActivityEnabled != null && liveActivityEnabled != _liveActivityEnabled) {
+      _liveActivityEnabled = liveActivityEnabled;
+      if (!liveActivityEnabled && Platform.isIOS) {
+        LiveCardProvider.hasActivitySettingsChanged = true;
+      }
+    }
     if (cloudSyncEnabled != null && cloudSyncEnabled != _cloudSyncEnabled) {
       _cloudSyncEnabled = cloudSyncEnabled;
     }
@@ -1005,6 +1019,7 @@ class SettingsProvider extends ChangeNotifier {
       newPopups: map['new_popups'] == 1,
       unseenNewFeatures:
           jsonDecode(map["unseen_new_features"] ?? "[]").cast<String>(),
+      liveActivityEnabled: map['live_activity_enabled'] == 1,
       cloudSyncEnabled: map['cloud_sync_enabled'] == 1,
       cloudSyncToken: map['cloud_sync_token'],
       qTimetableLessonNum: map['q_timetable_lesson_num'] == 1,
