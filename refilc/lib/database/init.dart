@@ -189,14 +189,18 @@ Future<Database> initDB(DatabaseProvider database) async {
   }
 
   // One-time migration: add 'live_activity_consent' to unseen_new_features for existing users
+  // Only if they haven't already accepted or dismissed it
   try {
-    final rows = await db.query('settings', columns: ['unseen_new_features']);
+    final rows = await db.query('settings', columns: ['unseen_new_features', 'live_activity_consent_accepted']);
     if (rows.isNotEmpty) {
-      final raw = rows.first['unseen_new_features'] as String? ?? '[]';
-      final list = (jsonDecode(raw) as List).cast<String>();
-      if (!list.contains('live_activity_consent')) {
-        list.add('live_activity_consent');
-        await db.update('settings', {'unseen_new_features': jsonEncode(list)});
+      final consentAccepted = rows.first['live_activity_consent_accepted'] as int? ?? 0;
+      if (consentAccepted == 0) {
+        final raw = rows.first['unseen_new_features'] as String? ?? '[]';
+        final list = (jsonDecode(raw) as List).cast<String>();
+        if (!list.contains('live_activity_consent')) {
+          list.add('live_activity_consent');
+          await db.update('settings', {'unseen_new_features': jsonEncode(list)});
+        }
       }
     }
   } catch (e) {
