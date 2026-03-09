@@ -32,9 +32,14 @@ final class LiveActivityManager {
     class func create(completion: @escaping (Bool) -> Void) {
         Task {
             // Előző activity-k eltakarítása, hogy ne legyen dupla
+            // Flag beállítása, hogy a monitorActivityState ne küldjön dismiss notification-t
+            isCleaningUpOldActivities = true
             for activity in Activity<LiveActivitiesAppAttributes>.activities {
                 await activity.end(nil, dismissalPolicy: .immediate)
             }
+            // Kis várakozás, hogy a state update-ek lefussanak
+            try? await Task.sleep(nanoseconds: 200_000_000)
+            isCleaningUpOldActivities = false
 
             do {
                 let contentState = LiveActivitiesAppAttributes.ContentState(
@@ -96,6 +101,11 @@ final class LiveActivityManager {
     private class func monitorActivityState(activity: Activity<LiveActivitiesAppAttributes>) async {
         for await state in activity.activityStateUpdates {
             if state == .dismissed || state == .ended {
+                // Ha cleanup közben vagyunk (create() hívta), ne küldjünk dismiss notification-t
+                if isCleaningUpOldActivities {
+                    print("Live Activity ended during cleanup - ignoring dismiss")
+                    break
+                }
                 print("Live Activity dismissed/ended by user or system")
                 activityID = nil
                 activityPushToken = nil
