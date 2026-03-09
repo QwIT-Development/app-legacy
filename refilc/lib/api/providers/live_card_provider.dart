@@ -37,6 +37,7 @@ class LiveCardProvider extends ChangeNotifier {
   static bool hasActivityStarted = false;
   static bool hasDayEnd = false;
   static bool hasUserDismissed = false;
+  static bool _isCreating = false;
   static DateTime? storeFirstRunDate;
   static bool hasActivitySettingsChanged = false;
   // ignore: non_constant_identifier_names
@@ -77,7 +78,12 @@ class LiveCardProvider extends ChangeNotifier {
     };
 
     PlatformChannel.onActivityDismissed = (deviceId) {
+      if (_isCreating) {
+        debugPrint("Live Activity dismiss ignored (create in progress)");
+        return;
+      }
       debugPrint("Live Activity dismissed by user");
+      serverSync.forceUnregister(deviceId);
       hasActivityStarted = false;
       hasUserDismissed = true;
     };
@@ -430,7 +436,9 @@ class LiveCardProvider extends ChangeNotifier {
   }
 
   Future<void> _createAndSync() async {
+    _isCreating = true;
     final result = await PlatformChannel.createLiveActivity(toMap());
+    _isCreating = false;
     if (result != null && result['success'] == 'true') {
       debugPrint("Live Activity létrehozva, várunk a push tokenre...");
     } else {
