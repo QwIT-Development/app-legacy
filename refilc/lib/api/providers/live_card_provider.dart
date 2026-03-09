@@ -348,6 +348,10 @@ class LiveCardProvider extends ChangeNotifier {
     }
 
     //LIVE ACTIVITIES
+    debugPrint("LA DEBUG: state=$currentState, today=${today.length}, "
+        "current=${currentLesson?.subject.name}, next=${nextLesson?.subject.name}, "
+        "hasStarted=$hasActivityStarted, dismissed=$hasUserDismissed, "
+        "enabled=${_settings.liveActivityEnabled}, weekday=${now.weekday}, hour=${now.hour}");
 
     // Guard: if not enabled, stop any running activity and skip
     if (!_settings.liveActivityEnabled) {
