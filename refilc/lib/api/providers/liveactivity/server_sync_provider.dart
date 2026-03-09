@@ -32,7 +32,6 @@ class ServerSyncProvider {
     }
   }
 
-  /// Token rotation esetén frissíti a tokent a szerveren.
   Future<void> refreshToken({
     required String pushToken,
     required String bundleId,
@@ -85,18 +84,38 @@ class ServerSyncProvider {
       final dateStr =
           '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
 
-      final lessonsJson = lessons
-          .map((l) => {
-                'index': l.lessonIndex.toString(),
-                'subject': l.subject.renamedTo ??
-                    ShortSubject.resolve(subject: l.subject).capital(),
-                'icon': SubjectIcon.resolveName(subject: l.subject),
-                'room': l.room.replaceAll('_', ' '),
-                'description': l.description,
-                'start': l.start.millisecondsSinceEpoch,
-                'end': l.end.millisecondsSinceEpoch,
-              })
-          .toList();
+      final entries = <Map<String, dynamic>>[];
+
+      for (int i = 0; i < lessons.length; i++) {
+        final l = lessons[i];
+        entries.add({
+          'type': 'lesson',
+          'index': l.lessonIndex.toString(),
+          'subject': l.subject.renamedTo ??
+              ShortSubject.resolve(subject: l.subject).capital(),
+          'icon': SubjectIcon.resolveName(subject: l.subject),
+          'room': l.room.replaceAll('_', ' '),
+          'description': l.description,
+          'start': l.start.millisecondsSinceEpoch,
+          'end': l.end.millisecondsSinceEpoch,
+        });
+
+        if (i < lessons.length - 1) {
+          final next = lessons[i + 1];
+          if (l.end.isBefore(next.start)) {
+            entries.add({
+              'type': 'break',
+              'start': l.end.millisecondsSinceEpoch,
+              'end': next.start.millisecondsSinceEpoch,
+              'nextSubject': next.subject.renamedTo ??
+                  ShortSubject.resolve(subject: next.subject).capital(),
+              'nextIcon': SubjectIcon.resolveName(subject: next.subject),
+              'nextRoom': next.room.replaceAll('_', ' '),
+              'nextIndex': next.lessonIndex.toString(),
+            });
+          }
+        }
+      }
 
       final response = await http.post(
         Uri.parse('$_baseUrl/schedule'),
@@ -104,13 +123,13 @@ class ServerSyncProvider {
         body: jsonEncode({
           'device_id': deviceId,
           'date': dateStr,
-          'lessons': lessonsJson,
+          'lessons': entries,
         }),
       ).timeout(const Duration(seconds: 10));
       if (response.statusCode != 200 && response.statusCode != 201) {
         debugPrint('ServerSync schedule hiba: ${response.statusCode} ${response.body}');
       } else {
-        debugPrint('ServerSync: ${lessons.length} óra feltöltve ($dateStr)');
+        debugPrint('ServerSync: ${entries.length} elem feltöltve ($dateStr)');
       }
     } catch (e) {
       debugPrint('ServerSync schedule kivétel: $e');
@@ -122,7 +141,6 @@ class ServerSyncProvider {
     await forceUnregister(_deviceId!);
   }
 
-  /// Unregister egy adott deviceId-vel, akkor is ha a _deviceId nincs beállítva (pl. app restart után).
   Future<void> forceUnregister(String deviceId) async {
     try {
       final response = await http.post(

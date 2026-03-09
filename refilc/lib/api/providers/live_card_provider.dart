@@ -34,7 +34,6 @@ class LiveCardProvider extends ChangeNotifier {
   Lesson? prevLesson;
   List<Lesson>? nextLessons;
 
-  // new variables
   static bool hasActivityStarted = false;
   static bool hasDayEnd = false;
   static bool hasUserDismissed = false;
@@ -43,7 +42,6 @@ class LiveCardProvider extends ChangeNotifier {
   // ignore: non_constant_identifier_names
   static Map<String, String> LAData = {};
   static DateTime? now;
-  //
 
   LiveCardState currentState = LiveCardState.empty;
   // ignore: unused_field
@@ -66,12 +64,8 @@ class LiveCardProvider extends ChangeNotifier {
         ? Duration(seconds: settings.bellDelay)
         : Duration.zero;
 
-    // Token figyelése: amikor az APNs tokent ad (első vagy rotation), regisztráljuk a szerverrel
     PlatformChannel.onTokenUpdated = (pushToken, deviceId, bundleId) {
-      if (!_settings.liveActivityEnabled) {
-        debugPrint("Push token érkezett, de Live Activity nincs engedélyezve - skip");
-        return;
-      }
+      if (!_settings.liveActivityEnabled) return;
       debugPrint("Push token érkezett: $pushToken");
       serverSync.registerAndSync(
         deviceId: deviceId,
@@ -82,7 +76,6 @@ class LiveCardProvider extends ChangeNotifier {
       );
     };
 
-    // Ha a user dismiss-eli a Live Activity-t (swipe), értesítjük a szervert
     PlatformChannel.onActivityDismissed = (deviceId) {
       debugPrint("Live Activity dismissed - unregistering from server");
       serverSync.forceUnregister(deviceId);
@@ -93,9 +86,7 @@ class LiveCardProvider extends ChangeNotifier {
     update();
   }
 
-  // Debugging
   static DateTime _now() {
-    // return DateTime(2023, 9, 27, 9, 30);
     return DateTime.now();
   }
 
@@ -116,8 +107,6 @@ class LiveCardProvider extends ChangeNotifier {
   }
 
   Map<String, String> toMap() {
-    // print("LIVE ACTIVITY COLOR BELOW:");
-    // print(_settings.liveActivityColor.toHexString().substring(2));
     String color = '#${_settings.liveActivityColor.toHexString().substring(2)}';
 
     switch (currentState) {
@@ -281,8 +270,6 @@ class LiveCardProvider extends ChangeNotifier {
       storeFirstRunDate = now;
     }
 
-    // Filter cancelled lessons #20
-    // Filter label lessons #128
     today = today
         .where((lesson) =>
             lesson.status?.name != "Elmaradt" &&
@@ -291,7 +278,6 @@ class LiveCardProvider extends ChangeNotifier {
         .toList();
 
     if (today.isNotEmpty) {
-      // sort
       today.sort((a, b) => a.start.compareTo(b.start));
 
       final _lesson = today.firstWhere(
@@ -347,13 +333,10 @@ class LiveCardProvider extends ChangeNotifier {
       currentState = LiveCardState.empty;
     }
 
-    //LIVE ACTIVITIES
     debugPrint("LA DEBUG: state=$currentState, today=${today.length}, "
         "current=${currentLesson?.subject.name}, next=${nextLesson?.subject.name}, "
         "hasStarted=$hasActivityStarted, dismissed=$hasUserDismissed, "
         "enabled=${_settings.liveActivityEnabled}, weekday=${now.weekday}, hour=${now.hour}");
-
-    // Guard: if not enabled, stop any running activity and skip
     if (!_settings.liveActivityEnabled) {
       if (hasActivityStarted) {
         debugPrint("Live Activity nincs engedélyezve, de fut – leállítás...");
@@ -363,7 +346,6 @@ class LiveCardProvider extends ChangeNotifier {
       }
     } else {
 
-    //CREATE
     if (!hasActivityStarted &&
         !hasUserDismissed &&
         nextLesson != null &&
@@ -384,7 +366,6 @@ class LiveCardProvider extends ChangeNotifier {
       hasActivityStarted = true;
       _createAndSync();
     }
-    // Fake mód: mindig hozzuk létre a Live Activity-t ha nincs elindítva
     else if (!hasActivityStarted &&
         _settings.developerMode &&
         _settings.devLiveFakeLessons &&
@@ -395,7 +376,6 @@ class LiveCardProvider extends ChangeNotifier {
       _createAndSync();
     }
 
-    //UPDATE
     else if (hasActivityStarted) {
       if (hasActivitySettingsChanged) {
         debugPrint("Valamelyik beállítás megváltozott. Frissítés...");
@@ -421,10 +401,7 @@ class LiveCardProvider extends ChangeNotifier {
       }
     }
 
-    //END
-    // Fake módban ne fejezzük be a Live Activity-t
     if (_settings.developerMode && _settings.devLiveFakeLessons) {
-      // skip end logic in fake mode
     } else if ((currentState == LiveCardState.afternoon ||
             currentState == LiveCardState.morning ||
             currentState == LiveCardState.night) &&
@@ -476,8 +453,6 @@ class LiveCardProvider extends ChangeNotifier {
     if (!_settings.developerMode || !_settings.devLiveFakeLessons) {
       return real;
     }
-    // Fake mód: ha vannak valódi órák, a fake órákat utánuk rakjuk
-    // DE: ha az utolsó valódi óra már véget ért, a fake-ek a jelen idő köré kerülnek
     if (real.isNotEmpty) {
       final sorted = List<Lesson>.from(real)
         ..sort((a, b) => a.end.compareTo(b.end));
@@ -485,17 +460,15 @@ class LiveCardProvider extends ChangeNotifier {
       final now = _now();
       final nextIndex = sorted.length;
       if (lastEnd.isBefore(now)) {
-        // Az órák már véget értek — fake órákat a jelen idő köré
         return [...real, ..._generateFakeLessons(startIndex: nextIndex)];
       }
-      // Van még óra — fake órákat az utolsó után
+
       final fakeStart = lastEnd.add(const Duration(minutes: 10));
       return [...real, ..._generateFakeLessons(baseStart: fakeStart, startIndex: nextIndex)];
     }
     return _generateFakeLessons();
   }
 
-  /// Generál fake órákat a jelenlegi idő köré, hogy a Live Activity tesztelhető legyen.
   static List<Lesson> _generateFakeLessons({DateTime? baseStart, int startIndex = 0}) {
     final now = _now();
     final start0 = baseStart ?? now.subtract(const Duration(minutes: 10));
