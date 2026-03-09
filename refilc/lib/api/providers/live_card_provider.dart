@@ -332,10 +332,7 @@ class LiveCardProvider extends ChangeNotifier {
       currentState = LiveCardState.empty;
     }
 
-    debugPrint("LA DEBUG: state=$currentState, today=${today.length}, "
-        "current=${currentLesson?.subject.name}, next=${nextLesson?.subject.name}, "
-        "hasStarted=$hasActivityStarted, dismissed=$hasUserDismissed, "
-        "enabled=${_settings.liveActivityEnabled}, weekday=${now.weekday}, hour=${now.hour}");
+
     if (!_settings.liveActivityEnabled) {
       if (hasActivityStarted) {
         debugPrint("Live Activity nincs engedélyezve, de fut – leállítás...");
