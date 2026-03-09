@@ -23,8 +23,6 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:home_widget/home_widget.dart';
 
-import 'live_card_provider.dart';
-import 'liveactivity/platform_channel.dart';
 
 // Mutex
 bool lock = false;
@@ -148,16 +146,8 @@ Future<void> syncAll(BuildContext context) async {
   }
 
   return Future.wait(tasks).then((value) {
-    // Unlock
     lock = false;
 
-    if (Platform.isIOS && LiveCardProvider.hasActivityStarted == true) {
-      PlatformChannel.endLiveActivity();
-      LiveCardProvider.serverSync.unregister();
-      LiveCardProvider.hasActivityStarted = false;
-    }
-
-    // Update Widget
     if (Platform.isAndroid) updateWidget();
   });
 }

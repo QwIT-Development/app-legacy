@@ -105,6 +105,11 @@ class ServerSyncProvider {
           if (l.end.isBefore(next.start)) {
             entries.add({
               'type': 'break',
+              'index': '',
+              'subject': 'Szünet',
+              'icon': 'cup.and.saucer',
+              'room': '',
+              'description': '',
               'start': l.end.millisecondsSinceEpoch,
               'end': next.start.millisecondsSinceEpoch,
               'nextSubject': next.subject.renamedTo ??
