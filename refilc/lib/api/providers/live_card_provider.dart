@@ -363,11 +363,12 @@ class LiveCardProvider extends ChangeNotifier {
     if (!hasActivityStarted &&
         !hasUserDismissed &&
         nextLesson != null &&
+        nextLesson!.start.difference(now).inMinutes <= 120 &&
         (currentState == LiveCardState.morning ||
             currentState == LiveCardState.afternoon ||
             currentState == LiveCardState.night)) {
       debugPrint(
-          "Az első óra előtt állunk. Létrehozás...");
+          "Az első óra előtt állunk, kevesebb mint két órával. Létrehozás...");
       hasActivityStarted = true;
       _createAndSync();
     } else if (!hasActivityStarted &&
