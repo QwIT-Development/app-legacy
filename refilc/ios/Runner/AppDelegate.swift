@@ -32,7 +32,6 @@ import Security
             self?.handleMethodCall(call, result: result)
         })
 
-        // Activity dismiss figyelése: ha a user swipe-olja, értesítjük Flutter-t
         NotificationCenter.default.addObserver(
             forName: NSNotification.Name("LiveActivityDismissed"),
             object: nil,
@@ -44,7 +43,6 @@ import Security
             ])
         }
 
-        // Token rotation figyelése: ha az APNs új tokent ad, értesítjük Flutter-t
         tokenRotationObserver = NotificationCenter.default.addObserver(
             forName: NSNotification.Name("LiveActivityTokenUpdated"),
             object: nil,
@@ -123,8 +121,6 @@ import Security
         }
     }
 
-    // MARK: - Keychain device ID
-
     private func getOrCreateDeviceId() -> String {
         let keychainKey = "refilc.live.device_id"
         let query: [String: Any] = [
@@ -139,7 +135,6 @@ import Security
            let existingId = String(data: data, encoding: .utf8) {
             return existingId
         }
-        // Nem létezik – generálunk egyet
         let newId = UUID().uuidString
         let addQuery: [String: Any] = [
             kSecClass as String:       kSecClassGenericPassword,
@@ -149,8 +144,6 @@ import Security
         SecItemAdd(addQuery as CFDictionary, nil)
         return newId
     }
-
-    // MARK: - Helpers
 
     private func checkLiveActivityFeatureAvailable() -> Bool {
         if #available(iOS 16.2, *) {
