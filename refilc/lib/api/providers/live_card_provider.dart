@@ -78,6 +78,7 @@ class LiveCardProvider extends ChangeNotifier {
 
     PlatformChannel.onActivityDismissed = (deviceId) {
       debugPrint("Live Activity dismissed by user");
+      serverSync.forceUnregister(deviceId);
       hasActivityStarted = false;
       hasUserDismissed = true;
     };
