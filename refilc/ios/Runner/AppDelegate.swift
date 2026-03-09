@@ -63,12 +63,27 @@ import Security
     }
 
     override func applicationWillTerminate(_ application: UIApplication) {
+        let deviceId = getOrCreateDeviceId()
+        unregisterFromServer(deviceId: deviceId)
         if #available(iOS 16.2, *) {
             LiveActivityManager.stop()
         }
         if let observer = tokenRotationObserver {
             NotificationCenter.default.removeObserver(observer)
         }
+    }
+
+    private func unregisterFromServer(deviceId: String) {
+        guard let url = URL(string: "https://legacy-la.devbeni.lol/unregister") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: ["device_id": deviceId])
+        let semaphore = DispatchSemaphore(value: 0)
+        URLSession.shared.dataTask(with: request) { _, _, _ in
+            semaphore.signal()
+        }.resume()
+        _ = semaphore.wait(timeout: .now() + 3)
     }
 
     private func handleMethodCall(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
