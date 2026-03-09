@@ -51,6 +51,18 @@ extension Color {
 struct LockScreenLiveActivityView: View {
     let context: ActivityViewContext<LiveActivitiesAppAttributes>
 
+    private var hasNextLesson: Bool {
+        !context.state.nextSubject.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    private var nextLessonLine: String {
+        if context.state.nextRoom.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return context.state.nextSubject
+        }
+
+        return "\(context.state.nextSubject) - \(context.state.nextRoom)"
+    }
+
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
             // Ikon
@@ -84,12 +96,12 @@ struct LockScreenLiveActivityView: View {
                 }
 
                 // Következő óra
-                if !context.state.nextSubject.isEmpty && !context.state.nextRoom.isEmpty {
+                if hasNextLesson {
                     HStack(spacing: 4) {
                         Image(systemName: "arrow.right")
                             .font(.system(size: 8, weight: .semibold))
                             .foregroundStyle(.secondary)
-                        Text("\(context.state.nextSubject) - \(context.state.nextRoom)")
+                        Text(nextLessonLine)
                             .font(.system(size: 12))
                             .foregroundStyle(.secondary)
                     }
@@ -204,14 +216,18 @@ struct LiveCardWidget: Widget {
                     
                     Spacer(minLength: 2)
                     
-                    if(context.state.nextRoom != "" && context.state.nextSubject != "") {
+                    if(!context.state.nextSubject.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
                       Text("Következő óra és terem:")
                         .font(.system(size: 14))
                         .padding(.trailing, -45)
                       Spacer(minLength: 2)
-                      
-                      Text("\(context.state.nextSubject) - \(context.state.nextRoom)")
-                        .modifier(DynamicFontSizeModifier(text: "\(context.state.nextSubject) - \(context.state.nextRoom)"))
+
+                      let nextLessonLine = context.state.nextRoom.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                        ? context.state.nextSubject
+                        : "\(context.state.nextSubject) - \(context.state.nextRoom)"
+
+                      Text(nextLessonLine)
+                        .modifier(DynamicFontSizeModifier(text: nextLessonLine))
                         .padding(.trailing, 35)
                     } else {
                       Text("Ez az utolsó óra! Kitartást!")
