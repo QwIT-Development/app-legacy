@@ -412,7 +412,9 @@ class LiveCardProvider extends ChangeNotifier {
     } else if (hasActivityStarted &&
         !hasDayEnd &&
         nextLesson == null &&
-        now.isAfter(prevLesson!.end)) {
+        prevLesson != null &&
+        now.isAfter(prevLesson!.end) &&
+        today.every((l) => l.end.isBefore(now))) {
       debugPrint("Az utolsó óra véget ért. Befejezés...");
       PlatformChannel.endLiveActivity();
       serverSync.unregister();
