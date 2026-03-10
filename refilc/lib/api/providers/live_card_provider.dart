@@ -409,8 +409,8 @@ class LiveCardProvider extends ChangeNotifier {
               currentState == LiveCardState.night) &&
           hasActivityStarted &&
           nextLesson != null &&
-          nextLesson!.start.difference(now).inMinutes > 60) {
-        debugPrint("Több, mint 1 óra van az első óráig. Befejezés...");
+          nextLesson!.start.difference(now).inMinutes > 120) {
+        debugPrint("Több, mint 2 óra van az első óráig. Befejezés...");
         PlatformChannel.endLiveActivity();
         serverSync.unregister();
         hasActivityStarted = false;
