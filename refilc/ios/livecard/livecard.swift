@@ -63,6 +63,12 @@ struct LockScreenLiveActivityView: View {
         return "\(context.state.nextSubject) - \(context.state.nextRoom)"
     }
 
+    private var countdownFont: Font {
+        // h:mm:ss needs more space than mm:ss
+        let remaining = max(0, context.state.endDate.timeIntervalSinceNow)
+        return remaining >= 3600 ? .title3 : .title2
+    }
+
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
             // Ikon
@@ -113,15 +119,19 @@ struct LockScreenLiveActivityView: View {
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 14)
+            .layoutPriority(0)
 
             Spacer(minLength: 4)
 
             // Visszaszámláló
             Text(timerInterval: context.state.date, countsDown: true)
                 .multilineTextAlignment(.trailing)
-                .frame(width: 75)
-                .font(.title2)
+                .frame(minWidth: 86, maxWidth: 100, alignment: .trailing)
+                .font(countdownFont)
                 .monospacedDigit()
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
+                .layoutPriority(1)
                 .padding(.trailing, 16)
         }
 //        .activityBackgroundTint(
@@ -242,14 +252,17 @@ struct LiveCardWidget: Widget {
               }
 
                 /// Compact
-            } compactLeading: {
+        } compactLeading: {
                   Image(systemName: context.state.icon)
             }
         compactTrailing: {
             Text(timerInterval: context.state.date, countsDown: true)
                 .multilineTextAlignment(.center)
-                .frame(width: 40)
+                .frame(width: 52)
                 .font(.caption2)
+                .monospacedDigit()
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
 
             /// Collapsed
         } minimal: {
