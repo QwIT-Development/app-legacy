@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 
 class TimetableProvider with ChangeNotifier {
   Map<Week, List<Lesson>> lessons = {};
+  String? _activeUserId;
   late final UserProvider _user;
   late final DatabaseProvider _database;
   late final KretaClient _kreta;
@@ -21,17 +22,38 @@ class TimetableProvider with ChangeNotifier {
   })  : _user = user,
         _database = database,
         _kreta = kreta {
+    _user.addListener(_onUserChanged);
+    restoreUser();
+  }
+
+  @override
+  void dispose() {
+    _user.removeListener(_onUserChanged);
+    super.dispose();
+  }
+
+  void _onUserChanged() {
+    final userId = _user.id;
+    if (userId == _activeUserId) return;
+
+    _activeUserId = userId;
+    lessons = {};
+    notifyListeners();
     restoreUser();
   }
 
   Future<void> restoreUser() async {
     String? userId = _user.id;
+    _activeUserId = userId;
 
     // Load lessons from the database
     if (userId != null) {
       var dbLessons = await _database.userQuery.getLessons(userId: userId);
       lessons = dbLessons;
       await convertBySettings();
+    } else {
+      lessons = {};
+      notifyListeners();
     }
   }
 
@@ -72,6 +94,12 @@ class TimetableProvider with ChangeNotifier {
   // Fetches Lessons from the Kreta API then stores them in the database
   Future<void> fetch({Week? week}) async {
     if (week == null) return;
+
+    if (_activeUserId != _user.id) {
+      _activeUserId = _user.id;
+      await restoreUser();
+    }
+
     User? user = _user.user;
     if (user == null) throw "Cannot fetch Lessons for User null";
 
