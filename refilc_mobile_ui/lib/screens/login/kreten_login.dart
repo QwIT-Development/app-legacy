@@ -208,7 +208,7 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
               ),
               const SizedBox(height: 16),
               Text(
-                'A bejelentkezesi oldal nem toltheto be',
+                'A bejelentkezési oldal nem tölthető be',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -230,7 +230,7 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
               FilledButton.icon(
                 onPressed: _retry,
                 icon: const Icon(Icons.refresh),
-                label: const Text('Probald ujra'),
+                label: const Text('Próbáld újra'),
               ),
               const SizedBox(height: 12),
               TextButton(
