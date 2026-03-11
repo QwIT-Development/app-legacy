@@ -18,6 +18,8 @@
 
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -38,6 +40,13 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
   var loadingPercentage = 0;
   var currentUrl = '';
   bool _hasFadedIn = false;
+  bool _hasError = false;
+  String _errorMessage = '';
+  bool _hasTimedOut = false;
+  Timer? _timeoutTimer;
+
+  static const _loginUrl =
+      'https://idp.e-kreta.hu/connect/authorize?prompt=login&nonce=wylCrqT4oN6PPgQn2yQB0euKei9nJeZ6_ffJ-VpSKZU&response_type=code&code_challenge_method=S256&scope=openid%20email%20offline_access%20kreta-ellenorzo-webapi.public%20kreta-eugyintezes-webapi.public%20kreta-fileservice-webapi.public%20kreta-mobile-global-webapi.public%20kreta-dkt-webapi.public%20kreta-ier-webapi.public&code_challenge=HByZRRnPGb-Ko_wTI7ibIba1HQ6lor0ws4bcgReuYSQ&redirect_uri=https://mobil.e-kreta.hu/ellenorzo-student/prod/oauthredirect&client_id=kreta-ellenorzo-student-mobile-ios&state=refilc_student_mobile';
 
   @override
   void initState() {
@@ -123,15 +132,48 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
           });
         },
         onPageFinished: (url) {
+          _timeoutTimer?.cancel();
           setState(() {
             loadingPercentage = 100;
           });
         },
+        onWebResourceError: (error) {
+          _timeoutTimer?.cancel();
+          setState(() {
+            _hasError = true;
+            _errorMessage = error.description;
+          });
+        },
       ))
       ..loadRequest(
-        Uri.parse(
-            'https://idp.e-kreta.hu/connect/authorize?prompt=login&nonce=wylCrqT4oN6PPgQn2yQB0euKei9nJeZ6_ffJ-VpSKZU&response_type=code&code_challenge_method=S256&scope=openid%20email%20offline_access%20kreta-ellenorzo-webapi.public%20kreta-eugyintezes-webapi.public%20kreta-fileservice-webapi.public%20kreta-mobile-global-webapi.public%20kreta-dkt-webapi.public%20kreta-ier-webapi.public&code_challenge=HByZRRnPGb-Ko_wTI7ibIba1HQ6lor0ws4bcgReuYSQ&redirect_uri=https://mobil.e-kreta.hu/ellenorzo-student/prod/oauthredirect&client_id=kreta-ellenorzo-student-mobile-ios&state=refilc_student_mobile'), // &institute_code=${widget.selectedSchool}
+        Uri.parse(_loginUrl), // &institute_code=${widget.selectedSchool}
       );
+
+    _startTimeoutTimer();
+  }
+
+  void _startTimeoutTimer() {
+    _timeoutTimer?.cancel();
+    _timeoutTimer = Timer(const Duration(seconds: 15), () {
+      if (mounted && loadingPercentage < 100 && !_hasError) {
+        setState(() {
+          _hasTimedOut = true;
+        });
+      }
+    });
+  }
+
+  void _retry() {
+    setState(() {
+      _hasError = false;
+      _errorMessage = '';
+      _hasTimedOut = false;
+      loadingPercentage = 0;
+      _hasFadedIn = false;
+    });
+    _animationController.reset();
+    controller.loadRequest(Uri.parse(_loginUrl));
+    _startTimeoutTimer();
   }
 
   // Future<void> loadLoginUrl() async {
@@ -143,6 +185,7 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
 
   @override
   void dispose() {
+    _timeoutTimer?.cancel();
     // Step 3: Dispose of the animation controller
     _animationController.dispose();
     super.dispose();
@@ -150,6 +193,56 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
 
   @override
   Widget build(BuildContext context) {
+    // Show error UI if there was a web resource error or a timeout
+    if (_hasError || _hasTimedOut) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.error_outline,
+                size: 48,
+                color: Theme.of(context).colorScheme.error,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'A bejelentkezesi oldal nem toltheto be',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+              if (_errorMessage.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                Text(
+                  _errorMessage,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+              const SizedBox(height: 24),
+              FilledButton.icon(
+                onPressed: _retry,
+                icon: const Icon(Icons.refresh),
+                label: const Text('Probald ujra'),
+              ),
+              const SizedBox(height: 12),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Vissza'),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     // Trigger the fade-in animation only once when loading reaches 100%
     if (loadingPercentage == 100 && !_hasFadedIn) {
       _animationController.forward(); // Play the animation
