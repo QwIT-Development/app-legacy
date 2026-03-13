@@ -51,6 +51,10 @@ extension Color {
 struct LockScreenLiveActivityView: View {
     let context: ActivityViewContext<LiveActivitiesAppAttributes>
 
+    private var isExpired: Bool {
+        context.state.endDate <= Date()
+    }
+
     private var hasNextLesson: Bool {
         !context.state.nextSubject.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
@@ -124,15 +128,26 @@ struct LockScreenLiveActivityView: View {
             Spacer(minLength: 4)
 
             // Visszaszámláló
-            Text(timerInterval: context.state.date, countsDown: true)
-                .multilineTextAlignment(.trailing)
-                .frame(minWidth: 86, maxWidth: 100, alignment: .trailing)
-                .font(countdownFont)
-                .monospacedDigit()
-                .lineLimit(1)
-                .minimumScaleFactor(0.75)
-                .layoutPriority(1)
-                .padding(.trailing, 16)
+            if isExpired {
+                Text("Vége")
+                    .multilineTextAlignment(.trailing)
+                    .frame(minWidth: 86, maxWidth: 100, alignment: .trailing)
+                    .font(.headline)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
+                    .layoutPriority(1)
+                    .padding(.trailing, 16)
+            } else {
+                Text(timerInterval: context.state.date, countsDown: true)
+                    .multilineTextAlignment(.trailing)
+                    .frame(minWidth: 86, maxWidth: 100, alignment: .trailing)
+                    .font(countdownFont)
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
+                    .layoutPriority(1)
+                    .padding(.trailing, 16)
+            }
         }
 //        .activityBackgroundTint(
 //            context.state.color != "#676767"
@@ -256,13 +271,22 @@ struct LiveCardWidget: Widget {
                   Image(systemName: context.state.icon)
             }
         compactTrailing: {
-            Text(timerInterval: context.state.date, countsDown: true)
-                .multilineTextAlignment(.center)
-                .frame(width: 52)
-                .font(.caption2)
-                .monospacedDigit()
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
+            if context.state.endDate <= Date() {
+                Text("Vége")
+                    .multilineTextAlignment(.center)
+                    .frame(width: 52)
+                    .font(.caption2)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+            } else {
+                Text(timerInterval: context.state.date, countsDown: true)
+                    .multilineTextAlignment(.center)
+                    .frame(width: 52)
+                    .font(.caption2)
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+            }
 
             /// Collapsed
         } minimal: {
