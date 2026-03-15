@@ -45,6 +45,9 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
   String _errorMessage = '';
   bool _hasTimedOut = false;
   Timer? _timeoutTimer;
+  int _autoRetryCount = 0;
+  static const int _maxAutoRetries = 1;
+  bool _hasLoadedOnce = false;
 
   static const _loginUrl =
       'https://idp.e-kreta.hu/connect/authorize?prompt=login&nonce=wylCrqT4oN6PPgQn2yQB0euKei9nJeZ6_ffJ-VpSKZU&response_type=code&code_challenge_method=S256&scope=openid%20email%20offline_access%20kreta-ellenorzo-webapi.public%20kreta-eugyintezes-webapi.public%20kreta-fileservice-webapi.public%20kreta-mobile-global-webapi.public%20kreta-dkt-webapi.public%20kreta-ier-webapi.public&code_challenge=HByZRRnPGb-Ko_wTI7ibIba1HQ6lor0ws4bcgReuYSQ&redirect_uri=https://mobil.e-kreta.hu/ellenorzo-student/prod/oauthredirect&client_id=kreta-ellenorzo-student-mobile-ios&state=refilc_student_mobile';
@@ -124,6 +127,8 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
 
           if (!mounted) return;
 
+          _autoRetryCount = 0;
+          _hasLoadedOnce = true;
           setState(() {
             currentUrl = url;
             _initialPageLoaded = true;
@@ -140,6 +145,14 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
           _timeoutTimer?.cancel();
 
           if (!mounted) return;
+
+          // Auto-retry once on first error before showing the error UI,
+          // to handle transient network issues on initial load.
+          if (!_hasLoadedOnce && _autoRetryCount < _maxAutoRetries) {
+            _autoRetryCount++;
+            _retryLoad();
+            return;
+          }
 
           setState(() {
             _hasError = true;
@@ -165,6 +178,18 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
     });
   }
 
+  void _retryLoad() {
+    setState(() {
+      _hasError = false;
+      _errorMessage = '';
+      _hasTimedOut = false;
+      _initialPageLoaded = false;
+      loadingPercentage = 0;
+    });
+    controller.loadRequest(Uri.parse(_loginUrl));
+    _startTimeoutTimer();
+  }
+
   void _retry() {
     setState(() {
       _hasError = false;
@@ -174,6 +199,8 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
       loadingPercentage = 0;
       _hasFadedIn = false;
     });
+    _autoRetryCount = 0;
+    _hasLoadedOnce = false;
     _animationController.reset();
     controller.loadRequest(Uri.parse(_loginUrl));
     _startTimeoutTimer();
