@@ -112,7 +112,6 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
             }
           });
 
-          _autoRetryCount = 0;
           _startTimeoutTimer();
         },
         onProgress: (progress) {
@@ -127,6 +126,7 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
 
           if (!mounted) return;
 
+          _autoRetryCount = 0;
           setState(() {
             currentUrl = url;
             _initialPageLoaded = true;
