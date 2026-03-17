@@ -167,7 +167,9 @@ class ServerSyncProvider {
   List<Lesson> _filterLessons(List<Lesson> lessons) {
     return lessons
         .where((l) =>
-            l.status?.name != 'Elmaradt' && l.subject.id != '' && !l.isEmpty)
+            (l.status?.name != 'Elmaradt' || l.substituteTeacher != null) &&
+            l.subject.id != '' &&
+            !l.isEmpty)
         .toList()
       ..sort((a, b) => a.start.compareTo(b.start));
   }

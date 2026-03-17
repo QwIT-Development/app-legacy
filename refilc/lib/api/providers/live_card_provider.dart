@@ -280,7 +280,7 @@ class LiveCardProvider extends ChangeNotifier {
 
     today = today
         .where((lesson) =>
-            lesson.status?.name != "Elmaradt" &&
+            (lesson.status?.name != "Elmaradt" || lesson.substituteTeacher != null) &&
             lesson.subject.id != '' &&
             !lesson.isEmpty)
         .toList();
