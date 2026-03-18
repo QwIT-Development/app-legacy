@@ -391,17 +391,6 @@ class LoginScreenState extends State<LoginScreen> {
                                       )),
                                 ),
                               ),
-                              const SizedBox(height: 19),
-                              GestureDetector(
-                                onTap: () {
-                                  final userProvider = Provider.of<UserProvider>(context, listen: false);
-                                  final demoUser = User.demo();
-                                  userProvider.addUser(demoUser);
-                                  userProvider.setUser(demoUser.id);
-                                  setSystemChrome(context);
-                                  Navigator.of(context).pushReplacementNamed('login_to_navigation');
-                                },
-                              ),
                               const SizedBox(height: 12),
                               // privacy policy
                               GestureDetector(
