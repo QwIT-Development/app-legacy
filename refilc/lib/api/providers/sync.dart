@@ -37,8 +37,18 @@ Future<void> syncAll(BuildContext context) async {
 
   UserProvider user = Provider.of<UserProvider>(context, listen: false);
 
-  // Demo mode: skip all API calls
+  // Demo mode: load demo data into providers without API calls
   if (user.isDemo) {
+    await Provider.of<GradeProvider>(context, listen: false).fetch();
+    await Provider.of<TimetableProvider>(context, listen: false)
+        .fetch(week: Week.current());
+    await Provider.of<ExamProvider>(context, listen: false).fetch();
+    await Provider.of<HomeworkProvider>(context, listen: false)
+        .fetch(from: DateTime.now().subtract(const Duration(days: 30)));
+    await Provider.of<MessageProvider>(context, listen: false).fetchAll();
+    await Provider.of<NoteProvider>(context, listen: false).fetch();
+    await Provider.of<EventProvider>(context, listen: false).fetch();
+    await Provider.of<AbsenceProvider>(context, listen: false).fetch();
     lock = false;
     return Future.value();
   }
