@@ -45,6 +45,8 @@ class LiveCardProvider extends ChangeNotifier {
   static DateTime? now;
 
   LiveCardState currentState = LiveCardState.empty;
+  static LiveCardState _previousState = LiveCardState.empty;
+  static String? _previousLessonId;
   // ignore: unused_field
   late Timer _timer;
   late final TimetableProvider _timetable;
@@ -379,28 +381,22 @@ class LiveCardProvider extends ChangeNotifier {
         hasUserDismissed = false;
         _createAndSync();
       } else if (hasActivityStarted) {
+        final currentLessonId = currentLesson?.id ?? nextLesson?.id;
+        final stateChanged = currentState != _previousState;
+        final lessonChanged = currentLessonId != _previousLessonId;
+
         if (hasActivitySettingsChanged) {
           debugPrint("Valamelyik beállítás megváltozott. Frissítés...");
           PlatformChannel.updateLiveActivity(toMap());
           hasActivitySettingsChanged = false;
-        } else if (nextLesson != null || currentLesson != null) {
-          bool afterPrevLessonEnd = prevLesson != null &&
-              now
-                  .subtract(const Duration(seconds: 1))
-                  .isBefore(prevLesson!.end) &&
-              now.isAfter(prevLesson!.end);
-
-          bool afterCurrentLessonStart = currentLesson != null &&
-              now
-                  .subtract(const Duration(seconds: 1))
-                  .isBefore(currentLesson!.start) &&
-              now.isAfter(currentLesson!.start);
-          if (afterPrevLessonEnd || afterCurrentLessonStart) {
-            debugPrint(
-                "Óra kezdete/vége után 1 másodperccel vagyunk. Frissítés...");
-            PlatformChannel.updateLiveActivity(toMap());
-          }
+        } else if (stateChanged || lessonChanged) {
+          debugPrint(
+              "Állapot vagy óra váltás: $currentState, lesson: $currentLessonId. Frissítés...");
+          PlatformChannel.updateLiveActivity(toMap());
         }
+
+        _previousState = currentState;
+        _previousLessonId = currentLessonId;
       }
 
       if (_settings.developerMode && _settings.devLiveFakeLessons) {
@@ -469,6 +465,8 @@ class LiveCardProvider extends ChangeNotifier {
     hasDayEnd = false;
     hasUserDismissed = false;
     storeFirstRunDate = null;
+    _previousState = LiveCardState.empty;
+    _previousLessonId = null;
   }
 
   List<Lesson> _today(TimetableProvider p) {
