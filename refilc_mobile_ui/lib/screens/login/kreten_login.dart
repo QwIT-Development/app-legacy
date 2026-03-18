@@ -85,6 +85,7 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
 
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setUserAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1')
       ..setNavigationDelegate(NavigationDelegate(
         onNavigationRequest: (n) async {
           final Uri? uri = Uri.tryParse(n.url);
@@ -112,8 +113,6 @@ class _KretenLoginWidgetState extends State<KretenLoginWidget>
               loadingPercentage = 0;
             }
           });
-
-          _startTimeoutTimer();
         },
         onProgress: (progress) {
           if (!mounted) return;
