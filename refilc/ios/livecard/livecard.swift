@@ -272,6 +272,25 @@ struct LiveCardWidget: Widget {
                     .padding(.leading, 4)
                 }
 
+                DynamicIslandExpandedRegion(.trailing) {
+                    VStack {
+                        Spacer()
+                        if context.state.endDate <= Date() {
+                            Text("Vége")
+                                .font(.title3)
+                                .bold()
+                        } else {
+                            Text(timerInterval: context.state.date, countsDown: true)
+                                .font(.title3)
+                                .monospacedDigit()
+                                .multilineTextAlignment(.trailing)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.7)
+                        }
+                        Spacer()
+                    }
+                }
+
                 /// Compact
             } compactLeading: {
                 Image(systemName: context.state.icon)
