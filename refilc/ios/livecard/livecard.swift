@@ -48,6 +48,19 @@ extension Color {
     }
 }
 
+// MARK: - Availability helpers
+
+@available(iOSApplicationExtension 16.2, *)
+extension WidgetConfiguration {
+    func ifAvailable_supplementalActivityFamilies() -> some WidgetConfiguration {
+        if #available(iOSApplicationExtension 18.0, *) {
+            return self.supplementalActivityFamilies([.small, .medium])
+        } else {
+            return self
+        }
+    }
+}
+
 // MARK: - Helper: next lesson line
 
 private func buildNextLessonLine(state: LiveActivitiesAppAttributes.ContentState) -> String {
@@ -306,7 +319,7 @@ struct LiveCardWidget: Widget {
                 : Color.clear
             )
         }
-        .supplementalActivityFamilies([.small, .medium])
+        .ifAvailable_supplementalActivityFamilies()
     }
 }
 
