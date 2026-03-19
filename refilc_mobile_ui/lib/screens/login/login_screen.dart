@@ -279,7 +279,7 @@ class LoginScreenState extends State<LoginScreen> {
                                           context: context,
                                           isScrollControlled:
                                               true, // This ensures the modal accommodates input fields properly
-                                          builder: (BuildContext context) {
+                                          builder: (BuildContext sheetContext) {
                                             return Container(
                                               height: MediaQuery.of(context)
                                                           .size
@@ -355,6 +355,15 @@ class LoginScreenState extends State<LoginScreen> {
                                                                       context)
                                                                   .pop();
                                                             },
+                                                            onDemoMode: () {
+                                                              Navigator.of(context).pop();
+                                                              final userProvider = Provider.of<UserProvider>(context, listen: false);
+                                                              final demoUser = User.demo();
+                                                              userProvider.addUser(demoUser);
+                                                              userProvider.setUser(demoUser.id);
+                                                              setSystemChrome(context);
+                                                              Navigator.of(context).pushReplacementNamed('login_to_navigation');
+                                                            },
                                                           ),
                                                         ),
                                                       ),
@@ -382,7 +391,7 @@ class LoginScreenState extends State<LoginScreen> {
                                       )),
                                 ),
                               ),
-                              const SizedBox(height: 19),
+                              const SizedBox(height: 12),
                               // privacy policy
                               GestureDetector(
                                 onTap: () => PrivacyView.show(context),

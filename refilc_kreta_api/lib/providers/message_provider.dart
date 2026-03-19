@@ -7,6 +7,7 @@ import 'package:refilc/api/providers/database_provider.dart';
 import 'package:refilc/models/user.dart';
 import 'package:refilc_kreta_api/client/api.dart';
 import 'package:refilc_kreta_api/client/client.dart';
+import 'package:refilc_kreta_api/demo/demo_data.dart';
 import 'package:refilc_kreta_api/models/message.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,12 +54,20 @@ class MessageProvider with ChangeNotifier {
   Future<void> fetch({MessageType type = MessageType.inbox}) async {
     // Check Message Type
     if (type == MessageType.draft) return;
-    String messageType =
-        ["beerkezett", "elkuldott", "torolt"].elementAt(type.index);
 
     // Check User
     User? user = Provider.of<UserProvider>(_context, listen: false).user;
     if (user == null) throw "Cannot fetch Messages for User null";
+
+    if (DemoData.isDemo(user.id)) {
+      if (type == MessageType.inbox) {
+        await store(DemoData.messages, type);
+      }
+      return;
+    }
+
+    String messageType =
+        ["beerkezett", "elkuldott", "torolt"].elementAt(type.index);
 
     // Get messages
     List? messagesJson = await Provider.of<KretaClient>(_context, listen: false)
@@ -126,6 +135,8 @@ class MessageProvider with ChangeNotifier {
     // check user
     User? user = Provider.of<UserProvider>(_context, listen: false).user;
     if (user == null) throw "Cannot fetch Messages for User null";
+
+    if (DemoData.isDemo(user.id)) return;
 
     // get categories
     List? availableCategoriesJson =

@@ -17,7 +17,7 @@ public struct LiveActivitiesAppAttributes: ActivityAttributes, Identifiable {
         var nextSubject: String
         var nextRoom: String
     }
-    
+
     public var id = UUID()
 }
 
@@ -26,67 +26,153 @@ final class LiveActivityManager {
     static let shared = LiveActivityManager()
     var currentActivity: Activity<LiveActivitiesAppAttributes>?
 
-    class func create() {
-           
-            Task {
-                do {
-                    let contentState = LiveActivitiesAppAttributes.ContentState(color: globalLessonData.color, icon: globalLessonData.icon, index: globalLessonData.index, title: globalLessonData.title, subtitle: globalLessonData.subtitle, description: globalLessonData.description, startDate: globalLessonData.startDate, endDate: globalLessonData.endDate, date: globalLessonData.date, nextSubject: globalLessonData.nextSubject, nextRoom: globalLessonData.nextRoom)
-                    
-                    let activityContent = ActivityContent(state: contentState, staleDate: globalLessonData.endDate, relevanceScore: 0)
-                    
-                    let activity = try Activity<LiveActivitiesAppAttributes>.request(
-                        attributes: LiveActivitiesAppAttributes(),
-                        content: activityContent,
-                        pushType: nil
-                    )
-                    
-                    activityID = activity.id
-                    print("Live Activity létrehozva. Azonosító: \(activity.id)")
-                } catch {
-                    print("Hiba történt a Live Activity létrehozásakor: \(error)")
-                }
+    class func create(completion: @escaping (Bool) -> Void) {
+        Task {
+            isCleaningUpOldActivities = true
+            for activity in Activity<LiveActivitiesAppAttributes>.activities {
+                await activity.end(nil, dismissalPolicy: .immediate)
             }
-    }
-        
-        class func update() {
-                Task {
-                    for activity in Activity<LiveActivitiesAppAttributes>.activities {
-                        do {
-                            let contentState = LiveActivitiesAppAttributes.ContentState(color: globalLessonData.color, icon: globalLessonData.icon, index: globalLessonData.index, title: globalLessonData.title, subtitle: globalLessonData.subtitle, description: globalLessonData.description, startDate: globalLessonData.startDate, endDate: globalLessonData.endDate, date: globalLessonData.date, nextSubject: globalLessonData.nextSubject, nextRoom: globalLessonData.nextRoom)
-                            
-                            let activityContent = ActivityContent(state: contentState, staleDate: globalLessonData.endDate, relevanceScore: 0)
+            try? await Task.sleep(nanoseconds: 200_000_000)
+            isCleaningUpOldActivities = false
 
-                            await activity.update(activityContent)
-                            activityID = activity.id
-                            print("Live Activity frissítve. Azonosító: \(activity.id)")
-                        } catch {
-                            print("Hiba történt a Live Activity frissítésekor: \(error)")
-                        }
+            do {
+                let contentState = LiveActivitiesAppAttributes.ContentState(
+                    color: globalLessonData.color,
+                    icon: globalLessonData.icon,
+                    index: globalLessonData.index,
+                    title: globalLessonData.title,
+                    subtitle: globalLessonData.subtitle,
+                    description: globalLessonData.description,
+                    startDate: globalLessonData.startDate,
+                    endDate: globalLessonData.endDate,
+                    date: globalLessonData.date,
+                    nextSubject: globalLessonData.nextSubject,
+                    nextRoom: globalLessonData.nextRoom
+                )
+
+                let activityContent = ActivityContent(
+                    state: contentState,
+                    staleDate: globalLessonData.endDate,
+                    relevanceScore: 0
+                )
+
+                let activity = try Activity<LiveActivitiesAppAttributes>.request(
+                    attributes: LiveActivitiesAppAttributes(),
+                    content: activityContent,
+                    pushType: .token
+                )
+
+                activityID = activity.id
+                print("Live Activity létrehozva. Azonosító: \(activity.id)")
+
+                completion(true)
+
+                Task { await monitorActivityState(activity: activity) }
+
+                Task {
+                    for await tokenData in activity.pushTokenUpdates {
+                        let tokenHex = tokenData.map { String(format: "%02x", $0) }.joined()
+                        activityPushToken = tokenHex
+                        print("Live Activity push token: \(tokenHex)")
+                        NotificationCenter.default.post(
+                            name: NSNotification.Name("LiveActivityTokenUpdated"),
+                            object: tokenHex
+                        )
                     }
                 }
+            } catch {
+                print("Hiba történt a Live Activity létrehozásakor: \(error)")
+                completion(false)
+            }
         }
-        
-        
+    }
+
+    private class func monitorActivityState(activity: Activity<LiveActivitiesAppAttributes>) async {
+        for await state in activity.activityStateUpdates {
+            if state == .dismissed || state == .ended {
+                if isCleaningUpOldActivities {
+                    print("Live Activity ended during cleanup - ignoring dismiss")
+                    break
+                }
+                print("Live Activity dismissed/ended by user or system")
+                activityID = nil
+                activityPushToken = nil
+                NotificationCenter.default.post(
+                    name: NSNotification.Name("LiveActivityDismissed"),
+                    object: nil
+                )
+                await activity.end(nil, dismissalPolicy: .immediate)
+                break
+            }
+        }
+    }
+
+    class func update() {
+        Task {
+            for activity in Activity<LiveActivitiesAppAttributes>.activities {
+                let contentState = LiveActivitiesAppAttributes.ContentState(
+                    color: globalLessonData.color,
+                    icon: globalLessonData.icon,
+                    index: globalLessonData.index,
+                    title: globalLessonData.title,
+                    subtitle: globalLessonData.subtitle,
+                    description: globalLessonData.description,
+                    startDate: globalLessonData.startDate,
+                    endDate: globalLessonData.endDate,
+                    date: globalLessonData.date,
+                    nextSubject: globalLessonData.nextSubject,
+                    nextRoom: globalLessonData.nextRoom
+                )
+
+                let activityContent = ActivityContent(
+                    state: contentState,
+                    staleDate: globalLessonData.endDate,
+                    relevanceScore: 0
+                )
+
+                await activity.update(activityContent)
+                activityID = activity.id
+                print("Live Activity frissítve. Azonosító: \(activity.id)")
+            }
+        }
+    }
+
     class func stop() {
-        if (activityID != "") {
+        if activityID != "" {
             Task {
-                for activity in Activity<LiveActivitiesAppAttributes>.activities{
-                    let contentState = LiveActivitiesAppAttributes.ContentState(color: globalLessonData.color, icon: globalLessonData.icon, index: globalLessonData.index, title: globalLessonData.title, subtitle: globalLessonData.subtitle, description: globalLessonData.description, startDate: globalLessonData.startDate, endDate: globalLessonData.endDate, date: globalLessonData.date, nextSubject: globalLessonData.nextSubject, nextRoom: globalLessonData.nextRoom)
-                    
-                    await activity.end(ActivityContent(state: contentState, staleDate: Date.distantFuture),dismissalPolicy: .immediate)
+                for activity in Activity<LiveActivitiesAppAttributes>.activities {
+                    let contentState = LiveActivitiesAppAttributes.ContentState(
+                        color: globalLessonData.color,
+                        icon: globalLessonData.icon,
+                        index: globalLessonData.index,
+                        title: globalLessonData.title,
+                        subtitle: globalLessonData.subtitle,
+                        description: globalLessonData.description,
+                        startDate: globalLessonData.startDate,
+                        endDate: globalLessonData.endDate,
+                        date: globalLessonData.date,
+                        nextSubject: globalLessonData.nextSubject,
+                        nextRoom: globalLessonData.nextRoom
+                    )
+
+                    await activity.end(
+                        ActivityContent(state: contentState, staleDate: Date.distantFuture),
+                        dismissalPolicy: .immediate
+                    )
                 }
                 activityID = nil
+                activityPushToken = nil
                 print("Live Activity sikeresen leállítva")
             }
         }
     }
 
     class func isRunning(_ activityID: String) -> Bool {
-            for activity in Activity<LiveActivitiesAppAttributes>.activities {
-                if activity.id == activityID {
-                    return true
-                }
+        for activity in Activity<LiveActivitiesAppAttributes>.activities {
+            if activity.id == activityID {
+                return true
             }
-            return false
         }
+        return false
+    }
 }

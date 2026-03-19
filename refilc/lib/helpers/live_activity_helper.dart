@@ -10,6 +10,7 @@ class LiveActivityHelper {
       await PlatformChannel.updateLiveActivity(LiveCardProvider.LAData);
     } else {
       await PlatformChannel.endLiveActivity();
+      LiveCardProvider.serverSync.unregister();
     }
   }
 }

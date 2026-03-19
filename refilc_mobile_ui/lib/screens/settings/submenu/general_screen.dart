@@ -1,3 +1,6 @@
+import 'dart:io' show Platform;
+import 'package:refilc/api/providers/liveactivity/platform_channel.dart';
+import 'package:refilc/api/providers/live_card_provider.dart';
 import 'package:refilc/models/settings.dart';
 import 'package:refilc/theme/colors/colors.dart';
 import 'package:refilc/utils/format.dart';
@@ -10,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:refilc_mobile_ui/screens/settings/settings_screen.i18n.dart';
+import 'package:refilc_mobile_ui/screens/settings/live_activity_consent_dialog.dart';
 
 class MenuGeneralSettings extends StatelessWidget {
   const MenuGeneralSettings({
@@ -123,6 +127,69 @@ class GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                   ),
                 ],
               ),
+              if (Platform.isIOS)
+                SplittedPanel(
+                  padding: const EdgeInsets.only(top: 9.0),
+                  cardPadding: const EdgeInsets.all(4.0),
+                  isSeparated: true,
+                  children: [
+                    PanelButton(
+                      padding: const EdgeInsets.only(left: 14.0, right: 6.0),
+                      onPressed: () {
+                        if (!settingsProvider.liveActivityEnabled && !settingsProvider.liveActivityConsentAccepted) {
+                          LiveActivityConsentDialog.show(context).then((_) => setState(() {}));
+                          return;
+                        }
+                        final newVal = !settingsProvider.liveActivityEnabled;
+                        settingsProvider.update(liveActivityEnabled: newVal);
+                        if (!newVal) {
+                          PlatformChannel.endLiveActivity();
+                          LiveCardProvider.serverSync.unregister();
+                          LiveCardProvider.hasActivityStarted = false;
+                        }
+                        setState(() {});
+                      },
+                      title: Text(
+                        "live_activity_enabled".i18n,
+                        style: TextStyle(
+                          color: AppColors.of(context).text.withValues(
+                              alpha: settingsProvider.liveActivityEnabled
+                                  ? .95
+                                  : .25),
+                        ),
+                      ),
+                      leading: Icon(
+                        FeatherIcons.activity,
+                        size: 22.0,
+                        color: AppColors.of(context).text.withValues(
+                            alpha: settingsProvider.liveActivityEnabled
+                                ? .95
+                                : .25),
+                      ),
+                      trailing: Switch(
+                        onChanged: (v) {
+                          if (v && !settingsProvider.liveActivityConsentAccepted) {
+                            LiveActivityConsentDialog.show(context).then((_) => setState(() {}));
+                            return;
+                          }
+                          settingsProvider.update(liveActivityEnabled: v);
+                          if (!v) {
+                            PlatformChannel.endLiveActivity();
+                            LiveCardProvider.serverSync.unregister();
+                            LiveCardProvider.hasActivityStarted = false;
+                          }
+                          setState(() {});
+                        },
+                        value: settingsProvider.liveActivityEnabled,
+                        activeColor: Theme.of(context).colorScheme.secondary,
+                      ),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(12.0),
+                        bottom: Radius.circular(12.0),
+                      ),
+                    ),
+                  ],
+                ),
               SplittedPanel(
                 padding: const EdgeInsets.only(top: 9.0),
                 cardPadding: const EdgeInsets.all(4.0),

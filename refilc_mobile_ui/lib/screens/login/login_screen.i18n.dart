@@ -34,6 +34,7 @@ extension Localization on String {
           "welcome_text_4":
               "You can also organise your notes by lesson in the built-in notebook, so you can find everything in one app.",
           "login_w_kreta_acc": "Log in with your e-KRÉTA account",
+          "demo_login": "Try demo mode",
         },
         "hu_hu": {
           "username": "Felhasználónév",
@@ -66,6 +67,7 @@ extension Localization on String {
           "welcome_text_4":
               "A beépített jegyzetfüzetbe órák szerint is rendezheted a jegyzeteidet, így mindent megtalálsz egy appban.",
           "login_w_kreta_acc": "Bejelentkezés e-KRÉTA fiókkal",
+          "demo_login": "Demo mód kipróbálása",
         },
         "de_de": {
           "username": "Benutzername",
@@ -98,6 +100,7 @@ extension Localization on String {
           "welcome_text_4":
               "You can also organise your notes by lesson in the built-in notebook, so you can find everything in one app.",
           "login_w_kreta_acc": "Mit e-KRÉTA-Konto anmelden",
+          "demo_login": "Demo-Modus ausprobieren",
         },
       };
 

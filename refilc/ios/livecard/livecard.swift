@@ -51,72 +51,103 @@ extension Color {
 struct LockScreenLiveActivityView: View {
     let context: ActivityViewContext<LiveActivitiesAppAttributes>
 
+    private var isExpired: Bool {
+        context.state.endDate <= Date()
+    }
+
+    private var hasNextLesson: Bool {
+        !context.state.nextSubject.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    private var nextLessonLine: String {
+        if context.state.nextRoom.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return context.state.nextSubject
+        }
+
+        return "\(context.state.nextSubject) - \(context.state.nextRoom)"
+    }
+
+    private var countdownFont: Font {
+        // h:mm:ss needs more space than mm:ss
+        let remaining = max(0, context.state.endDate.timeIntervalSinceNow)
+        return remaining >= 3600 ? .title3 : .title2
+    }
+
     var body: some View {
-        HStack(alignment: .center) {
+        HStack(alignment: .center, spacing: 0) {
             // Ikon
             Image(systemName: context.state.icon)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: CGFloat(30), height: CGFloat(30))
-                .padding(.leading, CGFloat(24))
+                .frame(width: 28, height: 28)
+                .padding(.leading, 16)
 
-            VStack(alignment: .center) {
+            VStack(alignment: .leading, spacing: 3) {
                 // Jelenlegi óra
-                VStack {
-                  if(context.state.title.contains("Az első órádig")) {
+                if context.state.title.contains("Az első órádig") {
                     Text(context.state.title)
-                      .font(.system(size: 15))
-                      .bold()
-                      .multilineTextAlignment(.center)
-                  } else if(context.state.title == "Szünet") {
+                        .font(.system(size: 14, weight: .semibold))
+                        .lineLimit(2)
+                } else if context.state.title == "Szünet" {
                     Text(context.state.title)
-                      .font(.body)
-                      .bold()
-                      .padding(.trailing, 90)
-                  } else {
-                    MultilineTextView(text: "\(context.state.index) \(context.state.title) -  \(context.state.subtitle)", limit: 25)
-                      .font(.body)
-                      .bold()
-                      .multilineTextAlignment(.center)
-                  }
+                        .font(.system(size: 15, weight: .bold))
+                } else {
+                    Text("\(context.state.index) \(context.state.title) - \(context.state.subtitle)")
+                        .font(.system(size: 15, weight: .bold))
+                        .lineLimit(2)
                 }
 
                 // Leírás
-                if (context.state.description != "") {
-                  Text(context.state.description)
-                    .font(.subheadline)
+                if !context.state.description.isEmpty {
+                    Text(context.state.description)
+                        .font(.system(size: 13))
+                        .lineLimit(2)
+                        .foregroundStyle(.secondary)
                 }
 
                 // Következő óra
-              if(context.state.nextSubject != "" && context.state.nextRoom != "") {
-                HStack {
-                    Image(systemName: "arrow.right")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: CGFloat(8), height: CGFloat(8))
+                if hasNextLesson {
+                    HStack(spacing: 4) {
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 8, weight: .semibold))
+                            .foregroundStyle(.secondary)
+                        Text(nextLessonLine)
+                            .font(.system(size: 12))
+                            .foregroundStyle(.secondary)
+                    }
+                } else {
+                    Text("Ez az utolsó óra! Kitartást!")
+                        .font(.system(size: 13))
                         .foregroundStyle(.secondary)
-                  Text("\(context.state.nextSubject) -  \(context.state.nextRoom)")
-                        .font(.caption)
                 }
-                .multilineTextAlignment(.center)
-              } else {
-                Spacer(minLength: 5)
-                Text("Ez az utolsó óra! Kitartást!")
-                  .font(.system(size: 15))
-              }
-                
             }
-            .padding(15)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 14)
+            .layoutPriority(0)
 
-            Spacer()
+            Spacer(minLength: 4)
 
             // Visszaszámláló
-            Text(timerInterval: context.state.date, countsDown: true)
-                .multilineTextAlignment(.center)
-                .frame(width: 85)
-                .font(.title2)
-                .monospacedDigit()
-                .padding(.trailing)
+            if isExpired {
+                Text("Vége")
+                    .multilineTextAlignment(.trailing)
+                    .frame(minWidth: 86, maxWidth: 100, alignment: .trailing)
+                    .font(.headline)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
+                    .layoutPriority(1)
+                    .padding(.trailing, 16)
+            } else {
+                Text(timerInterval: context.state.date, countsDown: true)
+                    .multilineTextAlignment(.trailing)
+                    .frame(minWidth: 86, maxWidth: 100, alignment: .trailing)
+                    .font(countdownFont)
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
+                    .layoutPriority(1)
+                    .padding(.trailing, 16)
+            }
         }
 //        .activityBackgroundTint(
 //            context.state.color != "#676767"
@@ -210,14 +241,18 @@ struct LiveCardWidget: Widget {
                     
                     Spacer(minLength: 2)
                     
-                    if(context.state.nextRoom != "" && context.state.nextSubject != "") {
+                    if(!context.state.nextSubject.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
                       Text("Következő óra és terem:")
                         .font(.system(size: 14))
                         .padding(.trailing, -45)
                       Spacer(minLength: 2)
-                      
-                      Text("\(context.state.nextSubject) - \(context.state.nextRoom)")
-                        .modifier(DynamicFontSizeModifier(text: "\(context.state.nextSubject) - \(context.state.nextRoom)"))
+
+                      let nextLessonLine = context.state.nextRoom.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                        ? context.state.nextSubject
+                        : "\(context.state.nextSubject) - \(context.state.nextRoom)"
+
+                      Text(nextLessonLine)
+                        .modifier(DynamicFontSizeModifier(text: nextLessonLine))
                         .padding(.trailing, 35)
                     } else {
                       Text("Ez az utolsó óra! Kitartást!")
@@ -232,14 +267,26 @@ struct LiveCardWidget: Widget {
               }
 
                 /// Compact
-            } compactLeading: {
+        } compactLeading: {
                   Image(systemName: context.state.icon)
             }
         compactTrailing: {
-            Text(timerInterval: context.state.date, countsDown: true)
-                .multilineTextAlignment(.center)
-                .frame(width: 40)
-                .font(.caption2)
+            if context.state.endDate <= Date() {
+                Text("Vége")
+                    .multilineTextAlignment(.center)
+                    .frame(width: 52)
+                    .font(.caption2)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+            } else {
+                Text(timerInterval: context.state.date, countsDown: true)
+                    .multilineTextAlignment(.center)
+                    .frame(width: 52)
+                    .font(.caption2)
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+            }
 
             /// Collapsed
         } minimal: {

@@ -54,6 +54,7 @@ class SettingsProvider extends ChangeNotifier {
   // minutes: times 15
   int _notificationPollInterval;
   bool _developerMode;
+  bool _devLiveFakeLessons;
   VibrationStrength _vibrate;
   bool _abWeeks;
   bool _swapABweeks;
@@ -109,6 +110,8 @@ class SettingsProvider extends ChangeNotifier {
   bool _uwuMode;
   bool _newPopups;
   List<String> _unseenNewFeatures;
+  bool _liveActivityEnabled;
+  bool _liveActivityConsentAccepted;
   bool _cloudSyncEnabled;
   String _cloudSyncToken;
   DateTime _updatedAt;
@@ -134,6 +137,7 @@ class SettingsProvider extends ChangeNotifier {
     required bool notificationsLessonsEnabled,
     required int notificationsBitfield,
     required bool developerMode,
+    required bool devLiveFakeLessons,
     required int notificationPollInterval,
     required VibrationStrength vibrate,
     required bool abWeeks,
@@ -187,6 +191,8 @@ class SettingsProvider extends ChangeNotifier {
     required bool uwuMode,
     required bool newPopups,
     required List<String> unseenNewFeatures,
+    required bool liveActivityEnabled,
+    required bool liveActivityConsentAccepted,
     required bool cloudSyncEnabled,
     required String cloudSyncToken,
     required DateTime updatedAt,
@@ -209,6 +215,7 @@ class SettingsProvider extends ChangeNotifier {
         _notificationsLessonsEnabled = notificationsLessonsEnabled,
         _notificationsBitfield = notificationsBitfield,
         _developerMode = developerMode,
+        _devLiveFakeLessons = devLiveFakeLessons,
         _notificationPollInterval = notificationPollInterval,
         _vibrate = vibrate,
         _abWeeks = abWeeks,
@@ -262,6 +269,8 @@ class SettingsProvider extends ChangeNotifier {
         _uwuMode = uwuMode,
         _newPopups = newPopups,
         _unseenNewFeatures = unseenNewFeatures,
+        _liveActivityEnabled = liveActivityEnabled,
+        _liveActivityConsentAccepted = liveActivityConsentAccepted,
         _cloudSyncEnabled = cloudSyncEnabled,
         _cloudSyncToken = cloudSyncToken,
         _updatedAt = updatedAt,
@@ -303,6 +312,7 @@ class SettingsProvider extends ChangeNotifier {
       notificationsBitfield: map["notifications_bitfield"],
       notificationPollInterval: map["notification_poll_interval"],
       developerMode: map["developer_mode"] == 1,
+      devLiveFakeLessons: map["dev_live_fake_lessons"] == 1,
       vibrate: VibrationStrength.values[map["vibration_strength"]],
       abWeeks: map["ab_weeks"] == 1,
       swapABweeks: map["swap_ab_weeks"] == 1,
@@ -356,6 +366,8 @@ class SettingsProvider extends ChangeNotifier {
       uwuMode: map['uwu_mode'] == 1,
       newPopups: map['new_popups'] == 1,
       unseenNewFeatures: jsonDecode(map["unseen_new_features"]).cast<String>(),
+      liveActivityEnabled: map['live_activity_enabled'] == 1,
+      liveActivityConsentAccepted: map['live_activity_consent_accepted'] == 1,
       cloudSyncEnabled: map['cloud_sync_enabled'] == 1,
       cloudSyncToken: map['cloud_sync_token'],
       updatedAt: DateTime.tryParse(map['local_updated_at']) ?? DateTime.now(),
@@ -381,6 +393,7 @@ class SettingsProvider extends ChangeNotifier {
       "notifications_lessons": _notificationsLessonsEnabled ? 1 : 0,
       "notifications_bitfield": _notificationsBitfield,
       "developer_mode": _developerMode ? 1 : 0,
+      "dev_live_fake_lessons": _devLiveFakeLessons ? 1 : 0,
       "grade_color1": _gradeColors[0].value,
       "grade_color2": _gradeColors[1].value,
       "grade_color3": _gradeColors[2].value,
@@ -438,6 +451,8 @@ class SettingsProvider extends ChangeNotifier {
       "uwu_mode": _uwuMode ? 1 : 0,
       "new_popups": _newPopups ? 1 : 0,
       "unseen_new_features": jsonEncode(_unseenNewFeatures),
+      "live_activity_enabled": _liveActivityEnabled ? 1 : 0,
+      "live_activity_consent_accepted": _liveActivityConsentAccepted ? 1 : 0,
       "cloud_sync_enabled": _cloudSyncEnabled ? 1 : 0,
       "cloud_sync_token": _cloudSyncToken,
       "local_updated_at": _updatedAt.toIso8601String(),
@@ -471,6 +486,7 @@ class SettingsProvider extends ChangeNotifier {
       notificationsLessonsEnabled: true,
       notificationsBitfield: 255,
       developerMode: true,
+      devLiveFakeLessons: false,
       notificationPollInterval: 1,
       vibrate: VibrationStrength.medium,
       abWeeks: false,
@@ -523,7 +539,9 @@ class SettingsProvider extends ChangeNotifier {
       newColors: true,
       uwuMode: false,
       newPopups: false,
-      unseenNewFeatures: [],
+      unseenNewFeatures: ['live_activity_consent'],
+      liveActivityEnabled: false,
+      liveActivityConsentAccepted: false,
       cloudSyncEnabled: false,
       cloudSyncToken: '',
       updatedAt: DateTime.now(),
@@ -549,6 +567,7 @@ class SettingsProvider extends ChangeNotifier {
   bool get notificationsLessonsEnabled => _notificationsLessonsEnabled;
   int get notificationsBitfield => _notificationsBitfield;
   bool get developerMode => _developerMode;
+  bool get devLiveFakeLessons => _devLiveFakeLessons;
   int get notificationPollInterval => _notificationPollInterval;
   VibrationStrength get vibrate => _vibrate;
   bool get abWeeks => _abWeeks;
@@ -601,6 +620,8 @@ class SettingsProvider extends ChangeNotifier {
   bool get uwuMode => _uwuMode;
   bool get newPopups => _newPopups;
   List<String> get unseenNewFeatures => _unseenNewFeatures;
+  bool get liveActivityEnabled => _liveActivityEnabled;
+  bool get liveActivityConsentAccepted => _liveActivityConsentAccepted;
   bool get cloudSyncEnabled => _cloudSyncEnabled;
   String get cloudSyncToken => _cloudSyncToken;
   DateTime get updatedAt => _updatedAt;
@@ -626,6 +647,7 @@ class SettingsProvider extends ChangeNotifier {
     bool? notificationsLessonsEnabled,
     int? notificationsBitfield,
     bool? developerMode,
+    bool? devLiveFakeLessons,
     int? notificationPollInterval,
     VibrationStrength? vibrate,
     bool? abWeeks,
@@ -675,6 +697,8 @@ class SettingsProvider extends ChangeNotifier {
     bool? uwuMode,
     bool? newPopups,
     List<String>? unseenNewFeatures,
+    bool? liveActivityEnabled,
+    bool? liveActivityConsentAccepted,
     bool? cloudSyncEnabled,
     String? cloudSyncToken,
     bool? qTimetableLessonNum,
@@ -726,6 +750,9 @@ class SettingsProvider extends ChangeNotifier {
     }
     if (developerMode != null && developerMode != _developerMode) {
       _developerMode = developerMode;
+    }
+    if (devLiveFakeLessons != null && devLiveFakeLessons != _devLiveFakeLessons) {
+      _devLiveFakeLessons = devLiveFakeLessons;
     }
     if (notificationPollInterval != null &&
         notificationPollInterval != _notificationPollInterval) {
@@ -875,6 +902,15 @@ class SettingsProvider extends ChangeNotifier {
     if (unseenNewFeatures != null && unseenNewFeatures != _unseenNewFeatures) {
       _unseenNewFeatures = unseenNewFeatures;
     }
+    if (liveActivityEnabled != null && liveActivityEnabled != _liveActivityEnabled) {
+      _liveActivityEnabled = liveActivityEnabled;
+      if (!liveActivityEnabled && Platform.isIOS) {
+        LiveCardProvider.hasActivitySettingsChanged = true;
+      }
+    }
+    if (liveActivityConsentAccepted != null && liveActivityConsentAccepted != _liveActivityConsentAccepted) {
+      _liveActivityConsentAccepted = liveActivityConsentAccepted;
+    }
     if (cloudSyncEnabled != null && cloudSyncEnabled != _cloudSyncEnabled) {
       _cloudSyncEnabled = cloudSyncEnabled;
     }
@@ -930,6 +966,7 @@ class SettingsProvider extends ChangeNotifier {
       notificationsBitfield: map["notifications_bitfield"],
       notificationPollInterval: map["notification_poll_interval"],
       developerMode: map["developer_mode"] == 1,
+      devLiveFakeLessons: map["dev_live_fake_lessons"] == 1,
       vibrate:
           VibrationStrength.values[map["vibration_strength"] ?? _vibrate.index],
       abWeeks: map["ab_weeks"] == 1,
@@ -993,6 +1030,8 @@ class SettingsProvider extends ChangeNotifier {
       newPopups: map['new_popups'] == 1,
       unseenNewFeatures:
           jsonDecode(map["unseen_new_features"] ?? "[]").cast<String>(),
+      liveActivityEnabled: map['live_activity_enabled'] == 1,
+      liveActivityConsentAccepted: map['live_activity_consent_accepted'] == 1,
       cloudSyncEnabled: map['cloud_sync_enabled'] == 1,
       cloudSyncToken: map['cloud_sync_token'],
       qTimetableLessonNum: map['q_timetable_lesson_num'] == 1,

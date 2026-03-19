@@ -4,6 +4,7 @@ import 'package:refilc/api/providers/database_provider.dart';
 import 'package:refilc/models/user.dart';
 import 'package:refilc_kreta_api/client/api.dart';
 import 'package:refilc_kreta_api/client/client.dart';
+import 'package:refilc_kreta_api/demo/demo_data.dart';
 import 'package:refilc_kreta_api/models/homework.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +75,12 @@ class HomeworkProvider with ChangeNotifier {
   Future<void> fetch({DateTime? from, bool db = true}) async {
     User? user = Provider.of<UserProvider>(_context, listen: false).user;
     if (user == null) throw "Cannot fetch Homework for User null";
+
+    if (DemoData.isDemo(user.id)) {
+      _homework = DemoData.homework;
+      notifyListeners();
+      return;
+    }
 
     String iss = user.instituteCode;
 

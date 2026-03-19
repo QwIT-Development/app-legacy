@@ -23,8 +23,6 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:home_widget/home_widget.dart';
 
-import 'live_card_provider.dart';
-import 'liveactivity/platform_channel.dart';
 
 // Mutex
 bool lock = false;
@@ -39,8 +37,18 @@ Future<void> syncAll(BuildContext context) async {
 
   UserProvider user = Provider.of<UserProvider>(context, listen: false);
 
-  // Demo mode: skip all API calls
+  // Demo mode: load demo data into providers without API calls
   if (user.isDemo) {
+    await Provider.of<GradeProvider>(context, listen: false).fetch();
+    await Provider.of<TimetableProvider>(context, listen: false)
+        .fetch(week: Week.current());
+    await Provider.of<ExamProvider>(context, listen: false).fetch();
+    await Provider.of<HomeworkProvider>(context, listen: false)
+        .fetch(from: DateTime.now().subtract(const Duration(days: 30)));
+    await Provider.of<MessageProvider>(context, listen: false).fetchAll();
+    await Provider.of<NoteProvider>(context, listen: false).fetch();
+    await Provider.of<EventProvider>(context, listen: false).fetch();
+    await Provider.of<AbsenceProvider>(context, listen: false).fetch();
     lock = false;
     return Future.value();
   }
@@ -148,15 +156,8 @@ Future<void> syncAll(BuildContext context) async {
   }
 
   return Future.wait(tasks).then((value) {
-    // Unlock
     lock = false;
 
-    if (Platform.isIOS && LiveCardProvider.hasActivityStarted == true) {
-      PlatformChannel.endLiveActivity();
-      LiveCardProvider.hasActivityStarted = false;
-    }
-
-    // Update Widget
     if (Platform.isAndroid) updateWidget();
   });
 }

@@ -3,10 +3,14 @@
 import 'dart:async';
 
 import 'package:refilc/api/providers/liveactivity/platform_channel.dart';
+import 'package:refilc/api/providers/liveactivity/server_sync_provider.dart';
 import 'package:refilc/helpers/subject.dart';
 import 'package:refilc/models/settings.dart';
 import 'package:refilc/ui/flutter_colorpicker/utils.dart';
 import 'package:refilc_kreta_api/models/lesson.dart';
+import 'package:refilc_kreta_api/models/subject.dart';
+import 'package:refilc_kreta_api/models/category.dart' as kreta;
+import 'package:refilc_kreta_api/models/teacher.dart';
 import 'package:refilc_kreta_api/models/week.dart';
 import 'package:refilc/utils/format.dart';
 import 'package:refilc_kreta_api/providers/timetable_provider.dart';
@@ -30,21 +34,24 @@ class LiveCardProvider extends ChangeNotifier {
   Lesson? prevLesson;
   List<Lesson>? nextLessons;
 
-  // new variables
   static bool hasActivityStarted = false;
   static bool hasDayEnd = false;
+  static bool hasUserDismissed = false;
   static DateTime? storeFirstRunDate;
+  static DateTime? _lastProcessedDay;
   static bool hasActivitySettingsChanged = false;
   // ignore: non_constant_identifier_names
   static Map<String, String> LAData = {};
   static DateTime? now;
-  //
 
   LiveCardState currentState = LiveCardState.empty;
+  static LiveCardState _previousState = LiveCardState.empty;
+  static String? _previousLessonId;
   // ignore: unused_field
   late Timer _timer;
   late final TimetableProvider _timetable;
   late final SettingsProvider _settings;
+  static final ServerSyncProvider serverSync = ServerSyncProvider();
 
   late Duration _delay;
 
@@ -59,12 +66,31 @@ class LiveCardProvider extends ChangeNotifier {
     _delay = settings.bellDelayEnabled
         ? Duration(seconds: settings.bellDelay)
         : Duration.zero;
+
+    PlatformChannel.onTokenUpdated = (pushToken, deviceId, bundleId) {
+      if (!_settings.liveActivityEnabled) return;
+      debugPrint("Push token érkezett: $pushToken");
+      serverSync.registerAndSync(
+        deviceId: deviceId,
+        pushToken: pushToken,
+        bundleId: bundleId,
+        liveActivityColor:
+            '#${settings.liveActivityColor.toHexString().substring(2)}',
+        todayLessons: _today(_timetable),
+      );
+    };
+
+    PlatformChannel.onActivityDismissed = (deviceId) {
+      debugPrint("Live Activity dismissed by user");
+      serverSync.forceUnregister(deviceId);
+      hasActivityStarted = false;
+      hasUserDismissed = true;
+    };
+
     update();
   }
 
-  // Debugging
   static DateTime _now() {
-    // return DateTime(2023, 9, 27, 9, 30);
     return DateTime.now();
   }
 
@@ -85,8 +111,6 @@ class LiveCardProvider extends ChangeNotifier {
   }
 
   Map<String, String> toMap() {
-    // print("LIVE ACTIVITY COLOR BELOW:");
-    // print(_settings.liveActivityColor.toHexString().substring(2));
     String color = '#${_settings.liveActivityColor.toHexString().substring(2)}';
 
     switch (currentState) {
@@ -242,6 +266,12 @@ class LiveCardProvider extends ChangeNotifier {
         : Duration.zero;
 
     DateTime now = _now().add(_delay);
+    _resetDayScopedState(now);
+
+    currentLesson = null;
+    nextLesson = null;
+    prevLesson = null;
+    nextLessons = null;
 
     if ((currentState == LiveCardState.morning ||
             currentState == LiveCardState.afternoon ||
@@ -250,17 +280,14 @@ class LiveCardProvider extends ChangeNotifier {
       storeFirstRunDate = now;
     }
 
-    // Filter cancelled lessons #20
-    // Filter label lessons #128
     today = today
         .where((lesson) =>
-            lesson.status?.name != "Elmaradt" &&
+            (lesson.status?.name != "Elmaradt" || lesson.substituteTeacher != null) &&
             lesson.subject.id != '' &&
             !lesson.isEmpty)
         .toList();
 
     if (today.isNotEmpty) {
-      // sort
       today.sort((a, b) => a.start.compareTo(b.start));
 
       final _lesson = today.firstWhere(
@@ -294,7 +321,8 @@ class LiveCardProvider extends ChangeNotifier {
     }
 
     if (now.isBefore(DateTime(now.year, DateTime.august, 31)) &&
-        now.isAfter(DateTime(now.year, DateTime.june, 14))) {
+        now.isAfter(DateTime(now.year, DateTime.june, 14)) &&
+        !(_settings.developerMode && _settings.devLiveFakeLessons)) {
       currentState = LiveCardState.summary;
     } else if (currentLesson != null) {
       currentState = LiveCardState.duringLesson;
@@ -305,7 +333,9 @@ class LiveCardProvider extends ChangeNotifier {
     } else if (now.hour >= 20) {
       currentState = LiveCardState.night;
     } else if (now.hour >= 5 && now.hour <= 10) {
-      if (nextLesson == null || now.weekday == 6 || now.weekday == 7) {
+      if (nextLesson == null ||
+          ((now.weekday == 6 || now.weekday == 7) &&
+              !(_settings.developerMode && _settings.devLiveFakeLessons))) {
         currentState = LiveCardState.empty;
       } else {
         currentState = LiveCardState.morning;
@@ -314,75 +344,104 @@ class LiveCardProvider extends ChangeNotifier {
       currentState = LiveCardState.empty;
     }
 
-    //LIVE ACTIVITIES
+    if (!_settings.liveActivityEnabled) {
+      if (hasActivityStarted) {
+        debugPrint("Live Activity nincs engedélyezve, de fut – leállítás...");
+        PlatformChannel.endLiveActivity();
+        serverSync.unregister();
+        hasActivityStarted = false;
+      }
+    } else {
+      if (!hasActivityStarted &&
+          !hasUserDismissed &&
+          nextLesson != null &&
+          nextLesson!.start.difference(now).inMinutes <= 120 &&
+          (currentState == LiveCardState.morning ||
+              currentState == LiveCardState.afternoon ||
+              currentState == LiveCardState.night)) {
+        debugPrint(
+            "Az első óra előtt állunk, kevesebb mint két órával. Létrehozás...");
+        hasActivityStarted = true;
+        _createAndSync();
+      } else if (!hasActivityStarted &&
+          !hasUserDismissed &&
+          ((currentState == LiveCardState.duringLesson &&
+                  currentLesson != null) ||
+              currentState == LiveCardState.duringBreak)) {
+        debugPrint(
+            "Óra van, vagy szünet, de nincs LiveActivity. létrehozás...");
+        hasActivityStarted = true;
+        _createAndSync();
+      } else if (!hasActivityStarted &&
+          _settings.developerMode &&
+          _settings.devLiveFakeLessons &&
+          today.isNotEmpty) {
+        debugPrint("Fake mód: Live Activity létrehozás...");
+        hasActivityStarted = true;
+        hasUserDismissed = false;
+        _createAndSync();
+      } else if (hasActivityStarted) {
+        final currentLessonId = currentLesson?.id ?? nextLesson?.id;
+        final stateChanged = currentState != _previousState;
+        final lessonChanged = currentLessonId != _previousLessonId;
 
-    //CREATE
-    if (!hasActivityStarted &&
-        nextLesson != null &&
-        nextLesson!.start.difference(now).inMinutes <= 60 &&
-        (currentState == LiveCardState.morning ||
-            currentState == LiveCardState.afternoon ||
-            currentState == LiveCardState.night)) {
-      debugPrint(
-          "Az első óra előtt állunk, kevesebb mint egy órával. Létrehozás...");
-      PlatformChannel.createLiveActivity(toMap());
-      hasActivityStarted = true;
-    } else if (!hasActivityStarted &&
-        ((currentState == LiveCardState.duringLesson &&
-                currentLesson != null) ||
-            currentState == LiveCardState.duringBreak)) {
-      debugPrint("Óra van, vagy szünet, de nincs LiveActivity. létrehozás...");
-      PlatformChannel.createLiveActivity(toMap());
-      hasActivityStarted = true;
-    }
-
-    //UPDATE
-    else if (hasActivityStarted) {
-      if (hasActivitySettingsChanged) {
-        debugPrint("Valamelyik beállítás megváltozott. Frissítés...");
-        PlatformChannel.updateLiveActivity(toMap());
-        hasActivitySettingsChanged = false;
-      } else if (nextLesson != null || currentLesson != null) {
-        bool afterPrevLessonEnd = prevLesson != null &&
-            now
-                .subtract(const Duration(seconds: 1))
-                .isBefore(prevLesson!.end) &&
-            now.isAfter(prevLesson!.end);
-
-        bool afterCurrentLessonStart = currentLesson != null &&
-            now
-                .subtract(const Duration(seconds: 1))
-                .isBefore(currentLesson!.start) &&
-            now.isAfter(currentLesson!.start);
-        if (afterPrevLessonEnd || afterCurrentLessonStart) {
+        if (hasActivitySettingsChanged) {
+          debugPrint("Valamelyik beállítás megváltozott. Frissítés...");
+          PlatformChannel.updateLiveActivity(toMap());
+          hasActivitySettingsChanged = false;
+        } else if (stateChanged || lessonChanged) {
           debugPrint(
-              "Óra kezdete/vége után 1 másodperccel vagyunk. Frissítés...");
+              "Állapot vagy óra váltás: $currentState, lesson: $currentLessonId. Frissítés...");
           PlatformChannel.updateLiveActivity(toMap());
         }
-      }
-    }
 
-    //END
-    if ((currentState == LiveCardState.afternoon ||
-            currentState == LiveCardState.morning ||
-            currentState == LiveCardState.night) &&
-        hasActivityStarted &&
-        nextLesson != null &&
-        nextLesson!.start.difference(now).inMinutes > 60) {
-      debugPrint("Több, mint 1 óra van az első óráig. Befejezés...");
-      PlatformChannel.endLiveActivity();
-      hasActivityStarted = false;
-    } else if (hasActivityStarted &&
-        !hasDayEnd &&
-        nextLesson == null &&
-        now.isAfter(prevLesson!.end)) {
-      debugPrint("Az utolsó óra véget ért. Befejezés...");
-      PlatformChannel.endLiveActivity();
-      hasDayEnd = true;
-      hasActivityStarted = false;
-    }
+        _previousState = currentState;
+        _previousLessonId = currentLessonId;
+      }
+
+      if (_settings.developerMode && _settings.devLiveFakeLessons) {
+      } else if ((currentState == LiveCardState.afternoon ||
+              currentState == LiveCardState.morning ||
+              currentState == LiveCardState.night) &&
+          hasActivityStarted &&
+          nextLesson != null &&
+          nextLesson!.start.difference(now).inMinutes > 120) {
+        debugPrint("Több, mint 2 óra van az első óráig. Befejezés...");
+        PlatformChannel.endLiveActivity();
+        serverSync.unregister();
+        hasActivityStarted = false;
+      } else if (hasActivityStarted &&
+          !hasDayEnd &&
+          nextLesson == null &&
+          prevLesson != null &&
+          now.isAfter(prevLesson!.end) &&
+          today.every((l) => l.end.isBefore(now))) {
+        debugPrint("Az utolsó óra véget ért. Befejezés...");
+        PlatformChannel.endLiveActivity();
+        serverSync.unregister();
+        hasDayEnd = true;
+        hasActivityStarted = false;
+        hasUserDismissed = false;
+      } else if (hasActivityStarted && currentState == LiveCardState.empty) {
+        debugPrint("Nincs több megjeleníthető mai állapot. Befejezés...");
+        PlatformChannel.endLiveActivity();
+        serverSync.unregister();
+        hasActivityStarted = false;
+      }
+    } // end of liveActivityEnabled else block
+
     LAData = toMap();
     notifyListeners();
+  }
+
+  Future<void> _createAndSync() async {
+    final result = await PlatformChannel.createLiveActivity(toMap());
+    if (result != null && result['success'] == 'true') {
+      debugPrint("Live Activity létrehozva, várunk a push tokenre...");
+    } else {
+      debugPrint("Live Activity létrehozás sikertelen");
+      hasActivityStarted = false;
+    }
   }
 
   bool get show => currentState != LiveCardState.empty;
@@ -391,7 +450,89 @@ class LiveCardProvider extends ChangeNotifier {
   bool _sameDate(DateTime a, DateTime b) =>
       (a.year == b.year && a.month == b.month && a.day == b.day);
 
-  List<Lesson> _today(TimetableProvider p) => (p.getWeek(Week.current()) ?? [])
-      .where((l) => _sameDate(l.date, _now()))
-      .toList();
+  void _resetDayScopedState(DateTime now) {
+    if (_lastProcessedDay != null && _sameDate(_lastProcessedDay!, now)) {
+      return;
+    }
+
+    if (hasActivityStarted) {
+      PlatformChannel.endLiveActivity();
+      serverSync.unregister();
+    }
+
+    _lastProcessedDay = DateTime(now.year, now.month, now.day);
+    hasActivityStarted = false;
+    hasDayEnd = false;
+    hasUserDismissed = false;
+    storeFirstRunDate = null;
+    _previousState = LiveCardState.empty;
+    _previousLessonId = null;
+  }
+
+  List<Lesson> _today(TimetableProvider p) {
+    final real = (p.getWeek(Week.current()) ?? [])
+        .where((l) => _sameDate(l.date, _now()))
+        .toList();
+    if (!_settings.developerMode || !_settings.devLiveFakeLessons) {
+      return real;
+    }
+    if (real.isNotEmpty) {
+      final sorted = List<Lesson>.from(real)
+        ..sort((a, b) => a.end.compareTo(b.end));
+      final lastEnd = sorted.last.end;
+      final now = _now();
+      final nextIndex = sorted.length;
+      if (lastEnd.isBefore(now)) {
+        return [...real, ..._generateFakeLessons(startIndex: nextIndex)];
+      }
+
+      final fakeStart = lastEnd.add(const Duration(minutes: 10));
+      return [
+        ...real,
+        ..._generateFakeLessons(baseStart: fakeStart, startIndex: nextIndex)
+      ];
+    }
+    return _generateFakeLessons();
+  }
+
+  static List<Lesson> _generateFakeLessons(
+      {DateTime? baseStart, int startIndex = 0}) {
+    final now = _now();
+    final start0 = baseStart ?? now.subtract(const Duration(minutes: 10));
+
+    const subjects = [
+      ('Matematika', 'fake_math', 'Egyenletek'),
+      ('Magyar', 'fake_hun', 'Nyelvtan'),
+      ('Angol', 'fake_eng', 'Writing'),
+      ('Fizika', 'fake_phys', 'Mechanika'),
+      ('Történelem', 'fake_hist', 'XX. század'),
+      ('Informatika', 'fake_info', 'Programozás'),
+    ];
+
+    final lessons = <Lesson>[];
+    for (int i = 0; i < 6; i++) {
+      final start = start0.add(Duration(minutes: i * 55));
+      final end = start.add(const Duration(minutes: 45));
+      final (name, id, desc) = subjects[i];
+      lessons.add(Lesson(
+        id: 'fake_lesson_${startIndex + i}',
+        date: DateTime(now.year, now.month, now.day),
+        subject: GradeSubject(
+          id: id,
+          category: kreta.Category(id: '', name: ''),
+          name: name,
+        ),
+        lessonIndex: '${startIndex + i + 1}',
+        teacher: Teacher(id: 'fake_teacher', name: 'Teszt Tanár'),
+        start: start,
+        end: end,
+        homeworkId: '',
+        description: desc,
+        room: '${(i + 1) * 100 + 1}',
+        groupName: '',
+        name: name,
+      ));
+    }
+    return lessons;
+  }
 }
