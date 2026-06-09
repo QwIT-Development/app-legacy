@@ -63,13 +63,12 @@ dependencies:
   markdown: ^7.3.0
   carousel_slider: ^5.0.0
   flutter_portal: ^1.1.4
-  webview_flutter: ^4.10.0
+  webview_flutter: ^4.13.0
   file_picker: ^8.3.7
   shake_flutter: ^17.1.0
   wakelock_plus: ^1.2.10
 
 dependency_overrides:
-  webview_flutter_wkwebview: 3.17.0
   intl: 0.20.2
 
 dev_dependencies:

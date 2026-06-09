@@ -193,11 +193,24 @@ class NavigationScreenState extends State<NavigationScreen>
     syncAll(context);
     setupQuickActions();
 
-    // Show live activity consent dialog on iOS
+    // Show live activity consent dialog on iOS.
+    // Defer one frame after the navigation screen is fully laid out so a
+    // crash inside the dialog cannot leave the user staring at a black
+    // screen with no underlying UI rendered yet.
     if (Platform.isIOS &&
         settings.unseenNewFeatures.contains('live_activity_consent')) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        LiveActivityConsentDialog.show(context);
+        if (!mounted) return;
+        Future.delayed(const Duration(milliseconds: 300), () {
+          if (!mounted) return;
+          try {
+            LiveActivityConsentDialog.show(context);
+          } catch (e) {
+            if (kDebugMode) {
+              print('Failed to show live activity consent dialog: $e');
+            }
+          }
+        });
       });
     }
   }

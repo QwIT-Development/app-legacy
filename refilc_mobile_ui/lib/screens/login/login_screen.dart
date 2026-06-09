@@ -351,12 +351,19 @@ class LoginScreenState extends State<LoginScreen> {
                                                                 (String code) {
                                                               codeController
                                                                   .text = code;
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
+                                                              if (Navigator.of(
+                                                                      sheetContext)
+                                                                  .canPop()) {
+                                                                Navigator.of(
+                                                                        sheetContext)
+                                                                    .pop();
+                                                              }
                                                             },
                                                             onDemoMode: () {
-                                                              Navigator.of(context).pop();
+                                                              if (!mounted) return;
+                                                              if (Navigator.of(sheetContext).canPop()) {
+                                                                Navigator.of(sheetContext).pop();
+                                                              }
                                                               final userProvider = Provider.of<UserProvider>(context, listen: false);
                                                               final demoUser = User.demo();
                                                               userProvider.addUser(demoUser);
@@ -374,6 +381,7 @@ class LoginScreenState extends State<LoginScreen> {
                                             );
                                           },
                                         ).then((value) {
+                                          if (!mounted) return;
                                           // After closing the modal bottom sheet, check if the code is set
                                           if (codeController.text.isNotEmpty) {
                                             // Call your API after retrieving the code
@@ -513,6 +521,7 @@ class LoginScreenState extends State<LoginScreen> {
           code: code,
           context: context,
           onLogin: (user) {
+            if (!mounted) return;
             ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(
               context: context,
               brightness: Brightness.light,
@@ -521,11 +530,14 @@ class LoginScreenState extends State<LoginScreen> {
             ));
           },
           onSuccess: () {
+            if (!mounted) return;
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             setSystemChrome(context);
             Navigator.of(context).pushReplacementNamed("login_to_navigation");
           }).then(
-        (res) => setState(() {
+        (res) {
+          if (!mounted) return;
+          setState(() {
           // if (res == LoginState.invalidGrant &&
           //     tempUsername.replaceAll(username, '').length <= 3) {
           //   tempUsername = username + ' ';
@@ -537,7 +549,8 @@ class LoginScreenState extends State<LoginScreen> {
           // } else {
           _loginState = res;
           // }
-        }),
+          });
+        },
       );
     }
 
