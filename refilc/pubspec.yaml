@@ -70,6 +70,8 @@ dependencies:
 
 dependency_overrides:
   intl: 0.20.2
+  flutter_feather_icons:
+    path: local_packages/flutter_feather_icons
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.3
