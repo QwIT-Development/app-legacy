@@ -8,6 +8,7 @@ import 'package:refilc_kreta_api/client/client.dart';
 import 'package:refilc_kreta_api/demo/demo_data.dart';
 import 'package:refilc_kreta_api/models/grade.dart';
 import 'package:refilc_kreta_api/models/group_average.dart';
+import 'package:refilc_kreta_api/models/subject.dart';
 import 'package:refilc_kreta_api/providers/grade_provider.i18n.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class GradeProvider with ChangeNotifier {
   late DateTime _lastSeen;
   late String _groups;
   List<GroupAverage> _groupAvg = [];
+  List<GradeSubject> _allSubjects = [];
   late final SettingsProvider _settings;
   late final UserProvider _user;
   late final DatabaseProvider _database;
@@ -28,6 +30,7 @@ class GradeProvider with ChangeNotifier {
       _settings.gradeOpeningFun ? _lastSeen : DateTime(3000);
   String get groups => _groups;
   List<GroupAverage> get groupAverages => _groupAvg;
+  List<GradeSubject> get allSubjects => _allSubjects;
 
   GradeProvider({
     List<Grade> initialGrades = const [],
@@ -196,6 +199,15 @@ Future<void> unseenAll() async {
     final groupAvgs =
         groupAvgJson.map((e) => GroupAverage.fromJson(e)).toList();
     await storeGroupAvg(groupAvgs);
+
+    List? subjectsJson = await _kreta.getAPI(KretaAPI.subjects(iss, _groups));
+    if (subjectsJson != null) {
+      _allSubjects = subjectsJson
+          .map((e) => GradeSubject.fromJson(e["Tantargy"] ?? {}))
+          .where((s) => s.id.isNotEmpty)
+          .toList();
+      notifyListeners();
+    }
   }
 
   // Stores Grades in the database
