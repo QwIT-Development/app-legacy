@@ -117,7 +117,8 @@ class AbsencesPageState extends State<AbsencesPage>
 
       double absentLessonsOfSubjectPercentage;
 
-      if (absentLessonsOfSubject <= totalLessonsOfSubject) {
+      if (totalLessonsOfSubject > 0 &&
+          absentLessonsOfSubject <= totalLessonsOfSubject) {
         absentLessonsOfSubjectPercentage =
             absentLessonsOfSubject / totalLessonsOfSubject * 100;
       } else {
