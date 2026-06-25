@@ -187,6 +187,8 @@ class LiveCardProvider extends ChangeNotifier {
         };
 
       case LiveCardState.duringLesson:
+        final hasSubstitute = currentLesson?.substituteTeacher != null &&
+            currentLesson!.substituteTeacher!.name.isNotEmpty;
         return {
           "color": color,
           "icon": currentLesson != null
@@ -201,7 +203,9 @@ class LiveCardProvider extends ChangeNotifier {
               : "",
           "subtitle":
               "Terem: ${currentLesson?.room.replaceAll("_", " ") ?? ""}",
-          "description": currentLesson?.description ?? "",
+          "description": hasSubstitute
+              ? "Helyettesítés: ${currentLesson!.substituteTeacher!.name}"
+              : (currentLesson?.description ?? ""),
           "startDate": ((currentLesson?.start.millisecondsSinceEpoch ?? 0) -
                   _delay.inMilliseconds)
               .toString(),

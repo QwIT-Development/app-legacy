@@ -28,6 +28,18 @@ extension StringFormatUtils on String {
     htmlString = htmlString.replaceAll(RegExp(r'<br ?/?>'), "\n");
     htmlString = htmlString.replaceAll(RegExp(r'<p ?>'), "");
     htmlString = htmlString.replaceAll(RegExp(r'</p ?>'), "\n");
+    // Replace <a href="URL">text</a> with the URL so linkify can detect it
+    htmlString = htmlString.replaceAllMapped(
+      RegExp(r'<a\s+[^>]*href="([^"]*)"[^>]*>([^<]*)</a>', caseSensitive: false),
+      (match) {
+        final url = match.group(1) ?? '';
+        final text = match.group(2) ?? '';
+        // If the link text looks like a URL already, just use it
+        // Otherwise show "text (URL)" so the URL is linkifiable
+        if (url == text || text.isEmpty) return url;
+        return '$text ( $url )';
+      },
+    );
     var document = parse(htmlString);
     return document.body?.text.trim() ?? htmlString;
   }

@@ -113,19 +113,26 @@ class GradesPageState extends State<GradesPage> {
               .toList();
 
   void generateTiles() {
-    List<GradeSubject> subjects =
-        (importedViewMode ? jsonGrades : gradeProvider.grades)
-            .map((e) => GradeSubject(
-                  category: e.subject.category,
-                  id: e.subject.id,
-                  name: e.subject.name,
-                  renamedTo: e.subject.renamedTo,
-                  customRounding: e.subject.customRounding,
-                  teacher: e.teacher,
-                ))
-            .toSet()
-            .toList()
-          ..sort((a, b) => a.name.compareTo(b.name));
+    final gradesForSubjects =
+        (importedViewMode ? jsonGrades : gradeProvider.grades);
+    final Map<String, GradeSubject> subjectMap = {};
+    for (final g in gradesForSubjects) {
+      subjectMap[g.subject.id] = GradeSubject(
+        category: g.subject.category,
+        id: g.subject.id,
+        name: g.subject.name,
+        renamedTo: g.subject.renamedTo,
+        customRounding: g.subject.customRounding,
+        teacher: g.teacher,
+      );
+    }
+    if (!importedViewMode && !gradeCalcMode) {
+      for (final s in gradeProvider.allSubjects) {
+        subjectMap.putIfAbsent(s.id, () => s);
+      }
+    }
+    List<GradeSubject> subjects = subjectMap.values.toList()
+      ..sort((a, b) => a.name.compareTo(b.name));
     List<Widget> tiles = [];
 
     Map<GradeSubject, double> subjectAvgs = {};

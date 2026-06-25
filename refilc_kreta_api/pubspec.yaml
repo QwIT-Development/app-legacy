@@ -17,7 +17,6 @@ dependencies:
   uuid: ^4.5.1
 
 dependency_overrides:
-  webview_flutter_wkwebview: 3.17.0
   intl: 0.20.2
 
 dev_dependencies:

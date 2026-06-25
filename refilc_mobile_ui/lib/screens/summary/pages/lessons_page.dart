@@ -9,7 +9,6 @@ import 'package:refilc/utils/format.dart';
 import 'package:refilc_kreta_api/models/absence.dart';
 import 'package:refilc_kreta_api/models/lesson.dart';
 import 'package:refilc_kreta_api/models/subject.dart';
-import 'package:refilc_kreta_api/models/week.dart';
 import 'package:refilc_kreta_api/providers/absence_provider.dart';
 import 'package:refilc_kreta_api/providers/timetable_provider.dart';
 import 'package:refilc_mobile_ui/screens/summary/summary_screen.i18n.dart';
@@ -65,21 +64,23 @@ class LessonsBodyState extends State<LessonsBody> {
     timetableProvider = Provider.of<TimetableProvider>(context, listen: false);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      for (final lesson in timetableProvider.getWeek(Week.current()) ?? []) {
-        if (!lesson.isEmpty &&
-            lesson.subject.id != '' &&
-            lesson.lessonYearIndex != null) {
-          _lessonCount.update(
-            lesson.subject,
-            (value) {
-              if (lesson.lessonYearIndex! > value.lessonYearIndex!) {
-                return lesson;
-              } else {
-                return value;
-              }
-            },
-            ifAbsent: () => lesson,
-          );
+      for (final weekLessons in timetableProvider.lessons.values) {
+        for (final lesson in weekLessons) {
+          if (!lesson.isEmpty &&
+              lesson.subject.id != '' &&
+              lesson.lessonYearIndex != null) {
+            _lessonCount.update(
+              lesson.subject,
+              (value) {
+                if (lesson.lessonYearIndex! > value.lessonYearIndex!) {
+                  return lesson;
+                } else {
+                  return value;
+                }
+              },
+              ifAbsent: () => lesson,
+            );
+          }
         }
       }
       setState(() {});

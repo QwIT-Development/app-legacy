@@ -48,6 +48,34 @@ extension Color {
     }
 }
 
+// MARK: - Availability helpers
+
+@available(iOSApplicationExtension 16.2, *)
+extension WidgetConfiguration {
+    func ifAvailable_supplementalActivityFamilies() -> some WidgetConfiguration {
+        if #available(iOSApplicationExtension 18.0, *) {
+            return self.supplementalActivityFamilies([.small, .medium])
+        } else {
+            return self
+        }
+    }
+}
+
+// MARK: - Helper: next lesson line
+
+private func buildNextLessonLine(state: LiveActivitiesAppAttributes.ContentState) -> String {
+    let subject = state.nextSubject.trimmingCharacters(in: .whitespacesAndNewlines)
+    let room = state.nextRoom.trimmingCharacters(in: .whitespacesAndNewlines)
+    if room.isEmpty { return subject }
+    return "\(subject) - \(room)"
+}
+
+private func hasNextLesson(state: LiveActivitiesAppAttributes.ContentState) -> Bool {
+    !state.nextSubject.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+}
+
+// MARK: - Lock Screen Live Activity
+
 struct LockScreenLiveActivityView: View {
     let context: ActivityViewContext<LiveActivitiesAppAttributes>
 
@@ -55,20 +83,7 @@ struct LockScreenLiveActivityView: View {
         context.state.endDate <= Date()
     }
 
-    private var hasNextLesson: Bool {
-        !context.state.nextSubject.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-    }
-
-    private var nextLessonLine: String {
-        if context.state.nextRoom.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return context.state.nextSubject
-        }
-
-        return "\(context.state.nextSubject) - \(context.state.nextRoom)"
-    }
-
     private var countdownFont: Font {
-        // h:mm:ss needs more space than mm:ss
         let remaining = max(0, context.state.endDate.timeIntervalSinceNow)
         return remaining >= 3600 ? .title3 : .title2
     }
@@ -97,7 +112,7 @@ struct LockScreenLiveActivityView: View {
                         .lineLimit(2)
                 }
 
-                // Leírás
+                // Leírás (helyettesítés info stb.)
                 if !context.state.description.isEmpty {
                     Text(context.state.description)
                         .font(.system(size: 13))
@@ -106,12 +121,12 @@ struct LockScreenLiveActivityView: View {
                 }
 
                 // Következő óra
-                if hasNextLesson {
+                if hasNextLesson(state: context.state) {
                     HStack(spacing: 4) {
                         Image(systemName: "arrow.right")
                             .font(.system(size: 8, weight: .semibold))
                             .foregroundStyle(.secondary)
-                        Text(nextLessonLine)
+                        Text(buildNextLessonLine(state: context.state))
                             .font(.system(size: 12))
                             .foregroundStyle(.secondary)
                     }
@@ -149,17 +164,14 @@ struct LockScreenLiveActivityView: View {
                     .padding(.trailing, 16)
             }
         }
-//        .activityBackgroundTint(
-//            context.state.color != "#676767"
-//            ? Color(hex: context.state.color)
-//            : Color.clear
-//        )
         .activityBackgroundTint(
           Color.clear
         )
         .foregroundStyle(Color(hex: context.state.color))
     }
 }
+
+// MARK: - Widget Configuration
 
 @available(iOSApplicationExtension 16.2, *)
 struct LiveCardWidget: Widget {
@@ -182,115 +194,127 @@ struct LiveCardWidget: Widget {
                                 Image(systemName: context.state.icon)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: CGFloat(32), height: CGFloat(32))
+                                    .frame(width: 32, height: 32)
                             },
                             currentValueLabel: {
                                 Image(systemName: context.state.icon)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: CGFloat(32), height: CGFloat(32))
+                                    .frame(width: 32, height: 32)
                             }
                         ).progressViewStyle(.circular)
                     }
                 }
-              DynamicIslandExpandedRegion(.center) {
-                VStack(alignment: .center) {
-                  // Első óra előtti expanded DynamicIsland
-                  if(context.state.title.contains("Az első órádig")) {
-                    Text("Az első órád:")
-                      .font(.body)
-                      .bold()
-                      .padding(.trailing, -15)
-                    MultilineTextView(text: "\(context.state.nextSubject)", limit: 25)
-                      .font(.body)
-                      .padding(.trailing, -25)
-                    
-                    Text("Ebben a teremben:")
-                      .font(.body)
-                      .bold()
-                      .padding(.leading, 15)
-                    Text(context.state.nextRoom)
-                      .font(.body)
-                      .padding(.leading, 15)
-                  } else if(context.state.title == "Szünet") {
-                    // Amikor szünet van, expanded DynamicIsland
-                    Text(context.state.title)
-                      .lineLimit(1)
-                      .font(.body)
-                      .bold()
-                      .padding(.leading, 15)
-                    
-                    Spacer(minLength: 5)
-                    Text("Következő óra és terem:")
-                      .font(.system(size: 13))
-                      .padding(.leading, 25)
-                    Text(context.state.nextSubject)
-                      .font(.caption)
-                      .padding(.leading, 15)
-                    Text(context.state.nextRoom)
-                      .font(.caption2)
-                      .padding(.leading, 15)
-                    
-                  } else {
-                    // Amikor óra van, expanded DynamicIsland
-                    MultilineTextView(text: "\(context.state.index) \(context.state.title) - \(context.state.subtitle)", limit: 25)
-                      .lineLimit(1)
-                      .font(.body)
-                      .bold()
-                      .padding(.trailing, -35)
-                    
-                    Spacer(minLength: 2)
-                    
-                    if(!context.state.nextSubject.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
-                      Text("Következő óra és terem:")
-                        .font(.system(size: 14))
-                        .padding(.trailing, -45)
-                      Spacer(minLength: 2)
 
-                      let nextLessonLine = context.state.nextRoom.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-                        ? context.state.nextSubject
-                        : "\(context.state.nextSubject) - \(context.state.nextRoom)"
+                DynamicIslandExpandedRegion(.center) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        if context.state.title.contains("Az első órádig") {
+                            // Első óra előtt
+                            Text("Az első órád:")
+                                .font(.subheadline)
+                                .bold()
+                            Text(context.state.nextSubject)
+                                .font(.subheadline)
+                                .lineLimit(2)
+                            if !context.state.nextRoom.isEmpty {
+                                Text("Terem: \(context.state.nextRoom)")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        } else if context.state.title == "Szünet" {
+                            // Szünet
+                            Text(context.state.title)
+                                .font(.subheadline)
+                                .bold()
 
-                      Text(nextLessonLine)
-                        .modifier(DynamicFontSizeModifier(text: nextLessonLine))
-                        .padding(.trailing, 35)
-                    } else {
-                      Text("Ez az utolsó óra! Kitartást!")
-                        .font(.system(size: 14))
-                        .padding(.trailing, -30)
+                            if !context.state.description.isEmpty {
+                                Text(context.state.description)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+
+                            if hasNextLesson(state: context.state) {
+                                Spacer(minLength: 2)
+                                Text("Következő óra és terem:")
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                                Text(buildNextLessonLine(state: context.state))
+                                    .font(.caption)
+                            }
+                        } else {
+                            // Óra közben
+                            Text("\(context.state.index) \(context.state.title) - \(context.state.subtitle)")
+                                .font(.subheadline)
+                                .bold()
+                                .lineLimit(2)
+
+                            if !context.state.description.isEmpty {
+                                Text(context.state.description)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+
+                            Spacer(minLength: 2)
+
+                            if hasNextLesson(state: context.state) {
+                                Text("Következő óra és terem:")
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                                Text(buildNextLessonLine(state: context.state))
+                                    .font(.caption)
+                            } else {
+                                Text("Ez az utolsó óra! Kitartást!")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
                     }
-                  }
-                  
-                  
-                }.padding(EdgeInsets(top: 0.0, leading: 5.0, bottom: 0.0, trailing: 0.0))
-                
-              }
+                    .padding(.leading, 4)
+                }
+
+                DynamicIslandExpandedRegion(.trailing) {
+                    VStack {
+                        Spacer()
+                        if context.state.endDate <= Date() {
+                            Text("Vége")
+                                .font(.title3)
+                                .bold()
+                        } else {
+                            Text(timerInterval: context.state.date, countsDown: true)
+                                .font(.title3)
+                                .monospacedDigit()
+                                .multilineTextAlignment(.trailing)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.7)
+                        }
+                        Spacer()
+                    }
+                }
 
                 /// Compact
-        } compactLeading: {
-                  Image(systemName: context.state.icon)
+            } compactLeading: {
+                Image(systemName: context.state.icon)
             }
-        compactTrailing: {
-            if context.state.endDate <= Date() {
-                Text("Vége")
-                    .multilineTextAlignment(.center)
-                    .frame(width: 52)
-                    .font(.caption2)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-            } else {
-                Text(timerInterval: context.state.date, countsDown: true)
-                    .multilineTextAlignment(.center)
-                    .frame(width: 52)
-                    .font(.caption2)
-                    .monospacedDigit()
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-            }
+            compactTrailing: {
+                if context.state.endDate <= Date() {
+                    Text("Vége")
+                        .multilineTextAlignment(.center)
+                        .frame(width: 52)
+                        .font(.caption2)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                } else {
+                    Text(timerInterval: context.state.date, countsDown: true)
+                        .multilineTextAlignment(.center)
+                        .frame(width: 52)
+                        .font(.caption2)
+                        .monospacedDigit()
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                }
 
-            /// Collapsed
-        } minimal: {
-            VStack(alignment: .center, content: {
+                /// Collapsed
+            } minimal: {
                 ProgressView(
                     timerInterval: context.state.date,
                     countsDown: true,
@@ -298,129 +322,78 @@ struct LiveCardWidget: Widget {
                         Image(systemName: context.state.icon)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: CGFloat(12), height: CGFloat(12))
+                            .frame(width: 12, height: 12)
                     },
                     currentValueLabel: {
                         Image(systemName: context.state.icon)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: CGFloat(12), height: CGFloat(12))
+                            .frame(width: 12, height: 12)
                     }
                 ).progressViewStyle(.circular)
-            })
+            }
+            .keylineTint(
+                context.state.color != "#676767"
+                ? Color(hex: context.state.color)
+                : Color.clear
+            )
         }
-        .keylineTint(
-            context.state.color != "#676767"
-            ? Color(hex: context.state.color)
-            : Color.clear
-           )
-        }
+        .ifAvailable_supplementalActivityFamilies()
     }
 }
 
-struct MultilineTextView: View {
-    var text: String
-    var limit: Int = 20 // default is 20 character
-
-    var body: some View {
-        let words = text.split(separator: " ")
-        var currentLine = ""
-        var lines: [String] = []
-
-        for word in words {
-            if (currentLine.count + word.count + 1) > limit {
-                lines.append(currentLine)
-                currentLine = ""
-            }
-            if !currentLine.isEmpty {
-                currentLine += " "
-            }
-            currentLine += word
-        }
-        if !currentLine.isEmpty {
-            lines.append(currentLine)
-        }
-
-        return VStack(alignment: .center) {
-            ForEach(lines, id: \.self) { line in
-                Text(line)
-            }
-          Spacer(minLength: 1)
-        }
-    }
-}
-
-struct DynamicFontSizeModifier: ViewModifier {
-    var text: String
-
-    func body(content: Content) -> some View {
-        content
-            .font(.system(size: fontSize(for: text)))
-    }
-
-    private func fontSize(for text: String) -> CGFloat {
-        let length = text.count
-        if length < 10 {
-            return 12
-        } else if length < 20 {
-            return 12
-        } else {
-            return 11
-        }
-    }
-}
+// MARK: - Previews
 
 struct LiveCardWidget_Previews: PreviewProvider {
 
     static let attributes = LiveActivitiesAppAttributes()
-    
-    static let duringLessonExmaple = LiveActivitiesAppAttributes.ContentState(
+
+    static let duringLessonExample = LiveActivitiesAppAttributes.ContentState(
       color: "#FF5733",
       icon: "bell",
       index: "1.",
       title: "Math Class",
-      subtitle: "101",
-      description: "Algebra lesson",
+      subtitle: "Terem: 101",
+      description: "Helyettesítés: Teszt Tanár",
       startDate: Date(),
       endDate: Date().addingTimeInterval(3000),
-      date: Date()...Date().addingTimeInterval(3000), // 50 minutes later
+      date: Date()...Date().addingTimeInterval(3000),
       nextSubject: "Physics",
       nextRoom: "102"
     )
-  
+
     static let inBreak = LiveActivitiesAppAttributes.ContentState(
       color: "#FF5733",
       icon: "house",
       index: "",
       title: "Szünet",
-      subtitle: "Menj a(z) 122 terembe.",
-      description: "",
+      subtitle: "",
+      description: "Menj a(z) 122 terembe.",
       startDate: Date(),
       endDate: Date().addingTimeInterval(3000),
-      date: Date()...Date().addingTimeInterval(3000), // 50 minutes later
+      date: Date()...Date().addingTimeInterval(3000),
       nextSubject: "Physics",
       nextRoom: "122"
     )
-  
+
     static let lastLesson = LiveActivitiesAppAttributes.ContentState(
       color: "#00ff00",
       icon: "bell",
       index: "6.",
       title: "Math Class",
-      subtitle: "",
-      description: "Lorem Ipsum",
+      subtitle: "Terem: 201",
+      description: "",
       startDate: Date(),
       endDate: Date().addingTimeInterval(3000),
-      date: Date()...Date().addingTimeInterval(3000), // 50 minutes later
+      date: Date()...Date().addingTimeInterval(3000),
       nextSubject: "",
       nextRoom: ""
     )
 
     static var previews: some View {
-      // Dynamic Island Compact
       Group {
         attributes
-          .previewContext(duringLessonExmaple, viewKind: .dynamicIsland(.compact))
+          .previewContext(duringLessonExample, viewKind: .dynamicIsland(.compact))
           .previewDisplayName("During Lesson")
         attributes
           .previewContext(inBreak, viewKind: .dynamicIsland(.compact))
@@ -430,5 +403,5 @@ struct LiveCardWidget_Previews: PreviewProvider {
           .previewDisplayName("During Last Lesson")
       }
     }
-    
+
 }
